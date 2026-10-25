@@ -24,9 +24,9 @@ def create_server(
         instructions="Local exploratory MMM. Call tools with a request object. Check ok/error and "
         "validate_dataset.data.valid. No causal attribution or real campaign operations.",
     )
-    read_only = ToolAnnotations(readOnlyHint=True, destructiveHint=False, openWorldHint=False)
+    read_only = ToolAnnotations(read_only_hint=True, destructive_hint=False, open_world_hint=False)
     creates = ToolAnnotations(
-        readOnlyHint=False, destructiveHint=False, idempotentHint=False, openWorldHint=False
+        read_only_hint=False, destructive_hint=False, idempotent_hint=False, open_world_hint=False
     )
 
     @mcp.tool(annotations=creates)

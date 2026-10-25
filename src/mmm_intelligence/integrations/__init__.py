@@ -10,4 +10,4 @@ CAPABILITIES = {
 }
 
 # Compatibility name retained for clients which imported the initial registry.
-PLANNED_CAPABILITIES = {}
+PLANNED_CAPABILITIES: dict[str, str] = {}

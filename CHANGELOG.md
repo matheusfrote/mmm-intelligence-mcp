@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.3.1 — segurança do transporte, workers e cadeia de suprimentos
+
+- Workers herdam apenas ambiente permitido; falhas não repassam mensagem interna ao cliente. Saída nativa drenada/limitada a 1 MB.
+- HTTP aceita expiração/bloqueio opcionais de token, rejeita Authorization duplicado e limita frequência/concorrência, preservando isolamento e papéis.
+- Headers defensivos e dashboard com script autorizado por hash CSP; cálculo legítimo e bloqueio de script não autorizado verificados no Chrome.
+- CI com dependências universais fixadas por hash, somente wheels, actions por SHA, credenciais não persistidas, mypy básico, Bandit e scanner de padrões/histórico.
+- Testes de regressão, negativas HTTP reais, recuperação por cópia para raiz nova e recarga dos três motores opcionais. Auditoria completa em SECURITY_DEPLOY_AUDIT.md.
+- Somente publicação de código no GitHub; nenhum deploy, recurso pago ou dado empresarial.
+
 ## 0.3.0 — auditoria científica e abstenção explícita
 
 - Adicionada audit_model: decomposição reconciliada, backtesting com seleção nested, sensibilidade de especificação e insight rastreável.

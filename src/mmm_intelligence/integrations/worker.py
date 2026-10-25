@@ -8,7 +8,9 @@ import base64
 import json
 import math
 import os
-import subprocess
+
+# R worker is fixed; its runtime is selected only by the host.
+import subprocess  # nosec B404
 import sys
 import traceback
 from importlib.metadata import version
@@ -527,7 +529,8 @@ def main():
             if not rscript.is_file():
                 raise FileNotFoundError("Configured Rscript runtime is unavailable")
             r_result = root / "r-result.json"
-            subprocess.run(
+            # Fixed argv, shell=False; runtime from trusted host configuration.
+            subprocess.run(  # nosec B603
                 [
                     str(rscript),
                     "--vanilla",

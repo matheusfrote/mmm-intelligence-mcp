@@ -2,7 +2,10 @@
 
 import os
 import signal
-import subprocess
+
+# Internal worker runner, no shell or client command strings.
+import subprocess  # nosec B404
+import threading
 
 
 def run_worker(args, *, timeout, env, cwd, stdout):
@@ -12,16 +15,32 @@ def run_worker(args, *, timeout, env, cwd, stdout):
     if not 1 <= cpu <= 100 or not 512 <= memory <= 32768:
         raise ValueError("Invalid worker CPU percentage or memory limit")
     job = None
-    process = subprocess.Popen(
+    # Internal fixed argv and host-selected runtime, shell=False.
+    process = subprocess.Popen(  # nosec B603
         args,
         cwd=cwd,
         env=env,
-        stdout=stdout,
-        stderr=stdout,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
         stdin=subprocess.DEVNULL,
         start_new_session=os.name != "nt",
         creationflags=subprocess.CREATE_NO_WINDOW if os.name == "nt" else 0,
     )
+    # Drain continuously so verbose native libraries cannot fill the pipe or the disk.
+    captured = bytearray()
+    log_limit = 1_000_000
+    truncated = False
+
+    def drain():
+        nonlocal truncated
+        while chunk := process.stdout.read(65536):
+            captured.extend(chunk)
+            if len(captured) > log_limit:
+                del captured[:-log_limit]
+                truncated = True
+
+    reader = threading.Thread(target=drain, daemon=True)
+    reader.start()
     try:
         if os.name == "nt":
             import ctypes
@@ -77,3 +96,13 @@ def run_worker(args, *, timeout, env, cwd, stdout):
         if process.poll() is None:
             process.kill()
         process.wait()
+        reader.join(timeout=5)
+        if reader.is_alive():
+            raise RuntimeError("Worker output did not close after process cleanup")
+        process.stdout.close()
+        if truncated:
+            marker = b"[worker output truncated; bounded tail follows]\n"
+            captured = bytearray(marker) + captured[-(log_limit - len(marker)) :]
+        stream = getattr(stdout, "buffer", stdout)
+        stream.write(captured)
+        stream.flush()

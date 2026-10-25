@@ -96,7 +96,8 @@ def validate(dataset: dict, request: DatasetSpec, max_rows: int) -> dict:
             issues.append("DUPLICATE_DATES: one row per period is required")
         if any(b <= a for a, b in zip(dates, dates[1:])):
             issues.append("UNSORTED_DATES: dates must increase strictly")
-        step = {"daily": 1, "weekly": 7}.get(dataset.get("frequency"))
+        frequency = dataset.get("frequency")
+        step = {"daily": 1, "weekly": 7}.get(frequency) if isinstance(frequency, str) else None
         if step is None or any((b - a).days != step for a, b in zip(dates, dates[1:])):
             issues.append("IRREGULAR_SERIES: expected complete daily or weekly periods")
     numeric = names[1:]

@@ -2,7 +2,9 @@
 
 import json
 import os
-import subprocess
+
+# Only fixed worker argv and operator configuration, never client commands.
+import subprocess  # nosec B404
 import tempfile
 from contextlib import ExitStack
 from pathlib import Path
@@ -27,6 +29,38 @@ def executable(backend: str) -> Path:
     return Path(os.environ.get("MMM_" + name.upper() + "_PYTHON", str(default)))
 
 
+def worker_environment() -> dict[str, str]:
+    """Inherit OS/runtime locations, never the host's unrelated credentials or tokens."""
+    allowed = {
+        "PATH",
+        "SYSTEMROOT",
+        "WINDIR",
+        "COMSPEC",
+        "SYSTEMDRIVE",
+        "PATHEXT",
+        "USERPROFILE",
+        "HOMEDRIVE",
+        "HOMEPATH",
+        "HOME",
+        "APPDATA",
+        "LOCALAPPDATA",
+        "TEMP",
+        "TMP",
+        "TMPDIR",
+        "LANG",
+        "LC_ALL",
+        "TZ",
+        "SSL_CERT_FILE",
+        "SSL_CERT_DIR",
+        "REQUESTS_CA_BUNDLE",
+        "CURL_CA_BUNDLE",
+        "NUMBER_OF_PROCESSORS",
+        "PROCESSOR_ARCHITECTURE",
+        "MMM_RSCRIPT",
+    }
+    return {key: value for key, value in os.environ.items() if key.upper() in allowed}
+
+
 def execute(store, backend: str, payload: dict) -> dict:
     python = executable(backend)
     if not python.is_file():
@@ -44,7 +78,7 @@ def execute(store, backend: str, payload: dict) -> dict:
         source, destination = root / "input.json", root / "output.json"
         source.write_text(json.dumps(payload, allow_nan=False), encoding="utf-8")
         env = {
-            **os.environ,
+            **worker_environment(),
             "OMP_NUM_THREADS": "1",
             "OPENBLAS_NUM_THREADS": "1",
             "MKL_NUM_THREADS": "1",
@@ -111,13 +145,15 @@ def execute(store, backend: str, payload: dict) -> dict:
                         "process_tree_cleanup": True,
                     }
                     return result["data"]
-                code = result.get("code", "BACKEND_FAILED")
                 diagnostics = store.root / "logs" / ("backend-" + uuid4().hex + ".log")
                 reject_links(diagnostics)
                 with diagnostics.open("xb") as output:
                     output.write((root / "worker.log").read_bytes()[-1_000_000:])
                 # Keep the bounded error diagnostic, no training rows or input paths.
-                raise MMMError(code, result.get("message", "Backend execution failed")[:600])
+                raise MMMError(
+                    "BACKEND_FAILED",
+                    "Backend execution failed; inspect the private host diagnostic log",
+                )
             raise MMMError("BACKEND_FAILED", "Backend failed without a valid bounded result")
         except subprocess.TimeoutExpired as exc:
             raise MMMError(

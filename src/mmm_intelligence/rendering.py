@@ -1,5 +1,7 @@
 """Self-contained local artifacts; no CDNs, external requests or deployment."""
 
+import base64
+import hashlib
 import html
 import json
 
@@ -124,4 +126,10 @@ function recalc(){const budget=Number($('budget').value),n=Number($('horizon').v
     template = template.replace(
         "<section><h2>Explore um cenário", notice + "<section><h2>Explore um cenário"
     )
-    return template.replace("__TITLE__", title).replace("__DATA__", payload)
+    rendered = template.replace("__TITLE__", title).replace("__DATA__", payload)
+    script = rendered.split("<script>", 1)[1].split("</script>", 1)[0]
+    script_hash = base64.b64encode(hashlib.sha256(script.encode()).digest()).decode()
+    return rendered.replace(
+        "script-src 'unsafe-inline'",
+        "script-src 'sha256-" + script_hash + "'; base-uri 'none'; form-action 'none'",
+    )

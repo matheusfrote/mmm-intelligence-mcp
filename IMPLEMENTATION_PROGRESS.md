@@ -124,3 +124,21 @@ Distribuição 0.3: wheel e sdist construídos, quatro documentos MMM incluídos
 - Este registro e os índices de documentação são enviados em commit posterior de documentação. A branch final e suas execuções permanecem verificáveis no [histórico](https://github.com/matheusfrote/mmm-intelligence-mcp/commits/main/) e [Actions](https://github.com/matheusfrote/mmm-intelligence-mcp/actions).
 
 Entrega funcional 0.3 concluída e publicada. Limites científicos pendentes são os explicitados no veredito, não funcionalidades simuladas como prontas. Nenhum dado empresarial foi disponibilizado ou usado.
+
+## Segurança 0.3.1 — entrega somente GitHub, 25/10/2026
+
+O usuário substituiu o deploy inicialmente pedido por **somente GitHub**, por não haver destino de produção. O escopo final preserva o servidor local e a publicação de código; nenhum domínio, serviço, campanha, banco ou recurso pago foi criado/alterado. Relatório: [SECURITY_DEPLOY_AUDIT.md](SECURITY_DEPLOY_AUDIT.md).
+
+- Corrigidos ambiente excessivo dos workers, exposição de mensagens internas, log nativo temporário sem limite e nomes irrestritos de target/data.
+- Adicionados expiração/bloqueio opcionais de token, rotação após reinício testada, rejeição de auth duplicado, frequência/concorrência HTTP, headers defensivos e hash CSP do script do dashboard.
+- Lock universal com hashes em requirements/base-ci.txt; instalação limpa com 76 pacotes, somente wheels, em venv nova. CI fixa actions por SHA oficial, não persiste credenciais e passa a executar mypy básico, Bandit e scanner de padrões/histórico.
+- **130 testes passaram em 20,76 s**, com um RuntimeWarning SciPy preexistente e resultados finitos. Ruff check/format, mypy básico (20 módulos), Bandit e pip check passaram. As seis marcações Bandit de baixa severidade foram revisadas e justificadas por linha, sem exclusão global de regra.
+- Sete locks Python auditados: zero advisories conhecidos. Não há cobertura completa de advisories R ou garantia de ausência universal de vulnerabilidades. Scanner do checkout/histórico: 112 arquivos/131 blobs na segunda execução, sem padrões reconhecidos; valores não são emitidos.
+- HTTP real confirmou 401 para expirados/bloqueados, 421 Host, 403 Origin, 413 corpo grande, 405 métodos não suportados, 429 com Retry-After, isolamento e reader sem escrita. Vinte requests sequenciais em loopback: p50 5,88 ms / p95 6,27 ms; não é benchmark de produção.
+- Chrome real: visual em 1889/500 px, mesma previsão do backend até arredondamento, script não autorizado bloqueado por CSP e zero recursos externos. Capturas inspecionadas inline, sem alegação de screenshot salvo.
+- Novo processo MCP recarregou os três motores reais com ambiente permitido e log limitado: previsões iguais às persistidas (erro máximo zero) e cenário ×1,1 passou. São os treinos sintéticos anteriores, não novos ajustes ou certificação MCMC.
+- Recuperação local: cópia para backup novo e restauração em raiz nova, hashes iguais e mesma simulação; nenhum dado sobrescrito. Falha de publicação injetada deixou zero artefatos parciais/temporários.
+- Vercel/Netlify não retornaram projeto correspondente; Strix continuou solicitando autenticação nas consultas e não produziu resultado de scan. Nenhum pentest ou crédito Strix foi usado. A limitação foi registrada e não substituída por alegação de sucesso.
+- Wheel/sdist 0.3.1 foram construídos. O registro de verificação do wheel instalado, commit/push e CI é acrescentado depois da execução. Evidências públicas em docs/validation/security031 e security031-checks.json; pastas privadas continuam ignoradas.
+
+O wheel 0.3.1 foi instalado em diretório separado, com import confirmado a partir desse diretório, todos os módulos Python/R comparados byte a byte com a fonte e ciclo stdio ampliado/reinício concluído. O sdist contém este relatório e o lock com hashes; exclui var/evidence/venvs e configurações pessoais. O relatório do wheel permanece local em evidence/security031-wheel-demo. A suíte final de 130 testes inclui seis regressões adicionais de nomes de colunas, além das proteções HTTP/worker/recuperação/scanner.

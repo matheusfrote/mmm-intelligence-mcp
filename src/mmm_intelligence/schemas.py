@@ -55,6 +55,13 @@ class DatasetSpec(DatasetRequest):
     test_fraction: float = Field(default=0.2, ge=0.1, le=0.4)
     warmup_periods: int = Field(default=8, ge=0, le=52, strict=True)
 
+    @field_validator("target_column", "date_column")
+    @classmethod
+    def scalar_column(cls, value):
+        if not re.fullmatch(r"[A-Za-z][A-Za-z0-9_]{0,63}", value):
+            raise ValueError("Invalid column name")
+        return value
+
     @field_validator("media_columns", "control_columns")
     @classmethod
     def columns(cls, value):

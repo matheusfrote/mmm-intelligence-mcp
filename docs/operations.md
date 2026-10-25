@@ -2,7 +2,7 @@
 
 ## Ambiente principal
 
-Python 3.11+ e `pip install -e '.[dev]'` na venv. O SDK foi migrado para MCP 2.3: `MCPServer`, `Client` e campos Python `structured_content`/`is_error`. Confira também `ToolResponse.ok`; erros de esquema anteriores ao serviço são erros do protocolo. O wrapper `server.py` permanece.
+Python 3.11+ na venv. Para reproduzir o CI 0.3.1, instale `requirements/base-ci.txt` com `--require-hashes --only-binary=:all:` e depois o projeto com `--no-deps --no-build-isolation -e .`, conforme README. O lock universal inclui dev e scanners; os locks anteriores são snapshots históricos ou dos runtimes opcionais, não instalações concorrentes. O SDK usa MCP 2.3: `MCPServer`, `Client` e campos Python `structured_content`/`is_error`. Confira também `ToolResponse.ok`; erros de esquema anteriores ao serviço são erros do protocolo. O wrapper `server.py` permanece.
 
 O lock principal registra Windows/Python 3.12; os locks em `requirements/` registram os outros ambientes. Para outra plataforma, resolva pelo pyproject e teste: pacotes Windows não são portáveis ao Linux. A matriz em `.github/workflows/ci.yml` prepara Windows/Linux/macOS e Python 3.11/3.12/3.13, sem publicação/deploy.
 
@@ -71,4 +71,22 @@ Os controles não alteram plano de energia nem configurações globais. Não sã
 
 Os smokes nativos desta auditoria usaram `MMM_MAX_FILE_BYTES=52428800` explicitamente no host para acomodar serialização nativa. O padrão continua 10 MiB; não aumentar por argumentos de ferramenta. Declare target_type e contexto ao importar. Meridian recusa KPI não monetário/indefinido nesta interface; Robyn distingue receita/conversões. Priors efetivos e regras de holdout acompanham cada modelo novo. Artefatos 0.2 são evidência histórica; para avaliar as correções use os treinos 0.3 documentados.
 
-HTTP usa tokens estáticos: não implementa expiração/refresh OAuth. Não há chamadas a APIs de anúncios neste servidor; indisponibilidade ou autenticação de uma futura fonte externa não foi homologada por estes testes. Ausência de fonte real está registrada, não simulada como conexão empresarial bem-sucedida.
+HTTP usa tokens opacos estáticos, com `expires_at` e `disabled` opcionais desde 0.3.1; não implementa refresh OAuth. Não há chamadas a APIs de anúncios neste servidor; indisponibilidade ou autenticação de uma futura fonte externa não foi homologada por estes testes. Ausência de fonte real está registrada, não simulada como conexão empresarial bem-sucedida.
+
+## Segurança 0.3.1
+
+Perfil estrutural de usuário, com hash placeholder que deve ser substituído pelo operador:
+
+~~~json
+{"analista":{"role":"analyst","token_sha256":"<64 caracteres hex do SHA-256 do token>","expires_at":"2027-01-01T00:00:00Z","disabled":false}}
+~~~
+
+Não coloque o token original nesse JSON. Gere um token forte localmente e entregue-o ao cliente por canal seguro. Expiração exige timezone e é conferida em cada nova requisição. Para revogar, altere/remova o hash ou marque disabled e reinicie. Tokens antigos sem expires_at continuam sem vencimento automático, por compatibilidade; não confundir isso com sessão OAuth. Configuração inválida impede startup.
+
+Limites por processo: `MMM_HTTP_REQUESTS_PER_MINUTE` (1–10000, padrão 120 por usuário), `MMM_HTTP_UNAUTH_PER_MINUTE` (1–1000, padrão 30 no bucket anônimo) e `MMM_HTTP_MAX_CONCURRENT` (1–32, padrão 4 por usuário). Respostas 429 incluem Retry-After. São controles locais, não quotas distribuídas. O semáforo de cálculo continua separado. Não há reload automático de configuração.
+
+Workers não herdam credenciais arbitrárias do host. Apenas variáveis de SO, caminhos/certificados e MMM_RSCRIPT passam pela allowlist; limites de recursos são aplicados pelo processo pai. stdout/stderr é drenado e preserva no máximo 1.000.000 bytes finais, com marcador de truncamento. Isso não é isolamento de código hostil nem quota total de armazenamento.
+
+Para repetir os checks: `python -m mypy src`, `python -m bandit -r src`, `python examples/check_secrets.py` e `python -m pip_audit --no-deps --disable-pip -r requirements/base-ci.txt`. O scanner de segredos reporta somente localização/regra, nunca o valor encontrado. `examples/http_smoke.py` também executa negativas de expiração/host/origin/body e limite, além de pequena amostra de latência em servidor descartável.
+
+Backup local: pare a instância, copie a raiz de dados para um diretório novo protegido por ACL, exclua logs/jobs da cópia publicável e valide todos os envelopes/hashes. Restaure somente em outra raiz nova e compare uma consulta/simulação antes de trocar MMM_DATA_DIR. Não sobrescreva uma raiz existente nem trate Git como backup de dados privados. A entrega 0.3.1 não implanta serviço externo.

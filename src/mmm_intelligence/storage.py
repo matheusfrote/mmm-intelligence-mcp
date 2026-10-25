@@ -71,10 +71,11 @@ class ArtifactStore:
 
     def write(self, kind: str, artifact_id: str, payload: dict) -> str:
         path = self.path(kind, artifact_id)
+        checksum = digest(payload)
         envelope = {
             "schema_version": 1,
             "kind": kind,
-            "sha256": digest(payload),
+            "sha256": checksum,
             "payload": payload,
         }
         raw = canonical(envelope)
@@ -92,7 +93,7 @@ class ArtifactStore:
             raise MMMError("ALREADY_EXISTS", "ID already exists; choose a new ID") from exc
         finally:
             temporary.unlink(missing_ok=True)
-        return envelope["sha256"]
+        return checksum
 
     def read(self, kind: str, artifact_id: str) -> dict:
         path = self.path(kind, artifact_id)

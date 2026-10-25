@@ -1,4 +1,4 @@
-# MMM Intelligence MCP — 0.3
+# MMM Intelligence MCP — 0.3.1
 
 Servidor independente de Marketing Mix Modeling com **SDK oficial MCP 2.3**, execução local e resultados exploratórios. Há **16 ferramentas**, motor Ridge e integrações reais com **Google Meridian, PyMC-Marketing e Meta Robyn**, além de auditoria científica, otimização, incerteza condicional, importação autorizada, dashboard e relatório.
 
@@ -12,7 +12,8 @@ Python 3.11+ para o servidor base; PyMC-Marketing 1.3 exige Python 3.12 em seu a
 
 ~~~powershell
 python -m venv .venv
-.\.venv\Scripts\python.exe -m pip install -e '.[dev]'
+.\.venv\Scripts\python.exe -m pip install --require-hashes --only-binary=:all: -r requirements/base-ci.txt
+.\.venv\Scripts\python.exe -m pip install --no-deps --no-build-isolation -e .
 .\.venv\Scripts\python.exe -m pip check
 $env:MMM_DATA_DIR = Join-Path $PWD 'var'
 .\.venv\Scripts\python.exe -m mmm_intelligence.server
@@ -30,7 +31,7 @@ Stdio aguarda um cliente MCP, sem abrir URL. Alternativas: python server.py ou o
 
 Use pasta de evidências nova em cada execução. O exemplo verifica descoberta, chamadas estruturadas, erros e persistência após reinício. Exporta HTML interativo, Markdown e CSV completos.
 
-Artefatos atuais de demonstração: [dashboard](docs/validation/scientific-final/dashboard.html), [relatório](docs/validation/scientific-final/report.md), [CSV sintético](docs/validation/scientific-final/demo.csv), [ciclo MCP](docs/validation/scientific-final/mcp-cycle.json) e [auditoria estruturada](docs/validation/scientific-final/audit.json). O dashboard funciona localmente sem CDNs nem requisições externas. Evidências anteriores permanecem históricas.
+Artefatos atuais de demonstração: [dashboard](docs/validation/security031/dashboard.html), [relatório](docs/validation/security031/report.md), [CSV sintético](docs/validation/security031/demo.csv), [ciclo MCP](docs/validation/security031/mcp-cycle.json) e [auditoria estruturada](docs/validation/security031/audit.json). O dashboard funciona localmente sem CDNs nem requisições externas. Evidências anteriores permanecem históricas.
 
 ## Ferramentas
 
@@ -97,6 +98,9 @@ Arquivos são acessados por IDs. Dados reais exigem MMM_ALLOW_REAL_DATA=true no 
 | MMM_LOG_LEVEL | INFO |
 | MMM_TRANSPORT / MMM_PORT | stdio / 8769; HTTP opcional |
 | MMM_USERS_JSON | Usuários HTTP: token_sha256 e role analyst/reader |
+| MMM_HTTP_REQUESTS_PER_MINUTE | 120 por usuário, por processo |
+| MMM_HTTP_UNAUTH_PER_MINUTE | 30 negativas anônimas por processo |
+| MMM_HTTP_MAX_CONCURRENT | 4 requisições simultâneas por usuário |
 | MMM_MERIDIAN_PYTHON / MMM_PYMC_PYTHON / MMM_ROBYN_PYTHON | Python de cada runtime opcional |
 | MMM_RSCRIPT | Executável Rscript portátil |
 | MMM_BACKEND_TIMEOUT_SECONDS | 900 |
@@ -107,6 +111,8 @@ Arquivos são acessados por IDs. Dados reais exigem MMM_ALLOW_REAL_DATA=true no 
 ## Documentação e evidências
 
 [Operação e instalação](docs/operations.md) · [Ferramentas](docs/tools.md) · [Método](docs/methodology.md) · [Segurança](docs/security.md) · [Arquitetura](docs/architecture.md) · [Relatório da extensão](docs/extension-report.md).
+
+A [auditoria de segurança 0.3.1](SECURITY_DEPLOY_AUDIT.md) documenta correções, testes negativos e limites. HTTP aceita expiração/bloqueio opcionais de token, rejeita Authorization duplicado e limita frequência/concorrência. Workers recebem somente variáveis de ambiente permitidas e têm log limitado. O CI usa lock com hashes, actions por SHA, Ruff, mypy básico, Bandit e scanner de padrões no histórico. Conforme orientação do usuário, a entrega é somente GitHub, sem deploy de serviço.
 
 O [progresso de implementação](IMPLEMENTATION_PROGRESS.md) registra auditoria, correções, testes e estado verificável da publicação. Os [relatórios históricos](docs/delivery-report.md) podem referenciar evidências privadas locais excluídas da distribuição. A pasta `docs/validation` contém somente evidências sintéticas revisadas para publicação. Ambientes, modelos persistidos e logs privados não são versionados. Publicação do código no GitHub não inicia serviço nem publica pacote no PyPI.
 

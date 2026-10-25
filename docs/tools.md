@@ -38,6 +38,8 @@ Motores aceitos: `google_meridian`, `pymc_marketing`, `meta_robyn`. As duas prim
 
 Padrões de colunas: target `revenue`, data `date`, mídias `spend_search`, `spend_social`, `spend_video`; controles `price_index`, `promotion`. Aceitam-se 1–10 mídias e 0–10 controles, distintos, sem usar target/data como features. Nomes de features internos são reservados. Ao validar um schema personalizado, forneça os mesmos campos ao treinar.
 
+Desde 0.3.1, nomes de target/data seguem a mesma regra lexical das mídias/controles: letra ASCII inicial, letras/números/underscore e até 64 caracteres. Sintaxe de fórmula, caminhos e nomes excessivos são recusados antes de acessar dados ou workers.
+
 `test_fraction` entre 0.1 e 0.4; `warmup_periods` 0–52; `ridge_alpha` >0 e <=10000; `adstock_decay` >=0 e <0.99; `saturation_multiplier` >0 e <=100. O orçamento total é finito, entre 0 e 1e9, na unidade monetária do dataset. Frações de allocation são finitas, entre 0 e 1, somam 1 com tolerância 1e-8 e nomeiam exatamente as mídias do modelo. Controles futuros exigem exatamente os controles modelados e vetores de tamanho igual ao horizonte, números finitos com magnitude até 1e12.
 
 Dataset tem metadata `synthetic`, `frequency` e `rows`. Datas são ISO YYYY-MM-DD, crescentes e sem repetição, a passos exatos de um ou sete dias. Colunas numéricas exigidas não aceitam null, texto, booleano, NaN/Inf ou magnitude acima de 1e12. Target e gastos não podem ser negativos. O servidor não ordena, imputa nem remove linhas automaticamente. A declaração sintética é metadata local confiada ao operador; não é perícia da origem.

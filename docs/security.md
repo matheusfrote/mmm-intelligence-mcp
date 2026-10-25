@@ -1,4 +1,4 @@
-# Segurança e escopo 0.3
+# Segurança e escopo 0.3.1
 
 Somente dados sintéticos foram usados. Não há integração de contas de anúncios, modificação de campanhas, compras de mídia, publicação de pacotes ou deploy. Pacotes Python, R portátil e bibliotecas R ficaram em diretórios deste projeto, sem Registro/PATH global. Dependências e imagens de teste foram baixadas dos distribuidores; isso não constitui um serviço externo implantado.
 
@@ -31,3 +31,7 @@ Testes verificam travessia, link externo, junction Windows, escrita concorrente,
 A matriz de CI não publica pacotes ou implanta serviços. O usuário autorizou publicar o código em repositório público; dados empresariais, identidade corporativa e serviço externo continuam exigindo escopo e ambiente definidos. `.gitignore` e `MANIFEST.in` excluem logs/evidências privadas, modelos, venvs, arquivos de credenciais, configurações locais e o inventário de preservação. Um teste constrói wheel e sdist e inspeciona efetivamente seu conteúdo. A auditoria de versões Python está em `validation/dependency-audit.json`; não equivale a prova de ausência de vulnerabilidades ou auditoria de todo o ecossistema R.
 
 A revisão 0.3 consultou novamente pip-audit para o lock principal: zero achados conhecidos em 51 dependências, conforme scientific-checks.json. O job remoto de segurança também passou. `audit_model` respeita isolamento por usuário, não escreve artefatos e compartilha o semáforo de cálculo. A política de abstenção estatística impede apresentar candidato como recomendação comercial, mas não é mecanismo de autorização para operar plataformas: nenhuma ferramenta de operação de anúncios existe neste servidor.
+
+A revisão [0.3.1](../SECURITY_DEPLOY_AUDIT.md) acrescenta expiração/bloqueio opcionais, revogação por configuração/reinício testada, rejeição de auth duplicado, limites de requisição/concorrência e headers no-store/nosniff/CSP. O SDK continua validando Host/Origin. Workers usam allowlist de ambiente, mensagens públicas genéricas e saída limitada a 1 MB durante a execução, inclusive antes de gerar diagnóstico. O dashboard autoriza o script gerado por hash CSP; não autoriza qualquer script inline.
+
+O lock universal com hashes é requirements/base-ci.txt. O CI instala somente wheels de dependências e fixa actions por SHA. Scanners e tipos básicos são parte dos checks. Consulte o relatório para achados baixos revisados do Bandit, cobertura limitada da busca por segredos, sete auditorias Python e limites de R/produção. O usuário optou por somente GitHub, sem deploy; não há certificação de segurança de serviço público.

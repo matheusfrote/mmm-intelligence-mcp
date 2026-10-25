@@ -18,6 +18,7 @@ from .schemas import (
     BackendPredictRequest,
     BackendRequest,
     CalibrationRequest,
+    Contract,
     EmptyRequest,
     GenerateRequest,
     ImportRequest,
@@ -47,7 +48,7 @@ COMPUTE_TOOLS = {
 
 
 class MMMService:
-    REQUESTS = {
+    REQUESTS: dict[str, type[Contract]] = {
         "generate_demo_dataset": GenerateRequest,
         "validate_dataset": ValidateRequest,
         "train_mmm": TrainRequest,
