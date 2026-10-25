@@ -10,7 +10,7 @@ A normalização faz um gasto constante tender ao mesmo valor do gasto por perí
 
 `h(a) = a / (K+a)`, `K > 0`.
 
-Cada canal recebe `K = mediana dos adstocks positivos do treino após warmup * saturation_multiplier`. O parâmetro de retenção é fornecido e compartilhado entre canais. Não é estimado a partir da verdade do gerador; não há busca ou calibração de formas nesta versão. Canal constante no treino bloqueia o ajuste por falta de variação. Controles constantes geram aviso.
+Cada canal recebe `K = mediana dos adstocks positivos do treino após warmup * saturation_multiplier`. O parâmetro de retenção é fornecido e compartilhado entre canais. Não é estimado a partir da verdade do gerador; `tune_mmm` pode selecionar formas em validação interna, conforme a seção de extensões. Canal constante no treino bloqueia o ajuste por falta de variação. Controles constantes geram aviso.
 
 A matriz inclui intercepto, mídia transformada, tendência em anos desde a origem, seno/cosseno anual e controles. O ajuste minimiza:
 
@@ -57,3 +57,13 @@ O motor Ridge não realiza inferência bayesiana. A versão 0.2 acrescenta boots
 `optimize_budget` resolve alocação de um total e limites por canal via SLSQP com gradiente analítico. Na família local Hill expoente 1 e mídia não negativa, a resposta é côncava na verba sob controles/estado fixos. O solver precisa satisfazer soma, limites e melhora sobre uma inicialização factível; testes comparam com malha independente. O resultado é um ótimo do modelo, sem garantia causal, de lucro ou de execução em plataformas.
 
 A boa métrica da demonstração é esperada: gerador e estimador compartilham uma família de transformações. É teste de software e de invariantes, não validação de uma política comercial nem prova de recuperação verdadeira das contribuições.
+
+## Auditoria 0.3
+
+`audit_model` reconcilia a soma de intercepto, mídia, controles, tendência e sazonalidade com a previsão persistida; o resíduo separa observado e previsto. Esses componentes são associações ajustadas com carryover, não receita causal incremental. ROI/mROI ficam indisponíveis. Backtesting usa origens expansivas com janelas finais disjuntas; modelos tuned refazem seleção dentro de cada prefixo. Sensibilidade de formas não escolhe um vencedor pelo teste externo.
+
+RMSE complementa MAE; MAPE exclui observados exatamente zero e informa a contagem. WAPE/R² retornam null com denominador indefinido. Posto e condicionamento padronizados separam escala de colinearidade; R² ajustado OLS é omitido por não representar graus de liberdade de Ridge restrito. Diagnósticos residuais são descritivos.
+
+Bootstrap residual reajusta o estimador penalizado e pode deslocar os percentis por shrinkage. O ponto fora dos intervalos é sinalizado; não há recentramento artificial, posterior bayesiana ou cobertura certificada. Calibração exige mesma origem sintética/real do modelo e do experimento.
+
+Otimização compara o candidato com uma referência de mesmo orçamento, horizonte, controles e estado inicial. Derivadas são KPI condicional por gasto. Sucesso SLSQP não gera recomendação de negócio: recommended_spend=null. Abstenção e revisão humana são explícitas, inclusive para dados sintéticos, posto deficiente, incerteza ausente, extrapolação ou instabilidade. [Auditoria e limites](../MMM_AUDIT_REPORT.md).

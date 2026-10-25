@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.3.0 — auditoria científica e abstenção explícita
+
+- Adicionada audit_model: decomposição reconciliada, backtesting com seleção nested, sensibilidade de especificação e insight rastreável.
+- Corrigida influência do target reservado no pré-processamento Meridian e na busca Robyn; contagens de split Robyn seguem datas nativas.
+- Persistidos priors/configuração efetiva, tipo de intervalo e diagnósticos MCMC completos sem arredondamento; ajustes curtos não certificados.
+- Adicionados RMSE/MAPE, posto/condição padronizados, declaração do KPI e contexto de dados; advertências preservadas nos cenários.
+- Otimização separa candidato numérico de recomendação, compara verba igual e expõe derivadas condicionais. ROI/mROI causal permanecem indisponíveis.
+- Calibração bloqueia mistura de origens; bootstrap registra viés de penalização e cobertura não certificada.
+- 105 testes, 11 casos sintéticos de stress e novas evidências nativas/UI; documentação científica e limites empresariais explícitos.
+
 ## 0.2.0 — primeira publicação do código
 
 ### Adicionado

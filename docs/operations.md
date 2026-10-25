@@ -64,3 +64,11 @@ $env:MMM_PORT = '8769'
 BLAS/OMP usam uma thread no servidor. Um semáforo permite um cálculo ativo por instância; outro recebe `BUSY`. Workers têm timeout de 900 s, configurável 10–3600. No Windows, Job Object aplica CPU hard cap (50%), memória total de 4096 MB e encerramento da árvore, incluindo R. Falha ao aplicar o controle falha a chamada. POSIX usa grupo de processos/timeout; não configura cgroup automaticamente.
 
 Os controles não alteram plano de energia nem configurações globais. Não são sandbox contra código hostil ou quota distribuída entre instâncias. Não inicie vários motores pesados simultaneamente. Logs nativos privados de falha são limitados a 1 MB; podem conter tracebacks/caminhos upstream. Proteja-os por ACL e não publique logs empresariais.
+
+## Auditoria 0.3 e artefatos grandes
+
+`audit_model` também é permitido ao reader, com semáforo de cálculo, sem criar arquivos. O relatório completo fica no retorno estruturado; exporte-o pelo cliente. Repita stress com `python examples/scientific_stress.py --output-dir evidence/novo-stress`.
+
+Os smokes nativos desta auditoria usaram `MMM_MAX_FILE_BYTES=52428800` explicitamente no host para acomodar serialização nativa. O padrão continua 10 MiB; não aumentar por argumentos de ferramenta. Declare target_type e contexto ao importar. Meridian recusa KPI não monetário/indefinido nesta interface; Robyn distingue receita/conversões. Priors efetivos e regras de holdout acompanham cada modelo novo. Artefatos 0.2 são evidência histórica; para avaliar as correções use os treinos 0.3 documentados.
+
+HTTP usa tokens estáticos: não implementa expiração/refresh OAuth. Não há chamadas a APIs de anúncios neste servidor; indisponibilidade ou autenticação de uma futura fonte externa não foi homologada por estes testes. Ausência de fonte real está registrada, não simulada como conexão empresarial bem-sucedida.

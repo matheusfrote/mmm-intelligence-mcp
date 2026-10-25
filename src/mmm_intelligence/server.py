@@ -76,6 +76,7 @@ def create_server(
         "train_backend": "Train an actual external backend in its isolated configured runtime; no Ridge fallback.",
         "predict_backend": "Restore native backend state and evaluate a historical media scenario.",
         "get_backend_model": "Read external backend metadata, diagnostics and predictions without native binaries.",
+        "audit_model": "Audit local model lineage, component reconciliation, rolling temporal backtests, shape sensitivity and evidence for abstaining from budget changes.",
     }
     for name, description in descriptions.items():
 
@@ -98,6 +99,7 @@ def create_server(
                     "predict_backend",
                     "get_backend_model",
                     "backend_status",
+                    "audit_model",
                 }
                 else creates
             ),

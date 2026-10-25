@@ -1,0 +1,27 @@
+{
+  "synthetic": true,
+  "browser": "Chrome via DevTools MCP",
+  "artifact": "scientific-final/dashboard.html",
+  "visual_inspection": [
+    "desktop 1889 px",
+    "narrow effective 500 px (390 requested, browser minimum 500)"
+  ],
+  "horizontal_overflow_narrow": false,
+  "external_resources": [],
+  "input": {
+    "total_budget": 26000,
+    "horizon": 8,
+    "weights": [
+      40,
+      30,
+      30
+    ]
+  },
+  "python_conditional_total": 95344.14042879627,
+  "javascript_display_pt_BR": "95.344,14",
+  "absolute_rounding_difference": 0.00042879626562353224,
+  "screenshots_inspected_inline": true,
+  "screenshot_file_saved": false,
+  "intervals_in_ui": false,
+  "business_validation": false
+}

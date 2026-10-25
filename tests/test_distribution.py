@@ -22,6 +22,7 @@ def test_source_and_wheel_include_workers_but_exclude_private_runtime(tmp_path):
     assert "examples/mcp-config.example.json" in names
     assert "src/mmm_intelligence/integrations/robyn_worker.R" in names
     assert "IMPLEMENTATION_PROGRESS.md" in names
+    assert "MMM_AUDIT_REPORT.md" in names
     assert not any(
         n.startswith(("var/", "evidence/", ".venv/"))
         or n.endswith(".local.json")

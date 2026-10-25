@@ -22,6 +22,7 @@ READ_TOOLS = {
     "calibrate_experiment",
     "predict_backend",
     "get_backend_model",
+    "audit_model",
 }
 
 

@@ -6,12 +6,137 @@ Native models are serialized by official safe formats, embedded in hashed JSON.
 
 import base64
 import json
+import math
 import os
 import subprocess
 import sys
 import traceback
 from importlib.metadata import version
 from pathlib import Path
+
+
+def declared_target_type(dataset, target_column):
+    """Use declared KPI semantics; support only the known legacy demo inference."""
+    target_type = dataset.get("target_type", "unspecified")
+    if not isinstance(target_type, str) or target_type not in {
+        "revenue",
+        "non_revenue",
+        "unspecified",
+    }:
+        raise ValueError("Invalid dataset target_type")
+    if (
+        target_type == "unspecified"
+        and dataset.get("synthetic") is True
+        and dataset.get("source") == "built-in-demo-v1"
+        and target_column == "revenue"
+    ):
+        return "revenue"
+    return target_type
+
+
+def prepare_meridian_holdout(dataset, request):
+    """Isolate holdout targets before native preprocessing, without importing TF.
+
+    Meridian 2.1 masks likelihood observations after fitting its KPI scaler to
+    the complete input. Train-only placeholders prevent the withheld observed
+    target from affecting that scaler. This is not a train-prefix-only scaler.
+    """
+    if declared_target_type(dataset, request["target_column"]) != "revenue":
+        raise ValueError("Meridian adapter requires explicitly declared revenue target_type")
+    rows = dataset.get("rows")
+    fraction = request.get("test_fraction")
+    if (
+        not isinstance(rows, list)
+        or len(rows) < 2
+        or isinstance(fraction, bool)
+        or not isinstance(fraction, (int, float))
+        or not math.isfinite(fraction)
+        or not 0 < fraction < 1
+    ):
+        raise ValueError("Invalid Meridian holdout shape or test_fraction")
+    cutoff = len(rows) - math.ceil(len(rows) * fraction)
+    if not 1 < cutoff < len(rows):
+        raise ValueError("Meridian holdout needs at least two train and one test observation")
+    observed = []
+    for row in rows:
+        value = row.get(request["target_column"]) if isinstance(row, dict) else None
+        if (
+            isinstance(value, bool)
+            or not isinstance(value, (int, float))
+            or not math.isfinite(value)
+            or value < 0
+        ):
+            raise ValueError("Meridian targets must be finite nonnegative numbers")
+        observed.append(float(value))
+    placeholder = math.fsum(observed[:cutoff]) / cutoff
+    if not math.isfinite(placeholder):
+        raise ValueError("Meridian train-only placeholder is nonfinite")
+    model_rows = [dict(row) for row in rows]
+    for row in model_rows[cutoff:]:
+        row[request["target_column"]] = placeholder
+    return (
+        model_rows,
+        observed,
+        cutoff,
+        {
+            "policy": "holdout_target_replaced_with_train_mean_before_native_loader",
+            "placeholder": placeholder,
+            "train_rows": cutoff,
+            "test_rows": len(rows) - cutoff,
+            "target_holdout_used_in_native_preprocessing": False,
+            "native_scaler_scope": "training_targets_and_train_only_holdout_placeholders",
+            "likelihood_exclusion": "native_HoldoutSpec",
+        },
+    )
+
+
+def robyn_split_indices(n, train_size=0.6):
+    """Reference of R 3.12.1's type-7 quantile split; zero-based bounds."""
+    if (
+        isinstance(n, bool)
+        or not isinstance(n, int)
+        or n < 3
+        or isinstance(train_size, bool)
+        or not isinstance(train_size, (int, float))
+        or not math.isfinite(train_size)
+        or not 0 < train_size < 1
+    ):
+        raise ValueError("Invalid native Robyn split")
+    train_end = math.floor(1 + (n - 1) * train_size)
+    validation_end = train_end + math.floor(((1 - train_size) / 2) * n)
+    if not 0 < train_end < validation_end < n:
+        raise ValueError("Robyn split has an empty partition")
+    return {"train_end": train_end, "validation_end": validation_end, "test_end": n}
+
+
+def summarize_diagnostics(statistics):
+    """Keep unrounded finite extrema and explicitly count undefined diagnostics."""
+    result = {"convergence_certified": False}
+    for column, name, aggregate in (
+        ("r_hat", "r_hat_max", max),
+        ("ess_bulk", "ess_bulk_min", min),
+        ("ess_tail", "ess_tail_min", min),
+    ):
+        values = [float(value) for value in statistics[column]] if column in statistics else []
+        finite = [value for value in values if math.isfinite(value)]
+        result[name] = aggregate(finite) if finite else None
+        result[column + "_available"] = bool(finite)
+        result[column + "_undefined_count"] = len(values) - len(finite)
+    return result
+
+
+def divergence_diagnostics(idata):
+    try:
+        return {
+            "divergences": int(idata["sample_stats"]["diverging"].sum().item()),
+            "divergences_available": True,
+        }
+    except (KeyError, AttributeError, TypeError):
+        return {
+            "divergences": None,
+            "divergences_available": False,
+            "divergences_unavailable_reason": "sample_stats.diverging is absent",
+        }
 
 
 def finite_json(value):
@@ -28,7 +153,7 @@ def finite_json(value):
     return value
 
 
-def summarize(samples, dates, observed=None):
+def summarize(samples, dates, observed=None, interval_type="unspecified"):
     import numpy as np
 
     draws = np.asarray(samples, float).reshape(-1, len(dates))
@@ -41,6 +166,8 @@ def summarize(samples, dates, observed=None):
         "lower_90": np.quantile(draws, 0.05, axis=0).tolist(),
         "upper_90": np.quantile(draws, 0.95, axis=0).tolist(),
         "samples": draws.shape[0],
+        "interval_type": interval_type,
+        "interval_level": 0.9,
     }
     if observed is not None:
         y = np.asarray(observed, float)
@@ -64,10 +191,41 @@ def pymc_diagnostics(model):
     ]
     statistics = summary(model.idata, var_names=names, kind="diagnostics", round_to="none")
     return {
-        "r_hat_max": float(statistics["r_hat"].max()),
-        "ess_bulk_min": float(statistics["ess_bulk"].min()),
-        "method": "ArviZ rank-normalized split R-hat and bulk ESS",
+        **summarize_diagnostics(statistics),
+        "method": "ArviZ rank-normalized split R-hat, bulk ESS and tail ESS",
+        "summarized_variables": names,
+        "excluded_date_dependent_variables": [
+            name for name in model.idata["posterior"].data_vars if name not in names
+        ],
         "convergence_certified": False,
+    }
+
+
+def pymc_effective_configuration(model, target_type):
+    from pymc_marketing.serialization import serialization
+
+    return {
+        "prior_source": "package_defaults_no_custom_priors",
+        "model_config": serialization.serialize_model_config(model.model_config),
+        "adstock": serialization.serialize(model.adstock),
+        "saturation": serialization.serialize(model.saturation),
+        "target_type": target_type,
+        "interval_type": "posterior_predictive_observed",
+    }
+
+
+def meridian_effective_configuration(model):
+    from google.protobuf.json_format import MessageToDict
+    from meridian.schema.serde import distribution, function_registry
+
+    serde = distribution.DistributionSerde(function_registry.FunctionRegistry())
+    return {
+        "prior_source": "package_defaults_no_custom_priors",
+        "configured_priors": MessageToDict(serde.serialize(model.model_spec.prior)),
+        "effective_broadcast_priors": MessageToDict(serde.serialize(model.prior_broadcast)),
+        "media_prior_type": model.model_spec.media_prior_type,
+        "target_type": "revenue",
+        "interval_type": "conditional_expected_outcome",
     }
 
 
@@ -130,11 +288,6 @@ def pymc(payload, root):
             raise ValueError("PyMC persistence changed predictions")
         # Current ArviZ exposes DataTree diagnostics through xarray accessors.
         idata = model.idata
-        divergences = None
-        try:
-            divergences = int(idata["sample_stats"]["diverging"].sum().item())
-        except (KeyError, AttributeError):
-            pass
         return {
             "backend": "pymc_marketing",
             "backend_version": version("pymc-marketing"),
@@ -144,10 +297,18 @@ def pymc(payload, root):
             "request": req,
             "cutoff": cutoff,
             "restore_verified": True,
-            "test": summarize(before, dates[cutoff:], y.iloc[cutoff:].to_numpy()),
+            "effective_configuration": pymc_effective_configuration(
+                model, declared_target_type(dataset, req["target_column"])
+            ),
+            "test": summarize(
+                before,
+                dates[cutoff:],
+                y.iloc[cutoff:].to_numpy(),
+                interval_type="posterior_predictive_observed",
+            ),
             "diagnostics": {
                 **pymc_diagnostics(model),
-                "divergences": divergences,
+                **divergence_diagnostics(idata),
                 "chains": req["chains"],
                 "draws": req["draws"],
                 "tune": req["tune"],
@@ -188,7 +349,9 @@ def pymc(payload, root):
         "scope": "historical_holdout_scenario",
         "diagnostics": pymc_diagnostics(model),
         "prediction": summarize(
-            np.asarray(pp["y_original_scale"]), df[req["date_column"]].iloc[cutoff:].tolist()
+            np.asarray(pp["y_original_scale"]),
+            df[req["date_column"]].iloc[cutoff:].tolist(),
+            interval_type="posterior_predictive_observed",
         ),
         "exploratory": True,
         "warnings": ["Conditional historical scenario; not a causal intervention estimate"],
@@ -196,6 +359,10 @@ def pymc(payload, root):
 
 
 def meridian(payload, root):
+    if payload["operation"] == "train":
+        model_rows, observed, cutoff, holdout_policy = prepare_meridian_holdout(
+            payload["dataset"], payload["request"]
+        )
     import numpy as np
     import pandas as pd
     from meridian.analysis import analyzer
@@ -208,8 +375,7 @@ def meridian(payload, root):
     if payload["operation"] == "train":
         req = payload["request"]
         dataset = payload["dataset"]
-        df = pd.DataFrame(dataset["rows"])
-        cutoff = len(df) - int(np.ceil(len(df) * req["test_fraction"]))
+        df = pd.DataFrame(model_rows)
         # Spend is an explicitly declared proxy for exposure in this synthetic adapter.
         exposure = []
         for c in req["media_columns"]:
@@ -265,13 +431,14 @@ def meridian(payload, root):
         try:
             import arviz as az
 
-            summary = az.summary(fitted.inference_data, kind="diagnostics")
-            diagnostics.update(
-                r_hat_max=float(summary["r_hat"].max()),
-                ess_bulk_min=float(summary["ess_bulk"].min()),
-            )
+            summary = az.summary(fitted.inference_data, kind="diagnostics", round_to="none")
+            diagnostics.update(summarize_diagnostics(summary))
+            diagnostics["summary_available"] = True
         except (ValueError, KeyError, TypeError):
+            diagnostics.update(summarize_diagnostics({}))
             diagnostics["summary_available"] = False
+            diagnostics["summary_unavailable_reason"] = "ArviZ diagnostic summary unavailable"
+        diagnostics.update(divergence_diagnostics(fitted.inference_data))
         return {
             "backend": "google_meridian",
             "backend_version": version("google-meridian"),
@@ -281,15 +448,19 @@ def meridian(payload, root):
             "request": req,
             "cutoff": cutoff,
             "restore_verified": True,
+            "holdout_policy": holdout_policy,
+            "effective_configuration": meridian_effective_configuration(fitted),
             "test": summarize(
                 before[:, cutoff:],
                 df[req["date_column"]].iloc[cutoff:].tolist(),
-                df[req["target_column"]].iloc[cutoff:].to_numpy(),
+                observed[cutoff:],
+                interval_type="conditional_expected_outcome",
             ),
             "diagnostics": diagnostics,
             "warnings": [
                 "SHORT_CHAINS: functional test does not establish convergence",
                 "SPEND_PROXY: synthetic spend used as exposure proxy",
+                "Holdout target uses train-only placeholders in native preprocessing",
                 "No demonstrated causal attribution",
             ],
         }
@@ -325,6 +496,7 @@ def meridian(payload, root):
         "prediction": summarize(
             out.reshape(-1, n)[:, cutoff:],
             [r[req["date_column"]] for r in stored["dataset"]["rows"]][cutoff:],
+            interval_type="conditional_expected_outcome",
         ),
         "warnings": [
             "Meridian future forecasting is not exposed; historical scenario only",
@@ -343,6 +515,12 @@ def main():
             result = pymc(payload, Path(destination).parent)
         else:
             root = Path(destination).parent
+            if payload["operation"] == "train":
+                target_type = declared_target_type(
+                    payload["dataset"], payload["request"]["target_column"]
+                )
+                if target_type == "unspecified":
+                    raise ValueError("Robyn requires declared revenue or non_revenue target_type")
             project = Path(__file__).resolve().parents[3]
             default = project / "var/runtime/r-portable/R-4.5.2/bin/Rscript.exe"
             rscript = Path(os.environ.get("MMM_RSCRIPT", str(default)))

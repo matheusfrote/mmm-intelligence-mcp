@@ -1,0 +1,1883 @@
+{
+  "synthetic": true,
+  "scope": "Controlled software/math stress tests; no business or causal certification",
+  "cases": {
+    "baseline": {
+      "data_quality": {
+        "dataset_id": "baseline",
+        "valid": true,
+        "issues": [],
+        "warnings": [],
+        "rows": 156,
+        "start_date": "2023-01-02",
+        "end_date": "2025-12-22",
+        "train_rows": 116,
+        "test_rows": 32,
+        "warmup_rows": 8,
+        "frequency": "weekly",
+        "synthetic": true,
+        "missing_metadata": [
+          "extracted_at",
+          "timezone",
+          "currency",
+          "kpi_definition",
+          "complete_through"
+        ],
+        "data_context": {
+          "source_reference": "constructed-seed42-718",
+          "tracking_notes": "baseline; fabricated stress case, not a business observation"
+        },
+        "target_type": "revenue"
+      },
+      "train_ok": true,
+      "metrics": {
+        "train": {
+          "mae": 99.79034465283245,
+          "rmse": 125.0834754454375,
+          "mape_nonzero_percent": 0.8191688061677133,
+          "mape_excluded_zeros": 0,
+          "wape_percent": 0.8130231097076975,
+          "r2": 0.9613565316195994
+        },
+        "test": {
+          "mae": 98.24395239088852,
+          "rmse": 125.0415604974599,
+          "mape_nonzero_percent": 0.8214391710130147,
+          "mape_excluded_zeros": 0,
+          "wape_percent": 0.8238151918367113,
+          "r2": 0.9761583350566961
+        },
+        "test_train_mean_baseline": {
+          "mae": 723.465911509367,
+          "rmse": 881.6204922075557,
+          "mape_nonzero_percent": 6.264762777205279,
+          "mape_excluded_zeros": 0,
+          "wape_percent": 6.066553657227307,
+          "r2": -0.18519869056008664
+        }
+      },
+      "diagnostics": {
+        "adjusted_r2": null,
+        "adjusted_r2_reason": "Nominal OLS degrees of freedom are inappropriate for constrained regularized regression",
+        "condition_number": 106.56412571143285,
+        "feature_count": 9,
+        "matrix_rank": 9,
+        "residual_diagnostics_scope": "descriptive; no causal or independence certification",
+        "standardized_condition_number": 1.7765839982996936,
+        "standardized_matrix_rank": 9,
+        "train_durbin_watson": 1.970633373540645,
+        "train_residual_lag1": -0.01633314451644895,
+        "train_residual_mean": -4.202492759916289e-12
+      },
+      "budgets": [
+        {
+          "multiplier": 0.5,
+          "solver": {
+            "success": true,
+            "message": "Optimization terminated successfully",
+            "objective": "conditional KPI total",
+            "form": "concave Hill exponent one with nonnegative media coefficients"
+          },
+          "decision_support": {
+            "status": "abstain_from_budget_change",
+            "business_recommendation_eligible": false,
+            "reasons": [
+              "SYNTHETIC_DATA"
+            ],
+            "policy": "Conservative evidence screens, not universal statistical acceptance thresholds. Numeric optimization remains an exploratory candidate.",
+            "required_next_step": "Review business context, causal assumptions, stability and experiment evidence before any budget change"
+          },
+          "optimal_spend": {
+            "spend_search": 8825.795821785423,
+            "spend_social": 8431.8985333398,
+            "spend_video": 8388.78323969036
+          },
+          "comparison_same_total": {
+            "reference_spend": {
+              "spend_search": 6486.794187263184,
+              "spend_social": 10732.972108410668,
+              "spend_video": 8426.711299141729
+            },
+            "reference_definition": "Recent spending shares rescaled to the same requested total; equal shares if recent total is zero",
+            "reference_predicted_total": 143217.0735662135,
+            "candidate_predicted_total": 143545.48508628338,
+            "predicted_difference": 328.4115200698725,
+            "conditional_difference_interval_90": [
+              167.63498627966356,
+              524.0979040384988
+            ],
+            "changes": {
+              "spend_search": {
+                "recent_horizon_spend": 12973.588374526367,
+                "candidate_spend": 8825.795821785423,
+                "absolute_change": -4147.792552740944,
+                "percent_change": -31.971050976807103
+              },
+              "spend_social": {
+                "recent_horizon_spend": 21465.944216821335,
+                "candidate_spend": 8431.8985333398,
+                "absolute_change": -13034.045683481536,
+                "percent_change": -60.71964760472861
+              },
+              "spend_video": {
+                "recent_horizon_spend": 16853.422598283458,
+                "candidate_spend": 8388.78323969036,
+                "absolute_change": -8464.639358593098,
+                "percent_change": -50.22504662913534
+              }
+            }
+          },
+          "warnings": [
+            "MODEL_OPTIMUM_ONLY: no causal, profit or operational guarantee",
+            "FIXED_SHAPE: decay and Hill multiplier supplied, not estimated",
+            "CONDITIONAL_HOLDOUT: test predictions use observed test spend and controls",
+            "ZERO_INITIAL_STATE: prehistory unknown; warmup only approximates its removal",
+            "MEDIA_SIGN_RESTRICTION: nonnegative conditional media coefficients are an explicit modeling assumption",
+            "CONDITIONAL_UNCERTAINTY: excludes shape, confounding and future input uncertainty",
+            "REFERENCE: flat per-period mean spending of the last up to 13 historical periods",
+            "HORIZON: residual effects beyond the horizon are excluded; history carryover included",
+            "CONTROL_ASSUMPTION: future controls held at the last observed value",
+            "CONDITIONAL_INTERVAL: fixed shape, controls and observed initial state; no causal guarantee"
+          ]
+        },
+        {
+          "multiplier": 1.0,
+          "solver": {
+            "success": true,
+            "message": "Optimization terminated successfully",
+            "objective": "conditional KPI total",
+            "form": "concave Hill exponent one with nonnegative media coefficients"
+          },
+          "decision_support": {
+            "status": "abstain_from_budget_change",
+            "business_recommendation_eligible": false,
+            "reasons": [
+              "SYNTHETIC_DATA"
+            ],
+            "policy": "Conservative evidence screens, not universal statistical acceptance thresholds. Numeric optimization remains an exploratory candidate.",
+            "required_next_step": "Review business context, causal assumptions, stability and experiment evidence before any budget change"
+          },
+          "optimal_spend": {
+            "spend_search": 17163.226059746987,
+            "spend_social": 16729.45290009364,
+            "spend_video": 17400.276229790536
+          },
+          "comparison_same_total": {
+            "reference_spend": {
+              "spend_search": 12973.588374526367,
+              "spend_social": 21465.944216821335,
+              "spend_video": 16853.422598283458
+            },
+            "reference_definition": "Recent spending shares rescaled to the same requested total; equal shares if recent total is zero",
+            "reference_predicted_total": 160834.5245356676,
+            "candidate_predicted_total": 161403.82544992433,
+            "predicted_difference": 569.3009142567462,
+            "conditional_difference_interval_90": [
+              385.13312029212125,
+              790.2549293631806
+            ],
+            "changes": {
+              "spend_search": {
+                "recent_horizon_spend": 12973.588374526367,
+                "candidate_spend": 17163.226059746987,
+                "absolute_change": 4189.6376852206195,
+                "percent_change": 32.29359190589838
+              },
+              "spend_social": {
+                "recent_horizon_spend": 21465.944216821335,
+                "candidate_spend": 16729.45290009364,
+                "absolute_change": -4736.491316727694,
+                "percent_change": -22.06514313503173
+              },
+              "spend_video": {
+                "recent_horizon_spend": 16853.422598283458,
+                "candidate_spend": 17400.276229790536,
+                "absolute_change": 546.8536315070778,
+                "percent_change": 3.244763064107681
+              }
+            }
+          },
+          "warnings": [
+            "MODEL_OPTIMUM_ONLY: no causal, profit or operational guarantee",
+            "FIXED_SHAPE: decay and Hill multiplier supplied, not estimated",
+            "CONDITIONAL_HOLDOUT: test predictions use observed test spend and controls",
+            "ZERO_INITIAL_STATE: prehistory unknown; warmup only approximates its removal",
+            "MEDIA_SIGN_RESTRICTION: nonnegative conditional media coefficients are an explicit modeling assumption",
+            "CONDITIONAL_UNCERTAINTY: excludes shape, confounding and future input uncertainty",
+            "REFERENCE: flat per-period mean spending of the last up to 13 historical periods",
+            "HORIZON: residual effects beyond the horizon are excluded; history carryover included",
+            "CONTROL_ASSUMPTION: future controls held at the last observed value",
+            "CONDITIONAL_INTERVAL: fixed shape, controls and observed initial state; no causal guarantee"
+          ]
+        },
+        {
+          "multiplier": 2.0,
+          "solver": {
+            "success": true,
+            "message": "Optimization terminated successfully",
+            "objective": "conditional KPI total",
+            "form": "concave Hill exponent one with nonnegative media coefficients"
+          },
+          "decision_support": {
+            "status": "abstain_from_budget_change",
+            "business_recommendation_eligible": false,
+            "reasons": [
+              "SYNTHETIC_DATA"
+            ],
+            "policy": "Conservative evidence screens, not universal statistical acceptance thresholds. Numeric optimization remains an exploratory candidate.",
+            "required_next_step": "Review business context, causal assumptions, stability and experiment evidence before any budget change"
+          },
+          "optimal_spend": {
+            "spend_search": 33806.833010999675,
+            "spend_social": 33346.08001992142,
+            "spend_video": 35432.99734834122
+          },
+          "comparison_same_total": {
+            "reference_spend": {
+              "spend_search": 25947.176749052735,
+              "spend_social": 42931.88843364267,
+              "spend_video": 33706.845196566916
+            },
+            "reference_definition": "Recent spending shares rescaled to the same requested total; equal shares if recent total is zero",
+            "reference_predicted_total": 180138.76326021602,
+            "candidate_predicted_total": 180871.26367346573,
+            "predicted_difference": 732.5004132497124,
+            "conditional_difference_interval_90": [
+              556.5825275561021,
+              936.7137793513624
+            ],
+            "changes": {
+              "spend_search": {
+                "recent_horizon_spend": 12973.588374526367,
+                "candidate_spend": 33806.833010999675,
+                "absolute_change": 20833.244636473308,
+                "percent_change": 160.5819765129852
+              },
+              "spend_social": {
+                "recent_horizon_spend": 21465.944216821335,
+                "candidate_spend": 33346.08001992142,
+                "absolute_change": 11880.135803100085,
+                "percent_change": 55.3441101080961
+              },
+              "spend_video": {
+                "recent_horizon_spend": 16853.422598283458,
+                "candidate_spend": 35432.99734834122,
+                "absolute_change": 18579.57475005776,
+                "percent_change": 110.24214601934989
+              }
+            }
+          },
+          "warnings": [
+            "MODEL_OPTIMUM_ONLY: no causal, profit or operational guarantee",
+            "FIXED_SHAPE: decay and Hill multiplier supplied, not estimated",
+            "CONDITIONAL_HOLDOUT: test predictions use observed test spend and controls",
+            "ZERO_INITIAL_STATE: prehistory unknown; warmup only approximates its removal",
+            "MEDIA_SIGN_RESTRICTION: nonnegative conditional media coefficients are an explicit modeling assumption",
+            "CONDITIONAL_UNCERTAINTY: excludes shape, confounding and future input uncertainty",
+            "REFERENCE: flat per-period mean spending of the last up to 13 historical periods",
+            "HORIZON: residual effects beyond the horizon are excluded; history carryover included",
+            "CONTROL_ASSUMPTION: future controls held at the last observed value",
+            "CONDITIONAL_INTERVAL: fixed shape, controls and observed initial state; no causal guarantee"
+          ]
+        }
+      ]
+    },
+    "collinear": {
+      "data_quality": {
+        "dataset_id": "collinear",
+        "valid": true,
+        "issues": [],
+        "warnings": [],
+        "rows": 156,
+        "start_date": "2023-01-02",
+        "end_date": "2025-12-22",
+        "train_rows": 116,
+        "test_rows": 32,
+        "warmup_rows": 8,
+        "frequency": "weekly",
+        "synthetic": true,
+        "missing_metadata": [
+          "extracted_at",
+          "timezone",
+          "currency",
+          "kpi_definition",
+          "complete_through"
+        ],
+        "data_context": {
+          "source_reference": "constructed-seed42-718",
+          "tracking_notes": "collinear; fabricated stress case, not a business observation"
+        },
+        "target_type": "revenue"
+      },
+      "train_ok": true,
+      "metrics": {
+        "train": {
+          "mae": 218.54724598210925,
+          "rmse": 286.0562067218021,
+          "mape_nonzero_percent": 1.7996431368642367,
+          "mape_excluded_zeros": 0,
+          "wape_percent": 1.7805726813008274,
+          "r2": 0.7978941100419199
+        },
+        "test": {
+          "mae": 316.86374130013905,
+          "rmse": 409.3211106320739,
+          "mape_nonzero_percent": 2.739264041609379,
+          "mape_excluded_zeros": 0,
+          "wape_percent": 2.6570303562978554,
+          "r2": 0.7445204761131705
+        },
+        "test_train_mean_baseline": {
+          "mae": 723.465911509367,
+          "rmse": 881.6204922075557,
+          "mape_nonzero_percent": 6.264762777205279,
+          "mape_excluded_zeros": 0,
+          "wape_percent": 6.066553657227307,
+          "r2": -0.18519869056008664
+        }
+      },
+      "diagnostics": {
+        "adjusted_r2": null,
+        "adjusted_r2_reason": "Nominal OLS degrees of freedom are inappropriate for constrained regularized regression",
+        "condition_number": 4.302458323631756e+16,
+        "feature_count": 9,
+        "matrix_rank": 8,
+        "residual_diagnostics_scope": "descriptive; no causal or independence certification",
+        "standardized_condition_number": 1.722531516900746e+16,
+        "standardized_matrix_rank": 8,
+        "train_durbin_watson": 1.4934544183799818,
+        "train_residual_lag1": 0.2511738957631662,
+        "train_residual_mean": -1.8660322329479047e-12
+      },
+      "budgets": [
+        {
+          "multiplier": 0.5,
+          "solver": {
+            "success": true,
+            "message": "Optimization terminated successfully",
+            "objective": "conditional KPI total",
+            "form": "concave Hill exponent one with nonnegative media coefficients"
+          },
+          "decision_support": {
+            "status": "abstain_from_budget_change",
+            "business_recommendation_eligible": false,
+            "reasons": [
+              "RANK_DEFICIENT",
+              "SYNTHETIC_DATA"
+            ],
+            "policy": "Conservative evidence screens, not universal statistical acceptance thresholds. Numeric optimization remains an exploratory candidate.",
+            "required_next_step": "Review business context, causal assumptions, stability and experiment evidence before any budget change"
+          },
+          "optimal_spend": {
+            "spend_search": 9846.308655693689,
+            "spend_social": 1885.1600036872283,
+            "spend_video": 16155.625201550365
+          },
+          "comparison_same_total": {
+            "reference_spend": {
+              "spend_search": 6486.794187263184,
+              "spend_social": 12973.588374526367,
+              "spend_video": 8426.711299141729
+            },
+            "reference_definition": "Recent spending shares rescaled to the same requested total; equal shares if recent total is zero",
+            "reference_predicted_total": 150694.4966706939,
+            "candidate_predicted_total": 152376.09544657273,
+            "predicted_difference": 1681.5987758788397,
+            "conditional_difference_interval_90": [
+              183.65064976935693,
+              3093.524075357879
+            ],
+            "changes": {
+              "spend_search": {
+                "recent_horizon_spend": 12973.588374526367,
+                "candidate_spend": 9846.308655693689,
+                "absolute_change": -3127.2797188326786,
+                "percent_change": -24.104971026929533
+              },
+              "spend_social": {
+                "recent_horizon_spend": 25947.176749052735,
+                "candidate_spend": 1885.1600036872283,
+                "absolute_change": -24062.016745365505,
+                "percent_change": -92.7346238015816
+              },
+              "spend_video": {
+                "recent_horizon_spend": 16853.422598283458,
+                "candidate_spend": 16155.625201550365,
+                "absolute_change": -697.7973967330927,
+                "percent_change": -4.140389838703529
+              }
+            }
+          },
+          "warnings": [
+            "MODEL_OPTIMUM_ONLY: no causal, profit or operational guarantee",
+            "FIXED_SHAPE: decay and Hill multiplier supplied, not estimated",
+            "CONDITIONAL_HOLDOUT: test predictions use observed test spend and controls",
+            "ZERO_INITIAL_STATE: prehistory unknown; warmup only approximates its removal",
+            "MEDIA_SIGN_RESTRICTION: nonnegative conditional media coefficients are an explicit modeling assumption",
+            "ILL_CONDITIONED: regressors may not separate channel associations",
+            "CONDITIONAL_UNCERTAINTY: excludes shape, confounding and future input uncertainty",
+            "REFERENCE: flat per-period mean spending of the last up to 13 historical periods",
+            "HORIZON: residual effects beyond the horizon are excluded; history carryover included",
+            "CONTROL_ASSUMPTION: future controls held at the last observed value",
+            "CONDITIONAL_INTERVAL: fixed shape, controls and observed initial state; no causal guarantee"
+          ]
+        },
+        {
+          "multiplier": 1.0,
+          "solver": {
+            "success": true,
+            "message": "Optimization terminated successfully",
+            "objective": "conditional KPI total",
+            "form": "concave Hill exponent one with nonnegative media coefficients"
+          },
+          "decision_support": {
+            "status": "abstain_from_budget_change",
+            "business_recommendation_eligible": false,
+            "reasons": [
+              "RANK_DEFICIENT",
+              "SYNTHETIC_DATA"
+            ],
+            "policy": "Conservative evidence screens, not universal statistical acceptance thresholds. Numeric optimization remains an exploratory candidate.",
+            "required_next_step": "Review business context, causal assumptions, stability and experiment evidence before any budget change"
+          },
+          "optimal_spend": {
+            "spend_search": 17381.23903401016,
+            "spend_social": 12376.056606692136,
+            "spend_video": 26016.892081160262
+          },
+          "comparison_same_total": {
+            "reference_spend": {
+              "spend_search": 12973.588374526367,
+              "spend_social": 25947.176749052735,
+              "spend_video": 16853.422598283458
+            },
+            "reference_definition": "Recent spending shares rescaled to the same requested total; equal shares if recent total is zero",
+            "reference_predicted_total": 159372.99055086737,
+            "candidate_predicted_total": 160648.39355681816,
+            "predicted_difference": 1275.4030059507932,
+            "conditional_difference_interval_90": [
+              146.0743473116402,
+              2340.3351634234746
+            ],
+            "changes": {
+              "spend_search": {
+                "recent_horizon_spend": 12973.588374526367,
+                "candidate_spend": 17381.23903401016,
+                "absolute_change": 4407.650659483792,
+                "percent_change": 33.974028867280936
+              },
+              "spend_social": {
+                "recent_horizon_spend": 25947.176749052735,
+                "candidate_spend": 12376.056606692136,
+                "absolute_change": -13571.120142360598,
+                "percent_change": -52.3028777797802
+              },
+              "spend_video": {
+                "recent_horizon_spend": 16853.422598283458,
+                "candidate_spend": 26016.892081160262,
+                "absolute_change": 9163.469482876804,
+                "percent_change": 54.37156417005835
+              }
+            }
+          },
+          "warnings": [
+            "MODEL_OPTIMUM_ONLY: no causal, profit or operational guarantee",
+            "FIXED_SHAPE: decay and Hill multiplier supplied, not estimated",
+            "CONDITIONAL_HOLDOUT: test predictions use observed test spend and controls",
+            "ZERO_INITIAL_STATE: prehistory unknown; warmup only approximates its removal",
+            "MEDIA_SIGN_RESTRICTION: nonnegative conditional media coefficients are an explicit modeling assumption",
+            "ILL_CONDITIONED: regressors may not separate channel associations",
+            "CONDITIONAL_UNCERTAINTY: excludes shape, confounding and future input uncertainty",
+            "REFERENCE: flat per-period mean spending of the last up to 13 historical periods",
+            "HORIZON: residual effects beyond the horizon are excluded; history carryover included",
+            "CONTROL_ASSUMPTION: future controls held at the last observed value",
+            "CONDITIONAL_INTERVAL: fixed shape, controls and observed initial state; no causal guarantee"
+          ]
+        },
+        {
+          "multiplier": 2.0,
+          "solver": {
+            "success": true,
+            "message": "Optimization terminated successfully",
+            "objective": "conditional KPI total",
+            "form": "concave Hill exponent one with nonnegative media coefficients"
+          },
+          "decision_support": {
+            "status": "abstain_from_budget_change",
+            "business_recommendation_eligible": false,
+            "reasons": [
+              "EXTRAPOLATION",
+              "RANK_DEFICIENT",
+              "SYNTHETIC_DATA"
+            ],
+            "policy": "Conservative evidence screens, not universal statistical acceptance thresholds. Numeric optimization remains an exploratory candidate.",
+            "required_next_step": "Review business context, causal assumptions, stability and experiment evidence before any budget change"
+          },
+          "optimal_spend": {
+            "spend_search": 32432.387262337877,
+            "spend_social": 33382.71780011382,
+            "spend_video": 45733.270381273425
+          },
+          "comparison_same_total": {
+            "reference_spend": {
+              "spend_search": 25947.176749052735,
+              "spend_social": 51894.35349810547,
+              "spend_video": 33706.845196566916
+            },
+            "reference_definition": "Recent spending shares rescaled to the same requested total; equal shares if recent total is zero",
+            "reference_predicted_total": 169351.03093219514,
+            "candidate_predicted_total": 170214.797440955,
+            "predicted_difference": 863.7665087598725,
+            "conditional_difference_interval_90": [
+              108.42149204979513,
+              1576.6843074343813
+            ],
+            "changes": {
+              "spend_search": {
+                "recent_horizon_spend": 12973.588374526367,
+                "candidate_spend": 32432.387262337877,
+                "absolute_change": 19458.79888781151,
+                "percent_change": 149.9877930921475
+              },
+              "spend_social": {
+                "recent_horizon_spend": 25947.176749052735,
+                "candidate_spend": 33382.71780011382,
+                "absolute_change": 7435.541051061089,
+                "percent_change": 28.65645508555201
+              },
+              "spend_video": {
+                "recent_horizon_spend": 16853.422598283458,
+                "candidate_spend": 45733.270381273425,
+                "absolute_change": 28879.847782989968,
+                "percent_change": 171.3589486917121
+              }
+            }
+          },
+          "warnings": [
+            "MODEL_OPTIMUM_ONLY: no causal, profit or operational guarantee",
+            "FIXED_SHAPE: decay and Hill multiplier supplied, not estimated",
+            "CONDITIONAL_HOLDOUT: test predictions use observed test spend and controls",
+            "ZERO_INITIAL_STATE: prehistory unknown; warmup only approximates its removal",
+            "MEDIA_SIGN_RESTRICTION: nonnegative conditional media coefficients are an explicit modeling assumption",
+            "ILL_CONDITIONED: regressors may not separate channel associations",
+            "CONDITIONAL_UNCERTAINTY: excludes shape, confounding and future input uncertainty",
+            "REFERENCE: flat per-period mean spending of the last up to 13 historical periods",
+            "HORIZON: residual effects beyond the horizon are excluded; history carryover included",
+            "CONTROL_ASSUMPTION: future controls held at the last observed value",
+            "EXTRAPOLATION: scenario spend outside training range for spend_video",
+            "CONDITIONAL_INTERVAL: fixed shape, controls and observed initial state; no causal guarantee"
+          ]
+        }
+      ]
+    },
+    "tracking_break": {
+      "data_quality": {
+        "dataset_id": "tracking_break",
+        "valid": true,
+        "issues": [],
+        "warnings": [
+          "OUTLIER_SCREEN: revenue has 32 values outside 3-IQR fences; not removed"
+        ],
+        "rows": 156,
+        "start_date": "2023-01-02",
+        "end_date": "2025-12-22",
+        "train_rows": 116,
+        "test_rows": 32,
+        "warmup_rows": 8,
+        "frequency": "weekly",
+        "synthetic": true,
+        "missing_metadata": [
+          "extracted_at",
+          "timezone",
+          "currency",
+          "kpi_definition",
+          "complete_through"
+        ],
+        "data_context": {
+          "source_reference": "constructed-seed42-718",
+          "tracking_notes": "tracking_break; fabricated stress case, not a business observation"
+        },
+        "target_type": "revenue"
+      },
+      "train_ok": true,
+      "metrics": {
+        "train": {
+          "mae": 99.79034465283245,
+          "rmse": 125.0834754454375,
+          "mape_nonzero_percent": 0.8191688061677133,
+          "mape_excluded_zeros": 0,
+          "wape_percent": 0.8130231097076975,
+          "r2": 0.9613565316195994
+        },
+        "test": {
+          "mae": 107371.37127208468,
+          "rmse": 107619.72339174675,
+          "mape_nonzero_percent": 90.0344879518497,
+          "mape_excluded_zeros": 0,
+          "wape_percent": 90.03522829613553,
+          "r2": -175.6084802565397
+        },
+        "test_train_mean_baseline": {
+          "mae": 106980.85800227564,
+          "rmse": 107286.92416258506,
+          "mape_nonzero_percent": 89.6599600045795,
+          "mape_excluded_zeros": 0,
+          "wape_percent": 89.70776715837255,
+          "r2": -174.51789412279572
+        }
+      },
+      "diagnostics": {
+        "adjusted_r2": null,
+        "adjusted_r2_reason": "Nominal OLS degrees of freedom are inappropriate for constrained regularized regression",
+        "condition_number": 106.56412571143285,
+        "feature_count": 9,
+        "matrix_rank": 9,
+        "residual_diagnostics_scope": "descriptive; no causal or independence certification",
+        "standardized_condition_number": 1.7765839982996936,
+        "standardized_matrix_rank": 9,
+        "train_durbin_watson": 1.970633373540645,
+        "train_residual_lag1": -0.01633314451644895,
+        "train_residual_mean": -4.202492759916289e-12
+      },
+      "budgets": [
+        {
+          "multiplier": 0.5,
+          "solver": {
+            "success": true,
+            "message": "Optimization terminated successfully",
+            "objective": "conditional KPI total",
+            "form": "concave Hill exponent one with nonnegative media coefficients"
+          },
+          "decision_support": {
+            "status": "abstain_from_budget_change",
+            "business_recommendation_eligible": false,
+            "reasons": [
+              "NO_HOLDOUT_IMPROVEMENT_OVER_MEAN_BASELINE",
+              "SYNTHETIC_DATA"
+            ],
+            "policy": "Conservative evidence screens, not universal statistical acceptance thresholds. Numeric optimization remains an exploratory candidate.",
+            "required_next_step": "Review business context, causal assumptions, stability and experiment evidence before any budget change"
+          },
+          "optimal_spend": {
+            "spend_search": 8825.795821785423,
+            "spend_social": 8431.8985333398,
+            "spend_video": 8388.78323969036
+          },
+          "comparison_same_total": {
+            "reference_spend": {
+              "spend_search": 6486.794187263184,
+              "spend_social": 10732.972108410668,
+              "spend_video": 8426.711299141729
+            },
+            "reference_definition": "Recent spending shares rescaled to the same requested total; equal shares if recent total is zero",
+            "reference_predicted_total": 143217.0735662135,
+            "candidate_predicted_total": 143545.48508628338,
+            "predicted_difference": 328.4115200698725,
+            "conditional_difference_interval_90": [
+              167.63498627966356,
+              524.0979040384988
+            ],
+            "changes": {
+              "spend_search": {
+                "recent_horizon_spend": 12973.588374526367,
+                "candidate_spend": 8825.795821785423,
+                "absolute_change": -4147.792552740944,
+                "percent_change": -31.971050976807103
+              },
+              "spend_social": {
+                "recent_horizon_spend": 21465.944216821335,
+                "candidate_spend": 8431.8985333398,
+                "absolute_change": -13034.045683481536,
+                "percent_change": -60.71964760472861
+              },
+              "spend_video": {
+                "recent_horizon_spend": 16853.422598283458,
+                "candidate_spend": 8388.78323969036,
+                "absolute_change": -8464.639358593098,
+                "percent_change": -50.22504662913534
+              }
+            }
+          },
+          "warnings": [
+            "MODEL_OPTIMUM_ONLY: no causal, profit or operational guarantee",
+            "OUTLIER_SCREEN: revenue has 32 values outside 3-IQR fences; not removed",
+            "FIXED_SHAPE: decay and Hill multiplier supplied, not estimated",
+            "CONDITIONAL_HOLDOUT: test predictions use observed test spend and controls",
+            "ZERO_INITIAL_STATE: prehistory unknown; warmup only approximates its removal",
+            "MEDIA_SIGN_RESTRICTION: nonnegative conditional media coefficients are an explicit modeling assumption",
+            "CONDITIONAL_UNCERTAINTY: excludes shape, confounding and future input uncertainty",
+            "REFERENCE: flat per-period mean spending of the last up to 13 historical periods",
+            "HORIZON: residual effects beyond the horizon are excluded; history carryover included",
+            "CONTROL_ASSUMPTION: future controls held at the last observed value",
+            "CONDITIONAL_INTERVAL: fixed shape, controls and observed initial state; no causal guarantee"
+          ]
+        },
+        {
+          "multiplier": 1.0,
+          "solver": {
+            "success": true,
+            "message": "Optimization terminated successfully",
+            "objective": "conditional KPI total",
+            "form": "concave Hill exponent one with nonnegative media coefficients"
+          },
+          "decision_support": {
+            "status": "abstain_from_budget_change",
+            "business_recommendation_eligible": false,
+            "reasons": [
+              "NO_HOLDOUT_IMPROVEMENT_OVER_MEAN_BASELINE",
+              "SYNTHETIC_DATA"
+            ],
+            "policy": "Conservative evidence screens, not universal statistical acceptance thresholds. Numeric optimization remains an exploratory candidate.",
+            "required_next_step": "Review business context, causal assumptions, stability and experiment evidence before any budget change"
+          },
+          "optimal_spend": {
+            "spend_search": 17163.226059746987,
+            "spend_social": 16729.45290009364,
+            "spend_video": 17400.276229790536
+          },
+          "comparison_same_total": {
+            "reference_spend": {
+              "spend_search": 12973.588374526367,
+              "spend_social": 21465.944216821335,
+              "spend_video": 16853.422598283458
+            },
+            "reference_definition": "Recent spending shares rescaled to the same requested total; equal shares if recent total is zero",
+            "reference_predicted_total": 160834.5245356676,
+            "candidate_predicted_total": 161403.82544992433,
+            "predicted_difference": 569.3009142567462,
+            "conditional_difference_interval_90": [
+              385.13312029212125,
+              790.2549293631806
+            ],
+            "changes": {
+              "spend_search": {
+                "recent_horizon_spend": 12973.588374526367,
+                "candidate_spend": 17163.226059746987,
+                "absolute_change": 4189.6376852206195,
+                "percent_change": 32.29359190589838
+              },
+              "spend_social": {
+                "recent_horizon_spend": 21465.944216821335,
+                "candidate_spend": 16729.45290009364,
+                "absolute_change": -4736.491316727694,
+                "percent_change": -22.06514313503173
+              },
+              "spend_video": {
+                "recent_horizon_spend": 16853.422598283458,
+                "candidate_spend": 17400.276229790536,
+                "absolute_change": 546.8536315070778,
+                "percent_change": 3.244763064107681
+              }
+            }
+          },
+          "warnings": [
+            "MODEL_OPTIMUM_ONLY: no causal, profit or operational guarantee",
+            "OUTLIER_SCREEN: revenue has 32 values outside 3-IQR fences; not removed",
+            "FIXED_SHAPE: decay and Hill multiplier supplied, not estimated",
+            "CONDITIONAL_HOLDOUT: test predictions use observed test spend and controls",
+            "ZERO_INITIAL_STATE: prehistory unknown; warmup only approximates its removal",
+            "MEDIA_SIGN_RESTRICTION: nonnegative conditional media coefficients are an explicit modeling assumption",
+            "CONDITIONAL_UNCERTAINTY: excludes shape, confounding and future input uncertainty",
+            "REFERENCE: flat per-period mean spending of the last up to 13 historical periods",
+            "HORIZON: residual effects beyond the horizon are excluded; history carryover included",
+            "CONTROL_ASSUMPTION: future controls held at the last observed value",
+            "CONDITIONAL_INTERVAL: fixed shape, controls and observed initial state; no causal guarantee"
+          ]
+        },
+        {
+          "multiplier": 2.0,
+          "solver": {
+            "success": true,
+            "message": "Optimization terminated successfully",
+            "objective": "conditional KPI total",
+            "form": "concave Hill exponent one with nonnegative media coefficients"
+          },
+          "decision_support": {
+            "status": "abstain_from_budget_change",
+            "business_recommendation_eligible": false,
+            "reasons": [
+              "NO_HOLDOUT_IMPROVEMENT_OVER_MEAN_BASELINE",
+              "SYNTHETIC_DATA"
+            ],
+            "policy": "Conservative evidence screens, not universal statistical acceptance thresholds. Numeric optimization remains an exploratory candidate.",
+            "required_next_step": "Review business context, causal assumptions, stability and experiment evidence before any budget change"
+          },
+          "optimal_spend": {
+            "spend_search": 33806.833010999675,
+            "spend_social": 33346.08001992142,
+            "spend_video": 35432.99734834122
+          },
+          "comparison_same_total": {
+            "reference_spend": {
+              "spend_search": 25947.176749052735,
+              "spend_social": 42931.88843364267,
+              "spend_video": 33706.845196566916
+            },
+            "reference_definition": "Recent spending shares rescaled to the same requested total; equal shares if recent total is zero",
+            "reference_predicted_total": 180138.76326021602,
+            "candidate_predicted_total": 180871.26367346573,
+            "predicted_difference": 732.5004132497124,
+            "conditional_difference_interval_90": [
+              556.5825275561021,
+              936.7137793513624
+            ],
+            "changes": {
+              "spend_search": {
+                "recent_horizon_spend": 12973.588374526367,
+                "candidate_spend": 33806.833010999675,
+                "absolute_change": 20833.244636473308,
+                "percent_change": 160.5819765129852
+              },
+              "spend_social": {
+                "recent_horizon_spend": 21465.944216821335,
+                "candidate_spend": 33346.08001992142,
+                "absolute_change": 11880.135803100085,
+                "percent_change": 55.3441101080961
+              },
+              "spend_video": {
+                "recent_horizon_spend": 16853.422598283458,
+                "candidate_spend": 35432.99734834122,
+                "absolute_change": 18579.57475005776,
+                "percent_change": 110.24214601934989
+              }
+            }
+          },
+          "warnings": [
+            "MODEL_OPTIMUM_ONLY: no causal, profit or operational guarantee",
+            "OUTLIER_SCREEN: revenue has 32 values outside 3-IQR fences; not removed",
+            "FIXED_SHAPE: decay and Hill multiplier supplied, not estimated",
+            "CONDITIONAL_HOLDOUT: test predictions use observed test spend and controls",
+            "ZERO_INITIAL_STATE: prehistory unknown; warmup only approximates its removal",
+            "MEDIA_SIGN_RESTRICTION: nonnegative conditional media coefficients are an explicit modeling assumption",
+            "CONDITIONAL_UNCERTAINTY: excludes shape, confounding and future input uncertainty",
+            "REFERENCE: flat per-period mean spending of the last up to 13 historical periods",
+            "HORIZON: residual effects beyond the horizon are excluded; history carryover included",
+            "CONTROL_ASSUMPTION: future controls held at the last observed value",
+            "CONDITIONAL_INTERVAL: fixed shape, controls and observed initial state; no causal guarantee"
+          ]
+        }
+      ]
+    },
+    "null_media_effect": {
+      "data_quality": {
+        "dataset_id": "null_media_effect",
+        "valid": true,
+        "issues": [],
+        "warnings": [],
+        "rows": 156,
+        "start_date": "2023-01-02",
+        "end_date": "2025-12-22",
+        "train_rows": 116,
+        "test_rows": 32,
+        "warmup_rows": 8,
+        "frequency": "weekly",
+        "synthetic": true,
+        "missing_metadata": [
+          "extracted_at",
+          "timezone",
+          "currency",
+          "kpi_definition",
+          "complete_through"
+        ],
+        "data_context": {
+          "source_reference": "constructed-seed42-718",
+          "tracking_notes": "null_media_effect; fabricated stress case, not a business observation"
+        },
+        "target_type": "revenue"
+      },
+      "train_ok": true,
+      "metrics": {
+        "train": {
+          "mae": 23.156556411605592,
+          "rmse": 29.488575527763473,
+          "mape_nonzero_percent": 0.4468334613675299,
+          "mape_excluded_zeros": 0,
+          "wape_percent": 0.4487077771246528,
+          "r2": 0.9836378558192788
+        },
+        "test": {
+          "mae": 27.212433964169094,
+          "rmse": 34.06765321147239,
+          "mape_nonzero_percent": 0.5245314677659404,
+          "mape_excluded_zeros": 0,
+          "wape_percent": 0.5286920977350102,
+          "r2": 0.9387930029961069
+        },
+        "test_train_mean_baseline": {
+          "mae": 120.69853485698471,
+          "rmse": 138.37219354173914,
+          "mape_nonzero_percent": 2.3409777446176547,
+          "mape_excluded_zeros": 0,
+          "wape_percent": 2.344970746501541,
+          "r2": -0.009750990955323946
+        }
+      },
+      "diagnostics": {
+        "adjusted_r2": null,
+        "adjusted_r2_reason": "Nominal OLS degrees of freedom are inappropriate for constrained regularized regression",
+        "condition_number": 106.56412571143285,
+        "feature_count": 9,
+        "matrix_rank": 9,
+        "residual_diagnostics_scope": "descriptive; no causal or independence certification",
+        "standardized_condition_number": 1.7765839982996936,
+        "standardized_matrix_rank": 9,
+        "train_durbin_watson": 2.076239844968495,
+        "train_residual_lag1": -0.04517539105908272,
+        "train_residual_mean": -2.587355617112641e-13
+      },
+      "budgets": [
+        {
+          "multiplier": 0.5,
+          "solver": {
+            "success": true,
+            "message": "Optimization terminated successfully",
+            "objective": "conditional KPI total",
+            "form": "concave Hill exponent one with nonnegative media coefficients"
+          },
+          "decision_support": {
+            "status": "abstain_from_budget_change",
+            "business_recommendation_eligible": false,
+            "reasons": [
+              "SYNTHETIC_DATA"
+            ],
+            "policy": "Conservative evidence screens, not universal statistical acceptance thresholds. Numeric optimization remains an exploratory candidate.",
+            "required_next_step": "Review business context, causal assumptions, stability and experiment evidence before any budget change"
+          },
+          "optimal_spend": {
+            "spend_search": 4877.895200770046,
+            "spend_social": 1.3187044889518273e-11,
+            "spend_video": 20768.58239404552
+          },
+          "comparison_same_total": {
+            "reference_spend": {
+              "spend_search": 6486.794187263184,
+              "spend_social": 10732.972108410668,
+              "spend_video": 8426.711299141729
+            },
+            "reference_definition": "Recent spending shares rescaled to the same requested total; equal shares if recent total is zero",
+            "reference_predicted_total": 71287.78731396311,
+            "candidate_predicted_total": 71316.6749145357,
+            "predicted_difference": 28.8876005725906,
+            "conditional_difference_interval_90": [
+              -136.40512375539603,
+              145.47815449210793
+            ],
+            "changes": {
+              "spend_search": {
+                "recent_horizon_spend": 12973.588374526367,
+                "candidate_spend": 4877.895200770046,
+                "absolute_change": -8095.693173756321,
+                "percent_change": -62.401341402600764
+              },
+              "spend_social": {
+                "recent_horizon_spend": 21465.944216821335,
+                "candidate_spend": 1.3187044889518273e-11,
+                "absolute_change": -21465.94421682132,
+                "percent_change": -99.99999999999993
+              },
+              "spend_video": {
+                "recent_horizon_spend": 16853.422598283458,
+                "candidate_spend": 20768.58239404552,
+                "absolute_change": 3915.1597957620615,
+                "percent_change": 23.23065106170674
+              }
+            }
+          },
+          "warnings": [
+            "MODEL_OPTIMUM_ONLY: no causal, profit or operational guarantee",
+            "FIXED_SHAPE: decay and Hill multiplier supplied, not estimated",
+            "CONDITIONAL_HOLDOUT: test predictions use observed test spend and controls",
+            "ZERO_INITIAL_STATE: prehistory unknown; warmup only approximates its removal",
+            "MEDIA_SIGN_RESTRICTION: nonnegative conditional media coefficients are an explicit modeling assumption",
+            "CONDITIONAL_UNCERTAINTY: excludes shape, confounding and future input uncertainty",
+            "REFERENCE: flat per-period mean spending of the last up to 13 historical periods",
+            "HORIZON: residual effects beyond the horizon are excluded; history carryover included",
+            "CONTROL_ASSUMPTION: future controls held at the last observed value",
+            "CONDITIONAL_INTERVAL: fixed shape, controls and observed initial state; no causal guarantee"
+          ]
+        },
+        {
+          "multiplier": 1.0,
+          "solver": {
+            "success": true,
+            "message": "Optimization terminated successfully",
+            "objective": "conditional KPI total",
+            "form": "concave Hill exponent one with nonnegative media coefficients"
+          },
+          "decision_support": {
+            "status": "abstain_from_budget_change",
+            "business_recommendation_eligible": false,
+            "reasons": [
+              "EXTRAPOLATION",
+              "SYNTHETIC_DATA"
+            ],
+            "policy": "Conservative evidence screens, not universal statistical acceptance thresholds. Numeric optimization remains an exploratory candidate.",
+            "required_next_step": "Review business context, causal assumptions, stability and experiment evidence before any budget change"
+          },
+          "optimal_spend": {
+            "spend_search": 14156.524122916895,
+            "spend_social": 1.2351757993784583e-11,
+            "spend_video": 37136.431066714256
+          },
+          "comparison_same_total": {
+            "reference_spend": {
+              "spend_search": 12973.588374526367,
+              "spend_social": 21465.944216821335,
+              "spend_video": 16853.422598283458
+            },
+            "reference_definition": "Recent spending shares rescaled to the same requested total; equal shares if recent total is zero",
+            "reference_predicted_total": 71320.12788928322,
+            "candidate_predicted_total": 71351.65216540024,
+            "predicted_difference": 31.524276117022964,
+            "conditional_difference_interval_90": [
+              -222.29101200384173,
+              134.93515151792997
+            ],
+            "changes": {
+              "spend_search": {
+                "recent_horizon_spend": 12973.588374526367,
+                "candidate_spend": 14156.524122916895,
+                "absolute_change": 1182.9357483905278,
+                "percent_change": 9.118030526644594
+              },
+              "spend_social": {
+                "recent_horizon_spend": 21465.944216821335,
+                "candidate_spend": 1.2351757993784583e-11,
+                "absolute_change": -21465.944216821325,
+                "percent_change": -99.99999999999994
+              },
+              "spend_video": {
+                "recent_horizon_spend": 16853.422598283458,
+                "candidate_spend": 37136.431066714256,
+                "absolute_change": 20283.0084684308,
+                "percent_change": 120.34949192157947
+              }
+            }
+          },
+          "warnings": [
+            "MODEL_OPTIMUM_ONLY: no causal, profit or operational guarantee",
+            "FIXED_SHAPE: decay and Hill multiplier supplied, not estimated",
+            "CONDITIONAL_HOLDOUT: test predictions use observed test spend and controls",
+            "ZERO_INITIAL_STATE: prehistory unknown; warmup only approximates its removal",
+            "MEDIA_SIGN_RESTRICTION: nonnegative conditional media coefficients are an explicit modeling assumption",
+            "CONDITIONAL_UNCERTAINTY: excludes shape, confounding and future input uncertainty",
+            "REFERENCE: flat per-period mean spending of the last up to 13 historical periods",
+            "HORIZON: residual effects beyond the horizon are excluded; history carryover included",
+            "CONTROL_ASSUMPTION: future controls held at the last observed value",
+            "EXTRAPOLATION: scenario spend outside training range for spend_video",
+            "CONDITIONAL_INTERVAL: fixed shape, controls and observed initial state; no causal guarantee"
+          ]
+        },
+        {
+          "multiplier": 2.0,
+          "solver": {
+            "success": true,
+            "message": "Optimization terminated successfully",
+            "objective": "conditional KPI total",
+            "form": "concave Hill exponent one with nonnegative media coefficients"
+          },
+          "decision_support": {
+            "status": "abstain_from_budget_change",
+            "business_recommendation_eligible": false,
+            "reasons": [
+              "EXTRAPOLATION",
+              "SYNTHETIC_DATA"
+            ],
+            "policy": "Conservative evidence screens, not universal statistical acceptance thresholds. Numeric optimization remains an exploratory candidate.",
+            "required_next_step": "Review business context, causal assumptions, stability and experiment evidence before any budget change"
+          },
+          "optimal_spend": {
+            "spend_search": 32732.415708601486,
+            "spend_social": 0.0,
+            "spend_video": 69853.49467066085
+          },
+          "comparison_same_total": {
+            "reference_spend": {
+              "spend_search": 25947.176749052735,
+              "spend_social": 42931.88843364267,
+              "spend_video": 33706.845196566916
+            },
+            "reference_definition": "Recent spending shares rescaled to the same requested total; equal shares if recent total is zero",
+            "reference_predicted_total": 71356.86669221126,
+            "candidate_predicted_total": 71385.32892957276,
+            "predicted_difference": 28.46223736149841,
+            "conditional_difference_interval_90": [
+              -287.0971072207535,
+              114.53290189792048
+            ],
+            "changes": {
+              "spend_search": {
+                "recent_horizon_spend": 12973.588374526367,
+                "candidate_spend": 32732.415708601486,
+                "absolute_change": 19758.82733407512,
+                "percent_change": 152.30040266169968
+              },
+              "spend_social": {
+                "recent_horizon_spend": 21465.944216821335,
+                "candidate_spend": 0.0,
+                "absolute_change": -21465.944216821335,
+                "percent_change": -100.0
+              },
+              "spend_video": {
+                "recent_horizon_spend": 16853.422598283458,
+                "candidate_spend": 69853.49467066085,
+                "absolute_change": 53000.072072377385,
+                "percent_change": 314.47661009684475
+              }
+            }
+          },
+          "warnings": [
+            "MODEL_OPTIMUM_ONLY: no causal, profit or operational guarantee",
+            "FIXED_SHAPE: decay and Hill multiplier supplied, not estimated",
+            "CONDITIONAL_HOLDOUT: test predictions use observed test spend and controls",
+            "ZERO_INITIAL_STATE: prehistory unknown; warmup only approximates its removal",
+            "MEDIA_SIGN_RESTRICTION: nonnegative conditional media coefficients are an explicit modeling assumption",
+            "CONDITIONAL_UNCERTAINTY: excludes shape, confounding and future input uncertainty",
+            "REFERENCE: flat per-period mean spending of the last up to 13 historical periods",
+            "HORIZON: residual effects beyond the horizon are excluded; history carryover included",
+            "CONTROL_ASSUMPTION: future controls held at the last observed value",
+            "EXTRAPOLATION: scenario spend outside training range for spend_video",
+            "CONDITIONAL_INTERVAL: fixed shape, controls and observed initial state; no causal guarantee"
+          ]
+        }
+      ]
+    },
+    "zeros_in_kpi": {
+      "data_quality": {
+        "dataset_id": "zeros_in_kpi",
+        "valid": true,
+        "issues": [],
+        "warnings": [
+          "CONSTANT_COLUMN: revenue"
+        ],
+        "rows": 156,
+        "start_date": "2023-01-02",
+        "end_date": "2025-12-22",
+        "train_rows": 116,
+        "test_rows": 32,
+        "warmup_rows": 8,
+        "frequency": "weekly",
+        "synthetic": true,
+        "missing_metadata": [
+          "extracted_at",
+          "timezone",
+          "currency",
+          "kpi_definition",
+          "complete_through"
+        ],
+        "data_context": {
+          "source_reference": "constructed-seed42-718",
+          "tracking_notes": "zeros_in_kpi; fabricated stress case, not a business observation"
+        },
+        "target_type": "revenue"
+      },
+      "train_ok": true,
+      "metrics": {
+        "train": {
+          "mae": 0.0,
+          "rmse": 0.0,
+          "mape_nonzero_percent": null,
+          "mape_excluded_zeros": 116,
+          "wape_percent": null,
+          "r2": null
+        },
+        "test": {
+          "mae": 0.0,
+          "rmse": 0.0,
+          "mape_nonzero_percent": null,
+          "mape_excluded_zeros": 32,
+          "wape_percent": null,
+          "r2": null
+        },
+        "test_train_mean_baseline": {
+          "mae": 0.0,
+          "rmse": 0.0,
+          "mape_nonzero_percent": null,
+          "mape_excluded_zeros": 32,
+          "wape_percent": null,
+          "r2": null
+        }
+      },
+      "diagnostics": {
+        "adjusted_r2": null,
+        "adjusted_r2_reason": "Nominal OLS degrees of freedom are inappropriate for constrained regularized regression",
+        "condition_number": 106.56412571143285,
+        "feature_count": 9,
+        "matrix_rank": 9,
+        "residual_diagnostics_scope": "descriptive; no causal or independence certification",
+        "standardized_condition_number": 1.7765839982996936,
+        "standardized_matrix_rank": 9,
+        "train_durbin_watson": null,
+        "train_residual_lag1": null,
+        "train_residual_mean": 0.0
+      },
+      "budgets": [
+        {
+          "multiplier": 0.5,
+          "solver": {
+            "success": true,
+            "message": "Optimization terminated successfully",
+            "objective": "conditional KPI total",
+            "form": "concave Hill exponent one with nonnegative media coefficients"
+          },
+          "decision_support": {
+            "status": "abstain_from_budget_change",
+            "business_recommendation_eligible": false,
+            "reasons": [
+              "NO_HOLDOUT_IMPROVEMENT_OVER_MEAN_BASELINE",
+              "SYNTHETIC_DATA"
+            ],
+            "policy": "Conservative evidence screens, not universal statistical acceptance thresholds. Numeric optimization remains an exploratory candidate.",
+            "required_next_step": "Review business context, causal assumptions, stability and experiment evidence before any budget change"
+          },
+          "optimal_spend": {
+            "spend_search": 8548.825864938526,
+            "spend_social": 8548.825864938526,
+            "spend_video": 8548.825864938526
+          },
+          "comparison_same_total": {
+            "reference_spend": {
+              "spend_search": 6486.794187263184,
+              "spend_social": 10732.972108410668,
+              "spend_video": 8426.711299141729
+            },
+            "reference_definition": "Recent spending shares rescaled to the same requested total; equal shares if recent total is zero",
+            "reference_predicted_total": 0.0,
+            "candidate_predicted_total": 0.0,
+            "predicted_difference": 0.0,
+            "conditional_difference_interval_90": [
+              0.0,
+              0.0
+            ],
+            "changes": {
+              "spend_search": {
+                "recent_horizon_spend": 12973.588374526367,
+                "candidate_spend": 8548.825864938526,
+                "absolute_change": -4424.762509587841,
+                "percent_change": -34.10592645498033
+              },
+              "spend_social": {
+                "recent_horizon_spend": 21465.944216821335,
+                "candidate_spend": 8548.825864938526,
+                "absolute_change": -12917.11835188281,
+                "percent_change": -60.17493673425547
+              },
+              "spend_video": {
+                "recent_horizon_spend": 16853.422598283458,
+                "candidate_spend": 8548.825864938526,
+                "absolute_change": -8304.596733344932,
+                "percent_change": -49.27543165143658
+              }
+            }
+          },
+          "warnings": [
+            "MODEL_OPTIMUM_ONLY: no causal, profit or operational guarantee",
+            "CONSTANT_COLUMN: revenue",
+            "FIXED_SHAPE: decay and Hill multiplier supplied, not estimated",
+            "CONDITIONAL_HOLDOUT: test predictions use observed test spend and controls",
+            "ZERO_INITIAL_STATE: prehistory unknown; warmup only approximates its removal",
+            "MEDIA_SIGN_RESTRICTION: nonnegative conditional media coefficients are an explicit modeling assumption",
+            "RANK_WARNING: constant regressors reduce identifiability",
+            "CONDITIONAL_UNCERTAINTY: excludes shape, confounding and future input uncertainty",
+            "REFERENCE: flat per-period mean spending of the last up to 13 historical periods",
+            "HORIZON: residual effects beyond the horizon are excluded; history carryover included",
+            "CONTROL_ASSUMPTION: future controls held at the last observed value",
+            "CONDITIONAL_INTERVAL: fixed shape, controls and observed initial state; no causal guarantee"
+          ]
+        },
+        {
+          "multiplier": 1.0,
+          "solver": {
+            "success": true,
+            "message": "Optimization terminated successfully",
+            "objective": "conditional KPI total",
+            "form": "concave Hill exponent one with nonnegative media coefficients"
+          },
+          "decision_support": {
+            "status": "abstain_from_budget_change",
+            "business_recommendation_eligible": false,
+            "reasons": [
+              "NO_HOLDOUT_IMPROVEMENT_OVER_MEAN_BASELINE",
+              "SYNTHETIC_DATA"
+            ],
+            "policy": "Conservative evidence screens, not universal statistical acceptance thresholds. Numeric optimization remains an exploratory candidate.",
+            "required_next_step": "Review business context, causal assumptions, stability and experiment evidence before any budget change"
+          },
+          "optimal_spend": {
+            "spend_search": 17097.651729877052,
+            "spend_social": 17097.651729877052,
+            "spend_video": 17097.651729877052
+          },
+          "comparison_same_total": {
+            "reference_spend": {
+              "spend_search": 12973.588374526367,
+              "spend_social": 21465.944216821335,
+              "spend_video": 16853.422598283458
+            },
+            "reference_definition": "Recent spending shares rescaled to the same requested total; equal shares if recent total is zero",
+            "reference_predicted_total": 0.0,
+            "candidate_predicted_total": 0.0,
+            "predicted_difference": 0.0,
+            "conditional_difference_interval_90": [
+              0.0,
+              0.0
+            ],
+            "changes": {
+              "spend_search": {
+                "recent_horizon_spend": 12973.588374526367,
+                "candidate_spend": 17097.651729877052,
+                "absolute_change": 4124.063355350685,
+                "percent_change": 31.78814709003934
+              },
+              "spend_social": {
+                "recent_horizon_spend": 21465.944216821335,
+                "candidate_spend": 17097.651729877052,
+                "absolute_change": -4368.292486944283,
+                "percent_change": -20.349873468510935
+              },
+              "spend_video": {
+                "recent_horizon_spend": 16853.422598283458,
+                "candidate_spend": 17097.651729877052,
+                "absolute_change": 244.2291315935945,
+                "percent_change": 1.4491366971268516
+              }
+            }
+          },
+          "warnings": [
+            "MODEL_OPTIMUM_ONLY: no causal, profit or operational guarantee",
+            "CONSTANT_COLUMN: revenue",
+            "FIXED_SHAPE: decay and Hill multiplier supplied, not estimated",
+            "CONDITIONAL_HOLDOUT: test predictions use observed test spend and controls",
+            "ZERO_INITIAL_STATE: prehistory unknown; warmup only approximates its removal",
+            "MEDIA_SIGN_RESTRICTION: nonnegative conditional media coefficients are an explicit modeling assumption",
+            "RANK_WARNING: constant regressors reduce identifiability",
+            "CONDITIONAL_UNCERTAINTY: excludes shape, confounding and future input uncertainty",
+            "REFERENCE: flat per-period mean spending of the last up to 13 historical periods",
+            "HORIZON: residual effects beyond the horizon are excluded; history carryover included",
+            "CONTROL_ASSUMPTION: future controls held at the last observed value",
+            "CONDITIONAL_INTERVAL: fixed shape, controls and observed initial state; no causal guarantee"
+          ]
+        },
+        {
+          "multiplier": 2.0,
+          "solver": {
+            "success": true,
+            "message": "Optimization terminated successfully",
+            "objective": "conditional KPI total",
+            "form": "concave Hill exponent one with nonnegative media coefficients"
+          },
+          "decision_support": {
+            "status": "abstain_from_budget_change",
+            "business_recommendation_eligible": false,
+            "reasons": [
+              "NO_HOLDOUT_IMPROVEMENT_OVER_MEAN_BASELINE",
+              "SYNTHETIC_DATA"
+            ],
+            "policy": "Conservative evidence screens, not universal statistical acceptance thresholds. Numeric optimization remains an exploratory candidate.",
+            "required_next_step": "Review business context, causal assumptions, stability and experiment evidence before any budget change"
+          },
+          "optimal_spend": {
+            "spend_search": 34195.303459754105,
+            "spend_social": 34195.303459754105,
+            "spend_video": 34195.303459754105
+          },
+          "comparison_same_total": {
+            "reference_spend": {
+              "spend_search": 25947.176749052735,
+              "spend_social": 42931.88843364267,
+              "spend_video": 33706.845196566916
+            },
+            "reference_definition": "Recent spending shares rescaled to the same requested total; equal shares if recent total is zero",
+            "reference_predicted_total": 0.0,
+            "candidate_predicted_total": 0.0,
+            "predicted_difference": 0.0,
+            "conditional_difference_interval_90": [
+              0.0,
+              0.0
+            ],
+            "changes": {
+              "spend_search": {
+                "recent_horizon_spend": 12973.588374526367,
+                "candidate_spend": 34195.303459754105,
+                "absolute_change": 21221.715085227737,
+                "percent_change": 163.5762941800787
+              },
+              "spend_social": {
+                "recent_horizon_spend": 21465.944216821335,
+                "candidate_spend": 34195.303459754105,
+                "absolute_change": 12729.35924293277,
+                "percent_change": 59.30025306297813
+              },
+              "spend_video": {
+                "recent_horizon_spend": 16853.422598283458,
+                "candidate_spend": 34195.303459754105,
+                "absolute_change": 17341.880861470647,
+                "percent_change": 102.8982733942537
+              }
+            }
+          },
+          "warnings": [
+            "MODEL_OPTIMUM_ONLY: no causal, profit or operational guarantee",
+            "CONSTANT_COLUMN: revenue",
+            "FIXED_SHAPE: decay and Hill multiplier supplied, not estimated",
+            "CONDITIONAL_HOLDOUT: test predictions use observed test spend and controls",
+            "ZERO_INITIAL_STATE: prehistory unknown; warmup only approximates its removal",
+            "MEDIA_SIGN_RESTRICTION: nonnegative conditional media coefficients are an explicit modeling assumption",
+            "RANK_WARNING: constant regressors reduce identifiability",
+            "CONDITIONAL_UNCERTAINTY: excludes shape, confounding and future input uncertainty",
+            "REFERENCE: flat per-period mean spending of the last up to 13 historical periods",
+            "HORIZON: residual effects beyond the horizon are excluded; history carryover included",
+            "CONTROL_ASSUMPTION: future controls held at the last observed value",
+            "CONDITIONAL_INTERVAL: fixed shape, controls and observed initial state; no causal guarantee"
+          ]
+        }
+      ]
+    },
+    "all_media_zero": {
+      "data_quality": {
+        "dataset_id": "all_media_zero",
+        "valid": true,
+        "issues": [],
+        "warnings": [
+          "CONSTANT_COLUMN: spend_search",
+          "CONSTANT_COLUMN: spend_social",
+          "CONSTANT_COLUMN: spend_video"
+        ],
+        "rows": 156,
+        "start_date": "2023-01-02",
+        "end_date": "2025-12-22",
+        "train_rows": 116,
+        "test_rows": 32,
+        "warmup_rows": 8,
+        "frequency": "weekly",
+        "synthetic": true,
+        "missing_metadata": [
+          "extracted_at",
+          "timezone",
+          "currency",
+          "kpi_definition",
+          "complete_through"
+        ],
+        "data_context": {
+          "source_reference": "constructed-seed42-718",
+          "tracking_notes": "all_media_zero; fabricated stress case, not a business observation"
+        },
+        "target_type": "revenue"
+      },
+      "train_ok": false,
+      "error": {
+        "code": "UNIDENTIFIABLE_MEDIA",
+        "message": "Training media must vary: spend_search"
+      }
+    },
+    "missing_target": {
+      "data_quality": {
+        "dataset_id": "missing_target",
+        "valid": false,
+        "issues": [
+          "INVALID_VALUES: missing, nonnumeric, infinite or excessive numeric values"
+        ],
+        "warnings": [],
+        "rows": 156,
+        "start_date": "2023-01-02",
+        "end_date": "2025-12-22",
+        "train_rows": 116,
+        "test_rows": 32,
+        "warmup_rows": 8,
+        "frequency": "weekly",
+        "synthetic": true,
+        "missing_metadata": [
+          "extracted_at",
+          "timezone",
+          "currency",
+          "kpi_definition",
+          "complete_through"
+        ],
+        "data_context": {
+          "source_reference": "constructed-seed42-718",
+          "tracking_notes": "missing_target; fabricated stress case, not a business observation"
+        },
+        "target_type": "revenue"
+      },
+      "train_ok": false,
+      "error": {
+        "code": "DATASET_INVALID",
+        "message": "INVALID_VALUES: missing, nonnumeric, infinite or excessive numeric values"
+      }
+    },
+    "duplicate_date": {
+      "data_quality": {
+        "dataset_id": "duplicate_date",
+        "valid": false,
+        "issues": [
+          "DUPLICATE_DATES: one row per period is required",
+          "UNSORTED_DATES: dates must increase strictly",
+          "IRREGULAR_SERIES: expected complete daily or weekly periods"
+        ],
+        "warnings": [],
+        "rows": 156,
+        "start_date": "2023-01-02",
+        "end_date": "2025-12-15",
+        "train_rows": 116,
+        "test_rows": 32,
+        "warmup_rows": 8,
+        "frequency": "weekly",
+        "synthetic": true,
+        "missing_metadata": [
+          "extracted_at",
+          "timezone",
+          "currency",
+          "kpi_definition",
+          "complete_through"
+        ],
+        "data_context": {
+          "source_reference": "constructed-seed42-718",
+          "tracking_notes": "duplicate_date; fabricated stress case, not a business observation"
+        },
+        "target_type": "revenue"
+      },
+      "train_ok": false,
+      "error": {
+        "code": "DATASET_INVALID",
+        "message": "DUPLICATE_DATES: one row per period is required; UNSORTED_DATES: dates must increase strictly; IRREGULAR_SERIES: expected complete daily or weekly periods"
+      }
+    },
+    "irregular_series": {
+      "data_quality": {
+        "dataset_id": "irregular_series",
+        "valid": false,
+        "issues": [
+          "IRREGULAR_SERIES: expected complete daily or weekly periods"
+        ],
+        "warnings": [],
+        "rows": 156,
+        "start_date": "2023-01-02",
+        "end_date": "2025-12-23",
+        "train_rows": 116,
+        "test_rows": 32,
+        "warmup_rows": 8,
+        "frequency": "weekly",
+        "synthetic": true,
+        "missing_metadata": [
+          "extracted_at",
+          "timezone",
+          "currency",
+          "kpi_definition",
+          "complete_through"
+        ],
+        "data_context": {
+          "source_reference": "constructed-seed42-718",
+          "tracking_notes": "irregular_series; fabricated stress case, not a business observation"
+        },
+        "target_type": "revenue"
+      },
+      "train_ok": false,
+      "error": {
+        "code": "DATASET_INVALID",
+        "message": "IRREGULAR_SERIES: expected complete daily or weekly periods"
+      }
+    },
+    "short_history": {
+      "data_quality": {
+        "dataset_id": "short_history",
+        "valid": false,
+        "issues": [
+          "ROW_COUNT: need 52..configured maximum rows"
+        ],
+        "warnings": []
+      },
+      "train_ok": false,
+      "error": {
+        "code": "DATASET_INVALID",
+        "message": "ROW_COUNT: need 52..configured maximum rows"
+      }
+    },
+    "negative_media_effect": {
+      "data_quality": {
+        "dataset_id": "negative_media_effect",
+        "valid": true,
+        "issues": [],
+        "warnings": [],
+        "rows": 156,
+        "start_date": "2023-01-02",
+        "end_date": "2025-12-22",
+        "train_rows": 116,
+        "test_rows": 32,
+        "warmup_rows": 8,
+        "frequency": "weekly",
+        "synthetic": true,
+        "missing_metadata": [
+          "extracted_at",
+          "timezone",
+          "currency",
+          "kpi_definition",
+          "complete_through"
+        ],
+        "data_context": {
+          "source_reference": "constructed-seed42-718",
+          "tracking_notes": "negative_media_effect; fabricated stress case, not a business observation"
+        },
+        "target_type": "revenue"
+      },
+      "train_ok": true,
+      "metrics": {
+        "train": {
+          "mae": 1354.3026505447297,
+          "rmse": 1569.091544385927,
+          "mape_nonzero_percent": 11.505358236630197,
+          "mape_excluded_zeros": 0,
+          "wape_percent": 11.27458156608436,
+          "r2": 0.05634474460051575
+        },
+        "test": {
+          "mae": 1145.439444464901,
+          "rmse": 1369.0712542583406,
+          "mape_nonzero_percent": 9.266567901783244,
+          "mape_excluded_zeros": 0,
+          "wape_percent": 9.203813925571534,
+          "r2": -0.11765285852589957
+        },
+        "test_train_mean_baseline": {
+          "mae": 1132.6543029998734,
+          "rmse": 1365.5657646013851,
+          "mape_nonzero_percent": 9.133385302814222,
+          "mape_excluded_zeros": 0,
+          "wape_percent": 9.101082992369566,
+          "r2": -0.11193671390533
+        }
+      },
+      "diagnostics": {
+        "adjusted_r2": null,
+        "adjusted_r2_reason": "Nominal OLS degrees of freedom are inappropriate for constrained regularized regression",
+        "condition_number": 106.56412571143285,
+        "feature_count": 9,
+        "matrix_rank": 9,
+        "residual_diagnostics_scope": "descriptive; no causal or independence certification",
+        "standardized_condition_number": 1.7765839982996936,
+        "standardized_matrix_rank": 9,
+        "train_durbin_watson": 2.240098504531133,
+        "train_residual_lag1": -0.12542374214265078,
+        "train_residual_mean": -1.7249037447417604e-13
+      },
+      "budgets": [
+        {
+          "multiplier": 0.5,
+          "solver": {
+            "success": true,
+            "message": "Optimization terminated successfully",
+            "objective": "conditional KPI total",
+            "form": "concave Hill exponent one with nonnegative media coefficients"
+          },
+          "decision_support": {
+            "status": "abstain_from_budget_change",
+            "business_recommendation_eligible": false,
+            "reasons": [
+              "NO_HOLDOUT_IMPROVEMENT_OVER_MEAN_BASELINE",
+              "SYNTHETIC_DATA"
+            ],
+            "policy": "Conservative evidence screens, not universal statistical acceptance thresholds. Numeric optimization remains an exploratory candidate.",
+            "required_next_step": "Review business context, causal assumptions, stability and experiment evidence before any budget change"
+          },
+          "optimal_spend": {
+            "spend_search": 0.0,
+            "spend_social": 25646.47759481558,
+            "spend_video": 0.0
+          },
+          "comparison_same_total": {
+            "reference_spend": {
+              "spend_search": 6486.794187263184,
+              "spend_social": 10732.972108410668,
+              "spend_video": 8426.711299141729
+            },
+            "reference_definition": "Recent spending shares rescaled to the same requested total; equal shares if recent total is zero",
+            "reference_predicted_total": 150172.88805040348,
+            "candidate_predicted_total": 152308.29282595185,
+            "predicted_difference": 2135.404775548377,
+            "conditional_difference_interval_90": [
+              -4348.569349191714,
+              7366.926896321228
+            ],
+            "changes": {
+              "spend_search": {
+                "recent_horizon_spend": 12973.588374526367,
+                "candidate_spend": 0.0,
+                "absolute_change": -12973.588374526367,
+                "percent_change": -100.0
+              },
+              "spend_social": {
+                "recent_horizon_spend": 21465.944216821335,
+                "candidate_spend": 25646.47759481558,
+                "absolute_change": 4180.533377994245,
+                "percent_change": 19.475189797233593
+              },
+              "spend_video": {
+                "recent_horizon_spend": 16853.422598283458,
+                "candidate_spend": 0.0,
+                "absolute_change": -16853.422598283458,
+                "percent_change": -100.0
+              }
+            }
+          },
+          "warnings": [
+            "MODEL_OPTIMUM_ONLY: no causal, profit or operational guarantee",
+            "FIXED_SHAPE: decay and Hill multiplier supplied, not estimated",
+            "CONDITIONAL_HOLDOUT: test predictions use observed test spend and controls",
+            "ZERO_INITIAL_STATE: prehistory unknown; warmup only approximates its removal",
+            "MEDIA_SIGN_RESTRICTION: nonnegative conditional media coefficients are an explicit modeling assumption",
+            "CONDITIONAL_UNCERTAINTY: excludes shape, confounding and future input uncertainty",
+            "REFERENCE: flat per-period mean spending of the last up to 13 historical periods",
+            "HORIZON: residual effects beyond the horizon are excluded; history carryover included",
+            "CONTROL_ASSUMPTION: future controls held at the last observed value",
+            "CONDITIONAL_INTERVAL: fixed shape, controls and observed initial state; no causal guarantee"
+          ]
+        },
+        {
+          "multiplier": 1.0,
+          "solver": {
+            "success": true,
+            "message": "Optimization terminated successfully",
+            "objective": "conditional KPI total",
+            "form": "concave Hill exponent one with nonnegative media coefficients"
+          },
+          "decision_support": {
+            "status": "abstain_from_budget_change",
+            "business_recommendation_eligible": false,
+            "reasons": [
+              "EXTRAPOLATION",
+              "NO_HOLDOUT_IMPROVEMENT_OVER_MEAN_BASELINE",
+              "SYNTHETIC_DATA"
+            ],
+            "policy": "Conservative evidence screens, not universal statistical acceptance thresholds. Numeric optimization remains an exploratory candidate.",
+            "required_next_step": "Review business context, causal assumptions, stability and experiment evidence before any budget change"
+          },
+          "optimal_spend": {
+            "spend_search": 0.0,
+            "spend_social": 51292.95518963116,
+            "spend_video": 0.0
+          },
+          "comparison_same_total": {
+            "reference_spend": {
+              "spend_search": 12973.588374526367,
+              "spend_social": 21465.944216821335,
+              "spend_video": 16853.422598283458
+            },
+            "reference_definition": "Recent spending shares rescaled to the same requested total; equal shares if recent total is zero",
+            "reference_predicted_total": 151859.37335597654,
+            "candidate_predicted_total": 153941.38358149517,
+            "predicted_difference": 2082.0102255186357,
+            "conditional_difference_interval_90": [
+              -9582.488253022733,
+              5999.380359518803
+            ],
+            "changes": {
+              "spend_search": {
+                "recent_horizon_spend": 12973.588374526367,
+                "candidate_spend": 0.0,
+                "absolute_change": -12973.588374526367,
+                "percent_change": -100.0
+              },
+              "spend_social": {
+                "recent_horizon_spend": 21465.944216821335,
+                "candidate_spend": 51292.95518963116,
+                "absolute_change": 29827.010972809825,
+                "percent_change": 138.9503795944672
+              },
+              "spend_video": {
+                "recent_horizon_spend": 16853.422598283458,
+                "candidate_spend": 0.0,
+                "absolute_change": -16853.422598283458,
+                "percent_change": -100.0
+              }
+            }
+          },
+          "warnings": [
+            "MODEL_OPTIMUM_ONLY: no causal, profit or operational guarantee",
+            "FIXED_SHAPE: decay and Hill multiplier supplied, not estimated",
+            "CONDITIONAL_HOLDOUT: test predictions use observed test spend and controls",
+            "ZERO_INITIAL_STATE: prehistory unknown; warmup only approximates its removal",
+            "MEDIA_SIGN_RESTRICTION: nonnegative conditional media coefficients are an explicit modeling assumption",
+            "CONDITIONAL_UNCERTAINTY: excludes shape, confounding and future input uncertainty",
+            "REFERENCE: flat per-period mean spending of the last up to 13 historical periods",
+            "HORIZON: residual effects beyond the horizon are excluded; history carryover included",
+            "CONTROL_ASSUMPTION: future controls held at the last observed value",
+            "EXTRAPOLATION: scenario spend outside training range for spend_social",
+            "CONDITIONAL_INTERVAL: fixed shape, controls and observed initial state; no causal guarantee"
+          ]
+        },
+        {
+          "multiplier": 2.0,
+          "solver": {
+            "success": true,
+            "message": "Optimization terminated successfully",
+            "objective": "conditional KPI total",
+            "form": "concave Hill exponent one with nonnegative media coefficients"
+          },
+          "decision_support": {
+            "status": "abstain_from_budget_change",
+            "business_recommendation_eligible": false,
+            "reasons": [
+              "EXTRAPOLATION",
+              "NO_HOLDOUT_IMPROVEMENT_OVER_MEAN_BASELINE",
+              "SYNTHETIC_DATA"
+            ],
+            "policy": "Conservative evidence screens, not universal statistical acceptance thresholds. Numeric optimization remains an exploratory candidate.",
+            "required_next_step": "Review business context, causal assumptions, stability and experiment evidence before any budget change"
+          },
+          "optimal_spend": {
+            "spend_search": 0.0,
+            "spend_social": 102585.91037926232,
+            "spend_video": 0.0
+          },
+          "comparison_same_total": {
+            "reference_spend": {
+              "spend_search": 25947.176749052735,
+              "spend_social": 42931.88843364267,
+              "spend_video": 33706.845196566916
+            },
+            "reference_definition": "Recent spending shares rescaled to the same requested total; equal shares if recent total is zero",
+            "reference_predicted_total": 153550.058678148,
+            "candidate_predicted_total": 155201.81118079077,
+            "predicted_difference": 1651.7525026427757,
+            "conditional_difference_interval_90": [
+              -16866.925235988172,
+              3390.5404907014554
+            ],
+            "changes": {
+              "spend_search": {
+                "recent_horizon_spend": 12973.588374526367,
+                "candidate_spend": 0.0,
+                "absolute_change": -12973.588374526367,
+                "percent_change": -100.0
+              },
+              "spend_social": {
+                "recent_horizon_spend": 21465.944216821335,
+                "candidate_spend": 102585.91037926232,
+                "absolute_change": 81119.96616244098,
+                "percent_change": 377.9007591889344
+              },
+              "spend_video": {
+                "recent_horizon_spend": 16853.422598283458,
+                "candidate_spend": 0.0,
+                "absolute_change": -16853.422598283458,
+                "percent_change": -100.0
+              }
+            }
+          },
+          "warnings": [
+            "MODEL_OPTIMUM_ONLY: no causal, profit or operational guarantee",
+            "FIXED_SHAPE: decay and Hill multiplier supplied, not estimated",
+            "CONDITIONAL_HOLDOUT: test predictions use observed test spend and controls",
+            "ZERO_INITIAL_STATE: prehistory unknown; warmup only approximates its removal",
+            "MEDIA_SIGN_RESTRICTION: nonnegative conditional media coefficients are an explicit modeling assumption",
+            "CONDITIONAL_UNCERTAINTY: excludes shape, confounding and future input uncertainty",
+            "REFERENCE: flat per-period mean spending of the last up to 13 historical periods",
+            "HORIZON: residual effects beyond the horizon are excluded; history carryover included",
+            "CONTROL_ASSUMPTION: future controls held at the last observed value",
+            "EXTRAPOLATION: scenario spend outside training range for spend_social",
+            "CONDITIONAL_INTERVAL: fixed shape, controls and observed initial state; no causal guarantee"
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -52,8 +52,14 @@ def metrics(observed, predicted) -> dict:
     error = y - p
     total = float(np.abs(y).sum())
     variance = float(np.sum((y - y.mean()) ** 2))
+    nonzero = y != 0
     return {
         "mae": float(np.abs(error).mean()),
+        "rmse": float(np.sqrt(np.mean(error**2))),
+        "mape_nonzero_percent": float(np.mean(np.abs(error[nonzero] / y[nonzero])) * 100)
+        if nonzero.any()
+        else None,
+        "mape_excluded_zeros": int((~nonzero).sum()),
         "wape_percent": float(np.abs(error).sum() / total * 100) if total > 0 else None,
         "r2": float(1 - np.sum(error**2) / variance) if variance > 0 else None,
     }
@@ -154,18 +160,26 @@ def train(dataset: dict, request: TrainRequest, model_id: str, report: dict) -> 
     if lag1 is not None and not np.isfinite(lag1):
         lag1 = None
     condition = float(np.linalg.cond(x[warmup:cutoff]))
+    centered = x[warmup:cutoff] - x[warmup:cutoff].mean(axis=0)
+    scales = x[warmup:cutoff].std(axis=0)
+    scales[scales < 1e-12] = 1
+    standardized = centered / scales
+    standardized[:, 0] = 1
+    standardized_condition = float(np.linalg.cond(standardized))
+    standardized_rank = int(np.linalg.matrix_rank(standardized))
     warnings = [
         *report["warnings"],
         "FIXED_SHAPE: decay and Hill multiplier supplied, not estimated",
         "NO_UNCERTAINTY: point estimates only; no causal identification or calibration",
         "CONDITIONAL_HOLDOUT: test predictions use observed test spend and controls",
         "ZERO_INITIAL_STATE: prehistory unknown; warmup only approximates its removal",
+        "MEDIA_SIGN_RESTRICTION: nonnegative conditional media coefficients are an explicit modeling assumption",
     ]
     if any(name.startswith("CONSTANT_COLUMN") for name in warnings):
         warnings.append("RANK_WARNING: constant regressors reduce identifiability")
     if lag1 is not None and abs(lag1) > 0.3:
         warnings.append("RESIDUAL_AUTOCORRELATION: absolute training lag-one correlation > 0.3")
-    if not np.isfinite(condition) or condition > 1e8:
+    if not np.isfinite(standardized_condition) or standardized_condition > 1e8:
         warnings.append("ILL_CONDITIONED: regressors may not separate channel associations")
     if np.any(prediction < 0):
         warnings.append(
@@ -214,6 +228,18 @@ def train(dataset: dict, request: TrainRequest, model_id: str, report: dict) -> 
             "train_residual_lag1": lag1,
             "condition_number": condition if np.isfinite(condition) else None,
             "matrix_rank": int(np.linalg.matrix_rank(x[warmup:cutoff])),
+            "standardized_condition_number": standardized_condition
+            if np.isfinite(standardized_condition)
+            else None,
+            "standardized_matrix_rank": standardized_rank,
+            "feature_count": x.shape[1],
+            "train_residual_mean": float(residual.mean()),
+            "train_durbin_watson": float(np.sum(np.diff(residual) ** 2) / np.sum(residual**2))
+            if np.sum(residual**2) > 0
+            else None,
+            "residual_diagnostics_scope": "descriptive; no causal or independence certification",
+            "adjusted_r2": None,
+            "adjusted_r2_reason": "Nominal OLS degrees of freedom are inappropriate for constrained regularized regression",
         },
         "state": {
             "last_date": rows[-1][request.date_column],
@@ -226,6 +252,8 @@ def train(dataset: dict, request: TrainRequest, model_id: str, report: dict) -> 
             ),
         },
         "units": dataset.get("units", {}),
+        "target_type": dataset.get("target_type", "unspecified"),
+        "data_context": dataset.get("data_context", {}),
         "warnings": warnings,
         "predictions": [
             {
@@ -258,9 +286,22 @@ def train(dataset: dict, request: TrainRequest, model_id: str, report: dict) -> 
             "block_size": block,
             "seed": request.bootstrap_seed,
             "scope": "conditional mean; fixed shape and inputs; not causal or predictive noise",
+            "coverage_certified": False,
+            "penalty_bias_note": "Residual bootstrap refits the penalized estimator; shrinkage can shift draws. Not a Bayesian posterior.",
         }
+        lower, upper = np.quantile(np.asarray(draws), [0.05, 0.95], axis=0)
+        outside = [
+            feature_names[j]
+            for j in range(len(coefficients))
+            if coefficients[j] < lower[j] or coefficients[j] > upper[j]
+        ]
+        result["uncertainty"]["point_outside_percentile_interval"] = outside
         result["warnings"] = [w for w in warnings if not w.startswith("NO_UNCERTAINTY")]
         result["warnings"].append(
             "CONDITIONAL_UNCERTAINTY: excludes shape, confounding and future input uncertainty"
         )
+        if outside:
+            result["warnings"].append(
+                "BOOTSTRAP_SHRINKAGE: point estimates outside percentile intervals; penalty bias or boundary effects may matter"
+            )
     return result

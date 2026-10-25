@@ -48,6 +48,11 @@ def generate(request: GenerateRequest) -> dict:
         "schema_version": 1,
         "synthetic": True,
         "source": "built-in-demo-v1",
+        "target_type": "revenue",
+        "data_context": {
+            "source_reference": "built-in-demo-v1",
+            "kpi_definition": "synthetic revenue; constructed DGP",
+        },
         "frequency": request.frequency,
         "seed": request.seed,
         "units": {"spend": "synthetic_currency_per_period", "target": "synthetic_revenue"},
@@ -125,6 +130,34 @@ def validate(dataset: dict, request: DatasetSpec, max_rows: int) -> dict:
         warnings.append(
             "SHORT_HISTORY: limited annual coverage; no universal sufficiency guarantee"
         )
+    context = dataset.get("data_context", {})
+    missing_metadata = [
+        c
+        for c in (
+            "source_reference",
+            "extracted_at",
+            "timezone",
+            "currency",
+            "kpi_definition",
+            "complete_through",
+        )
+        if not context.get(c)
+    ]
+    if dataset.get("synthetic") is not True and missing_metadata:
+        warnings.append("METADATA_MISSING: " + ", ".join(missing_metadata))
+    if valid_numbers:
+        for j, name in enumerate(numeric):
+            q1, q3 = np.quantile(values[:, j], [0.25, 0.75])
+            iqr = q3 - q1
+            count = (
+                int(np.sum((values[:, j] < q1 - 3 * iqr) | (values[:, j] > q3 + 3 * iqr)))
+                if iqr > 0
+                else 0
+            )
+            if count:
+                warnings.append(
+                    f"OUTLIER_SCREEN: {name} has {count} values outside 3-IQR fences; not removed"
+                )
     return {
         "valid": not issues,
         "issues": issues,
@@ -137,4 +170,7 @@ def validate(dataset: dict, request: DatasetSpec, max_rows: int) -> dict:
         "warmup_rows": request.warmup_periods,
         "frequency": dataset.get("frequency"),
         "synthetic": dataset.get("synthetic") is True,
+        "missing_metadata": missing_metadata,
+        "data_context": context,
+        "target_type": dataset.get("target_type", "unspecified"),
     }

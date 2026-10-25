@@ -51,6 +51,10 @@ def tune(dataset: dict, request: TuneRequest, model_id: str, max_rows: int) -> d
 
 
 def calibrate(model: dict, request: CalibrationRequest) -> dict:
+    if model.get("synthetic") is not request.synthetic:
+        raise MMMError(
+            "MIXED_DATA_ORIGINS", "Model and experiment origins must both be synthetic or both real"
+        )
     if request.channel not in model["request"]["media_columns"]:
         raise MMMError("CHANNEL_MISMATCH", "Experiment channel is not modeled")
     if not model.get("coefficient_draws"):
@@ -92,6 +96,8 @@ def calibrate(model: dict, request: CalibrationRequest) -> dict:
         "experiment_id": request.experiment_id,
         "method": "Gaussian importance reweighting of conditional bootstrap draws",
         "synthetic": request.synthetic,
+        "model_synthetic": model["synthetic"],
+        "experiment_synthetic": request.synthetic,
         "observed_lift": request.lift_mean,
         "lift_sd": request.lift_sd,
         "uncalibrated_lift_mean": float(predicted.mean()),

@@ -1,0 +1,613 @@
+{
+  "model_id": "model-ec9dd86d86b347c8a5f70e5e78f90c32",
+  "synthetic": true,
+  "source": {
+    "dataset_id": "demo-5b91b3094ac346b585766af0e2c0fd2d",
+    "dataset_sha256": "43ab06c77a76626f99ba135c46eef0b11696b53bc7fe4acb9a6d5319cef22e88",
+    "rows": 156,
+    "start_date": "2023-01-02",
+    "end_date": "2025-12-22",
+    "frequency": "weekly",
+    "data_context": {
+      "kpi_definition": "synthetic revenue; constructed DGP",
+      "source_reference": "built-in-demo-v1"
+    },
+    "target_type": "revenue"
+  },
+  "data_quality": {
+    "valid": true,
+    "issues": [],
+    "warnings": [],
+    "rows": 156,
+    "start_date": "2023-01-02",
+    "end_date": "2025-12-22",
+    "train_rows": 116,
+    "test_rows": 32,
+    "warmup_rows": 8,
+    "frequency": "weekly",
+    "synthetic": true,
+    "missing_metadata": [
+      "extracted_at",
+      "timezone",
+      "currency",
+      "complete_through"
+    ],
+    "data_context": {
+      "kpi_definition": "synthetic revenue; constructed DGP",
+      "source_reference": "built-in-demo-v1"
+    },
+    "target_type": "revenue"
+  },
+  "diagnostics": {
+    "adjusted_r2": null,
+    "adjusted_r2_reason": "Nominal OLS degrees of freedom are inappropriate for constrained regularized regression",
+    "condition_number": 106.56412571143285,
+    "feature_count": 9,
+    "matrix_rank": 9,
+    "residual_diagnostics_scope": "descriptive; no causal or independence certification",
+    "standardized_condition_number": 1.7765839982996936,
+    "standardized_matrix_rank": 9,
+    "train_durbin_watson": 1.970633373540645,
+    "train_residual_lag1": -0.01633314451644895,
+    "train_residual_mean": -4.202492759916289e-12
+  },
+  "training_correlations": [
+    {
+      "a": "spend_search",
+      "b": "spend_social",
+      "correlation": 0.017792383461663088
+    },
+    {
+      "a": "spend_search",
+      "b": "spend_video",
+      "correlation": 0.01492869779148395
+    },
+    {
+      "a": "spend_search",
+      "b": "price_index",
+      "correlation": 0.06931462999463796
+    },
+    {
+      "a": "spend_search",
+      "b": "promotion",
+      "correlation": 0.19048078841239502
+    },
+    {
+      "a": "spend_social",
+      "b": "spend_video",
+      "correlation": -0.15669657099132084
+    },
+    {
+      "a": "spend_social",
+      "b": "price_index",
+      "correlation": -0.17516438326142453
+    },
+    {
+      "a": "spend_social",
+      "b": "promotion",
+      "correlation": 0.17413910579084033
+    },
+    {
+      "a": "spend_video",
+      "b": "price_index",
+      "correlation": -0.018917055598063295
+    },
+    {
+      "a": "spend_video",
+      "b": "promotion",
+      "correlation": -0.0780237928889913
+    },
+    {
+      "a": "price_index",
+      "b": "promotion",
+      "correlation": -0.011664958445086568
+    }
+  ],
+  "decomposition": {
+    "definition": "Additive fitted components, including baseline, controls and historical carryover; not proven incremental causal effects",
+    "period_start": "2023-02-27",
+    "period_end": "2025-12-22",
+    "component_totals": {
+      "intercept": 1365372.7221422251,
+      "spend_search": 219735.6487495388,
+      "spend_social": 225377.23560271534,
+      "spend_video": 220790.4126389994,
+      "trend_years": 45512.413751950095,
+      "sin_year": -1635.7709139458136,
+      "cos_year": -87.60322677193356,
+      "price_index": -290426.8581046936,
+      "promotion": 19415.33896130414
+    },
+    "predicted_total": 1804053.5396013255,
+    "observed_total": 1805397.9059913193,
+    "residual_total": 1344.3663899939183,
+    "maximum_reconciliation_error": 3.637978807091713e-12,
+    "conditional_component_intervals_90": {
+      "intercept": [
+        1279623.9327842654,
+        1475955.492530514
+      ],
+      "spend_search": [
+        204887.39935120055,
+        233726.4641337156
+      ],
+      "spend_social": [
+        210924.35527173936,
+        242277.1952381496
+      ],
+      "spend_video": [
+        199892.6611534693,
+        237658.72872559275
+      ],
+      "trend_years": [
+        40203.0469816217,
+        52003.75027849079
+      ],
+      "sin_year": [
+        -1741.930006898556,
+        -1548.9974939758602
+      ],
+      "cos_year": [
+        -262.7392585482209,
+        104.80157706115398
+      ],
+      "price_index": [
+        -391854.6110660336,
+        -192946.2728631124
+      ],
+      "promotion": [
+        17764.474117114616,
+        20544.742811448752
+      ]
+    },
+    "roi": null,
+    "mroi": null,
+    "roi_unavailable_reason": "No identified incremental profit or causal return; aggregate media component includes carryover and is not incremental future return",
+    "units": {
+      "spend": "synthetic_currency_per_period",
+      "target": "synthetic_revenue"
+    }
+  },
+  "backtest": {
+    "status": "executed",
+    "method": "expanding origin, disjoint test windows, fixed declared shapes; no refit on test",
+    "folds": [
+      {
+        "shape_policy": "fixed_declared_shapes",
+        "adstock_decay": 0.5,
+        "saturation_multiplier": 1.0,
+        "train_end": "2024-02-19",
+        "test_start": "2024-02-26",
+        "test_end": "2024-09-30",
+        "test_rows": 32,
+        "metrics": {
+          "mae": 125.500399881661,
+          "rmse": 156.54184694787833,
+          "mape_nonzero_percent": 1.0404142358312847,
+          "mape_excluded_zeros": 0,
+          "wape_percent": 1.02994602448388,
+          "r2": 0.9350898459221116
+        },
+        "mean_baseline": {
+          "mae": 530.1043397049241,
+          "rmse": 619.480079526749,
+          "mape_nonzero_percent": 4.330554700679616,
+          "mape_excluded_zeros": 0,
+          "wape_percent": 4.350415279597217,
+          "r2": -0.01649775515201557
+        },
+        "last_observation_baseline": {
+          "mae": 955.2077063080962,
+          "rmse": 1128.9979319450138,
+          "mape_nonzero_percent": 8.109042671124895,
+          "mape_excluded_zeros": 0,
+          "wape_percent": 7.839117489634,
+          "r2": -2.3762766545197125
+        }
+      },
+      {
+        "shape_policy": "fixed_declared_shapes",
+        "adstock_decay": 0.5,
+        "saturation_multiplier": 1.0,
+        "train_end": "2024-09-30",
+        "test_start": "2024-10-07",
+        "test_end": "2025-05-12",
+        "test_rows": 32,
+        "metrics": {
+          "mae": 131.66309674049558,
+          "rmse": 161.7859916099102,
+          "mape_nonzero_percent": 1.0463745777961582,
+          "mape_excluded_zeros": 0,
+          "wape_percent": 1.0420140435203067,
+          "r2": 0.927034971279894
+        },
+        "mean_baseline": {
+          "mae": 630.0736089165532,
+          "rmse": 779.6701789733249,
+          "mape_nonzero_percent": 4.897428728332585,
+          "mape_excluded_zeros": 0,
+          "wape_percent": 4.986557093037266,
+          "r2": -0.6945515091313139
+        },
+        "last_observation_baseline": {
+          "mae": 1493.457128853436,
+          "rmse": 1591.6800808147964,
+          "mape_nonzero_percent": 11.642114144199311,
+          "mape_excluded_zeros": 0,
+          "wape_percent": 11.819586050964846,
+          "r2": -6.062272812105738
+        }
+      },
+      {
+        "shape_policy": "fixed_declared_shapes",
+        "adstock_decay": 0.5,
+        "saturation_multiplier": 1.0,
+        "train_end": "2025-05-12",
+        "test_start": "2025-05-19",
+        "test_end": "2025-12-22",
+        "test_rows": 32,
+        "metrics": {
+          "mae": 98.24395239088852,
+          "rmse": 125.0415604974599,
+          "mape_nonzero_percent": 0.8214391710130147,
+          "mape_excluded_zeros": 0,
+          "wape_percent": 0.8238151918367113,
+          "r2": 0.9761583350566961
+        },
+        "mean_baseline": {
+          "mae": 723.465911509367,
+          "rmse": 881.6204922075557,
+          "mape_nonzero_percent": 6.264762777205279,
+          "mape_excluded_zeros": 0,
+          "wape_percent": 6.066553657227307,
+          "r2": -0.18519869056008664
+        },
+        "last_observation_baseline": {
+          "mae": 874.4116275383748,
+          "rmse": 1057.3009531703588,
+          "mape_nonzero_percent": 7.66003127510345,
+          "mape_excluded_zeros": 0,
+          "wape_percent": 7.332294407483397,
+          "r2": -0.7046101020976565
+        }
+      }
+    ]
+  },
+  "sensitivity": {
+    "specifications": [
+      {
+        "decay": 0.2,
+        "half_saturation_multiplier": 0.5,
+        "holdout_metrics": {
+          "mae": 217.8373638248433,
+          "rmse": 275.7369691996446,
+          "mape_nonzero_percent": 1.864893533124092,
+          "mape_excluded_zeros": 0,
+          "wape_percent": 1.8266542143433782,
+          "r2": 0.8840641352317335
+        },
+        "conditional_media_coefficients": {
+          "spend_search": 1868.654048157615,
+          "spend_social": 1659.556553052302,
+          "spend_video": 1883.030153486189
+        },
+        "candidate_allocation": {
+          "spend_search": 0.3453531697236366,
+          "spend_social": 0.30509771516730705,
+          "spend_video": 0.34954911510905634
+        }
+      },
+      {
+        "decay": 0.2,
+        "half_saturation_multiplier": 1.0,
+        "holdout_metrics": {
+          "mae": 236.26318752851995,
+          "rmse": 297.0525727385542,
+          "mape_nonzero_percent": 2.039819723055568,
+          "mape_excluded_zeros": 0,
+          "wape_percent": 1.9811621827198787,
+          "r2": 0.8654466711622587
+        },
+        "conditional_media_coefficients": {
+          "spend_search": 1905.4430245470269,
+          "spend_social": 1725.1255306148182,
+          "spend_video": 1918.2326428568736
+        },
+        "candidate_allocation": {
+          "spend_search": 0.3479136300484848,
+          "spend_social": 0.3069405673357419,
+          "spend_video": 0.3451458026157733
+        }
+      },
+      {
+        "decay": 0.2,
+        "half_saturation_multiplier": 2.0,
+        "holdout_metrics": {
+          "mae": 259.29203560317995,
+          "rmse": 326.1644922833428,
+          "mape_nonzero_percent": 2.249073534926138,
+          "mape_excluded_zeros": 0,
+          "wape_percent": 2.1742683682173993,
+          "r2": 0.837781205187536
+        },
+        "conditional_media_coefficients": {
+          "spend_search": 2322.609591528051,
+          "spend_social": 2104.802947634864,
+          "spend_video": 2355.4557681728297
+        },
+        "candidate_allocation": {
+          "spend_search": 0.3544368140639249,
+          "spend_social": 0.3028142432826876,
+          "spend_video": 0.34274894265338746
+        }
+      },
+      {
+        "decay": 0.5,
+        "half_saturation_multiplier": 0.5,
+        "holdout_metrics": {
+          "mae": 120.1061891336322,
+          "rmse": 149.06614123581446,
+          "mape_nonzero_percent": 1.0292115502845982,
+          "mape_excluded_zeros": 0,
+          "wape_percent": 1.0071388704743933,
+          "r2": 0.9661166900034823
+        },
+        "conditional_media_coefficients": {
+          "spend_search": 3260.840447010794,
+          "spend_social": 3275.082119255643,
+          "spend_video": 3357.10481959564
+        },
+        "candidate_allocation": {
+          "spend_search": 0.3376903132638685,
+          "spend_social": 0.32143621946339906,
+          "spend_video": 0.3408734672727325
+        }
+      },
+      {
+        "decay": 0.5,
+        "half_saturation_multiplier": 1.0,
+        "holdout_metrics": {
+          "mae": 98.24395239088852,
+          "rmse": 125.0415604974599,
+          "mape_nonzero_percent": 0.8214391710130147,
+          "mape_excluded_zeros": 0,
+          "wape_percent": 0.8238151918367113,
+          "r2": 0.9761583350566961
+        },
+        "conditional_media_coefficients": {
+          "spend_search": 3056.2586735367254,
+          "spend_social": 3134.9567459147916,
+          "spend_video": 3241.1409409298108
+        },
+        "candidate_allocation": {
+          "spend_search": 0.3346117609385962,
+          "spend_social": 0.32615498245800995,
+          "spend_video": 0.33923325660339393
+        }
+      },
+      {
+        "decay": 0.5,
+        "half_saturation_multiplier": 2.0,
+        "holdout_metrics": {
+          "mae": 118.97075051569658,
+          "rmse": 142.72147479458502,
+          "mape_nonzero_percent": 1.0041164950549681,
+          "mape_excluded_zeros": 0,
+          "wape_percent": 0.9976177594025203,
+          "r2": 0.9689396417909648
+        },
+        "conditional_media_coefficients": {
+          "spend_search": 3536.4345258934104,
+          "spend_social": 3654.4584788227603,
+          "spend_video": 3835.564491406495
+        },
+        "candidate_allocation": {
+          "spend_search": 0.33200485875247565,
+          "spend_social": 0.33195662419864824,
+          "spend_video": 0.33603851704887605
+        }
+      },
+      {
+        "decay": 0.8,
+        "half_saturation_multiplier": 0.5,
+        "holdout_metrics": {
+          "mae": 608.1748268328124,
+          "rmse": 723.1469563571978,
+          "mape_nonzero_percent": 5.196013745840277,
+          "mape_excluded_zeros": 0,
+          "wape_percent": 5.099791380990883,
+          "r2": 0.20259136229289543
+        },
+        "conditional_media_coefficients": {
+          "spend_search": 4035.1110938158695,
+          "spend_social": 6680.078026106736,
+          "spend_video": 7800.921426408135
+        },
+        "candidate_allocation": {
+          "spend_search": 0.24143433712798523,
+          "spend_social": 0.3421792783311859,
+          "spend_video": 0.4163863845408289
+        }
+      },
+      {
+        "decay": 0.8,
+        "half_saturation_multiplier": 1.0,
+        "holdout_metrics": {
+          "mae": 559.3160068941067,
+          "rmse": 665.3209732186889,
+          "mape_nonzero_percent": 4.758793939049842,
+          "mape_excluded_zeros": 0,
+          "wape_percent": 4.6900904564945565,
+          "r2": 0.3250210350500885
+        },
+        "conditional_media_coefficients": {
+          "spend_search": 3738.197386484262,
+          "spend_social": 6099.053889049714,
+          "spend_video": 7032.305058293977
+        },
+        "candidate_allocation": {
+          "spend_search": 0.20482874325128841,
+          "spend_social": 0.35630326194009104,
+          "spend_video": 0.43886799480862054
+        }
+      },
+      {
+        "decay": 0.8,
+        "half_saturation_multiplier": 2.0,
+        "holdout_metrics": {
+          "mae": 508.04135749968344,
+          "rmse": 609.9838622258834,
+          "mape_nonzero_percent": 4.301576296642896,
+          "mape_excluded_zeros": 0,
+          "wape_percent": 4.2601318269886805,
+          "r2": 0.4326324393353923
+        },
+        "conditional_media_coefficients": {
+          "spend_search": 4348.690893435044,
+          "spend_social": 6946.220357222634,
+          "spend_video": 7878.882389566186
+        },
+        "candidate_allocation": {
+          "spend_search": 0.1358738727109392,
+          "spend_social": 0.38433500823229594,
+          "spend_video": 0.4797911190567649
+        }
+      }
+    ],
+    "allocation_ranges": {
+      "spend_search": [
+        0.1358738727109392,
+        0.3544368140639249
+      ],
+      "spend_social": [
+        0.3028142432826876,
+        0.38433500823229594
+      ],
+      "spend_video": [
+        0.33603851704887605,
+        0.4797911190567649
+      ]
+    },
+    "allocation_spread_screen": 0.2,
+    "screen_scope": "Operational warning only; absence of this warning does not certify validity",
+    "channels_exceeding_screen": [
+      "spend_search"
+    ],
+    "interpretation": "Sensitivity of conditional numeric optima, not confidence intervals or selection of a preferred model; outer test not used to choose a winner"
+  },
+  "decision_support": {
+    "status": "abstain_from_budget_change",
+    "business_recommendation_eligible": false,
+    "reasons": [
+      "SYNTHETIC_DATA",
+      "SPECIFICATION_SENSITIVITY"
+    ],
+    "policy": "Conservative evidence screens, not universal statistical acceptance thresholds. Numeric optimization remains an exploratory candidate.",
+    "required_next_step": "Review business context, causal assumptions, stability and experiment evidence before any budget change",
+    "sensitivity_allocation_ranges": {
+      "spend_search": [
+        0.1358738727109392,
+        0.3544368140639249
+      ],
+      "spend_social": [
+        0.3028142432826876,
+        0.38433500823229594
+      ],
+      "spend_video": [
+        0.33603851704887605,
+        0.4797911190567649
+      ]
+    }
+  },
+  "insight": {
+    "diagnosis": "Holdout MAE 98.244 versus training-mean baseline 723.466; standardized rank 9/9",
+    "evidence": {
+      "holdout": {
+        "mae": 98.24395239088852,
+        "mape_excluded_zeros": 0,
+        "mape_nonzero_percent": 0.8214391710130147,
+        "r2": 0.9761583350566961,
+        "rmse": 125.0415604974599,
+        "wape_percent": 0.8238151918367113
+      },
+      "reasons": [
+        "SYNTHETIC_DATA",
+        "SPECIFICATION_SENSITIVITY"
+      ],
+      "allocation_ranges": {
+        "spend_search": [
+          0.1358738727109392,
+          0.3544368140639249
+        ],
+        "spend_social": [
+          0.3028142432826876,
+          0.38433500823229594
+        ],
+        "spend_video": [
+          0.33603851704887605,
+          0.4797911190567649
+        ]
+      }
+    },
+    "interpretation": "Correlated channels, omitted variables, tracking and model shapes can explain apparent channel differences",
+    "uncertainty": {
+      "block_size": 4,
+      "coverage_certified": false,
+      "method": "moving_block_residual_bootstrap",
+      "penalty_bias_note": "Residual bootstrap refits the penalized estimator; shrinkage can shift draws. Not a Bayesian posterior.",
+      "point_outside_percentile_interval": [],
+      "samples": 40,
+      "scope": "conditional mean; fixed shape and inputs; not causal or predictive noise",
+      "seed": 42
+    },
+    "action": "Maintain the business allocation pending review; investigate correlated channels and use controlled incrementality experiments before reallocation",
+    "expected_impact": {
+      "scope": "Conditional model scenario only, not a validated business effect",
+      "reference_spend": {
+        "spend_search": 12973.588374526367,
+        "spend_social": 21465.944216821335,
+        "spend_video": 16853.422598283458
+      },
+      "reference_definition": "Recent spending shares rescaled to the same requested total; equal shares if recent total is zero",
+      "reference_predicted_total": 160834.5245356676,
+      "candidate_predicted_total": 161403.82544992433,
+      "predicted_difference": 569.3009142567462,
+      "conditional_difference_interval_90": [
+        326.3777905509375,
+        771.5880297069178
+      ],
+      "changes": {
+        "spend_search": {
+          "recent_horizon_spend": 12973.588374526367,
+          "candidate_spend": 17163.226059746987,
+          "absolute_change": 4189.6376852206195,
+          "percent_change": 32.29359190589838
+        },
+        "spend_social": {
+          "recent_horizon_spend": 21465.944216821335,
+          "candidate_spend": 16729.45290009364,
+          "absolute_change": -4736.491316727694,
+          "percent_change": -22.06514313503173
+        },
+        "spend_video": {
+          "recent_horizon_spend": 16853.422598283458,
+          "candidate_spend": 17400.276229790536,
+          "absolute_change": 546.8536315070778,
+          "percent_change": 3.244763064107681
+        }
+      }
+    },
+    "business_impact": null,
+    "impact_unavailable_reason": "No validated causal business effect; model-only opportunity is shown separately",
+    "conditions": "Authorized complete KPI and spend, comparable currency/periods, defensible controls, stable specifications and adequate experimental support",
+    "validation": "Predeclare population, period, KPI and uncertainty for a randomized geo/lift test; account for carryover and compare with model over matching scope"
+  },
+  "warnings": [
+    "FIXED_SHAPE: decay and Hill multiplier supplied, not estimated",
+    "CONDITIONAL_HOLDOUT: test predictions use observed test spend and controls",
+    "ZERO_INITIAL_STATE: prehistory unknown; warmup only approximates its removal",
+    "MEDIA_SIGN_RESTRICTION: nonnegative conditional media coefficients are an explicit modeling assumption",
+    "CONDITIONAL_UNCERTAINTY: excludes shape, confounding and future input uncertainty",
+    "AUDIT_NOT_CERTIFICATION: forecasts, parameter stability and causal assumptions require contextual review"
+  ]
+}

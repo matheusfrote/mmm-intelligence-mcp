@@ -61,6 +61,29 @@ def check_model(model: dict) -> TrainRequest:
         raise MMMError("CORRUPT_MODEL", "Stored model has an invalid schema or parameters") from exc
 
 
+def plan_design(model: dict, plan: dict, controls: np.ndarray, horizon: int) -> np.ndarray:
+    media = model["request"]["media_columns"]
+    transformed = np.column_stack(
+        [
+            hill(
+                adstock(
+                    np.full(horizon, plan[c]),
+                    model["media_parameters"][c]["decay"],
+                    model["state"]["terminal_adstock"][c],
+                ),
+                model["media_parameters"][c]["half_saturation"],
+            )
+            for c in media
+        ]
+    )
+    return design_matrix(
+        transformed,
+        controls,
+        np.arange(model["state"]["history_periods"], model["state"]["history_periods"] + horizon),
+        model["state"]["step_days"],
+    )
+
+
 def simulate(model: dict, request: SimulateRequest) -> dict:
     trained = check_model(model)
     media, control_names = trained.media_columns, trained.control_columns
@@ -90,6 +113,7 @@ def simulate(model: dict, request: SimulateRequest) -> dict:
     reference = state["reference_spend_per_period"]
     coef = np.array([model["coefficients"][c] for c in model["feature_names"]])
     warnings = [
+        *model.get("warnings", []),
         "POINT_SCENARIO: no uncertainty interval or causal interpretation",
         "REFERENCE: flat per-period mean spending of the last up to 13 historical periods",
         "HORIZON: residual effects beyond the horizon are excluded; history carryover included",
@@ -104,26 +128,8 @@ def simulate(model: dict, request: SimulateRequest) -> dict:
             warnings.append(f"EXTRAPOLATION: scenario spend outside training range for {c}")
 
     def evaluate(plan):
-        transformed = np.column_stack(
-            [
-                hill(
-                    adstock(
-                        np.full(horizon, plan[c]),
-                        model["media_parameters"][c]["decay"],
-                        state["terminal_adstock"][c],
-                    ),
-                    model["media_parameters"][c]["half_saturation"],
-                )
-                for c in media
-            ]
-        )
-        x = design_matrix(
-            transformed,
-            controls,
-            np.arange(state["history_periods"], state["history_periods"] + horizon),
-            state["step_days"],
-        )
-        return x @ coef, transformed @ coef[1 : 1 + len(media)], x
+        x = plan_design(model, plan, controls, horizon)
+        return x @ coef, x[:, 1 : 1 + len(media)] @ coef[1 : 1 + len(media)], x
 
     prediction, component, scenario_design = evaluate(per_period)
     baseline, _, baseline_design = evaluate(reference)

@@ -5,7 +5,8 @@ from scipy.optimize import minimize
 
 from .errors import MMMError
 from .schemas import OptimizeRequest, SimulateRequest
-from .simulation import check_model, simulate
+from .scientific import decision_support
+from .simulation import check_model, plan_design, simulate
 
 
 def optimize(model: dict, request: OptimizeRequest) -> dict:
@@ -78,9 +79,80 @@ def optimize(model: dict, request: OptimizeRequest) -> dict:
             future_controls=request.future_controls,
         ),
     )
+    recent = np.array([model["state"]["reference_spend_per_period"][c] for c in names])
+    reference_fractions = (
+        recent / recent.sum() if recent.sum() > 0 else np.full(len(names), 1 / len(names))
+    )
+    comparable = simulate(
+        model,
+        SimulateRequest(
+            model_id=request.model_id,
+            horizon=request.horizon,
+            total_budget=total,
+            allocation=dict(zip(names, reference_fractions.tolist())),
+            future_controls=request.future_controls,
+        ),
+    )
+    controls = (
+        np.array([scenario["future_controls"][c] for c in trained.control_columns]).T
+        if trained.control_columns
+        else np.empty((request.horizon, 0))
+    )
+    difference_design = (
+        plan_design(model, scenario["spend_per_period"], controls, request.horizon)
+        - plan_design(model, comparable["spend_per_period"], controls, request.horizon)
+    ).sum(axis=0)
+    interval = None
+    if model.get("coefficient_draws"):
+        interval = np.quantile(
+            np.asarray(model["coefficient_draws"]) @ difference_design, [0.05, 0.95]
+        ).tolist()
+    marginal = {}
+    for c in names:
+        p = model["media_parameters"][c]
+        retained = p["decay"] ** np.arange(1, request.horizon + 1)
+        stock = (
+            retained * model["state"]["terminal_adstock"][c]
+            + (1 - retained) * scenario["spend_per_period"][c]
+        )
+        marginal[c] = float(
+            np.sum(
+                model["coefficients"][c]
+                * p["half_saturation"]
+                / (p["half_saturation"] + stock) ** 2
+                * (1 - retained)
+                / request.horizon
+            )
+        )
+    support = decision_support(model, scenario["warnings"])
     return {
         "model_id": request.model_id,
         "optimal_spend": dict(zip(names, (fractions * total).tolist())),
+        "recommended_spend": None,
+        "decision_support": support,
+        "comparison_same_total": {
+            "reference_spend": dict(zip(names, (reference_fractions * total).tolist())),
+            "reference_definition": "Recent spending shares rescaled to the same requested total; equal shares if recent total is zero",
+            "reference_predicted_total": comparable["predicted_total"],
+            "candidate_predicted_total": scenario["predicted_total"],
+            "predicted_difference": scenario["predicted_total"] - comparable["predicted_total"],
+            "conditional_difference_interval_90": interval,
+            "changes": {
+                c: {
+                    "recent_horizon_spend": float(recent[j] * request.horizon),
+                    "candidate_spend": float(fractions[j] * total),
+                    "absolute_change": float(fractions[j] * total - recent[j] * request.horizon),
+                    "percent_change": float(
+                        100 * (fractions[j] * total / (recent[j] * request.horizon) - 1)
+                    )
+                    if recent[j]
+                    else None,
+                }
+                for j, c in enumerate(names)
+            },
+        },
+        "marginal_kpi_per_spend": marginal,
+        "marginal_definition": "Derivative of the conditional KPI total with respect to a channel's whole-horizon flat spending; same historical carryover. Not causal mROI or profit.",
         "solver": {
             "success": success,
             "message": message,

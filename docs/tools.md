@@ -1,6 +1,6 @@
 # Contrato das ferramentas
 
-Atualização 0.2: há 15 ferramentas e o cliente oficial é SDK MCP 2.3. Os nomes Python do cliente são `structured_content` e `is_error`; o JSON do protocolo preserva seus aliases de wire. O envelope `ok/data/error` continua.
+Atualização 0.3: há 16 ferramentas e o cliente oficial é SDK MCP 2.3. Os nomes Python do cliente são `structured_content` e `is_error`; o JSON do protocolo preserva seus aliases de wire. O envelope `ok/data/error` continua.
 
 Robyn exige `test_fraction=0.2`, correspondente ao split nativo 60/20/20 e seu arredondamento; outros valores falham na validação antes de iniciar worker. `tune_mmm` valida toda a série, incluindo o holdout externo, sem usar o holdout para selecionar hiperparâmetros. Calibração cujo erro padrão/lift exceda o intervalo numérico retorna `CALIBRATION_NUMERIC_RANGE`, sem apresentar NaN como sucesso.
 
@@ -14,8 +14,9 @@ Cada chamada tem `arguments = {"request": {...}}`. IDs: 1–64 caracteres ASCII 
 | validate_dataset | dataset_id | media_columns, control_columns, target_column, date_column, test_fraction=0.2, warmup_periods=8 |
 | train_mmm | dataset_id | mesmos campos do validador; model_id=null; ridge_alpha=0.1; adstock_decay=0.5; saturation_multiplier=1.0 |
 | get_model | model_id | nenhum |
+| audit_model | model_id | folds=3 (2–5), decays=[0.2,0.5,0.8], multipliers=[0.5,1,2], max_allocation_spread=0.2 (0–1) |
 | simulate_budget | model_id, total_budget, allocation | horizon=13 (1–104 períodos); future_controls=null |
-| import_dataset | rows, synthetic, authorization_reference | dataset_id; frequency=weekly; units; schema de colunas |
+| import_dataset | rows, synthetic, authorization_reference | dataset_id; frequency=weekly; units; schema de colunas; target_type=unspecified; data_context={} |
 | optimize_budget | model_id, total_budget | horizon=13; lower/upper, limites totais por canal; future_controls |
 | tune_mmm | dataset_id | mesmos campos de treino; decays=[0.2,0.5,0.8]; multipliers=[0.5,1,2] |
 | calibrate_experiment | model_id, channel, treatment_spend, control_spend, lift_mean, lift_sd, experiment_id, synthetic | horizon=4; initial_adstock=0 |
@@ -26,6 +27,12 @@ Cada chamada tem `arguments = {"request": {...}}`. IDs: 1–64 caracteres ASCII 
 | predict_backend | model_id | media_multiplier={}, cenário histórico nativo |
 
 O treino local aceita `bootstrap_samples=0` (0–500), `bootstrap_block_size=4` (1–26) e `bootstrap_seed=42`. Com draws, a simulação devolve intervalos centrais condicionais de 90% da média; calibração exige pelo menos 20 draws. A seleção de formas admite até 25 combinações e preserva o teste externo. Veja [método](methodology.md).
+
+`audit_model` é leitura com custo computacional limitado: reconstrói a linhagem pelo hash, componentes aditivos e intervalos condicionais; executa folds temporais disjuntos (seleção nested quando tuned) e até 25 especificações. Faixas de alocação são sensibilidade, não confiança. `max_allocation_spread` é um alerta operacional configurável, não limiar universal de validade. Históricos insuficientes produzem backtest indisponível e abstenção explícita. O contrato não fornece ROI/mROI causal: esses campos são null.
+
+`optimize_budget` devolve `optimal_spend` como candidato numérico, `recommended_spend=null`, `decision_support`, comparação de mesmo total, diferenças absolutas/percentuais da referência e derivadas condicionais `marginal_kpi_per_spend`. Não são lucro ou mROI causal. Alertas do modelo acompanham cenários. Calibração recusa origens sintéticas/reais diferentes (`MIXED_DATA_ORIGINS`).
+
+`target_type` aceita revenue/non_revenue/unspecified. `data_context` aceita até 12 campos textuais com até 1000 caracteres por valor. Meridian exige revenue declarado; Robyn exige tipo conhecido para revenue/conversion; PyMC aceita KPI genérico. Não inferir receita apenas pelo nome da coluna. As exceções legadas aplicam-se somente ao gerador conhecido, documentado no artefato.
 
 Motores aceitos: `google_meridian`, `pymc_marketing`, `meta_robyn`. As duas primeiras opções usam draws/tune/chains; Robyn faz ao menos 200 iterações/um trial com mídia positiva e seleção por validação. Modelos externos ficam em namespace separado; consulte-os por `get_backend_model`. Cenários não substituem universalmente o horizonte futuro local: Meridian exige dimensões históricas; Robyn com multiplicadores devolve respostas por canal. Nenhum número vem de fallback Ridge.
 

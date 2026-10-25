@@ -123,6 +123,12 @@ class ImportRequest(Contract):
     rows: list[dict[str, Any]] = Field(min_length=52, max_length=10000)
     frequency: Literal["daily", "weekly"] = "weekly"
     synthetic: bool
+    target_type: Literal["revenue", "non_revenue", "unspecified"] = "unspecified"
+    data_context: dict[str, Annotated[str, Field(min_length=1, max_length=1000)]] = Field(
+        default_factory=dict,
+        max_length=12,
+        description="Declared source_reference, extracted_at, timezone, currency, kpi_definition, complete_through, geography, tracking_notes",
+    )
     authorization_reference: str = Field(min_length=3, max_length=200)
     units: dict[str, str] = Field(
         default_factory=lambda: {"spend": "declared_currency", "target": "declared_kpi"},
@@ -173,6 +179,22 @@ class TuneRequest(TrainRequest):
 
 class RenderRequest(ModelRequest):
     artifact_id: Identifier | None = None
+
+
+class AuditRequest(ModelRequest):
+    folds: int = Field(default=3, ge=2, le=5, strict=True)
+    max_allocation_spread: float = Field(
+        default=0.2,
+        ge=0,
+        le=1,
+        description="Operational warning screen in allocation-share units, not a universal statistical validity threshold",
+    )
+    decays: list[Annotated[float, Field(ge=0, lt=0.99)]] = Field(
+        default_factory=lambda: [0.2, 0.5, 0.8], min_length=1, max_length=5
+    )
+    multipliers: list[Annotated[float, Field(gt=0, le=100)]] = Field(
+        default_factory=lambda: [0.5, 1.0, 2.0], min_length=1, max_length=5
+    )
 
 
 class CalibrationRequest(ModelRequest):

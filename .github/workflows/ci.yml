@@ -27,6 +27,7 @@ jobs:
       - run: python -m build
       - run: python examples/mcp_workflow.py --extended --data-dir var/ci-demo --output-dir evidence/ci-demo
       - run: python examples/http_smoke.py --output-dir evidence/ci-http
+      - run: python examples/scientific_stress.py --output-dir evidence/ci-scientific-stress
   security:
     runs-on: ubuntu-latest
     timeout-minutes: 10

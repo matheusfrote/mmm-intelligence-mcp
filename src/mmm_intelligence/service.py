@@ -14,6 +14,7 @@ from .datasets import generate, validate
 from .errors import MMMError
 from .modeling import train
 from .schemas import (
+    AuditRequest,
     BackendPredictRequest,
     BackendRequest,
     CalibrationRequest,
@@ -41,6 +42,7 @@ COMPUTE_TOOLS = {
     "train_backend",
     "predict_backend",
     "calibrate_experiment",
+    "audit_model",
 }
 
 
@@ -61,6 +63,7 @@ class MMMService:
         "predict_backend": BackendPredictRequest,
         "get_backend_model": ModelRequest,
         "backend_status": EmptyRequest,
+        "audit_model": AuditRequest,
     }
 
     def __init__(self, settings: Settings):
@@ -194,6 +197,8 @@ class MMMService:
             "schema_version": 1,
             "synthetic": request.synthetic,
             "source": "explicit-inline-import",
+            "target_type": request.target_type,
+            "data_context": request.data_context,
             "authorization_reference": request.authorization_reference,
             "frequency": request.frequency,
             "units": request.units,
@@ -332,3 +337,10 @@ class MMMService:
                 "Installed executable does not prove installed library or statistical convergence"
             ],
         }
+
+    def audit_model(self, request: AuditRequest) -> dict:
+        from .scientific import audit
+
+        model = self.get_model(ModelRequest(model_id=request.model_id))
+        dataset = self.load_dataset(model["dataset_id"])
+        return audit(dataset, model, request, self.settings.max_rows)

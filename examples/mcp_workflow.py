@@ -31,6 +31,7 @@ TOOLS = CORE_TOOLS | {
     "train_backend",
     "predict_backend",
     "get_backend_model",
+    "audit_model",
 }
 
 
@@ -110,6 +111,9 @@ async def cycle(data_dir: Path, *, entrypoint: str = "module", extended: bool = 
                 )
                 assert imported["validation"]["valid"]
                 await call("optimize_budget", {"model_id": fit["model_id"], "total_budget": total})
+                audited = await call("audit_model", {"model_id": fit["model_id"]})
+                assert audited["decomposition"]["maximum_reconciliation_error"] < 1e-8
+                assert not audited["decision_support"]["business_recommendation_eligible"]
                 await call(
                     "tune_mmm",
                     {
@@ -193,6 +197,16 @@ def main():
             (args.output_dir / filename).write_text(
                 report["calls"][tool]["data"]["content"], encoding="utf-8"
             )
+    if "audit_model" in report["calls"]:
+        (args.output_dir / "audit.json").write_text(
+            json.dumps(
+                report["calls"]["audit_model"]["data"],
+                ensure_ascii=False,
+                indent=2,
+                allow_nan=False,
+            ),
+            encoding="utf-8",
+        )
     print(
         json.dumps(
             {

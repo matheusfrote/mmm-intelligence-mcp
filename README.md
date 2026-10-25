@@ -1,6 +1,6 @@
-# MMM Intelligence MCP — 0.2
+# MMM Intelligence MCP — 0.3
 
-Servidor independente de Marketing Mix Modeling com **SDK oficial MCP 2.3**, execução local e resultados exploratórios. Há **15 ferramentas**, motor Ridge e integrações reais com **Google Meridian, PyMC-Marketing e Meta Robyn**, além de otimização, incerteza condicional, importação autorizada, dashboard e relatório.
+Servidor independente de Marketing Mix Modeling com **SDK oficial MCP 2.3**, execução local e resultados exploratórios. Há **16 ferramentas**, motor Ridge e integrações reais com **Google Meridian, PyMC-Marketing e Meta Robyn**, além de auditoria científica, otimização, incerteza condicional, importação autorizada, dashboard e relatório.
 
 Nenhuma ferramenta altera campanhas ou orçamentos reais. Dados sintéticos são o padrão. Integração funcional é diferente de convergência estatística e identificação causal.
 
@@ -30,7 +30,7 @@ Stdio aguarda um cliente MCP, sem abrir URL. Alternativas: python server.py ou o
 
 Use pasta de evidências nova em cada execução. O exemplo verifica descoberta, chamadas estruturadas, erros e persistência após reinício. Exporta HTML interativo, Markdown e CSV completos.
 
-Artefatos públicos de demonstração: [dashboard](docs/validation/dashboard.html), [relatório](docs/validation/report.md), [CSV sintético](examples/demo.csv), [ciclo MCP](docs/validation/mcp-cycle.json). O dashboard funciona localmente sem CDNs nem requisições externas.
+Artefatos atuais de demonstração: [dashboard](docs/validation/scientific-final/dashboard.html), [relatório](docs/validation/scientific-final/report.md), [CSV sintético](docs/validation/scientific-final/demo.csv), [ciclo MCP](docs/validation/scientific-final/mcp-cycle.json) e [auditoria estruturada](docs/validation/scientific-final/audit.json). O dashboard funciona localmente sem CDNs nem requisições externas. Evidências anteriores permanecem históricas.
 
 ## Ferramentas
 
@@ -42,6 +42,7 @@ Todas recebem um objeto request e retornam ToolResponse. Confira ok; o validador
 | validate_dataset | Examina colunas, valores, datas, regularidade e split |
 | train_mmm | Ridge, adstock, Hill, mídia positiva, holdout e bootstrap opcional |
 | get_model | Consulta parâmetros, diagnósticos, previsões e estado |
+| audit_model | Reconcilia componentes, backtests, sensibilidade e motivos de abstenção |
 | simulate_budget | Cenário futuro com horizonte, controles e carryover |
 | import_dataset | Importa linhas inline com procedência e autorização |
 | optimize_budget | Otimiza total fixo e mínimos/máximos por canal |
@@ -68,7 +69,7 @@ Simulação:
 
 O orçamento é o **total de todo o horizonte**, na unidade do dataset, dividido igualmente entre períodos. A referência usa a média dos últimos até 13 gastos por período; o retorno mostra ambos os totais. Os valores sintéticos não são reais nem valores de uma conta.
 
-Para otimizar, use model_id, horizon, total_budget e dicionários opcionais lower/upper com limites totais por canal. Para treinar motor externo:
+Para otimizar, use model_id, horizon, total_budget e dicionários opcionais lower/upper com limites totais por canal. `optimal_spend` é candidato do modelo; `recommended_spend` permanece null e `decision_support` explica os limites. A comparação usa referência com o mesmo total. Para auditar, envie `{"request":{"model_id":"modelo-exemplo"}}` a `audit_model`. Para treinar motor externo:
 
 ~~~json
 {"request":{"dataset_id":"demo-exemplo","backend":"google_meridian","draws":50,"tune":50,"chains":2}}
@@ -81,6 +82,8 @@ Use pymc_marketing ou meta_robyn nos outros adaptadores. Robyn requer `test_frac
 Servidor, contratos, validação, modelagem, análise, simulação, otimização, persistência, renderização e integrações são módulos separados em src/mmm_intelligence. Motores externos usam workers independentes e serialização Protobuf, NetCDF ou JSON oficial; não há fallback Ridge com outro rótulo nem uso de pickle/RDS.
 
 Bootstrap produz intervalos da **média condicional** com formas/inputs fixos; não é intervalo preditivo completo. Calibração é reponderação aproximada, sem demonstrar randomização ou transporte. Bom R² não certifica atribuição por canal. Diagnósticos e alertas permanecem visíveis, inclusive quando a convergência é ruim.
+
+Importações declaram `target_type` como revenue, non_revenue ou unspecified, além de `data_context`. Meridian exige receita declarada; Robyn distingue receita/conversões e recusa tipo indefinido. Os treinos nativos curtos publicados comprovam execução, mas os diagnósticos MCMC não aprovam uso inferencial. ROI/mROI causal não são inferidos de contribuição/gasto. Consulte a [auditoria 0.3](MMM_AUDIT_REPORT.md), [matriz científica](MMM_VALIDATION_MATRIX.md), [qualidade dos dados](MMM_DATA_QUALITY.md) e [resultados executados](MMM_VALIDATION_RESULTS.md).
 
 Arquivos são acessados por IDs. Dados reais exigem MMM_ALLOW_REAL_DATA=true no host e referência de autorização explícita. Nenhum dado real foi usado nesta entrega. HTTP é opcional, autenticado, com papéis e diretório por usuário, escutando somente 127.0.0.1.
 

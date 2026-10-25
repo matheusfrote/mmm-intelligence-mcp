@@ -1,0 +1,5582 @@
+{
+  "backend": "google_meridian",
+  "transport": "stdio",
+  "calls": {
+    "generate_demo_dataset": {
+      "schema_version": "1.0",
+      "ok": true,
+      "exploratory": true,
+      "disclaimer": "Exploratory statistical association, not demonstrated causal attribution. Synthetic data do not establish market effectiveness. Simulations and any intervals are conditional on the model and assumptions; no real campaign or budget is changed.",
+      "data": {
+        "dataset_id": "demo-2436c73644904e50992a998ccb0b8227",
+        "rows": 156,
+        "synthetic": true,
+        "frequency": "weekly",
+        "sha256": "43ab06c77a76626f99ba135c46eef0b11696b53bc7fe4acb9a6d5319cef22e88",
+        "columns": [
+          "date",
+          "revenue",
+          "price_index",
+          "promotion",
+          "spend_search",
+          "spend_social",
+          "spend_video"
+        ],
+        "units": {
+          "spend": "synthetic_currency_per_period",
+          "target": "synthetic_revenue"
+        }
+      },
+      "error": null,
+      "warnings": []
+    },
+    "train_backend": {
+      "schema_version": "1.0",
+      "ok": true,
+      "exploratory": true,
+      "disclaimer": "Exploratory statistical association, not demonstrated causal attribution. Synthetic data do not establish market effectiveness. Simulations and any intervals are conditional on the model and assumptions; no real campaign or budget is changed.",
+      "data": {
+        "model_id": "google_meridian-731a1b3817e741beaaeef7addb345713",
+        "sha256": "6351db0595fb0ac195c4976e73f47ba556972b3f2a9aa1adbee57a20cb5c1907",
+        "backend": "google_meridian",
+        "backend_version": "2.1.0",
+        "native_format": "protobuf-binpb",
+        "request": {
+          "dataset_id": "demo-2436c73644904e50992a998ccb0b8227",
+          "media_columns": [
+            "spend_search",
+            "spend_social",
+            "spend_video"
+          ],
+          "control_columns": [
+            "price_index",
+            "promotion"
+          ],
+          "target_column": "revenue",
+          "date_column": "date",
+          "test_fraction": 0.2,
+          "warmup_periods": 8,
+          "backend": "google_meridian",
+          "model_id": null,
+          "draws": 50,
+          "tune": 50,
+          "chains": 2,
+          "seed": 42
+        },
+        "cutoff": 124,
+        "restore_verified": true,
+        "holdout_policy": {
+          "policy": "holdout_target_replaced_with_train_mean_before_native_loader",
+          "placeholder": 12242.789345230929,
+          "train_rows": 124,
+          "test_rows": 32,
+          "target_holdout_used_in_native_preprocessing": false,
+          "native_scaler_scope": "training_targets_and_train_only_holdout_placeholders",
+          "likelihood_exclusion": "native_HoldoutSpec"
+        },
+        "effective_configuration": {
+          "prior_source": "package_defaults_no_custom_priors",
+          "configured_priors": {
+            "knotValues": {
+              "distributionType": "Normal",
+              "parameters": {
+                "name": {
+                  "stringValue": "knot_values"
+                },
+                "loc": {
+                  "scalarValue": 0.0
+                },
+                "allow_nan_stats": {
+                  "intValue": 1
+                },
+                "scale": {
+                  "scalarValue": 5.0
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "tauGExclBaseline": {
+              "distributionType": "Normal",
+              "parameters": {
+                "name": {
+                  "stringValue": "tau_g_excl_baseline"
+                },
+                "loc": {
+                  "scalarValue": 0.0
+                },
+                "allow_nan_stats": {
+                  "intValue": 1
+                },
+                "scale": {
+                  "scalarValue": 5.0
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "betaM": {
+              "distributionType": "HalfNormal",
+              "parameters": {
+                "name": {
+                  "stringValue": "beta_m"
+                },
+                "scale": {
+                  "scalarValue": 5.0
+                },
+                "allow_nan_stats": {
+                  "intValue": 1
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "betaRf": {
+              "distributionType": "HalfNormal",
+              "parameters": {
+                "name": {
+                  "stringValue": "beta_rf"
+                },
+                "scale": {
+                  "scalarValue": 5.0
+                },
+                "allow_nan_stats": {
+                  "intValue": 1
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "etaM": {
+              "distributionType": "HalfNormal",
+              "parameters": {
+                "name": {
+                  "stringValue": "eta_m"
+                },
+                "scale": {
+                  "scalarValue": 1.0
+                },
+                "allow_nan_stats": {
+                  "intValue": 1
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "etaRf": {
+              "distributionType": "HalfNormal",
+              "parameters": {
+                "name": {
+                  "stringValue": "eta_rf"
+                },
+                "scale": {
+                  "scalarValue": 1.0
+                },
+                "allow_nan_stats": {
+                  "intValue": 1
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "gammaC": {
+              "distributionType": "Normal",
+              "parameters": {
+                "name": {
+                  "stringValue": "gamma_c"
+                },
+                "loc": {
+                  "scalarValue": 0.0
+                },
+                "allow_nan_stats": {
+                  "intValue": 1
+                },
+                "scale": {
+                  "scalarValue": 5.0
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "xiC": {
+              "distributionType": "HalfNormal",
+              "parameters": {
+                "name": {
+                  "stringValue": "xi_c"
+                },
+                "scale": {
+                  "scalarValue": 5.0
+                },
+                "allow_nan_stats": {
+                  "intValue": 1
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "alphaM": {
+              "distributionType": "Uniform",
+              "parameters": {
+                "name": {
+                  "stringValue": "alpha_m"
+                },
+                "high": {
+                  "scalarValue": 1.0
+                },
+                "low": {
+                  "scalarValue": 0.0
+                },
+                "allow_nan_stats": {
+                  "intValue": 1
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "alphaRf": {
+              "distributionType": "Uniform",
+              "parameters": {
+                "name": {
+                  "stringValue": "alpha_rf"
+                },
+                "high": {
+                  "scalarValue": 1.0
+                },
+                "low": {
+                  "scalarValue": 0.0
+                },
+                "allow_nan_stats": {
+                  "intValue": 1
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "ecM": {
+              "distributionType": "TruncatedNormal",
+              "parameters": {
+                "name": {
+                  "stringValue": "ec_m"
+                },
+                "high": {
+                  "scalarValue": 10.0
+                },
+                "loc": {
+                  "scalarValue": 0.8
+                },
+                "allow_nan_stats": {
+                  "intValue": 1
+                },
+                "low": {
+                  "scalarValue": 0.1
+                },
+                "scale": {
+                  "scalarValue": 0.8
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "ecRf": {
+              "distributionType": "TransformedDistribution",
+              "parameters": {
+                "name": {
+                  "stringValue": "ec_rf"
+                },
+                "parameters": {
+                  "noneValue": true
+                },
+                "kwargs_split_fn": {
+                  "functionParam": {
+                    "usesDefault": true
+                  }
+                },
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "LogNormal",
+                    "parameters": {
+                      "name": {
+                        "stringValue": "LogNormal"
+                      },
+                      "scale": {
+                        "scalarValue": 0.4
+                      },
+                      "allow_nan_stats": {
+                        "intValue": 1
+                      },
+                      "loc": {
+                        "scalarValue": 0.7
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "bijector": {
+                  "bijectorValue": {
+                    "bijectorType": "Shift",
+                    "parameters": {
+                      "name": {
+                        "stringValue": "shift"
+                      },
+                      "shift": {
+                        "scalarValue": 0.1
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "slopeM": {
+              "distributionType": "Deterministic",
+              "parameters": {
+                "name": {
+                  "stringValue": "slope_m"
+                },
+                "loc": {
+                  "scalarValue": 1.0
+                },
+                "atol": {
+                  "noneValue": true
+                },
+                "rtol": {
+                  "noneValue": true
+                },
+                "allow_nan_stats": {
+                  "intValue": 1
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "slopeRf": {
+              "distributionType": "LogNormal",
+              "parameters": {
+                "name": {
+                  "stringValue": "slope_rf"
+                },
+                "loc": {
+                  "scalarValue": 0.7
+                },
+                "allow_nan_stats": {
+                  "intValue": 1
+                },
+                "scale": {
+                  "scalarValue": 0.4
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "sigma": {
+              "distributionType": "HalfNormal",
+              "parameters": {
+                "name": {
+                  "stringValue": "sigma"
+                },
+                "scale": {
+                  "scalarValue": 5.0
+                },
+                "allow_nan_stats": {
+                  "intValue": 1
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "roiM": {
+              "distributionType": "LogNormal",
+              "parameters": {
+                "name": {
+                  "stringValue": "roi_m"
+                },
+                "loc": {
+                  "scalarValue": 0.2
+                },
+                "allow_nan_stats": {
+                  "intValue": 1
+                },
+                "scale": {
+                  "scalarValue": 0.9
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "roiRf": {
+              "distributionType": "LogNormal",
+              "parameters": {
+                "name": {
+                  "stringValue": "roi_rf"
+                },
+                "loc": {
+                  "scalarValue": 0.2
+                },
+                "allow_nan_stats": {
+                  "intValue": 1
+                },
+                "scale": {
+                  "scalarValue": 0.9
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "betaOm": {
+              "distributionType": "HalfNormal",
+              "parameters": {
+                "name": {
+                  "stringValue": "beta_om"
+                },
+                "scale": {
+                  "scalarValue": 5.0
+                },
+                "allow_nan_stats": {
+                  "intValue": 1
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "betaOrf": {
+              "distributionType": "HalfNormal",
+              "parameters": {
+                "name": {
+                  "stringValue": "beta_orf"
+                },
+                "scale": {
+                  "scalarValue": 5.0
+                },
+                "allow_nan_stats": {
+                  "intValue": 1
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "etaOm": {
+              "distributionType": "HalfNormal",
+              "parameters": {
+                "name": {
+                  "stringValue": "eta_om"
+                },
+                "scale": {
+                  "scalarValue": 1.0
+                },
+                "allow_nan_stats": {
+                  "intValue": 1
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "etaOrf": {
+              "distributionType": "HalfNormal",
+              "parameters": {
+                "name": {
+                  "stringValue": "eta_orf"
+                },
+                "scale": {
+                  "scalarValue": 1.0
+                },
+                "allow_nan_stats": {
+                  "intValue": 1
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "gammaN": {
+              "distributionType": "Normal",
+              "parameters": {
+                "name": {
+                  "stringValue": "gamma_n"
+                },
+                "loc": {
+                  "scalarValue": 0.0
+                },
+                "allow_nan_stats": {
+                  "intValue": 1
+                },
+                "scale": {
+                  "scalarValue": 5.0
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "xiN": {
+              "distributionType": "HalfNormal",
+              "parameters": {
+                "name": {
+                  "stringValue": "xi_n"
+                },
+                "scale": {
+                  "scalarValue": 5.0
+                },
+                "allow_nan_stats": {
+                  "intValue": 1
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "alphaOm": {
+              "distributionType": "Uniform",
+              "parameters": {
+                "name": {
+                  "stringValue": "alpha_om"
+                },
+                "high": {
+                  "scalarValue": 1.0
+                },
+                "low": {
+                  "scalarValue": 0.0
+                },
+                "allow_nan_stats": {
+                  "intValue": 1
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "alphaOrf": {
+              "distributionType": "Uniform",
+              "parameters": {
+                "name": {
+                  "stringValue": "alpha_orf"
+                },
+                "high": {
+                  "scalarValue": 1.0
+                },
+                "low": {
+                  "scalarValue": 0.0
+                },
+                "allow_nan_stats": {
+                  "intValue": 1
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "ecOm": {
+              "distributionType": "TruncatedNormal",
+              "parameters": {
+                "name": {
+                  "stringValue": "ec_om"
+                },
+                "high": {
+                  "scalarValue": 10.0
+                },
+                "loc": {
+                  "scalarValue": 0.8
+                },
+                "allow_nan_stats": {
+                  "intValue": 1
+                },
+                "low": {
+                  "scalarValue": 0.1
+                },
+                "scale": {
+                  "scalarValue": 0.8
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "ecOrf": {
+              "distributionType": "TransformedDistribution",
+              "parameters": {
+                "name": {
+                  "stringValue": "ec_orf"
+                },
+                "parameters": {
+                  "noneValue": true
+                },
+                "kwargs_split_fn": {
+                  "functionParam": {
+                    "usesDefault": true
+                  }
+                },
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "LogNormal",
+                    "parameters": {
+                      "name": {
+                        "stringValue": "LogNormal"
+                      },
+                      "scale": {
+                        "scalarValue": 0.4
+                      },
+                      "allow_nan_stats": {
+                        "intValue": 1
+                      },
+                      "loc": {
+                        "scalarValue": 0.7
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "bijector": {
+                  "bijectorValue": {
+                    "bijectorType": "Shift",
+                    "parameters": {
+                      "name": {
+                        "stringValue": "shift"
+                      },
+                      "shift": {
+                        "scalarValue": 0.1
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "slopeOm": {
+              "distributionType": "Deterministic",
+              "parameters": {
+                "name": {
+                  "stringValue": "slope_om"
+                },
+                "loc": {
+                  "scalarValue": 1.0
+                },
+                "atol": {
+                  "noneValue": true
+                },
+                "rtol": {
+                  "noneValue": true
+                },
+                "allow_nan_stats": {
+                  "intValue": 1
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "slopeOrf": {
+              "distributionType": "LogNormal",
+              "parameters": {
+                "name": {
+                  "stringValue": "slope_orf"
+                },
+                "loc": {
+                  "scalarValue": 0.7
+                },
+                "allow_nan_stats": {
+                  "intValue": 1
+                },
+                "scale": {
+                  "scalarValue": 0.4
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "mroiM": {
+              "distributionType": "LogNormal",
+              "parameters": {
+                "name": {
+                  "stringValue": "mroi_m"
+                },
+                "loc": {
+                  "scalarValue": 0.0
+                },
+                "allow_nan_stats": {
+                  "intValue": 1
+                },
+                "scale": {
+                  "scalarValue": 0.5
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "mroiRf": {
+              "distributionType": "LogNormal",
+              "parameters": {
+                "name": {
+                  "stringValue": "mroi_rf"
+                },
+                "loc": {
+                  "scalarValue": 0.0
+                },
+                "allow_nan_stats": {
+                  "intValue": 1
+                },
+                "scale": {
+                  "scalarValue": 0.5
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "contributionM": {
+              "distributionType": "Beta",
+              "parameters": {
+                "concentration0": {
+                  "scalarValue": 99.0
+                },
+                "name": {
+                  "stringValue": "contribution_m"
+                },
+                "validate_args": {
+                  "intValue": 0
+                },
+                "allow_nan_stats": {
+                  "intValue": 1
+                },
+                "concentration1": {
+                  "scalarValue": 1.0
+                },
+                "force_probs_to_zero_outside_support": {
+                  "intValue": 0
+                }
+              }
+            },
+            "contributionRf": {
+              "distributionType": "Beta",
+              "parameters": {
+                "concentration0": {
+                  "scalarValue": 99.0
+                },
+                "name": {
+                  "stringValue": "contribution_rf"
+                },
+                "validate_args": {
+                  "intValue": 0
+                },
+                "allow_nan_stats": {
+                  "intValue": 1
+                },
+                "concentration1": {
+                  "scalarValue": 1.0
+                },
+                "force_probs_to_zero_outside_support": {
+                  "intValue": 0
+                }
+              }
+            },
+            "contributionOm": {
+              "distributionType": "Beta",
+              "parameters": {
+                "concentration0": {
+                  "scalarValue": 99.0
+                },
+                "name": {
+                  "stringValue": "contribution_om"
+                },
+                "validate_args": {
+                  "intValue": 0
+                },
+                "allow_nan_stats": {
+                  "intValue": 1
+                },
+                "concentration1": {
+                  "scalarValue": 1.0
+                },
+                "force_probs_to_zero_outside_support": {
+                  "intValue": 0
+                }
+              }
+            },
+            "contributionOrf": {
+              "distributionType": "Beta",
+              "parameters": {
+                "concentration0": {
+                  "scalarValue": 99.0
+                },
+                "name": {
+                  "stringValue": "contribution_orf"
+                },
+                "validate_args": {
+                  "intValue": 0
+                },
+                "allow_nan_stats": {
+                  "intValue": 1
+                },
+                "concentration1": {
+                  "scalarValue": 1.0
+                },
+                "force_probs_to_zero_outside_support": {
+                  "intValue": 0
+                }
+              }
+            },
+            "contributionN": {
+              "distributionType": "TruncatedNormal",
+              "parameters": {
+                "name": {
+                  "stringValue": "contribution_n"
+                },
+                "high": {
+                  "scalarValue": 1.0
+                },
+                "loc": {
+                  "scalarValue": 0.0
+                },
+                "allow_nan_stats": {
+                  "intValue": 1
+                },
+                "low": {
+                  "scalarValue": -1.0
+                },
+                "scale": {
+                  "scalarValue": 0.1
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            }
+          },
+          "effective_broadcast_priors": {
+            "knotValues": {
+              "distributionType": "BatchBroadcast",
+              "parameters": {
+                "name": {
+                  "stringValue": "knot_values"
+                },
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "Normal",
+                    "parameters": {
+                      "name": {
+                        "stringValue": "knot_values"
+                      },
+                      "scale": {
+                        "scalarValue": 5.0
+                      },
+                      "allow_nan_stats": {
+                        "intValue": 1
+                      },
+                      "loc": {
+                        "scalarValue": 0.0
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "with_shape": {
+                  "intValue": 4
+                },
+                "to_shape": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "tauGExclBaseline": {
+              "distributionType": "BatchBroadcast",
+              "parameters": {
+                "name": {
+                  "stringValue": "tau_g_excl_baseline"
+                },
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "Deterministic",
+                    "parameters": {
+                      "name": {
+                        "stringValue": "tau_g_excl_baseline"
+                      },
+                      "loc": {
+                        "tensorValue": {
+                          "dtype": "DT_DOUBLE",
+                          "tensorShape": {},
+                          "doubleVal": [
+                            0.0
+                          ]
+                        }
+                      },
+                      "allow_nan_stats": {
+                        "intValue": 1
+                      },
+                      "rtol": {
+                        "noneValue": true
+                      },
+                      "atol": {
+                        "noneValue": true
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "with_shape": {
+                  "intValue": 0
+                },
+                "to_shape": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "betaM": {
+              "distributionType": "BatchBroadcast",
+              "parameters": {
+                "name": {
+                  "stringValue": "beta_m"
+                },
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "HalfNormal",
+                    "parameters": {
+                      "name": {
+                        "stringValue": "beta_m"
+                      },
+                      "scale": {
+                        "scalarValue": 5.0
+                      },
+                      "allow_nan_stats": {
+                        "intValue": 1
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "with_shape": {
+                  "intValue": 3
+                },
+                "to_shape": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "betaRf": {
+              "distributionType": "BatchBroadcast",
+              "parameters": {
+                "name": {
+                  "stringValue": "beta_rf"
+                },
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "HalfNormal",
+                    "parameters": {
+                      "name": {
+                        "stringValue": "beta_rf"
+                      },
+                      "scale": {
+                        "scalarValue": 5.0
+                      },
+                      "allow_nan_stats": {
+                        "intValue": 1
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "with_shape": {
+                  "intValue": 0
+                },
+                "to_shape": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "etaM": {
+              "distributionType": "BatchBroadcast",
+              "parameters": {
+                "name": {
+                  "stringValue": "eta_m"
+                },
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "Deterministic",
+                    "parameters": {
+                      "name": {
+                        "stringValue": "eta_m"
+                      },
+                      "loc": {
+                        "tensorValue": {
+                          "dtype": "DT_DOUBLE",
+                          "tensorShape": {},
+                          "doubleVal": [
+                            0.0
+                          ]
+                        }
+                      },
+                      "allow_nan_stats": {
+                        "intValue": 1
+                      },
+                      "rtol": {
+                        "noneValue": true
+                      },
+                      "atol": {
+                        "noneValue": true
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "with_shape": {
+                  "intValue": 3
+                },
+                "to_shape": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "etaRf": {
+              "distributionType": "BatchBroadcast",
+              "parameters": {
+                "name": {
+                  "stringValue": "eta_rf"
+                },
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "Deterministic",
+                    "parameters": {
+                      "name": {
+                        "stringValue": "eta_rf"
+                      },
+                      "loc": {
+                        "tensorValue": {
+                          "dtype": "DT_DOUBLE",
+                          "tensorShape": {},
+                          "doubleVal": [
+                            0.0
+                          ]
+                        }
+                      },
+                      "allow_nan_stats": {
+                        "intValue": 1
+                      },
+                      "rtol": {
+                        "noneValue": true
+                      },
+                      "atol": {
+                        "noneValue": true
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "with_shape": {
+                  "intValue": 0
+                },
+                "to_shape": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "gammaC": {
+              "distributionType": "BatchBroadcast",
+              "parameters": {
+                "name": {
+                  "stringValue": "gamma_c"
+                },
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "Normal",
+                    "parameters": {
+                      "name": {
+                        "stringValue": "gamma_c"
+                      },
+                      "scale": {
+                        "scalarValue": 5.0
+                      },
+                      "allow_nan_stats": {
+                        "intValue": 1
+                      },
+                      "loc": {
+                        "scalarValue": 0.0
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "with_shape": {
+                  "intValue": 2
+                },
+                "to_shape": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "xiC": {
+              "distributionType": "BatchBroadcast",
+              "parameters": {
+                "name": {
+                  "stringValue": "xi_c"
+                },
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "Deterministic",
+                    "parameters": {
+                      "name": {
+                        "stringValue": "xi_c"
+                      },
+                      "loc": {
+                        "tensorValue": {
+                          "dtype": "DT_DOUBLE",
+                          "tensorShape": {},
+                          "doubleVal": [
+                            0.0
+                          ]
+                        }
+                      },
+                      "allow_nan_stats": {
+                        "intValue": 1
+                      },
+                      "rtol": {
+                        "noneValue": true
+                      },
+                      "atol": {
+                        "noneValue": true
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "with_shape": {
+                  "intValue": 2
+                },
+                "to_shape": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "alphaM": {
+              "distributionType": "BatchBroadcast",
+              "parameters": {
+                "name": {
+                  "stringValue": "alpha_m"
+                },
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "Uniform",
+                    "parameters": {
+                      "name": {
+                        "stringValue": "alpha_m"
+                      },
+                      "high": {
+                        "scalarValue": 1.0
+                      },
+                      "low": {
+                        "scalarValue": 0.0
+                      },
+                      "allow_nan_stats": {
+                        "intValue": 1
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "with_shape": {
+                  "intValue": 3
+                },
+                "to_shape": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "alphaRf": {
+              "distributionType": "BatchBroadcast",
+              "parameters": {
+                "name": {
+                  "stringValue": "alpha_rf"
+                },
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "Uniform",
+                    "parameters": {
+                      "name": {
+                        "stringValue": "alpha_rf"
+                      },
+                      "high": {
+                        "scalarValue": 1.0
+                      },
+                      "low": {
+                        "scalarValue": 0.0
+                      },
+                      "allow_nan_stats": {
+                        "intValue": 1
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "with_shape": {
+                  "intValue": 0
+                },
+                "to_shape": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "ecM": {
+              "distributionType": "BatchBroadcast",
+              "parameters": {
+                "name": {
+                  "stringValue": "ec_m"
+                },
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "TruncatedNormal",
+                    "parameters": {
+                      "name": {
+                        "stringValue": "ec_m"
+                      },
+                      "high": {
+                        "scalarValue": 10.0
+                      },
+                      "scale": {
+                        "scalarValue": 0.8
+                      },
+                      "allow_nan_stats": {
+                        "intValue": 1
+                      },
+                      "low": {
+                        "scalarValue": 0.1
+                      },
+                      "loc": {
+                        "scalarValue": 0.8
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "with_shape": {
+                  "intValue": 3
+                },
+                "to_shape": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "ecRf": {
+              "distributionType": "BatchBroadcast",
+              "parameters": {
+                "name": {
+                  "stringValue": "ec_rf"
+                },
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "TransformedDistribution",
+                    "parameters": {
+                      "name": {
+                        "stringValue": "ec_rf"
+                      },
+                      "parameters": {
+                        "noneValue": true
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      },
+                      "distribution": {
+                        "distributionValue": {
+                          "distributionType": "LogNormal",
+                          "parameters": {
+                            "name": {
+                              "stringValue": "LogNormal"
+                            },
+                            "loc": {
+                              "scalarValue": 0.7
+                            },
+                            "allow_nan_stats": {
+                              "intValue": 1
+                            },
+                            "scale": {
+                              "scalarValue": 0.4
+                            },
+                            "validate_args": {
+                              "intValue": 0
+                            }
+                          }
+                        }
+                      },
+                      "bijector": {
+                        "bijectorValue": {
+                          "bijectorType": "Shift",
+                          "parameters": {
+                            "name": {
+                              "stringValue": "shift"
+                            },
+                            "shift": {
+                              "scalarValue": 0.1
+                            },
+                            "validate_args": {
+                              "intValue": 0
+                            }
+                          }
+                        }
+                      },
+                      "kwargs_split_fn": {
+                        "functionParam": {
+                          "usesDefault": true
+                        }
+                      }
+                    }
+                  }
+                },
+                "with_shape": {
+                  "intValue": 0
+                },
+                "to_shape": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "slopeM": {
+              "distributionType": "BatchBroadcast",
+              "parameters": {
+                "name": {
+                  "stringValue": "slope_m"
+                },
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "Deterministic",
+                    "parameters": {
+                      "name": {
+                        "stringValue": "slope_m"
+                      },
+                      "loc": {
+                        "scalarValue": 1.0
+                      },
+                      "allow_nan_stats": {
+                        "intValue": 1
+                      },
+                      "rtol": {
+                        "noneValue": true
+                      },
+                      "atol": {
+                        "noneValue": true
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "with_shape": {
+                  "intValue": 3
+                },
+                "to_shape": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "slopeRf": {
+              "distributionType": "BatchBroadcast",
+              "parameters": {
+                "name": {
+                  "stringValue": "slope_rf"
+                },
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "LogNormal",
+                    "parameters": {
+                      "name": {
+                        "stringValue": "slope_rf"
+                      },
+                      "scale": {
+                        "scalarValue": 0.4
+                      },
+                      "allow_nan_stats": {
+                        "intValue": 1
+                      },
+                      "loc": {
+                        "scalarValue": 0.7
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "with_shape": {
+                  "intValue": 0
+                },
+                "to_shape": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "sigma": {
+              "distributionType": "BatchBroadcast",
+              "parameters": {
+                "name": {
+                  "stringValue": "sigma"
+                },
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "HalfNormal",
+                    "parameters": {
+                      "name": {
+                        "stringValue": "sigma"
+                      },
+                      "scale": {
+                        "scalarValue": 5.0
+                      },
+                      "allow_nan_stats": {
+                        "intValue": 1
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "with_shape": {
+                  "listValue": {}
+                },
+                "to_shape": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "roiM": {
+              "distributionType": "BatchBroadcast",
+              "parameters": {
+                "name": {
+                  "stringValue": "roi_m"
+                },
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "LogNormal",
+                    "parameters": {
+                      "name": {
+                        "stringValue": "roi_m"
+                      },
+                      "scale": {
+                        "scalarValue": 0.9
+                      },
+                      "allow_nan_stats": {
+                        "intValue": 1
+                      },
+                      "loc": {
+                        "scalarValue": 0.2
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "with_shape": {
+                  "intValue": 3
+                },
+                "to_shape": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "roiRf": {
+              "distributionType": "BatchBroadcast",
+              "parameters": {
+                "name": {
+                  "stringValue": "roi_rf"
+                },
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "LogNormal",
+                    "parameters": {
+                      "name": {
+                        "stringValue": "roi_rf"
+                      },
+                      "scale": {
+                        "scalarValue": 0.9
+                      },
+                      "allow_nan_stats": {
+                        "intValue": 1
+                      },
+                      "loc": {
+                        "scalarValue": 0.2
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "with_shape": {
+                  "intValue": 0
+                },
+                "to_shape": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "betaOm": {
+              "distributionType": "BatchBroadcast",
+              "parameters": {
+                "name": {
+                  "stringValue": "beta_om"
+                },
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "HalfNormal",
+                    "parameters": {
+                      "name": {
+                        "stringValue": "beta_om"
+                      },
+                      "scale": {
+                        "scalarValue": 5.0
+                      },
+                      "allow_nan_stats": {
+                        "intValue": 1
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "with_shape": {
+                  "intValue": 0
+                },
+                "to_shape": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "betaOrf": {
+              "distributionType": "BatchBroadcast",
+              "parameters": {
+                "name": {
+                  "stringValue": "beta_orf"
+                },
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "HalfNormal",
+                    "parameters": {
+                      "name": {
+                        "stringValue": "beta_orf"
+                      },
+                      "scale": {
+                        "scalarValue": 5.0
+                      },
+                      "allow_nan_stats": {
+                        "intValue": 1
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "with_shape": {
+                  "intValue": 0
+                },
+                "to_shape": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "etaOm": {
+              "distributionType": "BatchBroadcast",
+              "parameters": {
+                "name": {
+                  "stringValue": "eta_om"
+                },
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "Deterministic",
+                    "parameters": {
+                      "name": {
+                        "stringValue": "eta_om"
+                      },
+                      "loc": {
+                        "tensorValue": {
+                          "dtype": "DT_DOUBLE",
+                          "tensorShape": {},
+                          "doubleVal": [
+                            0.0
+                          ]
+                        }
+                      },
+                      "allow_nan_stats": {
+                        "intValue": 1
+                      },
+                      "rtol": {
+                        "noneValue": true
+                      },
+                      "atol": {
+                        "noneValue": true
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "with_shape": {
+                  "intValue": 0
+                },
+                "to_shape": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "etaOrf": {
+              "distributionType": "BatchBroadcast",
+              "parameters": {
+                "name": {
+                  "stringValue": "eta_orf"
+                },
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "Deterministic",
+                    "parameters": {
+                      "name": {
+                        "stringValue": "eta_orf"
+                      },
+                      "loc": {
+                        "tensorValue": {
+                          "dtype": "DT_DOUBLE",
+                          "tensorShape": {},
+                          "doubleVal": [
+                            0.0
+                          ]
+                        }
+                      },
+                      "allow_nan_stats": {
+                        "intValue": 1
+                      },
+                      "rtol": {
+                        "noneValue": true
+                      },
+                      "atol": {
+                        "noneValue": true
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "with_shape": {
+                  "intValue": 0
+                },
+                "to_shape": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "gammaN": {
+              "distributionType": "BatchBroadcast",
+              "parameters": {
+                "name": {
+                  "stringValue": "gamma_n"
+                },
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "Normal",
+                    "parameters": {
+                      "name": {
+                        "stringValue": "gamma_n"
+                      },
+                      "scale": {
+                        "scalarValue": 5.0
+                      },
+                      "allow_nan_stats": {
+                        "intValue": 1
+                      },
+                      "loc": {
+                        "scalarValue": 0.0
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "with_shape": {
+                  "intValue": 0
+                },
+                "to_shape": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "xiN": {
+              "distributionType": "BatchBroadcast",
+              "parameters": {
+                "name": {
+                  "stringValue": "xi_n"
+                },
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "Deterministic",
+                    "parameters": {
+                      "name": {
+                        "stringValue": "xi_n"
+                      },
+                      "loc": {
+                        "tensorValue": {
+                          "dtype": "DT_DOUBLE",
+                          "tensorShape": {},
+                          "doubleVal": [
+                            0.0
+                          ]
+                        }
+                      },
+                      "allow_nan_stats": {
+                        "intValue": 1
+                      },
+                      "rtol": {
+                        "noneValue": true
+                      },
+                      "atol": {
+                        "noneValue": true
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "with_shape": {
+                  "intValue": 0
+                },
+                "to_shape": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "alphaOm": {
+              "distributionType": "BatchBroadcast",
+              "parameters": {
+                "name": {
+                  "stringValue": "alpha_om"
+                },
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "Uniform",
+                    "parameters": {
+                      "name": {
+                        "stringValue": "alpha_om"
+                      },
+                      "high": {
+                        "scalarValue": 1.0
+                      },
+                      "low": {
+                        "scalarValue": 0.0
+                      },
+                      "allow_nan_stats": {
+                        "intValue": 1
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "with_shape": {
+                  "intValue": 0
+                },
+                "to_shape": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "alphaOrf": {
+              "distributionType": "BatchBroadcast",
+              "parameters": {
+                "name": {
+                  "stringValue": "alpha_orf"
+                },
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "Uniform",
+                    "parameters": {
+                      "name": {
+                        "stringValue": "alpha_orf"
+                      },
+                      "high": {
+                        "scalarValue": 1.0
+                      },
+                      "low": {
+                        "scalarValue": 0.0
+                      },
+                      "allow_nan_stats": {
+                        "intValue": 1
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "with_shape": {
+                  "intValue": 0
+                },
+                "to_shape": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "ecOm": {
+              "distributionType": "BatchBroadcast",
+              "parameters": {
+                "name": {
+                  "stringValue": "ec_om"
+                },
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "TruncatedNormal",
+                    "parameters": {
+                      "name": {
+                        "stringValue": "ec_om"
+                      },
+                      "high": {
+                        "scalarValue": 10.0
+                      },
+                      "scale": {
+                        "scalarValue": 0.8
+                      },
+                      "allow_nan_stats": {
+                        "intValue": 1
+                      },
+                      "low": {
+                        "scalarValue": 0.1
+                      },
+                      "loc": {
+                        "scalarValue": 0.8
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "with_shape": {
+                  "intValue": 0
+                },
+                "to_shape": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "ecOrf": {
+              "distributionType": "BatchBroadcast",
+              "parameters": {
+                "name": {
+                  "stringValue": "ec_orf"
+                },
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "TransformedDistribution",
+                    "parameters": {
+                      "name": {
+                        "stringValue": "ec_orf"
+                      },
+                      "parameters": {
+                        "noneValue": true
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      },
+                      "distribution": {
+                        "distributionValue": {
+                          "distributionType": "LogNormal",
+                          "parameters": {
+                            "name": {
+                              "stringValue": "LogNormal"
+                            },
+                            "loc": {
+                              "scalarValue": 0.7
+                            },
+                            "allow_nan_stats": {
+                              "intValue": 1
+                            },
+                            "scale": {
+                              "scalarValue": 0.4
+                            },
+                            "validate_args": {
+                              "intValue": 0
+                            }
+                          }
+                        }
+                      },
+                      "bijector": {
+                        "bijectorValue": {
+                          "bijectorType": "Shift",
+                          "parameters": {
+                            "name": {
+                              "stringValue": "shift"
+                            },
+                            "shift": {
+                              "scalarValue": 0.1
+                            },
+                            "validate_args": {
+                              "intValue": 0
+                            }
+                          }
+                        }
+                      },
+                      "kwargs_split_fn": {
+                        "functionParam": {
+                          "usesDefault": true
+                        }
+                      }
+                    }
+                  }
+                },
+                "with_shape": {
+                  "intValue": 0
+                },
+                "to_shape": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "slopeOm": {
+              "distributionType": "BatchBroadcast",
+              "parameters": {
+                "name": {
+                  "stringValue": "slope_om"
+                },
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "Deterministic",
+                    "parameters": {
+                      "name": {
+                        "stringValue": "slope_om"
+                      },
+                      "loc": {
+                        "scalarValue": 1.0
+                      },
+                      "allow_nan_stats": {
+                        "intValue": 1
+                      },
+                      "rtol": {
+                        "noneValue": true
+                      },
+                      "atol": {
+                        "noneValue": true
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "with_shape": {
+                  "intValue": 0
+                },
+                "to_shape": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "slopeOrf": {
+              "distributionType": "BatchBroadcast",
+              "parameters": {
+                "name": {
+                  "stringValue": "slope_orf"
+                },
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "LogNormal",
+                    "parameters": {
+                      "name": {
+                        "stringValue": "slope_orf"
+                      },
+                      "scale": {
+                        "scalarValue": 0.4
+                      },
+                      "allow_nan_stats": {
+                        "intValue": 1
+                      },
+                      "loc": {
+                        "scalarValue": 0.7
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "with_shape": {
+                  "intValue": 0
+                },
+                "to_shape": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "mroiM": {
+              "distributionType": "BatchBroadcast",
+              "parameters": {
+                "name": {
+                  "stringValue": "mroi_m"
+                },
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "LogNormal",
+                    "parameters": {
+                      "name": {
+                        "stringValue": "mroi_m"
+                      },
+                      "scale": {
+                        "scalarValue": 0.5
+                      },
+                      "allow_nan_stats": {
+                        "intValue": 1
+                      },
+                      "loc": {
+                        "scalarValue": 0.0
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "with_shape": {
+                  "intValue": 3
+                },
+                "to_shape": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "mroiRf": {
+              "distributionType": "BatchBroadcast",
+              "parameters": {
+                "name": {
+                  "stringValue": "mroi_rf"
+                },
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "LogNormal",
+                    "parameters": {
+                      "name": {
+                        "stringValue": "mroi_rf"
+                      },
+                      "scale": {
+                        "scalarValue": 0.5
+                      },
+                      "allow_nan_stats": {
+                        "intValue": 1
+                      },
+                      "loc": {
+                        "scalarValue": 0.0
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "with_shape": {
+                  "intValue": 0
+                },
+                "to_shape": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "contributionM": {
+              "distributionType": "BatchBroadcast",
+              "parameters": {
+                "name": {
+                  "stringValue": "contribution_m"
+                },
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "Beta",
+                    "parameters": {
+                      "name": {
+                        "stringValue": "contribution_m"
+                      },
+                      "concentration0": {
+                        "scalarValue": 99.0
+                      },
+                      "force_probs_to_zero_outside_support": {
+                        "intValue": 0
+                      },
+                      "allow_nan_stats": {
+                        "intValue": 1
+                      },
+                      "concentration1": {
+                        "scalarValue": 1.0
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "with_shape": {
+                  "intValue": 3
+                },
+                "to_shape": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "contributionRf": {
+              "distributionType": "BatchBroadcast",
+              "parameters": {
+                "name": {
+                  "stringValue": "contribution_rf"
+                },
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "Beta",
+                    "parameters": {
+                      "name": {
+                        "stringValue": "contribution_rf"
+                      },
+                      "concentration0": {
+                        "scalarValue": 99.0
+                      },
+                      "force_probs_to_zero_outside_support": {
+                        "intValue": 0
+                      },
+                      "allow_nan_stats": {
+                        "intValue": 1
+                      },
+                      "concentration1": {
+                        "scalarValue": 1.0
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "with_shape": {
+                  "intValue": 0
+                },
+                "to_shape": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "contributionOm": {
+              "distributionType": "BatchBroadcast",
+              "parameters": {
+                "name": {
+                  "stringValue": "contribution_om"
+                },
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "Beta",
+                    "parameters": {
+                      "name": {
+                        "stringValue": "contribution_om"
+                      },
+                      "concentration0": {
+                        "scalarValue": 99.0
+                      },
+                      "force_probs_to_zero_outside_support": {
+                        "intValue": 0
+                      },
+                      "allow_nan_stats": {
+                        "intValue": 1
+                      },
+                      "concentration1": {
+                        "scalarValue": 1.0
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "with_shape": {
+                  "intValue": 0
+                },
+                "to_shape": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "contributionOrf": {
+              "distributionType": "BatchBroadcast",
+              "parameters": {
+                "name": {
+                  "stringValue": "contribution_orf"
+                },
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "Beta",
+                    "parameters": {
+                      "name": {
+                        "stringValue": "contribution_orf"
+                      },
+                      "concentration0": {
+                        "scalarValue": 99.0
+                      },
+                      "force_probs_to_zero_outside_support": {
+                        "intValue": 0
+                      },
+                      "allow_nan_stats": {
+                        "intValue": 1
+                      },
+                      "concentration1": {
+                        "scalarValue": 1.0
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "with_shape": {
+                  "intValue": 0
+                },
+                "to_shape": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "contributionN": {
+              "distributionType": "BatchBroadcast",
+              "parameters": {
+                "name": {
+                  "stringValue": "contribution_n"
+                },
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "TruncatedNormal",
+                    "parameters": {
+                      "name": {
+                        "stringValue": "contribution_n"
+                      },
+                      "high": {
+                        "scalarValue": 1.0
+                      },
+                      "scale": {
+                        "scalarValue": 0.1
+                      },
+                      "allow_nan_stats": {
+                        "intValue": 1
+                      },
+                      "low": {
+                        "scalarValue": -1.0
+                      },
+                      "loc": {
+                        "scalarValue": 0.0
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "with_shape": {
+                  "intValue": 0
+                },
+                "to_shape": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            }
+          },
+          "media_prior_type": null,
+          "target_type": "revenue",
+          "interval_type": "conditional_expected_outcome"
+        },
+        "test": {
+          "dates": [
+            "2025-05-19",
+            "2025-05-26",
+            "2025-06-02",
+            "2025-06-09",
+            "2025-06-16",
+            "2025-06-23",
+            "2025-06-30",
+            "2025-07-07",
+            "2025-07-14",
+            "2025-07-21",
+            "2025-07-28",
+            "2025-08-04",
+            "2025-08-11",
+            "2025-08-18",
+            "2025-08-25",
+            "2025-09-01",
+            "2025-09-08",
+            "2025-09-15",
+            "2025-09-22",
+            "2025-09-29",
+            "2025-10-06",
+            "2025-10-13",
+            "2025-10-20",
+            "2025-10-27",
+            "2025-11-03",
+            "2025-11-10",
+            "2025-11-17",
+            "2025-11-24",
+            "2025-12-01",
+            "2025-12-08",
+            "2025-12-15",
+            "2025-12-22"
+          ],
+          "mean": [
+            12354.409338133632,
+            12636.37144327438,
+            13119.21865138414,
+            13816.918076993863,
+            13319.810961801548,
+            13320.215976198024,
+            13760.559564918487,
+            14612.113630898373,
+            13997.605789828704,
+            14647.1712494186,
+            14013.681370190201,
+            14344.214656519016,
+            14168.865011316915,
+            13934.223140796757,
+            13725.106996076247,
+            12725.847376387099,
+            12796.260301929191,
+            13292.078545672517,
+            13606.404019064375,
+            13785.428792623468,
+            14399.273021038915,
+            14366.007490463306,
+            14113.778411237325,
+            14080.534670950823,
+            13826.835390217519,
+            14044.397497161151,
+            13397.085176758328,
+            13710.6301001894,
+            14622.354643019704,
+            13785.852215658666,
+            14168.92790759363,
+            14163.198022719696
+          ],
+          "lower_90": [
+            12028.247166056724,
+            12361.733213054402,
+            12756.49380636518,
+            13477.729281981963,
+            13046.255501653557,
+            13027.745306588764,
+            13347.681197003078,
+            14225.200465558439,
+            13569.349369200803,
+            14243.2854264633,
+            13564.498367635655,
+            13945.437595772482,
+            13760.271186168256,
+            13488.25189434404,
+            13242.471365977215,
+            12237.44902291696,
+            12341.94428787234,
+            12868.477612692017,
+            13194.735935784754,
+            13241.413855493018,
+            13764.127366576002,
+            13887.493236821432,
+            13610.630392183733,
+            13571.191695474045,
+            13295.689427050438,
+            13383.799209265631,
+            12878.730208678046,
+            13149.774412420995,
+            13880.69621997562,
+            13115.548598566269,
+            13402.630410364261,
+            13386.241510674703
+          ],
+          "upper_90": [
+            12615.209805081662,
+            12916.362580215207,
+            13354.790055959867,
+            14084.611249535918,
+            13567.301009637215,
+            13557.833241524551,
+            14063.471843178291,
+            14971.688072098337,
+            14336.49963565072,
+            14993.017833449461,
+            14367.08811538282,
+            14690.129020913264,
+            14519.456529657047,
+            14294.721552437913,
+            14104.79114221566,
+            13085.790572042855,
+            13157.737217178252,
+            13686.76611569641,
+            14008.347787844095,
+            14168.516720954776,
+            14870.340215102064,
+            14811.508896009027,
+            14584.37866256849,
+            14522.721928427993,
+            14231.892246557487,
+            14584.38783916105,
+            13878.47290323264,
+            14261.876842867201,
+            15227.81502722328,
+            14400.508005033287,
+            14753.647332494687,
+            14730.79902272913
+          ],
+          "samples": 100,
+          "interval_type": "conditional_expected_outcome",
+          "interval_level": 0.9,
+          "metrics": {
+            "mae": 1844.9961828027463,
+            "wape_percent": 15.471037629127473,
+            "r2": -4.901420937822156
+          }
+        },
+        "diagnostics": {
+          "chains": 2,
+          "draws": 50,
+          "convergence_certified": false,
+          "r_hat_max": 1.2570684320503405,
+          "r_hat_available": true,
+          "r_hat_undefined_count": 9,
+          "ess_bulk_min": 6.5907124941944835,
+          "ess_bulk_available": true,
+          "ess_bulk_undefined_count": 0,
+          "ess_tail_min": 13.589418372893652,
+          "ess_tail_available": true,
+          "ess_tail_undefined_count": 0,
+          "summary_available": true,
+          "divergences": 1,
+          "divergences_available": true
+        },
+        "warnings": [
+          "SHORT_CHAINS: functional test does not establish convergence",
+          "SPEND_PROXY: synthetic spend used as exposure proxy",
+          "Holdout target uses train-only placeholders in native preprocessing",
+          "No demonstrated causal attribution"
+        ],
+        "execution_limits": {
+          "platform": "nt",
+          "wall_timeout_seconds": 900,
+          "numeric_threads": 1,
+          "cpu_percent": 50,
+          "memory_mb": 4096,
+          "process_tree_cleanup": true
+        },
+        "dataset_id": "demo-2436c73644904e50992a998ccb0b8227",
+        "synthetic": true,
+        "exploratory": true,
+        "dataset_sha256": "43ab06c77a76626f99ba135c46eef0b11696b53bc7fe4acb9a6d5319cef22e88"
+      },
+      "error": null,
+      "warnings": [
+        "SHORT_CHAINS: functional test does not establish convergence",
+        "SPEND_PROXY: synthetic spend used as exposure proxy",
+        "Holdout target uses train-only placeholders in native preprocessing",
+        "No demonstrated causal attribution"
+      ]
+    },
+    "get_backend_model": {
+      "schema_version": "1.0",
+      "ok": true,
+      "exploratory": true,
+      "disclaimer": "Exploratory statistical association, not demonstrated causal attribution. Synthetic data do not establish market effectiveness. Simulations and any intervals are conditional on the model and assumptions; no real campaign or budget is changed.",
+      "data": {
+        "backend": "google_meridian",
+        "backend_version": "2.1.0",
+        "cutoff": 124,
+        "dataset_id": "demo-2436c73644904e50992a998ccb0b8227",
+        "dataset_sha256": "43ab06c77a76626f99ba135c46eef0b11696b53bc7fe4acb9a6d5319cef22e88",
+        "diagnostics": {
+          "chains": 2,
+          "convergence_certified": false,
+          "divergences": 1,
+          "divergences_available": true,
+          "draws": 50,
+          "ess_bulk_available": true,
+          "ess_bulk_min": 6.5907124941944835,
+          "ess_bulk_undefined_count": 0,
+          "ess_tail_available": true,
+          "ess_tail_min": 13.589418372893652,
+          "ess_tail_undefined_count": 0,
+          "r_hat_available": true,
+          "r_hat_max": 1.2570684320503405,
+          "r_hat_undefined_count": 9,
+          "summary_available": true
+        },
+        "effective_configuration": {
+          "configured_priors": {
+            "alphaM": {
+              "distributionType": "Uniform",
+              "parameters": {
+                "allow_nan_stats": {
+                  "intValue": 1
+                },
+                "high": {
+                  "scalarValue": 1.0
+                },
+                "low": {
+                  "scalarValue": 0.0
+                },
+                "name": {
+                  "stringValue": "alpha_m"
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "alphaOm": {
+              "distributionType": "Uniform",
+              "parameters": {
+                "allow_nan_stats": {
+                  "intValue": 1
+                },
+                "high": {
+                  "scalarValue": 1.0
+                },
+                "low": {
+                  "scalarValue": 0.0
+                },
+                "name": {
+                  "stringValue": "alpha_om"
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "alphaOrf": {
+              "distributionType": "Uniform",
+              "parameters": {
+                "allow_nan_stats": {
+                  "intValue": 1
+                },
+                "high": {
+                  "scalarValue": 1.0
+                },
+                "low": {
+                  "scalarValue": 0.0
+                },
+                "name": {
+                  "stringValue": "alpha_orf"
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "alphaRf": {
+              "distributionType": "Uniform",
+              "parameters": {
+                "allow_nan_stats": {
+                  "intValue": 1
+                },
+                "high": {
+                  "scalarValue": 1.0
+                },
+                "low": {
+                  "scalarValue": 0.0
+                },
+                "name": {
+                  "stringValue": "alpha_rf"
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "betaM": {
+              "distributionType": "HalfNormal",
+              "parameters": {
+                "allow_nan_stats": {
+                  "intValue": 1
+                },
+                "name": {
+                  "stringValue": "beta_m"
+                },
+                "scale": {
+                  "scalarValue": 5.0
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "betaOm": {
+              "distributionType": "HalfNormal",
+              "parameters": {
+                "allow_nan_stats": {
+                  "intValue": 1
+                },
+                "name": {
+                  "stringValue": "beta_om"
+                },
+                "scale": {
+                  "scalarValue": 5.0
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "betaOrf": {
+              "distributionType": "HalfNormal",
+              "parameters": {
+                "allow_nan_stats": {
+                  "intValue": 1
+                },
+                "name": {
+                  "stringValue": "beta_orf"
+                },
+                "scale": {
+                  "scalarValue": 5.0
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "betaRf": {
+              "distributionType": "HalfNormal",
+              "parameters": {
+                "allow_nan_stats": {
+                  "intValue": 1
+                },
+                "name": {
+                  "stringValue": "beta_rf"
+                },
+                "scale": {
+                  "scalarValue": 5.0
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "contributionM": {
+              "distributionType": "Beta",
+              "parameters": {
+                "allow_nan_stats": {
+                  "intValue": 1
+                },
+                "concentration0": {
+                  "scalarValue": 99.0
+                },
+                "concentration1": {
+                  "scalarValue": 1.0
+                },
+                "force_probs_to_zero_outside_support": {
+                  "intValue": 0
+                },
+                "name": {
+                  "stringValue": "contribution_m"
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "contributionN": {
+              "distributionType": "TruncatedNormal",
+              "parameters": {
+                "allow_nan_stats": {
+                  "intValue": 1
+                },
+                "high": {
+                  "scalarValue": 1.0
+                },
+                "loc": {
+                  "scalarValue": 0.0
+                },
+                "low": {
+                  "scalarValue": -1.0
+                },
+                "name": {
+                  "stringValue": "contribution_n"
+                },
+                "scale": {
+                  "scalarValue": 0.1
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "contributionOm": {
+              "distributionType": "Beta",
+              "parameters": {
+                "allow_nan_stats": {
+                  "intValue": 1
+                },
+                "concentration0": {
+                  "scalarValue": 99.0
+                },
+                "concentration1": {
+                  "scalarValue": 1.0
+                },
+                "force_probs_to_zero_outside_support": {
+                  "intValue": 0
+                },
+                "name": {
+                  "stringValue": "contribution_om"
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "contributionOrf": {
+              "distributionType": "Beta",
+              "parameters": {
+                "allow_nan_stats": {
+                  "intValue": 1
+                },
+                "concentration0": {
+                  "scalarValue": 99.0
+                },
+                "concentration1": {
+                  "scalarValue": 1.0
+                },
+                "force_probs_to_zero_outside_support": {
+                  "intValue": 0
+                },
+                "name": {
+                  "stringValue": "contribution_orf"
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "contributionRf": {
+              "distributionType": "Beta",
+              "parameters": {
+                "allow_nan_stats": {
+                  "intValue": 1
+                },
+                "concentration0": {
+                  "scalarValue": 99.0
+                },
+                "concentration1": {
+                  "scalarValue": 1.0
+                },
+                "force_probs_to_zero_outside_support": {
+                  "intValue": 0
+                },
+                "name": {
+                  "stringValue": "contribution_rf"
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "ecM": {
+              "distributionType": "TruncatedNormal",
+              "parameters": {
+                "allow_nan_stats": {
+                  "intValue": 1
+                },
+                "high": {
+                  "scalarValue": 10.0
+                },
+                "loc": {
+                  "scalarValue": 0.8
+                },
+                "low": {
+                  "scalarValue": 0.1
+                },
+                "name": {
+                  "stringValue": "ec_m"
+                },
+                "scale": {
+                  "scalarValue": 0.8
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "ecOm": {
+              "distributionType": "TruncatedNormal",
+              "parameters": {
+                "allow_nan_stats": {
+                  "intValue": 1
+                },
+                "high": {
+                  "scalarValue": 10.0
+                },
+                "loc": {
+                  "scalarValue": 0.8
+                },
+                "low": {
+                  "scalarValue": 0.1
+                },
+                "name": {
+                  "stringValue": "ec_om"
+                },
+                "scale": {
+                  "scalarValue": 0.8
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "ecOrf": {
+              "distributionType": "TransformedDistribution",
+              "parameters": {
+                "bijector": {
+                  "bijectorValue": {
+                    "bijectorType": "Shift",
+                    "parameters": {
+                      "name": {
+                        "stringValue": "shift"
+                      },
+                      "shift": {
+                        "scalarValue": 0.1
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "LogNormal",
+                    "parameters": {
+                      "allow_nan_stats": {
+                        "intValue": 1
+                      },
+                      "loc": {
+                        "scalarValue": 0.7
+                      },
+                      "name": {
+                        "stringValue": "LogNormal"
+                      },
+                      "scale": {
+                        "scalarValue": 0.4
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "kwargs_split_fn": {
+                  "functionParam": {
+                    "usesDefault": true
+                  }
+                },
+                "name": {
+                  "stringValue": "ec_orf"
+                },
+                "parameters": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "ecRf": {
+              "distributionType": "TransformedDistribution",
+              "parameters": {
+                "bijector": {
+                  "bijectorValue": {
+                    "bijectorType": "Shift",
+                    "parameters": {
+                      "name": {
+                        "stringValue": "shift"
+                      },
+                      "shift": {
+                        "scalarValue": 0.1
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "LogNormal",
+                    "parameters": {
+                      "allow_nan_stats": {
+                        "intValue": 1
+                      },
+                      "loc": {
+                        "scalarValue": 0.7
+                      },
+                      "name": {
+                        "stringValue": "LogNormal"
+                      },
+                      "scale": {
+                        "scalarValue": 0.4
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "kwargs_split_fn": {
+                  "functionParam": {
+                    "usesDefault": true
+                  }
+                },
+                "name": {
+                  "stringValue": "ec_rf"
+                },
+                "parameters": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "etaM": {
+              "distributionType": "HalfNormal",
+              "parameters": {
+                "allow_nan_stats": {
+                  "intValue": 1
+                },
+                "name": {
+                  "stringValue": "eta_m"
+                },
+                "scale": {
+                  "scalarValue": 1.0
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "etaOm": {
+              "distributionType": "HalfNormal",
+              "parameters": {
+                "allow_nan_stats": {
+                  "intValue": 1
+                },
+                "name": {
+                  "stringValue": "eta_om"
+                },
+                "scale": {
+                  "scalarValue": 1.0
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "etaOrf": {
+              "distributionType": "HalfNormal",
+              "parameters": {
+                "allow_nan_stats": {
+                  "intValue": 1
+                },
+                "name": {
+                  "stringValue": "eta_orf"
+                },
+                "scale": {
+                  "scalarValue": 1.0
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "etaRf": {
+              "distributionType": "HalfNormal",
+              "parameters": {
+                "allow_nan_stats": {
+                  "intValue": 1
+                },
+                "name": {
+                  "stringValue": "eta_rf"
+                },
+                "scale": {
+                  "scalarValue": 1.0
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "gammaC": {
+              "distributionType": "Normal",
+              "parameters": {
+                "allow_nan_stats": {
+                  "intValue": 1
+                },
+                "loc": {
+                  "scalarValue": 0.0
+                },
+                "name": {
+                  "stringValue": "gamma_c"
+                },
+                "scale": {
+                  "scalarValue": 5.0
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "gammaN": {
+              "distributionType": "Normal",
+              "parameters": {
+                "allow_nan_stats": {
+                  "intValue": 1
+                },
+                "loc": {
+                  "scalarValue": 0.0
+                },
+                "name": {
+                  "stringValue": "gamma_n"
+                },
+                "scale": {
+                  "scalarValue": 5.0
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "knotValues": {
+              "distributionType": "Normal",
+              "parameters": {
+                "allow_nan_stats": {
+                  "intValue": 1
+                },
+                "loc": {
+                  "scalarValue": 0.0
+                },
+                "name": {
+                  "stringValue": "knot_values"
+                },
+                "scale": {
+                  "scalarValue": 5.0
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "mroiM": {
+              "distributionType": "LogNormal",
+              "parameters": {
+                "allow_nan_stats": {
+                  "intValue": 1
+                },
+                "loc": {
+                  "scalarValue": 0.0
+                },
+                "name": {
+                  "stringValue": "mroi_m"
+                },
+                "scale": {
+                  "scalarValue": 0.5
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "mroiRf": {
+              "distributionType": "LogNormal",
+              "parameters": {
+                "allow_nan_stats": {
+                  "intValue": 1
+                },
+                "loc": {
+                  "scalarValue": 0.0
+                },
+                "name": {
+                  "stringValue": "mroi_rf"
+                },
+                "scale": {
+                  "scalarValue": 0.5
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "roiM": {
+              "distributionType": "LogNormal",
+              "parameters": {
+                "allow_nan_stats": {
+                  "intValue": 1
+                },
+                "loc": {
+                  "scalarValue": 0.2
+                },
+                "name": {
+                  "stringValue": "roi_m"
+                },
+                "scale": {
+                  "scalarValue": 0.9
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "roiRf": {
+              "distributionType": "LogNormal",
+              "parameters": {
+                "allow_nan_stats": {
+                  "intValue": 1
+                },
+                "loc": {
+                  "scalarValue": 0.2
+                },
+                "name": {
+                  "stringValue": "roi_rf"
+                },
+                "scale": {
+                  "scalarValue": 0.9
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "sigma": {
+              "distributionType": "HalfNormal",
+              "parameters": {
+                "allow_nan_stats": {
+                  "intValue": 1
+                },
+                "name": {
+                  "stringValue": "sigma"
+                },
+                "scale": {
+                  "scalarValue": 5.0
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "slopeM": {
+              "distributionType": "Deterministic",
+              "parameters": {
+                "allow_nan_stats": {
+                  "intValue": 1
+                },
+                "atol": {
+                  "noneValue": true
+                },
+                "loc": {
+                  "scalarValue": 1.0
+                },
+                "name": {
+                  "stringValue": "slope_m"
+                },
+                "rtol": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "slopeOm": {
+              "distributionType": "Deterministic",
+              "parameters": {
+                "allow_nan_stats": {
+                  "intValue": 1
+                },
+                "atol": {
+                  "noneValue": true
+                },
+                "loc": {
+                  "scalarValue": 1.0
+                },
+                "name": {
+                  "stringValue": "slope_om"
+                },
+                "rtol": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "slopeOrf": {
+              "distributionType": "LogNormal",
+              "parameters": {
+                "allow_nan_stats": {
+                  "intValue": 1
+                },
+                "loc": {
+                  "scalarValue": 0.7
+                },
+                "name": {
+                  "stringValue": "slope_orf"
+                },
+                "scale": {
+                  "scalarValue": 0.4
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "slopeRf": {
+              "distributionType": "LogNormal",
+              "parameters": {
+                "allow_nan_stats": {
+                  "intValue": 1
+                },
+                "loc": {
+                  "scalarValue": 0.7
+                },
+                "name": {
+                  "stringValue": "slope_rf"
+                },
+                "scale": {
+                  "scalarValue": 0.4
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "tauGExclBaseline": {
+              "distributionType": "Normal",
+              "parameters": {
+                "allow_nan_stats": {
+                  "intValue": 1
+                },
+                "loc": {
+                  "scalarValue": 0.0
+                },
+                "name": {
+                  "stringValue": "tau_g_excl_baseline"
+                },
+                "scale": {
+                  "scalarValue": 5.0
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "xiC": {
+              "distributionType": "HalfNormal",
+              "parameters": {
+                "allow_nan_stats": {
+                  "intValue": 1
+                },
+                "name": {
+                  "stringValue": "xi_c"
+                },
+                "scale": {
+                  "scalarValue": 5.0
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            },
+            "xiN": {
+              "distributionType": "HalfNormal",
+              "parameters": {
+                "allow_nan_stats": {
+                  "intValue": 1
+                },
+                "name": {
+                  "stringValue": "xi_n"
+                },
+                "scale": {
+                  "scalarValue": 5.0
+                },
+                "validate_args": {
+                  "intValue": 0
+                }
+              }
+            }
+          },
+          "effective_broadcast_priors": {
+            "alphaM": {
+              "distributionType": "BatchBroadcast",
+              "parameters": {
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "Uniform",
+                    "parameters": {
+                      "allow_nan_stats": {
+                        "intValue": 1
+                      },
+                      "high": {
+                        "scalarValue": 1.0
+                      },
+                      "low": {
+                        "scalarValue": 0.0
+                      },
+                      "name": {
+                        "stringValue": "alpha_m"
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "name": {
+                  "stringValue": "alpha_m"
+                },
+                "to_shape": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                },
+                "with_shape": {
+                  "intValue": 3
+                }
+              }
+            },
+            "alphaOm": {
+              "distributionType": "BatchBroadcast",
+              "parameters": {
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "Uniform",
+                    "parameters": {
+                      "allow_nan_stats": {
+                        "intValue": 1
+                      },
+                      "high": {
+                        "scalarValue": 1.0
+                      },
+                      "low": {
+                        "scalarValue": 0.0
+                      },
+                      "name": {
+                        "stringValue": "alpha_om"
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "name": {
+                  "stringValue": "alpha_om"
+                },
+                "to_shape": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                },
+                "with_shape": {
+                  "intValue": 0
+                }
+              }
+            },
+            "alphaOrf": {
+              "distributionType": "BatchBroadcast",
+              "parameters": {
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "Uniform",
+                    "parameters": {
+                      "allow_nan_stats": {
+                        "intValue": 1
+                      },
+                      "high": {
+                        "scalarValue": 1.0
+                      },
+                      "low": {
+                        "scalarValue": 0.0
+                      },
+                      "name": {
+                        "stringValue": "alpha_orf"
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "name": {
+                  "stringValue": "alpha_orf"
+                },
+                "to_shape": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                },
+                "with_shape": {
+                  "intValue": 0
+                }
+              }
+            },
+            "alphaRf": {
+              "distributionType": "BatchBroadcast",
+              "parameters": {
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "Uniform",
+                    "parameters": {
+                      "allow_nan_stats": {
+                        "intValue": 1
+                      },
+                      "high": {
+                        "scalarValue": 1.0
+                      },
+                      "low": {
+                        "scalarValue": 0.0
+                      },
+                      "name": {
+                        "stringValue": "alpha_rf"
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "name": {
+                  "stringValue": "alpha_rf"
+                },
+                "to_shape": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                },
+                "with_shape": {
+                  "intValue": 0
+                }
+              }
+            },
+            "betaM": {
+              "distributionType": "BatchBroadcast",
+              "parameters": {
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "HalfNormal",
+                    "parameters": {
+                      "allow_nan_stats": {
+                        "intValue": 1
+                      },
+                      "name": {
+                        "stringValue": "beta_m"
+                      },
+                      "scale": {
+                        "scalarValue": 5.0
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "name": {
+                  "stringValue": "beta_m"
+                },
+                "to_shape": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                },
+                "with_shape": {
+                  "intValue": 3
+                }
+              }
+            },
+            "betaOm": {
+              "distributionType": "BatchBroadcast",
+              "parameters": {
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "HalfNormal",
+                    "parameters": {
+                      "allow_nan_stats": {
+                        "intValue": 1
+                      },
+                      "name": {
+                        "stringValue": "beta_om"
+                      },
+                      "scale": {
+                        "scalarValue": 5.0
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "name": {
+                  "stringValue": "beta_om"
+                },
+                "to_shape": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                },
+                "with_shape": {
+                  "intValue": 0
+                }
+              }
+            },
+            "betaOrf": {
+              "distributionType": "BatchBroadcast",
+              "parameters": {
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "HalfNormal",
+                    "parameters": {
+                      "allow_nan_stats": {
+                        "intValue": 1
+                      },
+                      "name": {
+                        "stringValue": "beta_orf"
+                      },
+                      "scale": {
+                        "scalarValue": 5.0
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "name": {
+                  "stringValue": "beta_orf"
+                },
+                "to_shape": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                },
+                "with_shape": {
+                  "intValue": 0
+                }
+              }
+            },
+            "betaRf": {
+              "distributionType": "BatchBroadcast",
+              "parameters": {
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "HalfNormal",
+                    "parameters": {
+                      "allow_nan_stats": {
+                        "intValue": 1
+                      },
+                      "name": {
+                        "stringValue": "beta_rf"
+                      },
+                      "scale": {
+                        "scalarValue": 5.0
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "name": {
+                  "stringValue": "beta_rf"
+                },
+                "to_shape": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                },
+                "with_shape": {
+                  "intValue": 0
+                }
+              }
+            },
+            "contributionM": {
+              "distributionType": "BatchBroadcast",
+              "parameters": {
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "Beta",
+                    "parameters": {
+                      "allow_nan_stats": {
+                        "intValue": 1
+                      },
+                      "concentration0": {
+                        "scalarValue": 99.0
+                      },
+                      "concentration1": {
+                        "scalarValue": 1.0
+                      },
+                      "force_probs_to_zero_outside_support": {
+                        "intValue": 0
+                      },
+                      "name": {
+                        "stringValue": "contribution_m"
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "name": {
+                  "stringValue": "contribution_m"
+                },
+                "to_shape": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                },
+                "with_shape": {
+                  "intValue": 3
+                }
+              }
+            },
+            "contributionN": {
+              "distributionType": "BatchBroadcast",
+              "parameters": {
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "TruncatedNormal",
+                    "parameters": {
+                      "allow_nan_stats": {
+                        "intValue": 1
+                      },
+                      "high": {
+                        "scalarValue": 1.0
+                      },
+                      "loc": {
+                        "scalarValue": 0.0
+                      },
+                      "low": {
+                        "scalarValue": -1.0
+                      },
+                      "name": {
+                        "stringValue": "contribution_n"
+                      },
+                      "scale": {
+                        "scalarValue": 0.1
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "name": {
+                  "stringValue": "contribution_n"
+                },
+                "to_shape": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                },
+                "with_shape": {
+                  "intValue": 0
+                }
+              }
+            },
+            "contributionOm": {
+              "distributionType": "BatchBroadcast",
+              "parameters": {
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "Beta",
+                    "parameters": {
+                      "allow_nan_stats": {
+                        "intValue": 1
+                      },
+                      "concentration0": {
+                        "scalarValue": 99.0
+                      },
+                      "concentration1": {
+                        "scalarValue": 1.0
+                      },
+                      "force_probs_to_zero_outside_support": {
+                        "intValue": 0
+                      },
+                      "name": {
+                        "stringValue": "contribution_om"
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "name": {
+                  "stringValue": "contribution_om"
+                },
+                "to_shape": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                },
+                "with_shape": {
+                  "intValue": 0
+                }
+              }
+            },
+            "contributionOrf": {
+              "distributionType": "BatchBroadcast",
+              "parameters": {
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "Beta",
+                    "parameters": {
+                      "allow_nan_stats": {
+                        "intValue": 1
+                      },
+                      "concentration0": {
+                        "scalarValue": 99.0
+                      },
+                      "concentration1": {
+                        "scalarValue": 1.0
+                      },
+                      "force_probs_to_zero_outside_support": {
+                        "intValue": 0
+                      },
+                      "name": {
+                        "stringValue": "contribution_orf"
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "name": {
+                  "stringValue": "contribution_orf"
+                },
+                "to_shape": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                },
+                "with_shape": {
+                  "intValue": 0
+                }
+              }
+            },
+            "contributionRf": {
+              "distributionType": "BatchBroadcast",
+              "parameters": {
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "Beta",
+                    "parameters": {
+                      "allow_nan_stats": {
+                        "intValue": 1
+                      },
+                      "concentration0": {
+                        "scalarValue": 99.0
+                      },
+                      "concentration1": {
+                        "scalarValue": 1.0
+                      },
+                      "force_probs_to_zero_outside_support": {
+                        "intValue": 0
+                      },
+                      "name": {
+                        "stringValue": "contribution_rf"
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "name": {
+                  "stringValue": "contribution_rf"
+                },
+                "to_shape": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                },
+                "with_shape": {
+                  "intValue": 0
+                }
+              }
+            },
+            "ecM": {
+              "distributionType": "BatchBroadcast",
+              "parameters": {
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "TruncatedNormal",
+                    "parameters": {
+                      "allow_nan_stats": {
+                        "intValue": 1
+                      },
+                      "high": {
+                        "scalarValue": 10.0
+                      },
+                      "loc": {
+                        "scalarValue": 0.8
+                      },
+                      "low": {
+                        "scalarValue": 0.1
+                      },
+                      "name": {
+                        "stringValue": "ec_m"
+                      },
+                      "scale": {
+                        "scalarValue": 0.8
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "name": {
+                  "stringValue": "ec_m"
+                },
+                "to_shape": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                },
+                "with_shape": {
+                  "intValue": 3
+                }
+              }
+            },
+            "ecOm": {
+              "distributionType": "BatchBroadcast",
+              "parameters": {
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "TruncatedNormal",
+                    "parameters": {
+                      "allow_nan_stats": {
+                        "intValue": 1
+                      },
+                      "high": {
+                        "scalarValue": 10.0
+                      },
+                      "loc": {
+                        "scalarValue": 0.8
+                      },
+                      "low": {
+                        "scalarValue": 0.1
+                      },
+                      "name": {
+                        "stringValue": "ec_om"
+                      },
+                      "scale": {
+                        "scalarValue": 0.8
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "name": {
+                  "stringValue": "ec_om"
+                },
+                "to_shape": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                },
+                "with_shape": {
+                  "intValue": 0
+                }
+              }
+            },
+            "ecOrf": {
+              "distributionType": "BatchBroadcast",
+              "parameters": {
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "TransformedDistribution",
+                    "parameters": {
+                      "bijector": {
+                        "bijectorValue": {
+                          "bijectorType": "Shift",
+                          "parameters": {
+                            "name": {
+                              "stringValue": "shift"
+                            },
+                            "shift": {
+                              "scalarValue": 0.1
+                            },
+                            "validate_args": {
+                              "intValue": 0
+                            }
+                          }
+                        }
+                      },
+                      "distribution": {
+                        "distributionValue": {
+                          "distributionType": "LogNormal",
+                          "parameters": {
+                            "allow_nan_stats": {
+                              "intValue": 1
+                            },
+                            "loc": {
+                              "scalarValue": 0.7
+                            },
+                            "name": {
+                              "stringValue": "LogNormal"
+                            },
+                            "scale": {
+                              "scalarValue": 0.4
+                            },
+                            "validate_args": {
+                              "intValue": 0
+                            }
+                          }
+                        }
+                      },
+                      "kwargs_split_fn": {
+                        "functionParam": {
+                          "usesDefault": true
+                        }
+                      },
+                      "name": {
+                        "stringValue": "ec_orf"
+                      },
+                      "parameters": {
+                        "noneValue": true
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "name": {
+                  "stringValue": "ec_orf"
+                },
+                "to_shape": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                },
+                "with_shape": {
+                  "intValue": 0
+                }
+              }
+            },
+            "ecRf": {
+              "distributionType": "BatchBroadcast",
+              "parameters": {
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "TransformedDistribution",
+                    "parameters": {
+                      "bijector": {
+                        "bijectorValue": {
+                          "bijectorType": "Shift",
+                          "parameters": {
+                            "name": {
+                              "stringValue": "shift"
+                            },
+                            "shift": {
+                              "scalarValue": 0.1
+                            },
+                            "validate_args": {
+                              "intValue": 0
+                            }
+                          }
+                        }
+                      },
+                      "distribution": {
+                        "distributionValue": {
+                          "distributionType": "LogNormal",
+                          "parameters": {
+                            "allow_nan_stats": {
+                              "intValue": 1
+                            },
+                            "loc": {
+                              "scalarValue": 0.7
+                            },
+                            "name": {
+                              "stringValue": "LogNormal"
+                            },
+                            "scale": {
+                              "scalarValue": 0.4
+                            },
+                            "validate_args": {
+                              "intValue": 0
+                            }
+                          }
+                        }
+                      },
+                      "kwargs_split_fn": {
+                        "functionParam": {
+                          "usesDefault": true
+                        }
+                      },
+                      "name": {
+                        "stringValue": "ec_rf"
+                      },
+                      "parameters": {
+                        "noneValue": true
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "name": {
+                  "stringValue": "ec_rf"
+                },
+                "to_shape": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                },
+                "with_shape": {
+                  "intValue": 0
+                }
+              }
+            },
+            "etaM": {
+              "distributionType": "BatchBroadcast",
+              "parameters": {
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "Deterministic",
+                    "parameters": {
+                      "allow_nan_stats": {
+                        "intValue": 1
+                      },
+                      "atol": {
+                        "noneValue": true
+                      },
+                      "loc": {
+                        "tensorValue": {
+                          "doubleVal": [
+                            0.0
+                          ],
+                          "dtype": "DT_DOUBLE",
+                          "tensorShape": {}
+                        }
+                      },
+                      "name": {
+                        "stringValue": "eta_m"
+                      },
+                      "rtol": {
+                        "noneValue": true
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "name": {
+                  "stringValue": "eta_m"
+                },
+                "to_shape": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                },
+                "with_shape": {
+                  "intValue": 3
+                }
+              }
+            },
+            "etaOm": {
+              "distributionType": "BatchBroadcast",
+              "parameters": {
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "Deterministic",
+                    "parameters": {
+                      "allow_nan_stats": {
+                        "intValue": 1
+                      },
+                      "atol": {
+                        "noneValue": true
+                      },
+                      "loc": {
+                        "tensorValue": {
+                          "doubleVal": [
+                            0.0
+                          ],
+                          "dtype": "DT_DOUBLE",
+                          "tensorShape": {}
+                        }
+                      },
+                      "name": {
+                        "stringValue": "eta_om"
+                      },
+                      "rtol": {
+                        "noneValue": true
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "name": {
+                  "stringValue": "eta_om"
+                },
+                "to_shape": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                },
+                "with_shape": {
+                  "intValue": 0
+                }
+              }
+            },
+            "etaOrf": {
+              "distributionType": "BatchBroadcast",
+              "parameters": {
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "Deterministic",
+                    "parameters": {
+                      "allow_nan_stats": {
+                        "intValue": 1
+                      },
+                      "atol": {
+                        "noneValue": true
+                      },
+                      "loc": {
+                        "tensorValue": {
+                          "doubleVal": [
+                            0.0
+                          ],
+                          "dtype": "DT_DOUBLE",
+                          "tensorShape": {}
+                        }
+                      },
+                      "name": {
+                        "stringValue": "eta_orf"
+                      },
+                      "rtol": {
+                        "noneValue": true
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "name": {
+                  "stringValue": "eta_orf"
+                },
+                "to_shape": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                },
+                "with_shape": {
+                  "intValue": 0
+                }
+              }
+            },
+            "etaRf": {
+              "distributionType": "BatchBroadcast",
+              "parameters": {
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "Deterministic",
+                    "parameters": {
+                      "allow_nan_stats": {
+                        "intValue": 1
+                      },
+                      "atol": {
+                        "noneValue": true
+                      },
+                      "loc": {
+                        "tensorValue": {
+                          "doubleVal": [
+                            0.0
+                          ],
+                          "dtype": "DT_DOUBLE",
+                          "tensorShape": {}
+                        }
+                      },
+                      "name": {
+                        "stringValue": "eta_rf"
+                      },
+                      "rtol": {
+                        "noneValue": true
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "name": {
+                  "stringValue": "eta_rf"
+                },
+                "to_shape": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                },
+                "with_shape": {
+                  "intValue": 0
+                }
+              }
+            },
+            "gammaC": {
+              "distributionType": "BatchBroadcast",
+              "parameters": {
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "Normal",
+                    "parameters": {
+                      "allow_nan_stats": {
+                        "intValue": 1
+                      },
+                      "loc": {
+                        "scalarValue": 0.0
+                      },
+                      "name": {
+                        "stringValue": "gamma_c"
+                      },
+                      "scale": {
+                        "scalarValue": 5.0
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "name": {
+                  "stringValue": "gamma_c"
+                },
+                "to_shape": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                },
+                "with_shape": {
+                  "intValue": 2
+                }
+              }
+            },
+            "gammaN": {
+              "distributionType": "BatchBroadcast",
+              "parameters": {
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "Normal",
+                    "parameters": {
+                      "allow_nan_stats": {
+                        "intValue": 1
+                      },
+                      "loc": {
+                        "scalarValue": 0.0
+                      },
+                      "name": {
+                        "stringValue": "gamma_n"
+                      },
+                      "scale": {
+                        "scalarValue": 5.0
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "name": {
+                  "stringValue": "gamma_n"
+                },
+                "to_shape": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                },
+                "with_shape": {
+                  "intValue": 0
+                }
+              }
+            },
+            "knotValues": {
+              "distributionType": "BatchBroadcast",
+              "parameters": {
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "Normal",
+                    "parameters": {
+                      "allow_nan_stats": {
+                        "intValue": 1
+                      },
+                      "loc": {
+                        "scalarValue": 0.0
+                      },
+                      "name": {
+                        "stringValue": "knot_values"
+                      },
+                      "scale": {
+                        "scalarValue": 5.0
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "name": {
+                  "stringValue": "knot_values"
+                },
+                "to_shape": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                },
+                "with_shape": {
+                  "intValue": 4
+                }
+              }
+            },
+            "mroiM": {
+              "distributionType": "BatchBroadcast",
+              "parameters": {
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "LogNormal",
+                    "parameters": {
+                      "allow_nan_stats": {
+                        "intValue": 1
+                      },
+                      "loc": {
+                        "scalarValue": 0.0
+                      },
+                      "name": {
+                        "stringValue": "mroi_m"
+                      },
+                      "scale": {
+                        "scalarValue": 0.5
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "name": {
+                  "stringValue": "mroi_m"
+                },
+                "to_shape": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                },
+                "with_shape": {
+                  "intValue": 3
+                }
+              }
+            },
+            "mroiRf": {
+              "distributionType": "BatchBroadcast",
+              "parameters": {
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "LogNormal",
+                    "parameters": {
+                      "allow_nan_stats": {
+                        "intValue": 1
+                      },
+                      "loc": {
+                        "scalarValue": 0.0
+                      },
+                      "name": {
+                        "stringValue": "mroi_rf"
+                      },
+                      "scale": {
+                        "scalarValue": 0.5
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "name": {
+                  "stringValue": "mroi_rf"
+                },
+                "to_shape": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                },
+                "with_shape": {
+                  "intValue": 0
+                }
+              }
+            },
+            "roiM": {
+              "distributionType": "BatchBroadcast",
+              "parameters": {
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "LogNormal",
+                    "parameters": {
+                      "allow_nan_stats": {
+                        "intValue": 1
+                      },
+                      "loc": {
+                        "scalarValue": 0.2
+                      },
+                      "name": {
+                        "stringValue": "roi_m"
+                      },
+                      "scale": {
+                        "scalarValue": 0.9
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "name": {
+                  "stringValue": "roi_m"
+                },
+                "to_shape": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                },
+                "with_shape": {
+                  "intValue": 3
+                }
+              }
+            },
+            "roiRf": {
+              "distributionType": "BatchBroadcast",
+              "parameters": {
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "LogNormal",
+                    "parameters": {
+                      "allow_nan_stats": {
+                        "intValue": 1
+                      },
+                      "loc": {
+                        "scalarValue": 0.2
+                      },
+                      "name": {
+                        "stringValue": "roi_rf"
+                      },
+                      "scale": {
+                        "scalarValue": 0.9
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "name": {
+                  "stringValue": "roi_rf"
+                },
+                "to_shape": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                },
+                "with_shape": {
+                  "intValue": 0
+                }
+              }
+            },
+            "sigma": {
+              "distributionType": "BatchBroadcast",
+              "parameters": {
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "HalfNormal",
+                    "parameters": {
+                      "allow_nan_stats": {
+                        "intValue": 1
+                      },
+                      "name": {
+                        "stringValue": "sigma"
+                      },
+                      "scale": {
+                        "scalarValue": 5.0
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "name": {
+                  "stringValue": "sigma"
+                },
+                "to_shape": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                },
+                "with_shape": {
+                  "listValue": {}
+                }
+              }
+            },
+            "slopeM": {
+              "distributionType": "BatchBroadcast",
+              "parameters": {
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "Deterministic",
+                    "parameters": {
+                      "allow_nan_stats": {
+                        "intValue": 1
+                      },
+                      "atol": {
+                        "noneValue": true
+                      },
+                      "loc": {
+                        "scalarValue": 1.0
+                      },
+                      "name": {
+                        "stringValue": "slope_m"
+                      },
+                      "rtol": {
+                        "noneValue": true
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "name": {
+                  "stringValue": "slope_m"
+                },
+                "to_shape": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                },
+                "with_shape": {
+                  "intValue": 3
+                }
+              }
+            },
+            "slopeOm": {
+              "distributionType": "BatchBroadcast",
+              "parameters": {
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "Deterministic",
+                    "parameters": {
+                      "allow_nan_stats": {
+                        "intValue": 1
+                      },
+                      "atol": {
+                        "noneValue": true
+                      },
+                      "loc": {
+                        "scalarValue": 1.0
+                      },
+                      "name": {
+                        "stringValue": "slope_om"
+                      },
+                      "rtol": {
+                        "noneValue": true
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "name": {
+                  "stringValue": "slope_om"
+                },
+                "to_shape": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                },
+                "with_shape": {
+                  "intValue": 0
+                }
+              }
+            },
+            "slopeOrf": {
+              "distributionType": "BatchBroadcast",
+              "parameters": {
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "LogNormal",
+                    "parameters": {
+                      "allow_nan_stats": {
+                        "intValue": 1
+                      },
+                      "loc": {
+                        "scalarValue": 0.7
+                      },
+                      "name": {
+                        "stringValue": "slope_orf"
+                      },
+                      "scale": {
+                        "scalarValue": 0.4
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "name": {
+                  "stringValue": "slope_orf"
+                },
+                "to_shape": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                },
+                "with_shape": {
+                  "intValue": 0
+                }
+              }
+            },
+            "slopeRf": {
+              "distributionType": "BatchBroadcast",
+              "parameters": {
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "LogNormal",
+                    "parameters": {
+                      "allow_nan_stats": {
+                        "intValue": 1
+                      },
+                      "loc": {
+                        "scalarValue": 0.7
+                      },
+                      "name": {
+                        "stringValue": "slope_rf"
+                      },
+                      "scale": {
+                        "scalarValue": 0.4
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "name": {
+                  "stringValue": "slope_rf"
+                },
+                "to_shape": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                },
+                "with_shape": {
+                  "intValue": 0
+                }
+              }
+            },
+            "tauGExclBaseline": {
+              "distributionType": "BatchBroadcast",
+              "parameters": {
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "Deterministic",
+                    "parameters": {
+                      "allow_nan_stats": {
+                        "intValue": 1
+                      },
+                      "atol": {
+                        "noneValue": true
+                      },
+                      "loc": {
+                        "tensorValue": {
+                          "doubleVal": [
+                            0.0
+                          ],
+                          "dtype": "DT_DOUBLE",
+                          "tensorShape": {}
+                        }
+                      },
+                      "name": {
+                        "stringValue": "tau_g_excl_baseline"
+                      },
+                      "rtol": {
+                        "noneValue": true
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "name": {
+                  "stringValue": "tau_g_excl_baseline"
+                },
+                "to_shape": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                },
+                "with_shape": {
+                  "intValue": 0
+                }
+              }
+            },
+            "xiC": {
+              "distributionType": "BatchBroadcast",
+              "parameters": {
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "Deterministic",
+                    "parameters": {
+                      "allow_nan_stats": {
+                        "intValue": 1
+                      },
+                      "atol": {
+                        "noneValue": true
+                      },
+                      "loc": {
+                        "tensorValue": {
+                          "doubleVal": [
+                            0.0
+                          ],
+                          "dtype": "DT_DOUBLE",
+                          "tensorShape": {}
+                        }
+                      },
+                      "name": {
+                        "stringValue": "xi_c"
+                      },
+                      "rtol": {
+                        "noneValue": true
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "name": {
+                  "stringValue": "xi_c"
+                },
+                "to_shape": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                },
+                "with_shape": {
+                  "intValue": 2
+                }
+              }
+            },
+            "xiN": {
+              "distributionType": "BatchBroadcast",
+              "parameters": {
+                "distribution": {
+                  "distributionValue": {
+                    "distributionType": "Deterministic",
+                    "parameters": {
+                      "allow_nan_stats": {
+                        "intValue": 1
+                      },
+                      "atol": {
+                        "noneValue": true
+                      },
+                      "loc": {
+                        "tensorValue": {
+                          "doubleVal": [
+                            0.0
+                          ],
+                          "dtype": "DT_DOUBLE",
+                          "tensorShape": {}
+                        }
+                      },
+                      "name": {
+                        "stringValue": "xi_n"
+                      },
+                      "rtol": {
+                        "noneValue": true
+                      },
+                      "validate_args": {
+                        "intValue": 0
+                      }
+                    }
+                  }
+                },
+                "name": {
+                  "stringValue": "xi_n"
+                },
+                "to_shape": {
+                  "noneValue": true
+                },
+                "validate_args": {
+                  "intValue": 0
+                },
+                "with_shape": {
+                  "intValue": 0
+                }
+              }
+            }
+          },
+          "interval_type": "conditional_expected_outcome",
+          "media_prior_type": null,
+          "prior_source": "package_defaults_no_custom_priors",
+          "target_type": "revenue"
+        },
+        "execution_limits": {
+          "cpu_percent": 50,
+          "memory_mb": 4096,
+          "numeric_threads": 1,
+          "platform": "nt",
+          "process_tree_cleanup": true,
+          "wall_timeout_seconds": 900
+        },
+        "exploratory": true,
+        "holdout_policy": {
+          "likelihood_exclusion": "native_HoldoutSpec",
+          "native_scaler_scope": "training_targets_and_train_only_holdout_placeholders",
+          "placeholder": 12242.789345230929,
+          "policy": "holdout_target_replaced_with_train_mean_before_native_loader",
+          "target_holdout_used_in_native_preprocessing": false,
+          "test_rows": 32,
+          "train_rows": 124
+        },
+        "model_id": "google_meridian-731a1b3817e741beaaeef7addb345713",
+        "native_format": "protobuf-binpb",
+        "request": {
+          "backend": "google_meridian",
+          "chains": 2,
+          "control_columns": [
+            "price_index",
+            "promotion"
+          ],
+          "dataset_id": "demo-2436c73644904e50992a998ccb0b8227",
+          "date_column": "date",
+          "draws": 50,
+          "media_columns": [
+            "spend_search",
+            "spend_social",
+            "spend_video"
+          ],
+          "model_id": null,
+          "seed": 42,
+          "target_column": "revenue",
+          "test_fraction": 0.2,
+          "tune": 50,
+          "warmup_periods": 8
+        },
+        "restore_verified": true,
+        "synthetic": true,
+        "test": {
+          "dates": [
+            "2025-05-19",
+            "2025-05-26",
+            "2025-06-02",
+            "2025-06-09",
+            "2025-06-16",
+            "2025-06-23",
+            "2025-06-30",
+            "2025-07-07",
+            "2025-07-14",
+            "2025-07-21",
+            "2025-07-28",
+            "2025-08-04",
+            "2025-08-11",
+            "2025-08-18",
+            "2025-08-25",
+            "2025-09-01",
+            "2025-09-08",
+            "2025-09-15",
+            "2025-09-22",
+            "2025-09-29",
+            "2025-10-06",
+            "2025-10-13",
+            "2025-10-20",
+            "2025-10-27",
+            "2025-11-03",
+            "2025-11-10",
+            "2025-11-17",
+            "2025-11-24",
+            "2025-12-01",
+            "2025-12-08",
+            "2025-12-15",
+            "2025-12-22"
+          ],
+          "interval_level": 0.9,
+          "interval_type": "conditional_expected_outcome",
+          "lower_90": [
+            12028.247166056724,
+            12361.733213054402,
+            12756.49380636518,
+            13477.729281981963,
+            13046.255501653557,
+            13027.745306588764,
+            13347.681197003078,
+            14225.200465558439,
+            13569.349369200803,
+            14243.2854264633,
+            13564.498367635655,
+            13945.437595772482,
+            13760.271186168256,
+            13488.25189434404,
+            13242.471365977215,
+            12237.44902291696,
+            12341.94428787234,
+            12868.477612692017,
+            13194.735935784754,
+            13241.413855493018,
+            13764.127366576002,
+            13887.493236821432,
+            13610.630392183733,
+            13571.191695474045,
+            13295.689427050438,
+            13383.799209265631,
+            12878.730208678046,
+            13149.774412420995,
+            13880.69621997562,
+            13115.548598566269,
+            13402.630410364261,
+            13386.241510674703
+          ],
+          "mean": [
+            12354.409338133632,
+            12636.37144327438,
+            13119.21865138414,
+            13816.918076993863,
+            13319.810961801548,
+            13320.215976198024,
+            13760.559564918487,
+            14612.113630898373,
+            13997.605789828704,
+            14647.1712494186,
+            14013.681370190201,
+            14344.214656519016,
+            14168.865011316915,
+            13934.223140796757,
+            13725.106996076247,
+            12725.847376387099,
+            12796.260301929191,
+            13292.078545672517,
+            13606.404019064375,
+            13785.428792623468,
+            14399.273021038915,
+            14366.007490463306,
+            14113.778411237325,
+            14080.534670950823,
+            13826.835390217519,
+            14044.397497161151,
+            13397.085176758328,
+            13710.6301001894,
+            14622.354643019704,
+            13785.852215658666,
+            14168.92790759363,
+            14163.198022719696
+          ],
+          "metrics": {
+            "mae": 1844.9961828027463,
+            "r2": -4.901420937822156,
+            "wape_percent": 15.471037629127473
+          },
+          "samples": 100,
+          "upper_90": [
+            12615.209805081662,
+            12916.362580215207,
+            13354.790055959867,
+            14084.611249535918,
+            13567.301009637215,
+            13557.833241524551,
+            14063.471843178291,
+            14971.688072098337,
+            14336.49963565072,
+            14993.017833449461,
+            14367.08811538282,
+            14690.129020913264,
+            14519.456529657047,
+            14294.721552437913,
+            14104.79114221566,
+            13085.790572042855,
+            13157.737217178252,
+            13686.76611569641,
+            14008.347787844095,
+            14168.516720954776,
+            14870.340215102064,
+            14811.508896009027,
+            14584.37866256849,
+            14522.721928427993,
+            14231.892246557487,
+            14584.38783916105,
+            13878.47290323264,
+            14261.876842867201,
+            15227.81502722328,
+            14400.508005033287,
+            14753.647332494687,
+            14730.79902272913
+          ]
+        },
+        "warnings": [
+          "SHORT_CHAINS: functional test does not establish convergence",
+          "SPEND_PROXY: synthetic spend used as exposure proxy",
+          "Holdout target uses train-only placeholders in native preprocessing",
+          "No demonstrated causal attribution"
+        ]
+      },
+      "error": null,
+      "warnings": [
+        "SHORT_CHAINS: functional test does not establish convergence",
+        "SPEND_PROXY: synthetic spend used as exposure proxy",
+        "Holdout target uses train-only placeholders in native preprocessing",
+        "No demonstrated causal attribution"
+      ]
+    },
+    "predict_backend": {
+      "schema_version": "1.0",
+      "ok": true,
+      "exploratory": true,
+      "disclaimer": "Exploratory statistical association, not demonstrated causal attribution. Synthetic data do not establish market effectiveness. Simulations and any intervals are conditional on the model and assumptions; no real campaign or budget is changed.",
+      "data": {
+        "backend": "google_meridian",
+        "model_id": "google_meridian-731a1b3817e741beaaeef7addb345713",
+        "scope": "historical_scenario_same_dimensions",
+        "exploratory": true,
+        "prediction": {
+          "dates": [
+            "2025-05-19",
+            "2025-05-26",
+            "2025-06-02",
+            "2025-06-09",
+            "2025-06-16",
+            "2025-06-23",
+            "2025-06-30",
+            "2025-07-07",
+            "2025-07-14",
+            "2025-07-21",
+            "2025-07-28",
+            "2025-08-04",
+            "2025-08-11",
+            "2025-08-18",
+            "2025-08-25",
+            "2025-09-01",
+            "2025-09-08",
+            "2025-09-15",
+            "2025-09-22",
+            "2025-09-29",
+            "2025-10-06",
+            "2025-10-13",
+            "2025-10-20",
+            "2025-10-27",
+            "2025-11-03",
+            "2025-11-10",
+            "2025-11-17",
+            "2025-11-24",
+            "2025-12-01",
+            "2025-12-08",
+            "2025-12-15",
+            "2025-12-22"
+          ],
+          "mean": [
+            12354.409338133632,
+            12636.37144327438,
+            13119.21865138414,
+            13816.918076993863,
+            13319.810961801548,
+            13320.215976198024,
+            13760.559564918487,
+            14612.113630898373,
+            13997.605789828704,
+            14647.1712494186,
+            14013.681370190201,
+            14344.214656519016,
+            14168.865011316915,
+            13934.223140796757,
+            13725.106996076247,
+            12725.847376387099,
+            12796.260301929191,
+            13292.078545672517,
+            13606.404019064375,
+            13785.428792623468,
+            14399.273021038915,
+            14366.007490463306,
+            14113.778411237325,
+            14080.534670950823,
+            13826.835390217519,
+            14044.397497161151,
+            13397.085176758328,
+            13710.6301001894,
+            14622.354643019704,
+            13785.852215658666,
+            14168.92790759363,
+            14163.198022719696
+          ],
+          "lower_90": [
+            12028.247166056724,
+            12361.733213054402,
+            12756.49380636518,
+            13477.729281981963,
+            13046.255501653557,
+            13027.745306588764,
+            13347.681197003078,
+            14225.200465558439,
+            13569.349369200803,
+            14243.2854264633,
+            13564.498367635655,
+            13945.437595772482,
+            13760.271186168256,
+            13488.25189434404,
+            13242.471365977215,
+            12237.44902291696,
+            12341.94428787234,
+            12868.477612692017,
+            13194.735935784754,
+            13241.413855493018,
+            13764.127366576002,
+            13887.493236821432,
+            13610.630392183733,
+            13571.191695474045,
+            13295.689427050438,
+            13383.799209265631,
+            12878.730208678046,
+            13149.774412420995,
+            13880.69621997562,
+            13115.548598566269,
+            13402.630410364261,
+            13386.241510674703
+          ],
+          "upper_90": [
+            12615.209805081662,
+            12916.362580215207,
+            13354.790055959867,
+            14084.611249535918,
+            13567.301009637215,
+            13557.833241524551,
+            14063.471843178291,
+            14971.688072098337,
+            14336.49963565072,
+            14993.017833449461,
+            14367.08811538282,
+            14690.129020913264,
+            14519.456529657047,
+            14294.721552437913,
+            14104.79114221566,
+            13085.790572042855,
+            13157.737217178252,
+            13686.76611569641,
+            14008.347787844095,
+            14168.516720954776,
+            14870.340215102064,
+            14811.508896009027,
+            14584.37866256849,
+            14522.721928427993,
+            14231.892246557487,
+            14584.38783916105,
+            13878.47290323264,
+            14261.876842867201,
+            15227.81502722328,
+            14400.508005033287,
+            14753.647332494687,
+            14730.79902272913
+          ],
+          "samples": 100,
+          "interval_type": "conditional_expected_outcome",
+          "interval_level": 0.9
+        },
+        "warnings": [
+          "Meridian future forecasting is not exposed; historical scenario only",
+          "No demonstrated causal attribution"
+        ],
+        "execution_limits": {
+          "platform": "nt",
+          "wall_timeout_seconds": 900,
+          "numeric_threads": 1,
+          "cpu_percent": 50,
+          "memory_mb": 4096,
+          "process_tree_cleanup": true
+        }
+      },
+      "error": null,
+      "warnings": [
+        "Meridian future forecasting is not exposed; historical scenario only",
+        "No demonstrated causal attribution"
+      ]
+    },
+    "predict_backend_scenario": {
+      "schema_version": "1.0",
+      "ok": true,
+      "exploratory": true,
+      "disclaimer": "Exploratory statistical association, not demonstrated causal attribution. Synthetic data do not establish market effectiveness. Simulations and any intervals are conditional on the model and assumptions; no real campaign or budget is changed.",
+      "data": {
+        "backend": "google_meridian",
+        "model_id": "google_meridian-731a1b3817e741beaaeef7addb345713",
+        "scope": "historical_scenario_same_dimensions",
+        "exploratory": true,
+        "prediction": {
+          "dates": [
+            "2025-05-19",
+            "2025-05-26",
+            "2025-06-02",
+            "2025-06-09",
+            "2025-06-16",
+            "2025-06-23",
+            "2025-06-30",
+            "2025-07-07",
+            "2025-07-14",
+            "2025-07-21",
+            "2025-07-28",
+            "2025-08-04",
+            "2025-08-11",
+            "2025-08-18",
+            "2025-08-25",
+            "2025-09-01",
+            "2025-09-08",
+            "2025-09-15",
+            "2025-09-22",
+            "2025-09-29",
+            "2025-10-06",
+            "2025-10-13",
+            "2025-10-20",
+            "2025-10-27",
+            "2025-11-03",
+            "2025-11-10",
+            "2025-11-17",
+            "2025-11-24",
+            "2025-12-01",
+            "2025-12-08",
+            "2025-12-15",
+            "2025-12-22"
+          ],
+          "mean": [
+            12454.866659105342,
+            12734.448673639174,
+            13214.915373240174,
+            13916.164907137787,
+            13416.250192860842,
+            13410.876618028973,
+            13856.137763142982,
+            14707.92053148857,
+            14096.304414892867,
+            14747.445115281287,
+            14108.818737521535,
+            14440.884772255162,
+            14269.376598166038,
+            14031.955684223178,
+            13823.149712526998,
+            12817.271728802549,
+            12893.922561769532,
+            13388.493635602561,
+            13695.754700610374,
+            13879.572620853933,
+            14494.113094788197,
+            14457.684318074806,
+            14208.322070478152,
+            14173.669967592992,
+            13921.738955509127,
+            14129.925275692187,
+            13471.352481742184,
+            13782.471746530902,
+            14712.215062202335,
+            13864.1025523562,
+            14246.026986147976,
+            14243.90528379407
+          ],
+          "lower_90": [
+            12135.371614069461,
+            12465.680801829933,
+            12865.172492112175,
+            13569.937471193663,
+            13131.635553280144,
+            13117.083697357546,
+            13454.779467191345,
+            14307.34024536422,
+            13673.461055434009,
+            14329.046943470885,
+            13647.139727511583,
+            14046.706111587258,
+            13859.190483874705,
+            13584.582754818193,
+            13339.033520217396,
+            12328.335894217957,
+            12438.404823199908,
+            12963.756462357629,
+            13278.575428650347,
+            13322.561017407832,
+            13867.588353642306,
+            13974.335964349442,
+            13716.331708140677,
+            13675.530034487609,
+            13401.79080388446,
+            13468.29610988158,
+            12947.402401789579,
+            13223.285145998414,
+            13974.087905928704,
+            13196.039942586163,
+            13479.031278805893,
+            13465.184362299275
+          ],
+          "upper_90": [
+            12712.439451462596,
+            13021.174827421128,
+            13438.650067857707,
+            14187.552230146493,
+            13671.717488840297,
+            13652.039148884509,
+            14170.139782339382,
+            15069.01263850778,
+            14435.719171980494,
+            15096.274461949157,
+            14470.038711678502,
+            14788.253472292667,
+            14612.843838567765,
+            14380.882852733324,
+            14202.7538081222,
+            13177.747980808013,
+            13253.248712746785,
+            13786.144876267084,
+            14104.82637830841,
+            14261.652707680078,
+            14943.361857725324,
+            14897.07142253029,
+            14657.958063864331,
+            14619.280400665104,
+            14327.907655288358,
+            14673.46918198697,
+            13957.694944719615,
+            14322.76960261252,
+            15313.305630101495,
+            14475.276538370917,
+            14823.059524450784,
+            14818.37118145759
+          ],
+          "samples": 100,
+          "interval_type": "conditional_expected_outcome",
+          "interval_level": 0.9
+        },
+        "warnings": [
+          "Meridian future forecasting is not exposed; historical scenario only",
+          "No demonstrated causal attribution"
+        ],
+        "execution_limits": {
+          "platform": "nt",
+          "wall_timeout_seconds": 900,
+          "numeric_threads": 1,
+          "cpu_percent": 50,
+          "memory_mb": 4096,
+          "process_tree_cleanup": true
+        }
+      },
+      "error": null,
+      "warnings": [
+        "Meridian future forecasting is not exposed; historical scenario only",
+        "No demonstrated causal attribution"
+      ]
+    }
+  },
+  "same_prediction_after_reload": true,
+  "model_id": "google_meridian-731a1b3817e741beaaeef7addb345713",
+  "restart_scenario_verified": true
+}
