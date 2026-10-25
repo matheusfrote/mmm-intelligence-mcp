@@ -14,6 +14,11 @@
   "real_local_tools_executed": 12,
   "real_http": "passed; server terminated",
   "business_data_used": false,
-  "publication": "repository created; code push and remote CI pending",
-  "native_reloads_and_scenarios": "passed: google_meridian, pymc_marketing, meta_robyn; real MCP stdio"
+  "publication": "public GitHub repository, main push confirmed; no service deployment or PyPI publication",
+  "native_reloads_and_scenarios": "passed: google_meridian, pymc_marketing, meta_robyn; real MCP stdio",
+  "implementation_commit": "89739e921688b930c8dc7cb789094f55a502710c",
+  "ci_run": "https://github.com/matheusfrote/mmm-intelligence-mcp/actions/runs/40154428664",
+  "ci_successful_jobs": 10,
+  "ci_tests_per_matrix_job": 74,
+  "installed_wheel_extended_mcp": "passed; Python and R package sources identical to checked source"
 }

@@ -1,0 +1,126 @@
+{
+  "repository": "matheusfrote/mmm-intelligence-mcp",
+  "branch": "main",
+  "commit": "89739e921688b930c8dc7cb789094f55a502710c",
+  "run_id": 40154428664,
+  "url": "https://github.com/matheusfrote/mmm-intelligence-mcp/actions/runs/40154428664",
+  "jobs": [
+    {
+      "id": 121052645797,
+      "name": "security",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 121052646027,
+      "name": "test (ubuntu-latest, 3.13)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 121052646059,
+      "name": "test (windows-latest, 3.11)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 121052646063,
+      "name": "test (macos-latest, 3.12)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 121052646071,
+      "name": "test (macos-latest, 3.11)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 121052646085,
+      "name": "test (ubuntu-latest, 3.11)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 121052646087,
+      "name": "test (windows-latest, 3.13)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 121052646104,
+      "name": "test (ubuntu-latest, 3.12)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 121052646128,
+      "name": "test (macos-latest, 3.13)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 121052646183,
+      "name": "test (windows-latest, 3.12)",
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ],
+  "test_results": [
+    {
+      "id": 121052646027,
+      "name": "test (ubuntu-latest, 3.13)",
+      "conclusion": "success",
+      "test_result": "74 passed in 8.41s"
+    },
+    {
+      "id": 121052646059,
+      "name": "test (windows-latest, 3.11)",
+      "conclusion": "success",
+      "test_result": "74 passed in 8.99s\r"
+    },
+    {
+      "id": 121052646063,
+      "name": "test (macos-latest, 3.12)",
+      "conclusion": "success",
+      "test_result": "74 passed in 6.95s"
+    },
+    {
+      "id": 121052646071,
+      "name": "test (macos-latest, 3.11)",
+      "conclusion": "success",
+      "test_result": "74 passed in 8.46s"
+    },
+    {
+      "id": 121052646085,
+      "name": "test (ubuntu-latest, 3.11)",
+      "conclusion": "success",
+      "test_result": "74 passed in 6.90s"
+    },
+    {
+      "id": 121052646087,
+      "name": "test (windows-latest, 3.13)",
+      "conclusion": "success",
+      "test_result": "74 passed in 12.77s\r"
+    },
+    {
+      "id": 121052646104,
+      "name": "test (ubuntu-latest, 3.12)",
+      "conclusion": "success",
+      "test_result": "74 passed in 7.87s"
+    },
+    {
+      "id": 121052646128,
+      "name": "test (macos-latest, 3.13)",
+      "conclusion": "success",
+      "test_result": "74 passed in 6.23s"
+    },
+    {
+      "id": 121052646183,
+      "name": "test (windows-latest, 3.12)",
+      "conclusion": "success",
+      "test_result": "74 passed in 7.65s\r"
+    }
+  ],
+  "scope": "base package, unit/integration, build, real stdio extended and loopback HTTP on 3 operating systems x 3 Python versions. Optional native engines tested separately on local Windows, not installed in CI."
+}

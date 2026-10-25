@@ -4,6 +4,8 @@ Servidor independente de Marketing Mix Modeling com **SDK oficial MCP 2.3**, exe
 
 Nenhuma ferramenta altera campanhas ou orçamentos reais. Dados sintéticos são o padrão. Integração funcional é diferente de convergência estatística e identificação causal.
 
+Código publicado em [GitHub](https://github.com/matheusfrote/mmm-intelligence-mcp). A [matriz CI](https://github.com/matheusfrote/mmm-intelligence-mcp/actions) verifica Windows, Linux e macOS com Python 3.11/3.12/3.13. Consulte o [registro de entrega](IMPLEMENTATION_PROGRESS.md) para resultados e limites.
+
 ## Começar
 
 Python 3.11+ para o servidor base; PyMC-Marketing 1.3 exige Python 3.12 em seu ambiente separado.
