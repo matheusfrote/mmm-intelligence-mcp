@@ -9,6 +9,9 @@ flowchart LR
     A --> D[datasets: geração e validação]
     A --> M[modeling: Ridge exploratório]
     A --> F[simulation: cenários]
+    A --> O[optimization: candidato condicionado]
+    A --> Q[scientific: auditoria e abstenção]
+    A --> W[workers nativos isolados]
     A --> P[storage: JSON imutável]
     A --> L[logs locais]
     P --> R[Raiz autorizada pelo operador]
@@ -23,6 +26,8 @@ Cada dataset/modelo é um arquivo JSON único com envelope de versão, tipo, SHA
 Publicação: gravação exclusiva em temporário no mesmo diretório, flush/fsync e hard link exclusivo para o nome final, seguido da remoção do temporário. O leitor vê um arquivo completo. Colisão falha com `ALREADY_EXISTS`; a geração automática usa UUID. Teste concorrente comprova que somente uma escrita vence. Requer sistema de arquivos com suporte a hard links, como o NTFS testado. Não há fallback que sobrescreva dados. Queda abrupta pode deixar `.pending-*`; não são lidos como artefatos e a remoção manual deve ser feita com o servidor parado.
 
 O artefato modelo serve à consulta e à simulação sem reabrir o dataset. O estado de adstock inclui as mídias realizadas no teste, mas os coeficientes e escalas continuam ajustados apenas no treino. Isso permite prever a partir da última data disponível sem contaminar as métricas de holdout com reajuste.
+
+`audit_model` reabre o dataset somente após verificar a linhagem do modelo. `scientific` reconstrói componentes, executa backtests e sensibilidade, sem persistir uma recomendação de negócio. O otimizador retorna candidato numérico e motivos de abstenção; recommended_spend permanece null. Os adaptadores externos preservam sua própria matemática, configurações e semântica de intervalo, conforme a matriz científica.
 
 ## Operação
 

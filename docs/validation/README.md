@@ -2,6 +2,8 @@
 
 Todos os dados são sintéticos. Arquivos de modelos nativos, ambientes, logs upstream e configurações pessoais ficam somente no armazenamento local, fora do Git e do sdist.
 
+Evidências atuais 0.3: `scientific-final/` contém CSV, dashboard, relatório, auditoria e ciclo stdio de 16 ferramentas/13 locais; `scientific-meridian.json`, `scientific-pymc.json` e `scientific-robyn.json` são novos treinos nativos reais com recarga. `scientific-stress.json` contém 11 casos construídos; `scientific-ui.json` registra a paridade JS/Python; `scientific-http.json` confirma transporte/autorização. `scientific-checks.json` agrega verificações e `scientific-github-ci.json` confirma dez jobs, incluindo 105 testes em cada combinação OS/Python. Os arquivos listados abaixo são evidências históricas 0.2.
+
 - `mcp-cycle.json`, `dashboard.html` e `report.md`: ciclo local ampliado com SDK oficial, descoberta de 15 ferramentas, execução das 12 ferramentas locais e persistência após reinício.
 - `*-mcp.json`: cópias revisadas dos ciclos nativos da etapa anterior, com treino real, consulta, reconstrução do formato nativo e cenário em novo processo MCP. Não são mocks nem execução de CI dos frameworks opcionais.
 - `*-extended.json` e `pymc-diagnostics.json`: diagnósticos estatísticos sintéticos; o baixo R² do Meridian e limitações de convergência dos smokes permanecem explícitos.

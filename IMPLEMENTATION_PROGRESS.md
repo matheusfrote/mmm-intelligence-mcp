@@ -114,3 +114,13 @@ Esta seção atualiza o estado anterior da entrega 0.2. O usuário autorizou dad
 Publicação 0.3, distribuição final e CI remoto são verificados na próxima seção, após a execução. Sem PyPI ou deploy.
 
 Distribuição 0.3: wheel e sdist construídos, quatro documentos MMM incluídos na fonte e diretórios privados excluídos. O wheel instalado em var/scientific-wheel foi importado desse diretório, teve todos os módulos Python/R comparados byte a byte com a fonte e executou as 13 ferramentas locais e reinício. Artefatos preservados em dist/scientific-0.3; evidência privada em evidence/scientific-wheel-demo. Inspeção dos 46 arquivos alterados não encontrou padrões reconhecidos de segredo nem caminho pessoal; isso não substitui revisão universal de segurança.
+
+## Publicação 0.3 confirmada
+
+- Commit [`e0f8656ffedb36d434ef2589b477e8cb2f9ed33a`](https://github.com/matheusfrote/mmm-intelligence-mcp/commit/e0f8656ffedb36d434ef2589b477e8cb2f9ed33a), branch main: `feat: audit MMM science, isolate holdouts and abstain from unsupported budget advice`.
+- Push normal confirmou d20e00b → e0f8656; GitHub MCP consultou independentemente o commit remoto. Nenhum force push, merge, PR, PyPI ou deploy.
+- [CI 40206543692](https://github.com/matheusfrote/mmm-intelligence-mcp/actions/runs/40206543692): **10 jobs concluídos com sucesso**. Nove combinações Windows/Linux/macOS × Python 3.11/3.12/3.13 passaram 105 testes cada, instalação, pip check, Ruff, build, stdio, HTTP e stress. O décimo job confirmou zero vulnerabilidades Python conhecidas.
+- Todos os logs dos jobs foram consultados pelo GitHub MCP; cada job de teste registrou 105 passed e zero recomendações empresariais no stress. Snapshot público em [scientific-github-ci.json](docs/validation/scientific-github-ci.json). Os frameworks opcionais continuam verificados nos treinos Windows separados, sem alegação de CI nativo multiplataforma.
+- Este registro e os índices de documentação são enviados em commit posterior de documentação. A branch final e suas execuções permanecem verificáveis no [histórico](https://github.com/matheusfrote/mmm-intelligence-mcp/commits/main/) e [Actions](https://github.com/matheusfrote/mmm-intelligence-mcp/actions).
+
+Entrega funcional 0.3 concluída e publicada. Limites científicos pendentes são os explicitados no veredito, não funcionalidades simuladas como prontas. Nenhum dado empresarial foi disponibilizado ou usado.

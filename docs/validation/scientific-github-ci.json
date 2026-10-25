@@ -1,0 +1,691 @@
+{
+  "head_sha": "e0f8656ffedb36d434ef2589b477e8cb2f9ed33a",
+  "run_id": 40206543692,
+  "url": "https://github.com/matheusfrote/mmm-intelligence-mcp/actions/runs/40206543692",
+  "conclusion": "success",
+  "scope": "Base server matrix; native frameworks separately tested on Windows; synthetic data only",
+  "jobs": [
+    {
+      "id": 121208587300,
+      "name": "security",
+      "conclusion": "success",
+      "test_summary": null,
+      "stress_zero_recommendations": false,
+      "security_no_known_vulnerabilities": true,
+      "status": "completed",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-python@v5",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pip install pip-audit==2.10.1",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pip_audit --no-deps --disable-pip -r requirements-lock.txt",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-python@v5",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 121208587414,
+      "name": "test (ubuntu-latest, 3.12)",
+      "conclusion": "success",
+      "test_summary": "105 passed in 9.99s",
+      "stress_zero_recommendations": true,
+      "security_no_known_vulnerabilities": false,
+      "status": "completed",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-python@v5",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pip install -e '.[dev]'",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pip check",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m ruff check src tests examples server.py",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m ruff format --check src tests examples server.py",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pytest -q",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m build",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python examples/mcp_workflow.py --extended --data-dir var/ci-demo --output-dir evidence/ci-demo",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python examples/http_smoke.py --output-dir evidence/ci-http",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python examples/scientific_stress.py --output-dir evidence/ci-scientific-stress",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-python@v5",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 121208587416,
+      "name": "test (windows-latest, 3.12)",
+      "conclusion": "success",
+      "test_summary": "105 passed in 14.33s",
+      "stress_zero_recommendations": true,
+      "security_no_known_vulnerabilities": false,
+      "status": "completed",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-python@v5",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pip install -e '.[dev]'",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pip check",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m ruff check src tests examples server.py",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m ruff format --check src tests examples server.py",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pytest -q",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m build",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python examples/mcp_workflow.py --extended --data-dir var/ci-demo --output-dir evidence/ci-demo",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python examples/http_smoke.py --output-dir evidence/ci-http",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python examples/scientific_stress.py --output-dir evidence/ci-scientific-stress",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-python@v5",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 121208587427,
+      "name": "test (windows-latest, 3.13)",
+      "conclusion": "success",
+      "test_summary": "105 passed in 13.18s",
+      "stress_zero_recommendations": true,
+      "security_no_known_vulnerabilities": false,
+      "status": "completed",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-python@v5",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pip install -e '.[dev]'",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pip check",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m ruff check src tests examples server.py",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m ruff format --check src tests examples server.py",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pytest -q",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m build",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python examples/mcp_workflow.py --extended --data-dir var/ci-demo --output-dir evidence/ci-demo",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python examples/http_smoke.py --output-dir evidence/ci-http",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python examples/scientific_stress.py --output-dir evidence/ci-scientific-stress",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-python@v5",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 121208587442,
+      "name": "test (macos-latest, 3.11)",
+      "conclusion": "success",
+      "test_summary": "105 passed in 10.71s",
+      "stress_zero_recommendations": true,
+      "security_no_known_vulnerabilities": false,
+      "status": "completed",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-python@v5",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pip install -e '.[dev]'",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pip check",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m ruff check src tests examples server.py",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m ruff format --check src tests examples server.py",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pytest -q",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m build",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python examples/mcp_workflow.py --extended --data-dir var/ci-demo --output-dir evidence/ci-demo",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python examples/http_smoke.py --output-dir evidence/ci-http",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python examples/scientific_stress.py --output-dir evidence/ci-scientific-stress",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-python@v5",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 121208587444,
+      "name": "test (macos-latest, 3.13)",
+      "conclusion": "success",
+      "test_summary": "105 passed in 6.65s",
+      "stress_zero_recommendations": true,
+      "security_no_known_vulnerabilities": false,
+      "status": "completed",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-python@v5",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pip install -e '.[dev]'",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pip check",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m ruff check src tests examples server.py",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m ruff format --check src tests examples server.py",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pytest -q",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m build",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python examples/mcp_workflow.py --extended --data-dir var/ci-demo --output-dir evidence/ci-demo",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python examples/http_smoke.py --output-dir evidence/ci-http",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python examples/scientific_stress.py --output-dir evidence/ci-scientific-stress",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-python@v5",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 121208587445,
+      "name": "test (macos-latest, 3.12)",
+      "conclusion": "success",
+      "test_summary": "105 passed in 6.62s",
+      "stress_zero_recommendations": true,
+      "security_no_known_vulnerabilities": false,
+      "status": "completed",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-python@v5",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pip install -e '.[dev]'",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pip check",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m ruff check src tests examples server.py",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m ruff format --check src tests examples server.py",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pytest -q",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m build",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python examples/mcp_workflow.py --extended --data-dir var/ci-demo --output-dir evidence/ci-demo",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python examples/http_smoke.py --output-dir evidence/ci-http",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python examples/scientific_stress.py --output-dir evidence/ci-scientific-stress",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-python@v5",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 121208587482,
+      "name": "test (ubuntu-latest, 3.11)",
+      "conclusion": "success",
+      "test_summary": "105 passed in 10.22s",
+      "stress_zero_recommendations": true,
+      "security_no_known_vulnerabilities": false,
+      "status": "completed",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-python@v5",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pip install -e '.[dev]'",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pip check",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m ruff check src tests examples server.py",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m ruff format --check src tests examples server.py",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pytest -q",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m build",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python examples/mcp_workflow.py --extended --data-dir var/ci-demo --output-dir evidence/ci-demo",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python examples/http_smoke.py --output-dir evidence/ci-http",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python examples/scientific_stress.py --output-dir evidence/ci-scientific-stress",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-python@v5",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 121208587500,
+      "name": "test (ubuntu-latest, 3.13)",
+      "conclusion": "success",
+      "test_summary": "105 passed in 10.51s",
+      "stress_zero_recommendations": true,
+      "security_no_known_vulnerabilities": false,
+      "status": "completed",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-python@v5",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pip install -e '.[dev]'",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pip check",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m ruff check src tests examples server.py",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m ruff format --check src tests examples server.py",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pytest -q",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m build",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python examples/mcp_workflow.py --extended --data-dir var/ci-demo --output-dir evidence/ci-demo",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python examples/http_smoke.py --output-dir evidence/ci-http",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python examples/scientific_stress.py --output-dir evidence/ci-scientific-stress",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-python@v5",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 121208587513,
+      "name": "test (windows-latest, 3.11)",
+      "conclusion": "success",
+      "test_summary": "105 passed in 9.65s",
+      "stress_zero_recommendations": true,
+      "security_no_known_vulnerabilities": false,
+      "status": "completed",
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-python@v5",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pip install -e '.[dev]'",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pip check",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m ruff check src tests examples server.py",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m ruff format --check src tests examples server.py",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pytest -q",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m build",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python examples/mcp_workflow.py --extended --data-dir var/ci-demo --output-dir evidence/ci-demo",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python examples/http_smoke.py --output-dir evidence/ci-http",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python examples/scientific_stress.py --output-dir evidence/ci-scientific-stress",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-python@v5",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ]
+}
