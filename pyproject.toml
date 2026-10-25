@@ -17,7 +17,7 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-dev = ["pytest>=9.0.3,<10", "pytest-cov>=6,<8", "ruff>=0.12,<1", "build>=1.2,<2", "setuptools>=77"]
+dev = ["pytest>=9.0.3,<10", "pytest-cov>=6,<8", "ruff>=0.12,<1", "build>=1.2,<2", "setuptools>=77", "pyyaml>=6,<7"]
 audit = ["bandit>=1.8,<2", "mypy>=1.18,<2", "pip-audit==2.10.1"]
 
 [project.scripts]
