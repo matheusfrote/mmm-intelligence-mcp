@@ -1,0 +1,860 @@
+{
+  "head_sha": "65f25710c1cdb3b37aa8d2a9a8ec23b821743f0e",
+  "run_id": 40217559233,
+  "url": "https://github.com/matheusfrote/mmm-intelligence-mcp/actions/runs/40217559233",
+  "conclusion": "success",
+  "previous_failed_run": {
+    "id": 40217269831,
+    "jobs_started": 0,
+    "cause": "YAML syntax; quoted install command and parsing regression fixed it"
+  },
+  "scope": "Base server; native engines separately reloaded on Windows. Synthetic data only. No deployment.",
+  "jobs": [
+    {
+      "id": 121241901878,
+      "name": "security",
+      "conclusion": "success",
+      "tests": null,
+      "mypy": false,
+      "bandit_no_active_findings": false,
+      "secret_patterns_none": false,
+      "stress_zero_recommendations": false,
+      "security_no_known_vulnerabilities": true,
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pip install --require-hashes --only-binary=:all: -r requirements/base-ci.txt",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pip_audit --no-deps --disable-pip -r requirements/base-ci.txt",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 121241902192,
+      "name": "test (ubuntu-latest, 3.12)",
+      "conclusion": "success",
+      "tests": "131 passed in 7.89s",
+      "mypy": true,
+      "bandit_no_active_findings": true,
+      "secret_patterns_none": true,
+      "stress_zero_recommendations": true,
+      "security_no_known_vulnerabilities": false,
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pip install --require-hashes --only-binary=:all: -r requirements/base-ci.txt",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pip install --no-deps --no-build-isolation -e .",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pip check",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m ruff check src tests examples server.py",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m ruff format --check src tests examples server.py",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m mypy src",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m bandit -r src",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python examples/check_secrets.py",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pytest -q",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m build --no-isolation",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python examples/mcp_workflow.py --extended --data-dir var/ci-demo --output-dir evidence/ci-demo",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python examples/http_smoke.py --output-dir evidence/ci-http",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python examples/scientific_stress.py --output-dir evidence/ci-scientific-stress",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 121241902195,
+      "name": "test (macos-latest, 3.13)",
+      "conclusion": "success",
+      "tests": "131 passed in 7.98s",
+      "mypy": true,
+      "bandit_no_active_findings": true,
+      "secret_patterns_none": true,
+      "stress_zero_recommendations": true,
+      "security_no_known_vulnerabilities": false,
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pip install --require-hashes --only-binary=:all: -r requirements/base-ci.txt",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pip install --no-deps --no-build-isolation -e .",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pip check",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m ruff check src tests examples server.py",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m ruff format --check src tests examples server.py",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m mypy src",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m bandit -r src",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python examples/check_secrets.py",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pytest -q",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m build --no-isolation",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python examples/mcp_workflow.py --extended --data-dir var/ci-demo --output-dir evidence/ci-demo",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python examples/http_smoke.py --output-dir evidence/ci-http",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python examples/scientific_stress.py --output-dir evidence/ci-scientific-stress",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 121241902213,
+      "name": "test (ubuntu-latest, 3.11)",
+      "conclusion": "success",
+      "tests": "131 passed in 8.69s",
+      "mypy": true,
+      "bandit_no_active_findings": true,
+      "secret_patterns_none": true,
+      "stress_zero_recommendations": true,
+      "security_no_known_vulnerabilities": false,
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pip install --require-hashes --only-binary=:all: -r requirements/base-ci.txt",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pip install --no-deps --no-build-isolation -e .",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pip check",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m ruff check src tests examples server.py",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m ruff format --check src tests examples server.py",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m mypy src",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m bandit -r src",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python examples/check_secrets.py",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pytest -q",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m build --no-isolation",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python examples/mcp_workflow.py --extended --data-dir var/ci-demo --output-dir evidence/ci-demo",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python examples/http_smoke.py --output-dir evidence/ci-http",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python examples/scientific_stress.py --output-dir evidence/ci-scientific-stress",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 121241902216,
+      "name": "test (ubuntu-latest, 3.13)",
+      "conclusion": "success",
+      "tests": "131 passed in 11.13s",
+      "mypy": true,
+      "bandit_no_active_findings": true,
+      "secret_patterns_none": true,
+      "stress_zero_recommendations": true,
+      "security_no_known_vulnerabilities": false,
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pip install --require-hashes --only-binary=:all: -r requirements/base-ci.txt",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pip install --no-deps --no-build-isolation -e .",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pip check",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m ruff check src tests examples server.py",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m ruff format --check src tests examples server.py",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m mypy src",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m bandit -r src",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python examples/check_secrets.py",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pytest -q",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m build --no-isolation",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python examples/mcp_workflow.py --extended --data-dir var/ci-demo --output-dir evidence/ci-demo",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python examples/http_smoke.py --output-dir evidence/ci-http",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python examples/scientific_stress.py --output-dir evidence/ci-scientific-stress",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 121241902268,
+      "name": "test (windows-latest, 3.11)",
+      "conclusion": "success",
+      "tests": "131 passed in 13.80s",
+      "mypy": true,
+      "bandit_no_active_findings": true,
+      "secret_patterns_none": true,
+      "stress_zero_recommendations": true,
+      "security_no_known_vulnerabilities": false,
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pip install --require-hashes --only-binary=:all: -r requirements/base-ci.txt",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pip install --no-deps --no-build-isolation -e .",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pip check",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m ruff check src tests examples server.py",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m ruff format --check src tests examples server.py",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m mypy src",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m bandit -r src",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python examples/check_secrets.py",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pytest -q",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m build --no-isolation",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python examples/mcp_workflow.py --extended --data-dir var/ci-demo --output-dir evidence/ci-demo",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python examples/http_smoke.py --output-dir evidence/ci-http",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python examples/scientific_stress.py --output-dir evidence/ci-scientific-stress",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 121241902321,
+      "name": "test (windows-latest, 3.12)",
+      "conclusion": "success",
+      "tests": "131 passed in 14.96s",
+      "mypy": true,
+      "bandit_no_active_findings": true,
+      "secret_patterns_none": true,
+      "stress_zero_recommendations": true,
+      "security_no_known_vulnerabilities": false,
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pip install --require-hashes --only-binary=:all: -r requirements/base-ci.txt",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pip install --no-deps --no-build-isolation -e .",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pip check",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m ruff check src tests examples server.py",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m ruff format --check src tests examples server.py",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m mypy src",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m bandit -r src",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python examples/check_secrets.py",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pytest -q",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m build --no-isolation",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python examples/mcp_workflow.py --extended --data-dir var/ci-demo --output-dir evidence/ci-demo",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python examples/http_smoke.py --output-dir evidence/ci-http",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python examples/scientific_stress.py --output-dir evidence/ci-scientific-stress",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 121241902325,
+      "name": "test (windows-latest, 3.13)",
+      "conclusion": "success",
+      "tests": "131 passed, 1 warning in 16.38s",
+      "mypy": true,
+      "bandit_no_active_findings": true,
+      "secret_patterns_none": true,
+      "stress_zero_recommendations": true,
+      "security_no_known_vulnerabilities": false,
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pip install --require-hashes --only-binary=:all: -r requirements/base-ci.txt",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pip install --no-deps --no-build-isolation -e .",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pip check",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m ruff check src tests examples server.py",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m ruff format --check src tests examples server.py",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m mypy src",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m bandit -r src",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python examples/check_secrets.py",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pytest -q",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m build --no-isolation",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python examples/mcp_workflow.py --extended --data-dir var/ci-demo --output-dir evidence/ci-demo",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python examples/http_smoke.py --output-dir evidence/ci-http",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python examples/scientific_stress.py --output-dir evidence/ci-scientific-stress",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 121241902360,
+      "name": "test (macos-latest, 3.11)",
+      "conclusion": "success",
+      "tests": "131 passed in 7.48s",
+      "mypy": true,
+      "bandit_no_active_findings": true,
+      "secret_patterns_none": true,
+      "stress_zero_recommendations": true,
+      "security_no_known_vulnerabilities": false,
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pip install --require-hashes --only-binary=:all: -r requirements/base-ci.txt",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pip install --no-deps --no-build-isolation -e .",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pip check",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m ruff check src tests examples server.py",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m ruff format --check src tests examples server.py",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m mypy src",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m bandit -r src",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python examples/check_secrets.py",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pytest -q",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m build --no-isolation",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python examples/mcp_workflow.py --extended --data-dir var/ci-demo --output-dir evidence/ci-demo",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python examples/http_smoke.py --output-dir evidence/ci-http",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python examples/scientific_stress.py --output-dir evidence/ci-scientific-stress",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 121241902381,
+      "name": "test (macos-latest, 3.12)",
+      "conclusion": "success",
+      "tests": "131 passed in 12.60s",
+      "mypy": true,
+      "bandit_no_active_findings": true,
+      "secret_patterns_none": true,
+      "stress_zero_recommendations": true,
+      "security_no_known_vulnerabilities": false,
+      "steps": [
+        {
+          "name": "Set up job",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pip install --require-hashes --only-binary=:all: -r requirements/base-ci.txt",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pip install --no-deps --no-build-isolation -e .",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pip check",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m ruff check src tests examples server.py",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m ruff format --check src tests examples server.py",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m mypy src",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m bandit -r src",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python examples/check_secrets.py",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m pytest -q",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python -m build --no-isolation",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python examples/mcp_workflow.py --extended --data-dir var/ci-demo --output-dir evidence/ci-demo",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python examples/http_smoke.py --output-dir evidence/ci-http",
+          "conclusion": "success"
+        },
+        {
+          "name": "Run python examples/scientific_stress.py --output-dir evidence/ci-scientific-stress",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "conclusion": "success"
+        },
+        {
+          "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "conclusion": "success"
+        },
+        {
+          "name": "Complete job",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ]
+}

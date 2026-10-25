@@ -1,6 +1,6 @@
 # Auditoria de segurança e publicação — 0.3.1
 
-Data de referência: 25/10/2026, America/Sao_Paulo. O pedido inicial incluía produção, mas o usuário esclareceu: **“não tem por hora vou deixar somene no github”**. O escopo final é auditar, corrigir, testar e publicar o código no repositório existente. Deploy, domínio, TLS externo e smoke de produção não foram executados nem aprovados. Nenhum serviço, plano pago, campanha ou dado empresarial foi alterado.
+Data de referência: 25/10/2026, America/Sao_Paulo. Após a descoberta do ambiente, o usuário definiu a entrega como **somente GitHub, sem deploy nesta etapa**. O escopo final é auditar, corrigir, testar e publicar o código no repositório existente. Deploy, domínio, TLS externo e smoke de produção não foram executados nem aprovados. Nenhum serviço, plano pago, campanha ou dado empresarial foi alterado.
 
 ## Ambiente e fronteiras de confiança
 
@@ -109,8 +109,12 @@ Rollback desta publicação é um revert revisado, sem force push nem reescrita 
 
 ## Conclusão verificável
 
-Suíte final local: **130 testes passaram em 20,76 s**, Python 3.12.14, no ambiente limpo com lock/hash. Um RuntimeWarning SciPy preexistente ocorreu em um solver nested; as saídas permaneceram finitas e a regressão passou. Ruff check/format passou; mypy básico passou nos 20 módulos; Bandit não apresentou achados ativos após as seis revisões de linha descritas; pip check não encontrou dependências quebradas. Wheel e sdist 0.3.1 foram construídos, incluindo este relatório, sem ambientes/modelos/logs privados.
+Suíte final local: **131 testes passaram em 20,31 s**, Python 3.12.14, no ambiente limpo com lock/hash, incluindo a regressão de YAML acrescentada após o primeiro CI. Um RuntimeWarning SciPy preexistente ocorreu em um solver nested; as saídas permaneceram finitas e a regressão passou. Ruff check/format passou; mypy básico passou nos 20 módulos; Bandit não apresentou achados ativos após as seis revisões de linha descritas; pip check não encontrou dependências quebradas. Wheel e sdist 0.3.1 foram construídos, incluindo este relatório, sem ambientes/modelos/logs privados.
 
 A segunda busca de padrões revisou 112 arquivos/131 blobs, sem achados reconhecidos; as contagens são da execução, não constantes do projeto. O resumo publicável está em [security031-checks.json](docs/validation/security031-checks.json). Publicação, pacote instalado e CI são confirmados no registro posterior de progresso. O veredito se restringe ao servidor local e à publicação de código, sem deploy e sem validação de negócio real.
+
+O [primeiro CI 40217269831](https://github.com/matheusfrote/mmm-intelligence-mcp/actions/runs/40217269831) não criou jobs por sintaxe YAML inválida no comando de instalação que contém `:all:`. A reprodução local com parser confirmou a causa. O comando foi colocado entre aspas, PyYAML tornou-se dependência dev explícita e um teste valida parsing e comandos escalares. O commit corretivo é `65f25710c1cdb3b37aa8d2a9a8ec23b821743f0e`; versões e hashes do lock permaneceram iguais. Essa falha não foi ocultada nem contada como teste de segurança aprovado.
+
+**Publicação confirmada:** código em main, commits [5492c0d](https://github.com/matheusfrote/mmm-intelligence-mcp/commit/5492c0d811a164ca47eb8143715f228397467a25) e [65f2571](https://github.com/matheusfrote/mmm-intelligence-mcp/commit/65f25710c1cdb3b37aa8d2a9a8ec23b821743f0e), push normal e commit remoto consultado pelo GitHub MCP. O [CI corrigido 40217559233](https://github.com/matheusfrote/mmm-intelligence-mcp/actions/runs/40217559233) concluiu **10 jobs com sucesso**: 131 testes em cada uma das nove combinações OS/Python, além de instalação com hashes, lint, tipos, SAST, segredos, build, stdio, HTTP e stress; o décimo job auditou advisories. Os dez logs foram lidos; [snapshot](docs/validation/security031-github-ci.json). A atualização final deste relatório é um commit posterior de documentação. Nenhum deploy ou PyPI.
 
 Referências primárias: [segurança/deploy do SDK MCP](https://py.sdk.modelcontextprotocol.io/run/deploy/), [OWASP MCP](https://cheatsheetseries.owasp.org/cheatsheets/MCP_Security_Cheat_Sheet.html), [instalações seguras pip](https://pip.pypa.io/en/stable/topics/secure-installs/), [locks e hashes uv](https://docs.astral.sh/uv/pip/compile/).

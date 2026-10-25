@@ -11,8 +11,8 @@
   },
   "pytest": {
     "python": "3.12.14",
-    "passed": 130,
-    "seconds": 20.76,
+    "passed": 131,
+    "seconds": 20.31,
     "warning": "One preexisting SciPy RuntimeWarning in a nested solver; finite results and tests passed"
   },
   "ruff": "passed after fixing import order",
@@ -208,5 +208,13 @@
     "python_and_r_source_bytes_matched": true,
     "private_files_excluded": true,
     "installed_wheel_extended_stdio_restart": true
+  },
+  "ci_yaml_regression": {
+    "initial_run": 40217269831,
+    "initial_jobs": 0,
+    "cause": "Unquoted YAML-sensitive :all: in install command",
+    "fixed": true,
+    "parse_and_scalar_commands_test": "passed",
+    "lock_versions_and_hashes_unchanged": true
   }
 }
