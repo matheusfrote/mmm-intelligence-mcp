@@ -1,0 +1,19 @@
+{
+  "executed_at": "2026-10-25T02:24:16.870912+00:00",
+  "python": "3.12.14",
+  "platform": "Windows",
+  "unit_integration_tests": {
+    "windows_py312": 74,
+    "windows_py311": 74
+  },
+  "ruff": "passed",
+  "pip_check": "passed",
+  "compileall": "passed",
+  "static_type_checker": "not configured",
+  "real_mcp_tools_discovered": 15,
+  "real_local_tools_executed": 12,
+  "real_http": "passed; server terminated",
+  "business_data_used": false,
+  "publication": "repository created; code push and remote CI pending",
+  "native_reloads_and_scenarios": "passed: google_meridian, pymc_marketing, meta_robyn; real MCP stdio"
+}

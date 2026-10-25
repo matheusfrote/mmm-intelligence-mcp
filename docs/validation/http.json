@@ -1,0 +1,8 @@
+{
+  "transport": "streamable-http-loopback",
+  "sdk": "2.x",
+  "created": true,
+  "tenant_isolation": true,
+  "reader_write_blocked": true,
+  "unauthorized_status": 401
+}

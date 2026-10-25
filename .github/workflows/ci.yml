@@ -1,0 +1,40 @@
+name: Local package quality
+on:
+  workflow_dispatch:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python: ['3.11', '3.12', '3.13']
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - run: python -m pip install -e '.[dev]'
+      - run: python -m pip check
+      - run: python -m ruff check src tests examples server.py
+      - run: python -m ruff format --check src tests examples server.py
+      - run: python -m pytest -q
+      - run: python -m build
+      - run: python examples/mcp_workflow.py --extended --data-dir var/ci-demo --output-dir evidence/ci-demo
+      - run: python examples/http_smoke.py --output-dir evidence/ci-http
+  security:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install pip-audit==2.10.1
+      - run: python -m pip_audit --no-deps --disable-pip -r requirements-lock.txt
+    # No upload, publish, deploy, credentials or real datasets.

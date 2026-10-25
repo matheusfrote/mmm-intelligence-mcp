@@ -1,0 +1,27 @@
+{
+  "executed_at": "2026-10-25T02:22:36.050041+00:00",
+  "transport": "real MCP stdio",
+  "results": [
+    {
+      "backend": "google_meridian",
+      "model_id": "google_meridian-0188982157b1430ca6bf9eb5606d8599",
+      "reload_prediction_equal": true,
+      "scenario_success": true,
+      "training": "previous real MCP cycle, not retrained in this reload check"
+    },
+    {
+      "backend": "pymc_marketing",
+      "model_id": "pymc_marketing-94f73dab5e1a4f1688eea54cb5934a6b",
+      "reload_prediction_equal": true,
+      "scenario_success": true,
+      "training": "previous real MCP cycle, not retrained in this reload check"
+    },
+    {
+      "backend": "meta_robyn",
+      "model_id": "meta_robyn-3ab8d282a9524560ab6c17cd54fe957f",
+      "reload_prediction_equal": true,
+      "scenario_success": true,
+      "training": "previous real MCP cycle, not retrained in this reload check"
+    }
+  ]
+}

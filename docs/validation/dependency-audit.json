@@ -1,0 +1,37 @@
+{
+  "tool": "pip-audit 2.10.1",
+  "service": "PyPI",
+  "scope": "exact versions in committed Python locks; no package remediation or native R advisory database",
+  "locks": [
+    {
+      "lock": "requirements-lock.txt",
+      "exit_code": 0,
+      "findings": []
+    },
+    {
+      "lock": "requirements/base-linux-py312.txt",
+      "exit_code": 0,
+      "findings": []
+    },
+    {
+      "lock": "requirements/base-win-py311.txt",
+      "exit_code": 0,
+      "findings": []
+    },
+    {
+      "lock": "requirements/meridian-win-py312.txt",
+      "exit_code": 0,
+      "findings": []
+    },
+    {
+      "lock": "requirements/pymc-win-py312.txt",
+      "exit_code": 0,
+      "findings": []
+    },
+    {
+      "lock": "requirements/robyn-python-win-py312.txt",
+      "exit_code": 0,
+      "findings": []
+    }
+  ]
+}

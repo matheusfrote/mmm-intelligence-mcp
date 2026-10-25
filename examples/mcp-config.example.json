@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "mmm-intelligence": {
+      "command": "/absolute/path/to/mmm-intelligence-mcp/.venv/bin/python",
+      "args": ["-m", "mmm_intelligence.server"],
+      "env": {
+        "MMM_DATA_DIR": "/absolute/path/to/private/mmm-data",
+        "MMM_ALLOW_REAL_DATA": "false"
+      }
+    }
+  }
+}

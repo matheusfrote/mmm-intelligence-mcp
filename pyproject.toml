@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mmm-intelligence-mcp"
+version = "0.2.0"
+description = "Local exploratory Marketing Mix Modeling server using the official MCP SDK"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "mcp>=2.3,<3",
+  "numpy>=2.2,<3",
+  "scipy>=1.15,<2",
+  "pydantic>=2.11,<3",
+  "threadpoolctl>=3.1,<4",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=9.0.3,<10", "pytest-cov>=6,<8", "ruff>=0.12,<1", "build>=1.2,<2", "setuptools>=77"]
+
+[project.scripts]
+mmm-intelligence-mcp = "mmm_intelligence.server:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+mmm_intelligence = ["integrations/*.R"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I"]

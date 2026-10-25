@@ -1,0 +1,20 @@
+include server.py
+include requirements-lock.txt
+include .env.example
+include .gitignore
+include IMPLEMENTATION_PROGRESS.md
+include CHANGELOG.md
+recursive-include docs *.md
+recursive-include examples *.py *.example.json *.csv
+recursive-include tests *.py
+recursive-include requirements *.txt
+recursive-include requirements *.csv
+recursive-include .github *.yml
+recursive-include src/mmm_intelligence/integrations *.R
+recursive-include docs/validation *.json *.md *.html
+prune evidence
+prune var
+exclude preservation-baseline.json
+exclude examples/*.local.json
+global-exclude __pycache__
+global-exclude *.py[cod]
