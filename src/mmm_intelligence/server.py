@@ -5,6 +5,7 @@ from mcp.types import ToolAnnotations
 
 from .config import Settings
 from .schemas import (
+    DatasetRequest,
     GenerateRequest,
     ModelRequest,
     SimulateRequest,
@@ -28,6 +29,17 @@ def create_server(
     creates = ToolAnnotations(
         read_only_hint=False, destructive_hint=False, idempotent_hint=False, open_world_hint=False
     )
+
+    @mcp.resource("mmm://datasets/{dataset_id}", mime_type="application/json")
+    def dataset_resource(dataset_id: str) -> str:
+        """Read authorized tenant dataset rows; IDs only, never paths or URLs."""
+        import json
+
+        try:
+            request = DatasetRequest(dataset_id=dataset_id)
+            return json.dumps(service.load_dataset(request.dataset_id), allow_nan=False)
+        except Exception:
+            raise ValueError("Dataset unavailable or unauthorized") from None
 
     @mcp.tool(annotations=creates)
     def generate_demo_dataset(request: GenerateRequest) -> ToolResponse:
@@ -66,6 +78,16 @@ def create_server(
         return service.call("simulate_budget", request.model_dump(mode="json"))
 
     descriptions = {
+        "storage_inventory": "Inspect verified artifact IDs, hashes, sizes and lineage inside the current tenant; excludes logs and runtimes.",
+        "retention_plan": "Prepare a retention review by age and dependencies; never deletes files.",
+        "connector_status": "Report source connector readiness honestly; contracts and offline reconciliation are not live authenticated integrations.",
+        "export_analysis": "Export canonical historical model evidence as JSON, safe numeric CSV or Markdown; no filesystem path input.",
+        "forecast_model": "Project future dates with explicit time-varying media and controls in Ridge or native PyMC; preserves observed adstock history and reports interval semantics.",
+        "get_analysis": "Normalize persisted evidence, test metrics, native diagnostics and capabilities without claiming engine equivalence.",
+        "compare_models": "Compare the same dataset and KPI on exact or explicitly intersected holdout dates; no universal winner or causal ranking.",
+        "model_capabilities": "Read operation availability and reasons per engine; unsupported operations never use a substitute engine.",
+        "import_csv": "Import bounded inline CSV with explicit mapping, date/timezone, aggregation policies and preserved original provenance; never opens paths or URLs.",
+        "data_quality": "Inspect completeness, missing periods, distributions, correlation and descriptive tracking screens without modifying data.",
         "backend_status": "List implemented capabilities and optional runtime presence without claiming statistical validity.",
         "import_dataset": "Import explicit inline rows with provenance and host authorization for real data.",
         "optimize_budget": "Optimize the exploratory Hill-one model with total and channel budget bounds.",
@@ -100,6 +122,15 @@ def create_server(
                     "get_backend_model",
                     "backend_status",
                     "audit_model",
+                    "data_quality",
+                    "get_analysis",
+                    "compare_models",
+                    "model_capabilities",
+                    "forecast_model",
+                    "export_analysis",
+                    "storage_inventory",
+                    "retention_plan",
+                    "connector_status",
                 }
                 else creates
             ),

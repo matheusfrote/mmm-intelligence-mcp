@@ -1,0 +1,9 @@
+# Deployment preparation, not a deployed service
+
+These operator-reviewed Linux templates package the existing authenticated Streamable HTTP server. They have **not** been built or deployed in this Windows delivery. No domain, account, certificate or cloud resource was provisioned. Before use, pin the Python base image by a reviewed digest, build and scan the image, render/validate nginx, test TLS/authentication from an external client and test backup/restoration of the named volume.
+
+`compose.yaml` requires an explicit `operator-approved` profile and a `MMM_USERS_FILE` containing the existing user/hash/role JSON format. It binds the application to loopback using Linux host networking. Install/configure nginx on that host separately; do not add a container port mapping exposing the application. Replace only the three declared placeholders in `nginx.conf.template`; ordinary nginx variables such as `$http_authorization` must remain intact. HTTPS certificates must already exist and be operated by the authorized host owner.
+
+The edge exposes **only `/mcp`**, forwards bearer authorization and blocks all `/app` paths. The dashboard's no-login local bridge must never become a public route. Server-side roles, tenant roots, request-size/rate/concurrency limits and the single compute gate remain in force. This is a single-process/single-host design: quotas and the compute gate are not distributed across replicas. Native runtimes are not included in this base image.
+
+Fixed bearer authentication is supported for controlled MCP clients. OAuth authorization-server discovery, user consent, token audience validation, dynamic registration and public ChatGPT connection tests are **not implemented by these templates**. Do not declare this deployment or the local plugin ready for the public directory. The owner previously selected GitHub-only distribution; deploying remains outside the current authorization.

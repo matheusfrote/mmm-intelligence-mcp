@@ -1,20 +1,24 @@
-# Evolução planejada: interfaces, sem integrações executáveis
+# Roadmap após a V4
 
-> Documento histórico do planejamento 0.1. Na versão 0.2, as seis capacidades abaixo foram implementadas e receberam testes locais. Consulte [extension-report.md](extension-report.md) e [operations.md](operations.md) para situação atual, limites dos motores e evidências. Os trechos seguintes registram os critérios originais, não o status atual.
+Estado executado: [entrega V4](v4-delivery.md). O plano original permanece no histórico
+Git; relatórios 0.1–0.3 são históricos. Não há prazos ou automações agendadas.
 
-O pacote `integrations/contracts.py` define contratos independentes de frameworks e de MCP: `ModelingData`, `ModelBundle`, `Scenario`, `ModelBackend`, `BudgetConstraints`, `InvestmentOptimizer`, `DashboardRenderer` e `ReportRenderer`. O registro `PLANNED_CAPABILITIES` marca as seis áreas como `planned_not_implemented`.
-
-Esses contratos não são adaptadores funcionais nem um mecanismo de seleção de backend. O serviço atual chama o motor Ridge local. Nenhuma biblioteca Meridian/Robyn/PyMC foi instalada para este projeto, nenhum mock é apresentado como resultado desses motores e nenhum import opcional ocorre em startup.
-
-| Área | Implementação futura | Critério antes de declarar pronta |
+| Prioridade | Pendência | Dependência e aceite |
 |---|---|---|
-| Google Meridian | Adaptar contrato a dados e modelo do SDK oficial escolhido; ambiente isolado | Instalar versão suportada, ajuste/diagnósticos reais, persistência e integração MCP testados |
-| Meta Robyn | Bridge explícita Python/R ou processo separado com contrato serializado | R/Robyn instalados, execução completa e tradução de unidades/parâmetros comprovadas |
-| PyMC-Marketing | Adaptar features, priors, amostragem e posterior | Fit real, diagnóstico de convergência e previsão posterior testados |
-| Otimização | Consumir backend, horizonte, estado e restrições independentes | Verificar conservação/limites, casos inviáveis e comparação com malha independente |
-| Dashboards | Consumir bundle versionado e resultados de cenário | Renderização e testes de dados completos, sem mascarar ressalvas |
-| Relatórios automatizados | Renderer local separado da operação MCP | Artefato real, métricas reconciliadas, proveniência e conteúdo conferidos |
+| P0 | Publicar branch/release/PyPI | Autorização correspondente, revisão, CI do commit; conta/Trusted Publisher para PyPI |
+| P0 | Executar V4 nas nove combinações CI | Publicação autorizada; resultados 0.3.1 não certificam V4 |
+| P0 | Proteger main | Aprovação das regras, revisão viável para mantenedor solo e nomes reais dos checks |
+| P0 | Validar decisões empresariais | Fonte autorizada, reconciliação e experimento conforme real_data_validation.md |
+| P1 | Conectores Google/Meta/vendas/GA4 | Adapter API/OAuth, cofre, paginação/retry/incremental e execução real autorizada |
+| P1 | Incerteza na fronteira/identificação fraca | Métodos e estudo de cobertura amplo; não deslocar percentis por conveniência |
+| P1 | Priors/PPC/mistura nos motores nativos | Amostragem adequada e estudo controlado; smoke curto não certifica |
+| P1 | Forecast Meridian/Robyn | Validar baseline, tendência, carryover e serialização no SDK nativo |
+| P1 | Otimizadores externos | Horizonte, limites, totais e incerteza comprovados, sem fallback Ridge |
+| P1 | CI Robyn e outros OS/runtimes | Provisionar R e validar; workflow Python manual ainda não executado remoto |
+| P1 | Aplicação de treino/comparação | Estado, erros e autorização reais; HTML atual é painel Ridge exportável |
+| P2 | Geo/hierarquias/reach/frequency/lift nativo | Novos contratos, dados e estudos científicos |
+| P2 | Serviço público/filas duráveis | Destino autorizado, identidade, TLS, quotas, filas, backups e observabilidade |
 
-Antes de permitir importação real: definir formato e schema, controles de acesso, consentimento, validação de origem e política de retenção. Antes de recomendar investimentos: identificação causal, calibração, incerteza, sensibilidade de formas, suporte observado e restrições de negócio. Antes de distribuir para outros ambientes: CI em Python 3.11/3.12+, testes por sistema operacional e locks apropriados. Antes de migrar o SDK MCP para outra major: adaptar APIs e repetir descoberta, execução, falhas e reinício do processo.
-
-Não há prazos ou automações agendadas. Qualquer acesso a contas, publicação ou serviço externo exige um novo escopo autorizado.
+Os controles locais não constituem uma oferta SaaS multiempresa. Serviço externo
+continua fora do escopo escolhido pelo proprietário. Strix foi encerrado por decisão
+expressa; não é uma dependência pendente desta entrega.

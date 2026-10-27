@@ -1,5 +1,21 @@
 # Matriz de conformidade científica — 0.3.0
 
+## Matriz atual V4
+
+| Capacidade | Validação atual | Limite |
+|---|---|---|
+| MCP/base | 183 testes; 26 descobertas/23 chamadas/reinício | Windows/Python 3.12.14 nesta execução |
+| CSV/qualidade | Parsing, fuso, agregação, negativas e original/hash | Sem conta real |
+| Quatro motores | Recarga nativa e comparação em 30 datas comuns | MCMC curto inadequado; sem novo treino pesado |
+| Futuro | Ridge variável/PyMC real após reinício | Meridian/Robyn indisponíveis |
+| Incerteza | 60 ajustes, cobertura/recuperação medidas | Fronteira nula falha; cobertura não certificada |
+| Painel | Chrome, números/CSV/JSON/CSP/navegação | Só Ridge; sem UI de treino |
+| Segurança | HTTP real, tipos/Bandit/pip-audit/limites/hash | Não SaaS público; pacotes R fora de pip-audit |
+| Distribuição/CI | Apache, CLI/wheel e workflows preparados | Sem release/PyPI/novo CI remoto |
+
+[Matriz operacional detalhada](docs/v4-matrix.md) e [evidências](docs/validation/v4/README.md).
+As matrizes anteriores abaixo são históricas.
+
 Referências primárias consultadas e código das versões instaladas inspecionado: Meridian 2.1.0, PyMC-Marketing 1.3.0, Robyn 3.12.1/R 4.5.2. [Notas com links e provas originais](docs/scientific-official-references.md). Esta matriz descreve a implementação final; as notas registram também achados anteriores às correções.
 
 | Dimensão | Local | Meridian | PyMC-Marketing | Robyn |

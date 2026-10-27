@@ -1,0 +1,48 @@
+{
+  "date": "2026-10-26",
+  "python": "3.12.14",
+  "platform": "Windows",
+  "version": "0.4.0",
+  "baseline_commit": "015eaeff6e6606bdaac70ff66c3ea4fe193660b1",
+  "branch": "feat/v4-intelligence",
+  "pytest": {
+    "passed": 183,
+    "failed": 0,
+    "warnings": 1,
+    "seconds": 35.17,
+    "warning": "Preexisting SciPy RuntimeWarning in nested backtest; checked solver results remain finite and tests pass"
+  },
+  "line_coverage": {
+    "covered_lines": 1854,
+    "num_statements": 2273,
+    "percent_covered": 81.56621205455346,
+    "percent_covered_display": "82",
+    "missing_lines": 419,
+    "excluded_lines": 26,
+    "percent_statements_covered": 81.56621205455346,
+    "percent_statements_covered_display": "82"
+  },
+  "baseline_line_coverage_percent": 82.34920634920634,
+  "coverage_limitations": "Subprocess CLI/native code not instrumented; standalone native tests and wheel checks separate. No modules excluded to raise ratio.",
+  "mcp": {
+    "discovered": 26,
+    "local_calls": 23,
+    "restart_persistence": true
+  },
+  "ruff": "passed",
+  "mypy": "passed (31 source files)",
+  "bandit": "passed, no reported issues",
+  "pip_check": "passed",
+  "native_reloaded": [
+    "google_meridian",
+    "pymc_marketing",
+    "meta_robyn"
+  ],
+  "native_future_restart": "pymc_marketing",
+  "remote_v4_ci_executed": false,
+  "new_commit_or_push": false,
+  "deployment": false,
+  "packaging_verified_on": "2026-10-27",
+  "wheel_install": "Fresh venv, actual console executable, 26 tools, 23 local calls, restart, import origin verified",
+  "post_suite_distribution_regression": "passed after adding demo CSV to sdist"
+}

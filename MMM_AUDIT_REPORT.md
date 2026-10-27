@@ -1,5 +1,15 @@
 # Auditoria científica e funcional — 0.3.0
 
+## Atualização V4 — 26/10/2026
+
+Diagnóstico e correções atuais em [v4-delivery](docs/v4-delivery.md). Novos contratos
+preservam as semânticas dos quatro motores e classificam MCMC sem certificar causalidade.
+Recargas nativas conferidas; modelos curtos Meridian/PyMC permanecem inadequados.
+Sessenta ajustes controlados demonstraram subcobertura, falha na fronteira nula e
+instabilidade sob especificação incorreta. Bootstrap não é teste de efeito nulo.
+Nenhum dado empresarial foi usado; Strix encerrado conforme decisão do proprietário.
+Os resultados anteriores abaixo permanecem históricos.
+
 Auditoria de 25/10/2026. **Software local aprovado nos testes descritos; validade causal e uso empresarial não demonstrados.** O usuário autorizou dados fabricados por não possuir uma base real. Nenhum resultado sintético é apresentado como observação de mercado. Publicação de código não implica implantação de serviço.
 
 ## A. Conformidade científica

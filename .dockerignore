@@ -1,0 +1,15 @@
+.git
+.venv
+var
+evidence
+dist
+build
+node_modules
+.env
+.env.*
+*.pem
+*.key
+__pycache__
+.pytest_cache
+.ruff_cache
+.coverage

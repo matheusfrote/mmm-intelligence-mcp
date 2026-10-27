@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.4.0 — preparada localmente, sem release publicada
+
+- Apache-2.0 autorizada; NOTICE, contribuição, conduta, segurança, templates e Dependabot.
+- CLI doctor/config e exclusão unitária pelo operador com hash, limites do host e referências verificadas.
+- Dez ferramentas adicionais: CSV, qualidade, análise canônica, comparação, capacidades, projeção, exportação, inventário, retenção e estado de fontes.
+- CSV sem limpeza silenciosa, preservando original, hash, mapeamento, fuso e políticas de agregação.
+- Projeção futura nativa PyMC com histórico intermediário de mídia, controles explícitos e intervalo posterior preditivo; Ridge aceita planos variáveis por período.
+- Comparação exige linhagem/KPI/unidades compatíveis; interseção explícita alinha métricas e intervalos e nunca elege vencedor universal.
+- Diagnósticos bayesianos explicáveis, viés preditivo, recuperação sintética/60 ajustes e advertência de bootstrap na fronteira nula.
+- Painéis locais de qualidade, resíduos, componentes, curvas e exportações; abstenção explícita.
+- CI preservado, limiar de cobertura medido, verificação de wheel em ambiente novo e workflows manuais de distribuição/motores Python.
+- Conectores de anúncios permanecem contratos offline; sem OAuth, acesso a contas ou serviço público.
+
 ## 0.3.1 — segurança do transporte, workers e cadeia de suprimentos
 
 - Workers herdam apenas ambiente permitido; falhas não repassam mensagem interna ao cliente. Saída nativa drenada/limitada a 1 MB.
@@ -39,3 +52,9 @@
 - Dependência de desenvolvimento pytest atualizada para 9.0.3 por advisory conhecido.
 
 O software usa somente dados sintéticos na entrega. Integração executável não certifica convergência, adequação empresarial ou causalidade. Não há publicação no PyPI ou implantação de serviço.
+# V4.2 — em desenvolvimento, sem nova publicação
+
+- Aplicação local com dez módulos analíticos, temas e gráficos interativos; HTML offline preservado.
+- Dashboard abre diretamente, sem login/token manual; endpoint MCP autenticado permanece separado.
+- Recurso MCP de dataset com isolamento de tenant, testes web e de origem/loopback.
+- Plugin local portável, ZIP reproduzível e templates de infraestrutura ainda não implantados.

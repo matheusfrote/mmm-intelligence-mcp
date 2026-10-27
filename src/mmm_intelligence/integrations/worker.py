@@ -239,6 +239,41 @@ def pymc(payload, root):
     from pymc_marketing.mmm.mmm import MMM
 
     native = root / "model.nc"
+    if payload["operation"] == "forecast":
+        stored = payload["model"]
+        req = stored["request"]
+        future = payload["future_rows"]
+        combined = pd.DataFrame(pymc_future_rows(stored, future))
+        combined[req["date_column"]] = pd.to_datetime(combined[req["date_column"]])
+        native.write_bytes(base64.b64decode(stored["native_base64"], validate=True))
+        model = MMM.load(str(native))
+        if "y_original_scale" not in model.model.named_vars:
+            model.add_original_scale_contribution_variable(var=["y"])
+        pp = model.sample_posterior_predictive(
+            X=combined,
+            extend_idata=False,
+            combined=False,
+            include_last_observations=True,
+            random_seed=req["seed"],
+            progressbar=False,
+            var_names=["y_original_scale"],
+        )
+        samples = np.asarray(pp["y_original_scale"]).reshape(-1, len(combined))[:, -len(future) :]
+        result = summarize(
+            samples,
+            [r[req["date_column"]] for r in future],
+            interval_type="posterior_predictive_observed",
+        )
+        result.update(
+            total_mean=float(samples.sum(axis=1).mean()),
+            total_interval_90=np.quantile(samples.sum(axis=1), [0.05, 0.95]).tolist(),
+        )
+        return {
+            "prediction": result,
+            "backend": "pymc_marketing",
+            "scope": "future_conditional_projection",
+            "refit": False,
+        }
     if payload["operation"] == "train":
         req = payload["request"]
         dataset = payload["dataset"]
@@ -428,6 +463,7 @@ def meridian(payload, root):
         diagnostics = {
             "chains": req["chains"],
             "draws": req["draws"],
+            "tune": req["tune"],
             "convergence_certified": False,
         }
         try:
@@ -505,6 +541,16 @@ def meridian(payload, root):
             "No demonstrated causal attribution",
         ],
     }
+
+
+def pymc_future_rows(stored, future_rows):
+    """Bridge the full post-training gap so future adstock does not skip holdout media."""
+    req = stored["request"]
+    columns = [req["date_column"], *req["media_columns"], *req["control_columns"]]
+    return [
+        {c: r[c] for c in columns}
+        for r in [*stored["dataset"]["rows"][stored["cutoff"] :], *future_rows]
+    ]
 
 
 def main():

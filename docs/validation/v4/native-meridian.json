@@ -1,0 +1,70 @@
+{
+  "backend": "google_meridian",
+  "fresh_training": false,
+  "transport": "stdio",
+  "synthetic": true,
+  "canonical_metrics": {
+    "bias_predicted_minus_observed": 1844.9961828027463,
+    "mae": 1844.9961828027463,
+    "rmse": 1967.271912379965,
+    "mape_nonzero_percent": 15.81968812138935,
+    "mape_excluded_zeros": 0,
+    "wape_percent": 15.471037629127474,
+    "r2": -4.901420937822156
+  },
+  "diagnostic_assessment": {
+    "status": "inadequate",
+    "failed_screens": [
+      "r_hat_max",
+      "divergences",
+      "ess_bulk_min",
+      "ess_tail_min"
+    ],
+    "missing_or_insufficient": [
+      "tune",
+      "r_hat_undefined_count:undefined_parameters",
+      "fewer_than_four_chains",
+      "draws:short_run"
+    ],
+    "policy": {
+      "max_rhat_exclusive": 1.01,
+      "minimum_ess_per_chain": 100,
+      "minimum_chains": 4,
+      "minimum_draws_and_tune_screen": 400
+    },
+    "reference": "https://mc-stan.org/learn-stan/diagnostics-warnings.html",
+    "scope": "Rank R-hat, bulk/tail ESS and divergences only; inspect mixing, PPC, priors and identification separately. Sample-count screens are operational, not universal guarantees.",
+    "business_recommendation_eligible": false,
+    "convergence_certified": false
+  },
+  "reload_matches": true,
+  "capabilities": {
+    "training": {
+      "available": true,
+      "runtime": "optional"
+    },
+    "historical_evaluation": {
+      "available": true
+    },
+    "future_projection": {
+      "available": false,
+      "reason": "Adapter exposes historical responses only; future baseline/carryover semantics not implemented and verified"
+    },
+    "optimization": {
+      "available": false,
+      "reason": "Native optimizer integration and uncertainty propagation not verified; no Ridge fallback"
+    },
+    "calibration": {
+      "available": false,
+      "reason": "Conditional bootstrap reweighting only; not a full experimental refit"
+    },
+    "multigeography": {
+      "available": false,
+      "reason": "Current API is one national time series"
+    },
+    "causal_recommendation": {
+      "available": false,
+      "reason": "Não há evidência suficiente para sustentar uma recomendação de investimento confiável com os dados e as condições atuais."
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "name": "mmm-intelligence-dashboard-tests",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test:web": "node --test tests/web/*.test.mjs",
+    "format:web": "prettier --write src/mmm_intelligence/web/*.{js,css,html} tests/web/*.mjs"
+  },
+  "devDependencies": {
+    "playwright": "1.62.1",
+    "axe-core": "4.10.3",
+    "prettier": "3.6.2"
+  }
+}

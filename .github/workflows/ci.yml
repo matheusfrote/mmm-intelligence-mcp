@@ -30,8 +30,9 @@ jobs:
       - run: python -m mypy src
       - run: python -m bandit -r src
       - run: python examples/check_secrets.py
-      - run: python -m pytest -q
+      - run: python -m pytest -q --cov=mmm_intelligence --cov-report=term --cov-report=xml:var/coverage.xml --cov-fail-under=80
       - run: python -m build --no-isolation
+      - run: python examples/verify_wheel.py --wheel-dir dist
       - run: python examples/mcp_workflow.py --extended --data-dir var/ci-demo --output-dir evidence/ci-demo
       - run: python examples/http_smoke.py --output-dir evidence/ci-http
       - run: python examples/scientific_stress.py --output-dir evidence/ci-scientific-stress

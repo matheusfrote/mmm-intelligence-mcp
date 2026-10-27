@@ -1,5 +1,19 @@
 # Resultados executados — auditoria 0.3.0
 
+## Resultados V4 — 26/10/2026
+
+183 testes aprovados, zero reprovados, um warning SciPy preexistente; cobertura de
+linhas 1854/2273 = 81,57%. Ruff, formato, mypy, Bandit e pip check aprovados.
+Quatro locks Python consultados sem vulnerabilidades conhecidas. MCP stdio/HTTP reais,
+recargas Meridian/PyMC/Robyn, forecast PyMC após reinício e comparação de quatro
+motores executados. Exato recusado; interseção explícita de 30 períodos.
+
+Cobertura condicional nominal 90% em dez seeds por regime: 87,31% bem especificado,
+87,31% ruído alto, 86,73% colinear, 28,08% preço omitido, 0% quebra estrutural,
+86,73% ruído assimétrico. Cobertura paramétrica do canal nulo: zero. Sem certificação
+causal, de posterior ou cobertura geral. [Relatório e recibos](docs/v4-delivery.md).
+Resultados das versões anteriores abaixo são históricos.
+
 Data de referência: 25/10/2026, America/Sao_Paulo. Testes reais de software sobre dados sintéticos; números abaixo não são resultados de campanhas. Evidências 0.1/0.2 preexistentes são históricas e não substituem estas execuções.
 
 ## Verificações locais

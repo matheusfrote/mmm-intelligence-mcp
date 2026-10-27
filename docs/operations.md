@@ -90,3 +90,26 @@ Workers não herdam credenciais arbitrárias do host. Apenas variáveis de SO, c
 Para repetir os checks: `python -m mypy src`, `python -m bandit -r src`, `python examples/check_secrets.py` e `python -m pip_audit --no-deps --disable-pip -r requirements/base-ci.txt`. O scanner de segredos reporta somente localização/regra, nunca o valor encontrado. `examples/http_smoke.py` também executa negativas de expiração/host/origin/body e limite, além de pequena amostra de latência em servidor descartável.
 
 Backup local: pare a instância, copie a raiz de dados para um diretório novo protegido por ACL, exclua logs/jobs da cópia publicável e valide todos os envelopes/hashes. Restaure somente em outra raiz nova e compare uma consulta/simulação antes de trocar MMM_DATA_DIR. Não sobrescreva uma raiz existente nem trate Git como backup de dados privados. A entrega 0.3.1 não implanta serviço externo.
+
+## CLI, retenção e distribuição V4
+
+[Instalação](installation.md) cobre console doctor/config e wheel. Inventário MCP
+verifica hashes e enumera apenas datasets/models/backend_models/reports/dashboards.
+Logs, jobs, runtimes e backups não entram na soma. retention_plan usa mtime em dias,
+que não substitui política jurídica de retenção, e lista dependentes sem apagar.
+
+Para excluir um artefato revisado: pare o servidor, revise backup/dependentes e execute
+`mmm-intelligence-mcp delete-artifact --data-dir RAIZ --kind reports --id ID --sha256 HASH`.
+Exige raiz existente, ID permitido, hash exato e ausência de referências. Honra limites
+MMM_MAX_FILE_BYTES do host; não faz exclusão recursiva. Uma exclusão não remove cópias,
+logs ou backups. Não há quota global de disco nem coleta automática de lixo. O operador
+local e ACL continuam sendo fronteira de confiança; não há defesa total contra outro
+processo hostil com escrita simultânea na mesma raiz.
+
+Workflows release-check e native-engines são manuais e somente leitura. Native-engines
+prepara Windows/Python 3.12 para PyMC/Meridian, executa treino curto, recarga e projeção
+quando suportada. Robyn ainda não tem job de provisionamento R. Nenhum novo workflow
+foi executado remotamente nesta entrega. O teste do wheel usa venv descartável fora do
+checkout; não confundir com certificação dos nove ambientes. O mínimo CI de 80% de
+linhas parte de baseline medido de 82,35%, sem excluir workers difíceis do denominador.
+Subprocessos não são instrumentados nessa cobertura; testes nativos são evidência separada.

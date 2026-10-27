@@ -1,5 +1,19 @@
 # Dados, procedência e qualidade — 0.3.0
 
+## Pipeline V4
+
+import_csv/import_dataset preservam origem, unidades, tipo de KPI e autorização.
+CSV original e SHA-256 são armazenados, com mapeamento, parsing de timezone, ordenação
+ou agregação explicitamente solicitados. Datas duplicadas/irregulares, ausentes,
+fórmulas e valores inválidos são recusados; semana parcial não é completada.
+data_quality reporta lacunas, resumo/zeros, constantes, correlação, extremos 3-IQR e
+mudança de nível com severidade/evidência. IQR zero é indefinido; extremos não são
+removidos. Screens não provam tracking alterado nem descartam endogeneidade.
+
+Só dados fabricados foram utilizados. Conectores são contratos offline sem APIs
+ativas. [Ferramentas](docs/tools.md), [fontes](docs/connectors.md) e
+[protocolo real](docs/real_data_validation.md). Registros abaixo são históricos.
+
 **Todos os dados desta entrega são fabricados.** O usuário informou que não possui base e autorizou explicitamente dados sintéticos. Nenhum dataset empresarial foi usado; não há extração autenticada de anúncios, experimento real ou evidência de eficácia comercial. A pesquisa delimitada de exemplos oficiais identificou exemplos simulados, sem necessidade de atribuir origem real a uma base pública não comprovada.
 
 ## Base principal

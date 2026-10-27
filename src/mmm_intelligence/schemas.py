@@ -25,6 +25,10 @@ class EmptyRequest(Contract):
     pass
 
 
+class RetentionRequest(Contract):
+    older_than_days: int = Field(default=90, ge=0, le=36500, strict=True)
+
+
 class GenerateRequest(Contract):
     dataset_id: Identifier | None = None
     periods: int = Field(default=156, ge=52, le=10000, strict=True)
@@ -125,9 +129,8 @@ class PublicError(Contract):
     message: str
 
 
-class ImportRequest(Contract):
+class ImportMetadata(Contract):
     dataset_id: Identifier | None = None
-    rows: list[dict[str, Any]] = Field(min_length=52, max_length=10000)
     frequency: Literal["daily", "weekly"] = "weekly"
     synthetic: bool
     target_type: Literal["revenue", "non_revenue", "unspecified"] = "unspecified"
@@ -157,6 +160,49 @@ class ImportRequest(Contract):
             target_column=self.target_column,
             date_column=self.date_column,
         )
+        return self
+
+
+class ImportRequest(ImportMetadata):
+    rows: list[dict[str, Any]] = Field(min_length=52, max_length=10000)
+
+
+class CSVImportRequest(ImportMetadata):
+    csv_text: str = Field(min_length=1, max_length=4000000)
+    delimiter: Literal[",", ";", "\t"] = ","
+    decimal_separator: Literal[".", ","] = "."
+    column_mapping: dict[str, str] = Field(default_factory=dict, max_length=22)
+    date_format: Literal["%Y-%m-%d", "%d/%m/%Y", "%m/%d/%Y", "iso_datetime"] = "%Y-%m-%d"
+    timezone: str | None = Field(default=None, min_length=1, max_length=64)
+    sort_dates: bool = False
+    duplicate_policy: Literal["reject", "aggregate"] = "reject"
+    source_frequency: Literal["daily", "weekly"] = "weekly"
+    aggregate_weekly: bool = False
+    reducers: dict[str, Literal["sum", "mean", "last"]] = Field(default_factory=dict, max_length=21)
+
+    @model_validator(mode="after")
+    def explicit_policy(self):
+        if self.aggregate_weekly:
+            if self.source_frequency != "daily" or self.frequency != "weekly":
+                raise ValueError("Weekly aggregation requires daily source and weekly output")
+        elif self.source_frequency != self.frequency:
+            raise ValueError("Frequency conversion requires explicit aggregation")
+        numeric = {self.target_column, *self.media_columns, *self.control_columns}
+        if self.aggregate_weekly or self.duplicate_policy == "aggregate":
+            if set(self.reducers) != numeric:
+                raise ValueError("Declare reducers for every numeric column")
+            if any(self.reducers[c] != "sum" for c in [self.target_column, *self.media_columns]):
+                raise ValueError("KPI and spend aggregation must use sum")
+        elif self.reducers:
+            raise ValueError("Reducers require aggregation")
+        if self.date_format == "iso_datetime" and self.timezone is None:
+            raise ValueError("Timestamp normalization requires an explicit reporting timezone")
+        if self.date_format != "iso_datetime" and self.timezone is not None:
+            raise ValueError("Timezone conversion applies only to timestamps")
+        if len(set(self.column_mapping.values())) != len(self.column_mapping):
+            raise ValueError("Column mapping must be one to one")
+        if any(not k or len(k) > 128 for k in self.column_mapping):
+            raise ValueError("Invalid source column name")
         return self
 
 
@@ -247,3 +293,46 @@ class ToolResponse(Contract):
     data: dict[str, Any] | None = None
     error: PublicError | None = None
     warnings: list[str] = Field(default_factory=list)
+
+
+BackendName = Literal["ridge", "google_meridian", "pymc_marketing", "meta_robyn"]
+
+
+class CapabilityRequest(Contract):
+    backend: BackendName
+
+
+class AnalysisRequest(ModelRequest):
+    backend: BackendName = "ridge"
+    max_rhat: float = Field(default=1.01, gt=1, le=1.2)
+    min_ess_per_chain: int = Field(default=100, ge=10, le=10000, strict=True)
+
+
+class ExportRequest(AnalysisRequest):
+    format: Literal["json", "csv", "markdown"] = "json"
+
+
+class CompareRequest(Contract):
+    models: list[AnalysisRequest] = Field(min_length=2, max_length=5)
+    window_policy: Literal["exact", "intersection"] = "exact"
+
+    @model_validator(mode="after")
+    def distinct(self):
+        if len({(m.backend, m.model_id) for m in self.models}) != len(self.models):
+            raise ValueError("Compare distinct models")
+        return self
+
+
+class ForecastRequest(ModelRequest):
+    backend: BackendName = "ridge"
+    media_plan: dict[str, list[Spend]] = Field(min_length=1, max_length=10)
+    future_controls: dict[str, list[Number]] = Field(max_length=10)
+
+    @model_validator(mode="after")
+    def same_horizon(self):
+        lengths = {len(v) for v in [*self.media_plan.values(), *self.future_controls.values()]}
+        if len(lengths) != 1 or not 1 <= next(iter(lengths)) <= 104:
+            raise ValueError("Every series must have the same horizon of 1..104 periods")
+        if sum(sum(v) for v in self.media_plan.values()) > 1e9:
+            raise ValueError("Total plan spend exceeds 1e9")
+        return self

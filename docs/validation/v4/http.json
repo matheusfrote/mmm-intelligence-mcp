@@ -1,0 +1,28 @@
+{
+  "transport": "streamable-http-loopback",
+  "sdk": "2.x",
+  "created": true,
+  "tenant_isolation": true,
+  "reader_write_blocked": true,
+  "unauthorized_status": 401,
+  "security": {
+    "negative_statuses": {
+      "expired": 401,
+      "disabled": 401,
+      "Host": 421,
+      "Origin": 403,
+      "body_over_4_mib": 413,
+      "OPTIONS": 405,
+      "PATCH": 405,
+      "DELETE": 405
+    },
+    "security_headers_present": true,
+    "rate_limit_status": 429,
+    "latency": {
+      "scope": "20 sequential tools/list requests on disposable loopback; not production capacity",
+      "samples": 20,
+      "p50_ms": 8.251449966337532,
+      "p95_ms": 8.645500056445599
+    }
+  }
+}

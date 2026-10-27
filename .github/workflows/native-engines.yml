@@ -1,0 +1,47 @@
+name: Manual native engine integration
+on:
+  workflow_dispatch:
+    inputs:
+      backend:
+        type: choice
+        required: true
+        options: [pymc_marketing, google_meridian]
+permissions:
+  contents: read
+jobs:
+  native:
+    runs-on: windows-latest
+    timeout-minutes: 45
+    env:
+      MMM_MAX_FILE_BYTES: '52428800'
+      MMM_BACKEND_TIMEOUT_SECONDS: '1800'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - run: "python -m pip install --require-hashes --only-binary=:all: -r requirements/base-ci.txt"
+      - run: python -m pip install --no-deps --no-build-isolation -e .
+      - name: Install selected isolated runtime
+        env:
+          BACKEND: ${{ inputs.backend }}
+        run: |
+          $runtimeName = if ($env:BACKEND -eq 'pymc_marketing') {'pymc'} else {'meridian'}
+          python -m venv "var/envs/$runtimeName"
+          & "var/envs/$runtimeName/Scripts/python.exe" -m pip install -r "requirements/$runtimeName-win-py312.txt"
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          & "var/envs/$runtimeName/Scripts/python.exe" -m pip check
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Real native train, serialize, reload and historical scenario
+        env:
+          BACKEND: ${{ inputs.backend }}
+        run: python examples/backend_smoke.py --backend $env:BACKEND --data-dir var/native-ci --output-dir evidence/native-ci --draws 50
+      - name: Canonical model and supported future forecast after restart
+        env:
+          BACKEND: ${{ inputs.backend }}
+        run: |
+          $modelId = (Get-Content evidence/native-ci/result.json -Raw | ConvertFrom-Json).model_id
+          python examples/native_v4_check.py --backend $env:BACKEND --model-id $modelId --data-dir var/native-ci --output evidence/native-v4.json
+    # Reduced synthetic smoke, never convergence certification. No upload, credentials or deploy.

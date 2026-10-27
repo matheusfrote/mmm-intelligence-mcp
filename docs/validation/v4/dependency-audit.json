@@ -1,0 +1,22 @@
+{
+  "v4-pip-audit": {
+    "dependencies": 76,
+    "vulnerabilities": [],
+    "skipped": []
+  },
+  "v4-audit-meridian-win-py312": {
+    "dependencies": 75,
+    "vulnerabilities": [],
+    "skipped": []
+  },
+  "v4-audit-pymc-win-py312": {
+    "dependencies": 55,
+    "vulnerabilities": [],
+    "skipped": []
+  },
+  "v4-audit-robyn-python-win-py312": {
+    "dependencies": 17,
+    "vulnerabilities": [],
+    "skipped": []
+  }
+}

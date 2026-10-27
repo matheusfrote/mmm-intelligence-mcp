@@ -1,5 +1,15 @@
 # Progresso da implementação e publicação
 
+## V4 — 26/10/2026, entrega local
+
+Baseline 015eaeff6e6606bdaac70ff66c3ea4fe193660b1 preservado; branch feat/v4-intelligence,
+sem commit/push novo. Apache-2.0 autorizada pelo proprietário e aplicada. Dez ferramentas
+adicionadas (26 totais), CSV, qualidade, comparação/forecast, CLI e governança, painel
+e ciclo de vida. 183 testes aprovados/0 falhas; 81,57% linhas, 23 chamadas MCP locais e
+reinício; três recargas nativas e futuro PyMC real; 60 ajustes/11 stress. Publicação,
+CI V4 remoto e proteção main não executados. [Relatório integral](docs/v4-delivery.md)
+e [matriz de execução](docs/v4-matrix.md). Registros abaixo são históricos.
+
 Pedido: entregar o MMM Intelligence MCP executável, revisado, testado e publicar no GitHub. Destino confirmado pelo usuário: **matheusfrote/mmm-intelligence-mcp, público**. Dados usados: exclusivamente sintéticos. Resultados estatísticos são exploratórios e não demonstram causalidade.
 
 ## Auditoria inicial
@@ -151,3 +161,10 @@ O wheel 0.3.1 foi instalado em diretório separado, com import confirmado a part
 - Push normal de ambos os commits para main confirmado; GitHub MCP consultou o commit remoto. Sem force push, merge, PR, tag de release, PyPI ou deploy.
 - [CI 40217559233](https://github.com/matheusfrote/mmm-intelligence-mcp/actions/runs/40217559233): **10 jobs aprovados**, nove combinações Windows/Linux/macOS × Python 3.11/3.12/3.13 e um job de advisories. Cada job de teste registrou 131 passed, mypy sem erros, Bandit sem achados ativos, nenhum padrão de segredo encontrado, stdio/HTTP/stress concluídos. Os dez logs foram consultados pelo MCP GitHub. Snapshot em [security031-github-ci.json](docs/validation/security031-github-ci.json).
 - Este registro é publicado em um commit posterior de documentação, com nova consulta ao CI da branch final. O veredito é aprovação da entrega local/GitHub no escopo testado, sem declaração de prontidão para Internet, pentest Strix ou validação causal.
+# Continuação V4.2 — 2026-10-27
+
+- Workspace local com dez módulos e ações MCP reais; login e exigência manual de token removidos exclusivamente do dashboard.
+- `/app/mcp` isolado por loopback/origem e raiz local própria; `/mcp` mantém bearer e tenants. CLI `dashboard` inicia sem configurar credenciais.
+- Ciclo Chrome: geração/importação CSV, qualidade, dois ajustes, comparação, simulação, otimização e HTML; numerais reconciliados com respostas MCP, teclado, 320–1440 px e axe-core claro/escuro.
+- Plugin local preparado com fonte e manifests portáveis; build ZIP determinístico e descoberta real fora do checkout. Templates remotos estruturais, sem deploy/HTTPS público/OAuth.
+- Estado detalhado e pendências reais: [entrega V4.2](docs/v42-delivery.md). Evidências históricas V4 preservadas.

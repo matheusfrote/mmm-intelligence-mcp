@@ -4,10 +4,21 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "mmm-intelligence-mcp"
-version = "0.3.1"
+version = "0.4.0"
 description = "Local exploratory Marketing Mix Modeling server using the official MCP SDK"
 readme = "README.md"
 requires-python = ">=3.11"
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE"]
+authors = [{name = "Matheus Frote"}]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Scientific/Engineering :: Information Analysis",
+]
 dependencies = [
   "mcp>=2.3,<3",
   "numpy>=2.2,<3",
@@ -21,13 +32,17 @@ dev = ["pytest>=9.0.3,<10", "pytest-cov>=6,<8", "ruff>=0.12,<1", "build>=1.2,<2"
 audit = ["bandit>=1.8,<2", "mypy>=1.18,<2", "pip-audit==2.10.1"]
 
 [project.scripts]
-mmm-intelligence-mcp = "mmm_intelligence.server:main"
+mmm-intelligence-mcp = "mmm_intelligence.cli:main"
+
+[project.urls]
+Repository = "https://github.com/matheusfrote/mmm-intelligence-mcp"
+Issues = "https://github.com/matheusfrote/mmm-intelligence-mcp/issues"
 
 [tool.setuptools.packages.find]
 where = ["src"]
 
 [tool.setuptools.package-data]
-mmm_intelligence = ["integrations/*.R"]
+mmm_intelligence = ["integrations/*.R", "web/*.html", "web/*.css", "web/*.js", "web/*.svg"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

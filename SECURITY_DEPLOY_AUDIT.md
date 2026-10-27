@@ -1,5 +1,20 @@
 # Auditoria de segurança e publicação — 0.3.1
 
+## Revisão V4 — somente local
+
+Transporte HTTP loopback foi repetido com autenticação, reader, isolamento, expiração,
+Host/Origin, corpo excessivo e limite de frequência. Novas ferramentas preservam o
+router por tenant e gate de dados reais. CSV não aceita path/URL; exportação é conteúdo
+local. Inventário/plano não apagam; exclusão CLI exige hash, ausência de referências e
+servidor parado, respeitando limites do host. Nenhum artefato do usuário foi removido.
+
+Ruff/mypy/Bandit e scanner de padrões executados. Locks Python base/Meridian/PyMC/Robyn
+sem achados conhecidos na consulta atual; R/binários não cobertos por pip-audit. CSP
+bloqueou script de teste no HTML. Não há identidade corporativa, fila durável, quota
+global ou defesa contra administrador hostil. Não houve deploy, exposição de rede,
+proteção main, release ou push V4. Strix permanece encerrado. [Entrega/evidências](docs/v4-delivery.md).
+A auditoria 0.3.1 abaixo é histórica.
+
 Data de referência: 25/10/2026, America/Sao_Paulo. Após a descoberta do ambiente, o usuário definiu a entrega como **somente GitHub, sem deploy nesta etapa**. O escopo final é auditar, corrigir, testar e publicar o código no repositório existente. Deploy, domínio, TLS externo e smoke de produção não foram executados nem aprovados. Nenhum serviço, plano pago, campanha ou dado empresarial foi alterado.
 
 ## Ambiente e fronteiras de confiança
