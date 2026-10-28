@@ -31,21 +31,29 @@ def main():
     env = dict(os.environ)
     env.pop("PYTHONPATH", None)
     with tempfile.TemporaryDirectory(prefix="mmm-wheel-") as task:
-        temporary = Path(task)
+        # The application rejects linked storage ancestors. Canonicalize our own
+        # disposable workspace before using it; do not relax storage checks.
+        temporary = Path(task).resolve(strict=True)
         runtime = temporary / "runtime"
         venv.EnvBuilder(with_pip=True).create(runtime)
         python = runtime / ("Scripts/python.exe" if os.name == "nt" else "bin/python")
 
         def run(*argv, executable=python):
-            return subprocess.run(
-                [str(executable), *map(str, argv)],
-                cwd=temporary,
-                env=env,
-                capture_output=True,
-                text=True,
-                check=True,
-                timeout=300,
-            )
+            try:
+                return subprocess.run(
+                    [str(executable), *map(str, argv)],
+                    cwd=temporary,
+                    env=env,
+                    capture_output=True,
+                    text=True,
+                    check=True,
+                    timeout=300,
+                )
+            except subprocess.CalledProcessError as exc:
+                raise RuntimeError(
+                    f"Wheel verification subprocess failed ({exc.returncode}):\n"
+                    f"{exc.stderr[-4000:]}"
+                ) from exc
 
         run(
             "-m",

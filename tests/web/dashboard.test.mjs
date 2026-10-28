@@ -98,7 +98,15 @@ test(
       );
       const nav = async (id) => {
         await page.locator(`nav a[href="#${id}"]`).click();
-        await page.waitForFunction((id) => location.hash === "#" + id, id);
+        // hash changes before the hashchange handler replaces the previous view.
+        await page.waitForFunction(
+          (id) =>
+            location.hash === "#" + id &&
+            document.querySelector('nav a[aria-current="page"]')?.hash ===
+              "#" + id &&
+            document.querySelector("main").getAttribute("aria-busy") !== "true",
+          id,
+        );
       };
       const idle = () =>
         page.waitForFunction(
