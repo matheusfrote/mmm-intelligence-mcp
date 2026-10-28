@@ -27,3 +27,16 @@ def test_all_workflows_are_read_only_with_pinned_actions_and_string_commands():
                     assert isinstance(step["run"], str), path.name
                 if "uses" in step:
                     assert re.search(r"@[0-9a-f]{40}$", step["uses"]), path.name
+
+
+def test_dashboard_and_container_have_executable_ci_checks():
+    root = Path(__file__).resolve().parents[1]
+    workflow = yaml.safe_load((root / ".github/workflows/dashboard.yml").read_text())
+    assert set(workflow["jobs"]) == {"browser", "container"}
+    browser = workflow["jobs"]["browser"]
+    commands = "\n".join(s.get("run", "") for s in browser["steps"])
+    assert "npm ci --ignore-scripts" in commands
+    assert "npm run test:web" in commands
+    assert browser["env"]["MMM_TEST_BROWSER"] == "chromium"
+    container = workflow["jobs"]["container"]
+    assert any("examples/container_smoke.py" in s.get("run", "") for s in container["steps"])

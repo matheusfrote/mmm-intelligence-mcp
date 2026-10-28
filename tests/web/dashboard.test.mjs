@@ -56,7 +56,12 @@ test(
         await new Promise((r) => setTimeout(r, 100));
       }
       assert.ok(ready, log);
-      browser = await chromium.launch({ channel: "chrome", headless: true });
+      browser = await chromium.launch({
+        ...(process.env.MMM_TEST_BROWSER === "chromium"
+          ? {}
+          : { channel: "chrome" }),
+        headless: true,
+      });
       const page = await browser.newPage({
           viewport: { width: 1440, height: 1000 },
         }),

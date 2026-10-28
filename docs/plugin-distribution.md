@@ -12,7 +12,7 @@ Official references inspected on 2026-10-27: [Package your plugin](https://devel
 | Bundled server startup and MCP discovery | Recorded separately in validation evidence |
 | Local installation inside Codex/ChatGPT | Not performed |
 | Public submission ZIP | Not ready: no authorized HTTPS endpoint or supported public authentication |
-| Remote infrastructure | Templates only; no Docker/TLS deployment validation |
+| Remote infrastructure | Local Docker smoke and CI workflow implemented; no public deployment or TLS validation |
 | Publisher listing | Draft derived from implemented behavior; verified identity and countries still needed |
 | Privacy/terms/support URLs | No invented URLs or commitments; publication review remains pending |
 | Recorded reviewer demo / reviewer account | Not produced; no registered remote development connection |

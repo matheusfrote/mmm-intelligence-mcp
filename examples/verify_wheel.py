@@ -11,6 +11,13 @@ import venv
 from pathlib import Path
 
 
+def verify_import_origin(located: str, runtime: Path) -> None:
+    # macOS temporary roots may be spelled /var or /private/var. Compare real
+    # locations, which also rejects an in-runtime link pointing outside it.
+    if not Path(located).resolve(strict=True).is_relative_to(runtime.resolve(strict=True)):
+        raise RuntimeError("Package was not imported from the installed wheel")
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--wheel-dir", type=Path, required=True)
@@ -54,8 +61,7 @@ def main():
         located = run(
             "-c", "import mmm_intelligence; print(mmm_intelligence.__file__)"
         ).stdout.strip()
-        if not Path(located).is_relative_to(runtime):
-            raise RuntimeError("Package was not imported from the installed wheel")
+        verify_import_origin(located, runtime)
         console = runtime / (
             "Scripts/mmm-intelligence-mcp.exe" if os.name == "nt" else "bin/mmm-intelligence-mcp"
         )
