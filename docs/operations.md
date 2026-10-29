@@ -108,8 +108,11 @@ processo hostil com escrita simultânea na mesma raiz.
 
 Workflows release-check e native-engines são manuais e somente leitura. Native-engines
 prepara Windows/Python 3.12 para PyMC/Meridian, executa treino curto, recarga e projeção
-quando suportada. Robyn ainda não tem job de provisionamento R. Nenhum novo workflow
-foi executado remotamente nesta entrega. O teste do wheel usa venv descartável fora do
-checkout; não confundir com certificação dos nove ambientes. O mínimo CI de 80% de
-linhas parte de baseline medido de 82,35%, sem excluir workers difíceis do denominador.
+quando suportada. Robyn ainda não tem job de provisionamento R. Esses dois workflows
+manuais continuam sem execução remota registrada. Os workflows automáticos da base
+e do dashboard/contêiner passaram no GitHub em 28/10/2026; consulte o
+[registro com commits e evidências](v42-followup.md). O teste do wheel usa venv
+descartável fora do checkout e verifica a origem real da importação. O mínimo CI
+é de 80% de linhas; a execução local atual mediu 81,50%, sem excluir workers
+difíceis do denominador.
 Subprocessos não são instrumentados nessa cobertura; testes nativos são evidência separada.

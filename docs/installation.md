@@ -7,7 +7,7 @@ uma instrução disponível enquanto não houver publicação autorizada.
 ## Checkout ou wheel
 
 ```sh
-git clone https://github.com/matheusfrote/mmm-intelligence-mcp.git
+git clone --branch feat/v4-intelligence https://github.com/matheusfrote/mmm-intelligence-mcp.git
 cd mmm-intelligence-mcp
 python -m venv .venv
 ```
@@ -31,9 +31,10 @@ argumentos e `mmm-intelligence-mcp serve` mantêm o servidor; o silêncio inicia
 esperado, pois stdout é reservado para o protocolo.
 
 Wheel: `python -m pip install /caminho/mmm_intelligence_mcp-VERSAO-py3-none-any.whl`.
-Use o hash SHA-256 publicado junto ao artefato. GitHub por commit, após publicação:
+Use o hash SHA-256 publicado junto ao artefato. GitHub por commit:
 `python -m pip install "git+https://github.com/matheusfrote/mmm-intelligence-mcp.git@COMMIT"`.
-Não substitua COMMIT por um hash inexistente; uma branch local ainda não está no GitHub.
+Substitua COMMIT por um hash publicado e revisado da branch. A V4.2 está em
+`feat/v4-intelligence`; clonar a main não seleciona esta entrega.
 
 ## pipx e uvx
 
@@ -42,6 +43,10 @@ ferramentas previamente instaladas: `pipx install .` ou `uvx --from . mmm-intell
 Esses gerenciadores resolvem dependências próprias; o lock de desenvolvimento não é
 aplicado automaticamente. A verificação de wheel limpo é a evidência de empacotamento;
 não equivale a homologação de todas as versões de pipx/uvx ou clientes desktop.
+Em 28/10/2026 foram verificados o wheel 0.4.0 com uvx 0.12.12 e pipx 1.18.7,
+em Windows/Python 3.12.14, usando diretórios isolados dentro do projeto e sem
+alterar o PATH global. Os resultados e o alcance dos testes estão no
+[registro de continuação](v42-followup.md).
 
 ## Motores opcionais e problemas comuns
 

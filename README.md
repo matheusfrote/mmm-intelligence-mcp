@@ -4,7 +4,7 @@ Servidor independente de Marketing Mix Modeling com **SDK oficial MCP 2.3**, exe
 
 Nenhuma ferramenta altera campanhas ou orçamentos reais. Dados sintéticos são o padrão. Integração funcional é diferente de convergência estatística e identificação causal.
 
-Licença **Apache-2.0**, autorizada pelo proprietário; consulte [LICENSE](LICENSE) e [NOTICE](NOTICE). A versão 0.4.0 está preparada na branch local `feat/v4-intelligence`; a publicação anterior no [GitHub](https://github.com/matheusfrote/mmm-intelligence-mcp) é 0.3.1. A matriz CI preserva Windows/Linux/macOS e Python 3.11/3.12/3.13; a V4 foi executada localmente em Windows/Python 3.12.14. O novo CI remoto ainda não foi executado. [Entrega V4 e evidências](docs/v4-delivery.md).
+Licença **Apache-2.0**, autorizada pelo proprietário; consulte [LICENSE](LICENSE) e [NOTICE](NOTICE). A versão 0.4.0 e o dashboard V4.2 estão publicados na [branch feat/v4-intelligence](https://github.com/matheusfrote/mmm-intelligence-mcp/tree/feat/v4-intelligence). A main permanece na entrega anterior. O [CI do código verificado](https://github.com/matheusfrote/mmm-intelligence-mcp/actions/runs/40709406231) passou nas nove combinações Windows/Linux/macOS × Python 3.11/3.12/3.13, além do job de segurança; [dashboard e contêiner](https://github.com/matheusfrote/mmm-intelligence-mcp/actions/runs/40709406223) também passaram. [Correções, evidências e limites atuais](docs/v42-followup.md).
 
 ## Começar
 

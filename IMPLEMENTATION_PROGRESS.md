@@ -168,3 +168,15 @@ O wheel 0.3.1 foi instalado em diretório separado, com import confirmado a part
 - Ciclo Chrome: geração/importação CSV, qualidade, dois ajustes, comparação, simulação, otimização e HTML; numerais reconciliados com respostas MCP, teclado, 320–1440 px e axe-core claro/escuro.
 - Plugin local preparado com fonte e manifests portáveis; build ZIP determinístico e descoberta real fora do checkout. Templates remotos estruturais, sem deploy/HTTPS público/OAuth.
 - Estado detalhado e pendências reais: [entrega V4.2](docs/v42-delivery.md). Evidências históricas V4 preservadas.
+
+## Continuação e CI V4.2 — consolidado em 2026-10-29
+
+Publicação em `feat/v4-intelligence` confirmada. Correções dos caminhos do wheel no
+macOS e sincronização da navegação entregues em 3349e4e/c5f8eaa. Em 28/10, c5f8eaa
+passou em dez jobs da matriz base/segurança e dois jobs de dashboard/contêiner.
+Localmente: 198 testes, cobertura 81,50%, wheel isolado, Docker real e ciclos MCP
+completos em instalações uvx/pipx.
+
+[Relatório com links, recibos e limites](docs/v42-followup.md). O roadmap foi
+atualizado sem declarar extensões científicas, conectores, plugin público ou
+produção como concluídos. Main, release, PyPI e infraestrutura externa preservados.

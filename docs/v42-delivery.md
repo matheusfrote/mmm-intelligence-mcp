@@ -1,5 +1,8 @@
 # Entrega incremental V4.2
 
+Registro da entrega inicial. A [continuação de 28/10/2026](v42-followup.md)
+atualiza publicação, CI, contêiner e instalação; os números abaixo são históricos.
+
 **Dashboard local sem login**, conforme a correção solicitada. Execute `mmm-intelligence-mcp dashboard` e abra `http://127.0.0.1:8769/app`. Nesta sessão, a demonstração está em `http://127.0.0.1:8772/app`. O comando roda até ser encerrado; não foi instalado como serviço do sistema.
 
 Implementados os dez módulos, sidebar responsiva, temas claro/escuro, gráficos com seleção/janela/leitura por teclado, importação CSV, qualidade, modelagem, resultados, comparação, curvas de saturação/adstock, simulação/otimização condicionais, insights e exports. O HTML offline anterior foi preservado. A aplicação usa JavaScript modular, CSS e SVG locais; não exige Node em produção nem adiciona framework ao backend.

@@ -1,5 +1,9 @@
 # Evidências públicas
 
+Atualização V4.2 de 28/10/2026: [continuação e CI](../v42-followup.md) e
+`v42-followup/` registram correções multiplataforma, teste real de contêiner,
+wheel isolado e instalações uvx/pipx. As evidências anteriores abaixo são históricas.
+
 Todos os dados são sintéticos. Arquivos de modelos nativos, ambientes, logs upstream e configurações pessoais ficam somente no armazenamento local, fora do Git e do sdist.
 
 Segurança 0.3.1: `security031/` contém o ciclo atual, dashboard com hash CSP, relatório, CSV e auditoria. `security031-checks.json` agrega HTTP, recuperação, scanners e recargas nativas, com escopo explícito. A [auditoria de segurança](../../SECURITY_DEPLOY_AUDIT.md) é a referência para esta entrega somente GitHub, sem produção.
