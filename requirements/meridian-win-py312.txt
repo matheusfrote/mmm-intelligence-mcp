@@ -34,7 +34,7 @@ kiwisolver==1.5.1
 libclang==18.1.1
 markdown-it-py==4.2.0
 MarkupSafe==3.0.4
-matplotlib==3.10.9
+matplotlib==3.11.2
 mdurl==0.1.2
 ml_dtypes==0.6.0
 mmm-proto-schema==1.6.0
