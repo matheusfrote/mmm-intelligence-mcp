@@ -30,7 +30,7 @@ pytest-cov==7.1.0
 python-multipart==0.0.32
 referencing==0.37.0
 rpds-py==2026.9.1
-ruff==0.17.2
+ruff==0.17.3
 scipy==1.18.1
 sse-starlette==3.5.1
 starlette==1.10.0
