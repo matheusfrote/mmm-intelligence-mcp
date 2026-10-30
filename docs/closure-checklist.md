@@ -33,7 +33,7 @@ Relatório vigente: [operational-validation.md](operational-validation.md).
 
 ## Execuções observadas
 
-- Windows no `.venv`: **657 aprovados, três nativos opcionais ignorados**, sem erros,
+- Windows no `.venv`: **663 aprovados, três nativos opcionais ignorados**, sem erros,
   em `var/reviewed-final-suite.log`.
 - Linux local sem rede/portas: **653 aprovados, quatro ignorados**, sem erros,
   em `var/linux-operational.log`; inclui a exclusão do teste exclusivo Windows.

@@ -102,6 +102,15 @@ Com R configurado, execute `examples/r_worker_coverage.R` e
 do manifesto fixado e verifica hashes antes de chamar R; não busca versões atuais
 implicitamente. Cache/runtimes/bibliotecas ficam sob `var`, fora do Git.
 
+O CI identificou uma resposta HTTP 429 no download oficial de R. O instalador
+agora limita a dois downloads simultâneos e faz no máximo cinco tentativas para
+falhas transitórias, com espera progressiva e `Retry-After` numérico limitado a
+60 segundos. Erros permanentes, tamanho excessivo e divergência de SHA256
+continuam encerrando a instalação. O cache recebe bytes somente após verificação,
+por substituição atômica. Seis testes adicionais verificam recuperação, limite de
+tentativas e recusa de conteúdo corrompido; um usa um servidor HTTP local real.
+O download de um pacote oficial do manifesto também foi novamente verificado.
+
 ## Limites preservados
 
 Nenhum dado real, API de mídia, alteração de campanha ou implantação externa foi

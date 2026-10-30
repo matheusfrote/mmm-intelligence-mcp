@@ -7,12 +7,52 @@ import os
 import re
 import subprocess
 import tempfile
+import time
+import urllib.error
 import urllib.request
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from uuid import uuid4
 
 ROOT = Path(__file__).resolve().parents[1]
+
+
+def download_verified(url, path, sha256):
+    """Retry transient HTTP failures, caching only bounded, verified bytes."""
+    for attempt in range(5):
+        try:
+            with urllib.request.urlopen(url, timeout=120) as response:
+                raw = response.read(64 * 1024 * 1024 + 1)
+            break
+        except (urllib.error.URLError, TimeoutError) as error:
+            if isinstance(error, urllib.error.HTTPError) and error.code not in {
+                408,
+                429,
+                500,
+                502,
+                503,
+                504,
+            }:
+                raise
+            if attempt == 4:
+                raise
+            delay = 2 ** (attempt + 1)
+            if isinstance(error, urllib.error.HTTPError):
+                retry_after = error.headers.get("Retry-After", "")
+                if retry_after.isdigit():
+                    delay = max(delay, min(int(retry_after), 60))
+            print(f"Retrying {path.name} in {delay}s after transient download failure", flush=True)
+            time.sleep(delay)
+    if len(raw) > 64 * 1024 * 1024:
+        raise ValueError("Excessive R archive")
+    if hashlib.sha256(raw).hexdigest() != sha256:
+        raise ValueError("R archive checksum mismatch: " + path.name)
+    temporary = path.with_name(path.name + "." + uuid4().hex + ".tmp")
+    try:
+        temporary.write_bytes(raw)
+        temporary.replace(path)
+    finally:
+        temporary.unlink(missing_ok=True)
 
 
 def install(library, offline):
@@ -31,16 +71,12 @@ def install(library, offline):
         if not path.exists():
             if offline:
                 raise FileNotFoundError(name)
-            with urllib.request.urlopen(record["url"], timeout=120) as response:
-                raw = response.read(64 * 1024 * 1024 + 1)
-            if len(raw) > 64 * 1024 * 1024:
-                raise ValueError("Excessive R archive")
-            path.write_bytes(raw)
+            download_verified(record["url"], path, record["sha256"])
         if hashlib.sha256(path.read_bytes()).hexdigest() != record["sha256"]:
             raise ValueError("R archive checksum mismatch: " + name)
         return str(path).replace("\\", "/")
 
-    with ThreadPoolExecutor(max_workers=4) as pool:
+    with ThreadPoolExecutor(max_workers=2) as pool:
         files = list(pool.map(archive, manifest["packages"]))
     library = library.resolve()
     library.mkdir(parents=True, exist_ok=True)
