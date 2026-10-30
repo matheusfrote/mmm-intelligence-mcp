@@ -28,11 +28,14 @@ jobs:
       - run: npm ci --ignore-scripts
       - run: npx playwright install --with-deps chromium
       - run: npm run test:web
+      - run: node tests/web/check_coverage.mjs
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:
           name: dashboard-evidence
-          path: evidence/v42-browser/
+          path: |
+            evidence/v42-browser/
+            evidence/javascript-coverage/
           retention-days: 14
   container:
     runs-on: ubuntu-latest

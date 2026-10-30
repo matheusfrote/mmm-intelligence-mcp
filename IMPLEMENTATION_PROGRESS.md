@@ -180,3 +180,39 @@ completos em instalações uvx/pipx.
 [Relatório com links, recibos e limites](docs/v42-followup.md). O roadmap foi
 atualizado sem declarar extensões científicas, conectores, plugin público ou
 produção como concluídos. Main, release, PyPI e infraestrutura externa preservados.
+
+## Ingestão fornecida pelo usuário e Growth — 2026-10-29
+
+Acrescentadas 13 ferramentas MCP (total39), formatos CSV/TSV/JSON/JSONL/XLSX,
+18 perfis iniciais, perfis customizados imutáveis, validação crossmedia, agregação
+explícita, screen MMM e snapshots de diagnóstico/decisão/aprendizado. Controles
+existentes de dados reais, tenants, leitura por papel, hashes e exclusão preservados.
+Referências entre reports passaram a bloquear exclusão de fonte utilizada.
+
+Baseline:198 testes. Resultado:230 testes, cobertura82,41%, um aviso preexistente.
+Demo SDK:7 fontes,38 chamadas,39 ferramentas, persistência após reinício.
+Regressão E2E Chrome aprovada. Revisão independente confirmou correções e32 testes
+focais aprovados. Documentação, ferramentas, evidências e limitações:
+[ingestão e Growth](docs/universal-ingestion.md). Extensão local; não foi declarada
+conclusão integral de todos os formatos, joins, métodos experimentais e UI previstos.
+
+## Fechamento universal e operacionalização — 29/10/2026
+
+Entregues oito formatos, joins explícitos, materialização consumida pelos quatro
+motores, análises temporais/coortes/experimentos, 18 perfis e interface dedicada.
+O protocolo expõe 45 ferramentas, três prompts e um recurso. Corrigidos perda de
+horário XLSX, recorte do gráfico, referência crossmedia, projeção inválida na UI e
+uso de resposta histórica no cenário Robyn. Context manager fecha logs no Windows.
+
+Gates locais: Python com 3.659 linhas/1.316 branches, JS com 792 linhas/284 branches/207 funções,
+R com 102 expressões/22 caminhos, todos em 100% no escopo explícito. Ambiente `.venv` instalado
+com dependências extras; 115 binários R fixados por URL/versão/SHA256 e instalação
+em biblioteca nova verificada. SDK stdio sintético executou as 45 ferramentas e
+verificou persistência, recursos, prompts, cenários e futuro suportado.
+
+O [checklist vigente](docs/closure-checklist.md), o
+[relatório de validação](docs/operational-validation.md) e os
+[recibos](docs/validation/closure/) preservam contagens, limitações e reprodução.
+MCMC curto/busca reduzida são testes funcionais, sem validação causal ou certificação
+de convergência. Publicação e merge dependem da aprovação das verificações, conforme
+autorização explícita do proprietário; nenhum serviço externo é implantado.

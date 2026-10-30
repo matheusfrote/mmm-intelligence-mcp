@@ -70,9 +70,10 @@ def prepare_meridian_holdout(dataset, request):
         ):
             raise ValueError("Meridian targets must be finite nonnegative numbers")
         observed.append(float(value))
-    placeholder = math.fsum(observed[:cutoff]) / cutoff
-    if not math.isfinite(placeholder):
-        raise ValueError("Meridian train-only placeholder is nonfinite")
+    try:
+        placeholder = math.fsum(observed[:cutoff]) / cutoff
+    except OverflowError as exc:
+        raise ValueError("Meridian train-only placeholder exceeds floating-point range") from exc
     model_rows = [dict(row) for row in rows]
     for row in model_rows[cutoff:]:
         row[request["target_column"]] = placeholder
@@ -231,6 +232,41 @@ def meridian_effective_configuration(model):
     }
 
 
+def ensure_original_scale(model):
+    """Compatibility boundary for native models saved without this optional variable."""
+    if "y_original_scale" not in model.model.named_vars:
+        model.add_original_scale_contribution_variable(var=["y"])
+
+
+def verify_restoration(before, after, backend, tolerance):
+    import numpy as np
+
+    if not np.allclose(before, after, rtol=tolerance, atol=tolerance):
+        raise ValueError(backend + " persistence changed predictions")
+
+
+def meridian_diagnostics(inference_data, request):
+    import arviz as az
+
+    diagnostics = {}
+    diagnostics.update(
+        chains=request["chains"],
+        draws=request["draws"],
+        tune=request["tune"],
+        convergence_certified=False,
+    )
+    try:
+        summary = az.summary(inference_data, kind="diagnostics", round_to="none")
+        diagnostics.update(summarize_diagnostics(summary))
+        diagnostics["summary_available"] = True
+    except (ValueError, KeyError, TypeError):
+        diagnostics.update(summarize_diagnostics({}))
+        diagnostics["summary_available"] = False
+        diagnostics["summary_unavailable_reason"] = "ArviZ diagnostic summary unavailable"
+    diagnostics.update(divergence_diagnostics(inference_data))
+    return diagnostics
+
+
 def pymc(payload, root):
     import numpy as np
     import pandas as pd
@@ -247,8 +283,7 @@ def pymc(payload, root):
         combined[req["date_column"]] = pd.to_datetime(combined[req["date_column"]])
         native.write_bytes(base64.b64decode(stored["native_base64"], validate=True))
         model = MMM.load(str(native))
-        if "y_original_scale" not in model.model.named_vars:
-            model.add_original_scale_contribution_variable(var=["y"])
+        ensure_original_scale(model)
         pp = model.sample_posterior_predictive(
             X=combined,
             extend_idata=False,
@@ -321,8 +356,7 @@ def pymc(payload, root):
         model.save(str(native), engine="h5netcdf")
         restored = MMM.load(str(native))
         after = prediction(restored)
-        if not np.allclose(before, after, rtol=1e-7, atol=1e-7):
-            raise ValueError("PyMC persistence changed predictions")
+        verify_restoration(before, after, "PyMC", 1e-7)
         # Current ArviZ exposes DataTree diagnostics through xarray accessors.
         idata = model.idata
         return {
@@ -369,8 +403,7 @@ def pymc(payload, root):
         x.loc[cutoff:, c] = x.loc[cutoff:, c] * factor
     native.write_bytes(base64.b64decode(stored["native_base64"], validate=True))
     model = MMM.load(str(native))
-    if "y_original_scale" not in model.model.named_vars:
-        model.add_original_scale_contribution_variable(var=["y"])
+    ensure_original_scale(model)
     pp = model.sample_posterior_predictive(
         X=x.iloc[cutoff:],
         extend_idata=False,
@@ -458,25 +491,8 @@ def meridian(payload, root):
         meridian_serde.save_meridian(fitted, str(native))
         restored = meridian_serde.load_meridian(str(native))
         after = prediction(restored)
-        if not np.allclose(before, after, rtol=1e-6, atol=1e-6):
-            raise ValueError("Meridian persistence changed expected outcomes")
-        diagnostics = {
-            "chains": req["chains"],
-            "draws": req["draws"],
-            "tune": req["tune"],
-            "convergence_certified": False,
-        }
-        try:
-            import arviz as az
-
-            summary = az.summary(fitted.inference_data, kind="diagnostics", round_to="none")
-            diagnostics.update(summarize_diagnostics(summary))
-            diagnostics["summary_available"] = True
-        except (ValueError, KeyError, TypeError):
-            diagnostics.update(summarize_diagnostics({}))
-            diagnostics["summary_available"] = False
-            diagnostics["summary_unavailable_reason"] = "ArviZ diagnostic summary unavailable"
-        diagnostics.update(divergence_diagnostics(fitted.inference_data))
+        verify_restoration(before, after, "Meridian", 1e-6)
+        diagnostics = meridian_diagnostics(fitted.inference_data, req)
         return {
             "backend": "google_meridian",
             "backend_version": version("google-meridian"),

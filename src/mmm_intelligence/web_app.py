@@ -12,6 +12,7 @@ ASSETS = {
             ("app.js", "text/javascript"),
             ("client.js", "text/javascript"),
             ("views.js", "text/javascript"),
+            ("growth_views.js", "text/javascript"),
             ("charts.js", "text/javascript"),
             ("ui.js", "text/javascript"),
             ("app.css", "text/css"),
@@ -59,9 +60,27 @@ def local_dashboard_request(scope):
 
 async def serve_asset(scope, send):
     """Only GET on exact bundled assets; never resolve a request path on disk."""
-    headers = {k.lower(): v.decode("latin-1") for k, v in scope["headers"]}
-    host = urlsplit("http://" + headers.get(b"host", "")).hostname
-    allowed = host in {"127.0.0.1", "localhost", "::1"}
+    headers = {}
+    allowed = True
+    for key, value in scope["headers"]:
+        key = key.lower()
+        if key in {b"host", b"origin"} and key in headers:
+            allowed = False
+        headers[key] = value.decode("latin-1")
+    try:
+        host = urlsplit("http://" + headers.get(b"host", ""))
+        allowed = (
+            allowed
+            and host.hostname in {"127.0.0.1", "localhost", "::1"}
+            and host.username is None
+            and host.password is None
+            and not host.path
+            and not host.query
+            and not host.fragment
+            and (host.port is None or 1 <= host.port <= 65535)
+        )
+    except ValueError:
+        allowed = False
     origin = headers.get(b"origin")
     if origin and origin != "http://" + headers.get(b"host", ""):
         allowed = False

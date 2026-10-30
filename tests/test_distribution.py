@@ -26,6 +26,12 @@ def test_source_and_wheel_include_workers_but_exclude_private_runtime(tmp_path):
     assert "SECURITY_DEPLOY_AUDIT.md" in names
     assert "docs/validation/v4/demo.csv" in names
     assert "tests/web/dashboard.test.mjs" in names
+    assert "tests/fixtures/dashboard-models.json" in names
+    assert "tests/r/native_cases.R" in names
+    assert "examples/r_worker_coverage.R" in names
+    assert "deploy/Dockerfile.tests" in names
+    assert "requirements/robyn-r-win-binaries.json" in names
+    assert "examples/operational_workflow.py" in names
     assert "package-lock.json" in names
     assert "LICENSE" in names and "NOTICE" in names
     assert not any(

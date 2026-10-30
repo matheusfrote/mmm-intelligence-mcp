@@ -29,7 +29,7 @@ def rpc(method, params, path="/mcp", supplied=None):
 assert os.getuid()==10001
 assert rpc("tools/list",{},supplied={})[0]==401
 status, discovered=rpc("tools/list",{})
-assert status==200 and len(discovered["result"]["tools"])==26
+assert status==200 and len(discovered["result"]["tools"])==45
 assert rpc("tools/list",{},path="/app/mcp",supplied={"Origin":"https://external.invalid","X-MMM-Dashboard":"1","Content-Type":"application/json"})[0]==403
 local_headers={"Origin":"http://127.0.0.1:8769","X-MMM-Dashboard":"1","Content-Type":"application/json","Accept":"application/json, text/event-stream"}
 assert rpc("tools/list",{},path="/app/mcp",supplied=local_headers)[0]==200
@@ -40,7 +40,7 @@ status,result=rpc("tools/call",{"name":"validate_dataset","arguments":{"request"
 assert result["result"]["structuredContent"]["data"]["valid"]
 status,result=rpc("resources/read",{"uri":"mmm://datasets/container-demo"},path="/app/mcp",supplied=local_headers)
 assert "error" in result
-print(json.dumps({"uid":os.getuid(),"tools":26,"unauthenticated_mcp":401,"cross_origin_dashboard":403,"local_dashboard":200,"tenant_isolation":True,"dataset_valid":True}))
+print(json.dumps({"uid":os.getuid(),"tools":45,"unauthenticated_mcp":401,"cross_origin_dashboard":403,"local_dashboard":200,"tenant_isolation":True,"dataset_valid":True}))
 """
 
 

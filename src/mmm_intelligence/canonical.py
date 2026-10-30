@@ -35,6 +35,17 @@ def capabilities(backend):
     }
 
 
+def require_operation(backend, operation):
+    """An unavailable adapter never silently substitutes another statistical engine."""
+    capability = capabilities(backend)[operation]
+    if not capability["available"]:
+        raise MMMError(
+            "OPERATION_UNAVAILABLE",
+            capability["reason"]
+            + ". Select Ridge explicitly for its constrained exploratory optimizer, or use the native package with its own validated allocation design.",
+        )
+
+
 def bundle(model, dataset, request):
     if digest(dataset) != model["dataset_sha256"]:
         raise MMMError("LINEAGE_MISMATCH", "Model and dataset lineage differ")

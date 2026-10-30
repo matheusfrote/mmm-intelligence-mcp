@@ -182,6 +182,8 @@ small,
 .sidebar nav {
   display: grid;
   gap: 4px;
+  min-height: 0;
+  overflow-y: auto;
 }
 .sidebar nav a {
   color: var(--muted);

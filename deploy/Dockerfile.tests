@@ -1,0 +1,10 @@
+# Local test image only. Production keeps its existing non-root image and permissions.
+ARG MMM_TEST_BASE=mmm-intelligence-local-base:latest
+FROM ${MMM_TEST_BASE}
+USER root
+RUN apt-get update && apt-get install -y --no-install-recommends git && apt-get clean
+COPY . /opt/mmm
+RUN pip install --no-deps --no-build-isolation -e . \
+    && python -c "import mmm_intelligence; assert mmm_intelligence.__file__.startswith('/opt/mmm/src/')" \
+    && chown -R mmm:mmm /opt/mmm
+USER 10001:10001

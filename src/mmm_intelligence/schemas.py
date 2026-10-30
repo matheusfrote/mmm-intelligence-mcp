@@ -207,6 +207,7 @@ class CSVImportRequest(ImportMetadata):
 
 
 class OptimizeRequest(ModelRequest):
+    backend: Literal["ridge", "google_meridian", "pymc_marketing", "meta_robyn"] = "ridge"
     horizon: int = Field(default=13, ge=1, le=104)
     total_budget: Spend
     lower: dict[str, Spend] = Field(default_factory=dict, max_length=10)

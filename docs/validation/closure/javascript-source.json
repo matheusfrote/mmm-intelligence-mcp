@@ -1,0 +1,12 @@
+{
+  "source_sha256": {
+    "src/mmm_intelligence/web/app.js": "f485cd8a2277456640aa4a14ab4391083243b1a4b9291cb56973f029f2fd25eb",
+    "src/mmm_intelligence/web/charts.js": "0a486fd3fc6e8bc9c9feaf7563cdce62ff0281ee2732d9a3480bc6543732f728",
+    "src/mmm_intelligence/web/client.js": "cb9d552ffd20ac1b43fb0bcc55e0d2e34ae63dccb5b4309c9d2b9d6a447187d2",
+    "src/mmm_intelligence/web/growth_views.js": "ffdf6ac79e3706589a55fd59273a159fe1ffa2206f859fc1bc87791d0dabb8f4",
+    "src/mmm_intelligence/web/ui.js": "d0ff4735523e7d84769ff5c298136b1104bcfa66b352ba920c2b78b86afeba7b",
+    "src/mmm_intelligence/web/views.js": "7c8ea467b1ec95116e869cba031b66d7c0a281ad207e1b633d5c9c45deed4b6d"
+  },
+  "coverage": "javascript-summary.json",
+  "scope": "All six first-party JavaScript assets, including unloaded assets"
+}

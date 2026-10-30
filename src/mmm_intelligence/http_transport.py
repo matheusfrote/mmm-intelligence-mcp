@@ -14,12 +14,13 @@ from datetime import datetime, timezone
 from time import monotonic
 
 from .config import Settings
+from .growth import READ_TOOLS as GROWTH_READ_TOOLS
 from .schemas import IDENTIFIER_PATTERN, PublicError, ToolResponse
 from .service import MMMService
 
 principal = contextvars.ContextVar("mmm_principal", default=None)
 LOCAL_DASHBOARD = "_local_dashboard"
-READ_TOOLS = {
+READ_TOOLS = GROWTH_READ_TOOLS | {
     "backend_status",
     "validate_dataset",
     "get_model",

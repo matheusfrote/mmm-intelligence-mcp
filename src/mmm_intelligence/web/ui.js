@@ -36,6 +36,7 @@ export function field(label, value, type = "text") {
 export function select(label, options, value) {
   const wrap = el("label", label),
     input = el("select");
+  input.setAttribute("aria-label", label);
   for (const [v, t] of options) {
     const o = el("option", t);
     o.value = v;

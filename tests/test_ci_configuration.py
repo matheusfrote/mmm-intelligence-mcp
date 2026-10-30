@@ -9,9 +9,11 @@ import yaml
 def test_workflow_parses_and_all_run_commands_are_strings():
     path = Path(__file__).resolve().parents[1] / ".github/workflows/ci.yml"
     workflow = yaml.safe_load(path.read_text(encoding="utf-8"))
-    assert set(workflow["jobs"]) == {"test", "security"}
+    assert set(workflow["jobs"]) == {"test", "security", "native", "coverage"}
+    assert set(workflow["jobs"]["coverage"]["needs"]) == {"test", "native"}
     for job in workflow["jobs"].values():
-        for step in job["steps"]:
+        assert "steps" in job or job.get("uses") == "./.github/workflows/native-engines.yml"
+        for step in job.get("steps", []):
             if "run" in step:
                 assert isinstance(step["run"], str)
 
@@ -22,7 +24,12 @@ def test_all_workflows_are_read_only_with_pinned_actions_and_string_commands():
         workflow = yaml.safe_load(path.read_text(encoding="utf-8"))
         assert workflow["permissions"] == {"contents": "read"}, path.name
         for job in workflow["jobs"].values():
-            for step in job["steps"]:
+            if "uses" in job:
+                assert job["uses"] == "./.github/workflows/native-engines.yml"
+                assert (root.parents[1] / job["uses"]).is_file()
+            else:
+                assert "steps" in job
+            for step in job.get("steps", []):
                 if "run" in step:
                     assert isinstance(step["run"], str), path.name
                 if "uses" in step:

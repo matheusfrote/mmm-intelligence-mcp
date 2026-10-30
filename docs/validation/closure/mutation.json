@@ -1,0 +1,39 @@
+{
+  "selective_only": true,
+  "production_modified": false,
+  "baseline_passed": true,
+  "mutations": [
+    {
+      "mutation": "normalized_adstock",
+      "file": "modeling.py",
+      "test": "tests/test_modeling.py::test_adstock_hand_calculation_continuity_and_time_direction",
+      "detected": true
+    },
+    {
+      "mutation": "hill_denominator",
+      "file": "modeling.py",
+      "test": "tests/test_modeling.py::test_hill_half_saturation_monotonicity_and_concavity",
+      "detected": true
+    },
+    {
+      "mutation": "complete_cohort_window",
+      "file": "growth_analytics.py",
+      "test": "tests/test_growth_analytics.py::test_cohort_eligibility_does_not_mark_censored_units_lost",
+      "detected": true
+    },
+    {
+      "mutation": "effect_direction",
+      "file": "experiments.py",
+      "test": "tests/test_growth_analytics.py::test_binary_experiment_estimate_and_power_are_not_causal_proof",
+      "detected": true
+    },
+    {
+      "mutation": "duplicate_parquet_columns",
+      "file": "file_readers.py",
+      "test": "tests/test_reader_edges.py::test_parquet_dates_decimal_null_and_duplicate_names",
+      "detected": true
+    }
+  ],
+  "detected": 5,
+  "total": 5
+}

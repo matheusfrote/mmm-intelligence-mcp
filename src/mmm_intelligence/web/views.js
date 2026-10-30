@@ -14,7 +14,9 @@ import {
   engines,
 } from "./ui.js";
 import { lineChart } from "./charts.js";
+import { growthModules, growthViews } from "./growth_views.js";
 export const modules = [
+  ...growthModules,
   ["overview", "Visão geral"],
   ["data", "Data Explorer"],
   ["quality", "Qualidade"],
@@ -88,10 +90,6 @@ function analysisStats(a) {
     ["Períodos", String(a.evaluation.length), "Janela de avaliação"],
   ]);
 }
-function rawResult(p, title, data) {
-  p.append(detail(title, data));
-}
-
 function overview(c) {
   head(
     c,
@@ -232,7 +230,9 @@ function data(c) {
   if (!need(c)) return;
   const rows = c.state.dataset.rows,
     cols = Object.keys(rows[0]),
-    date = cols.includes("date") ? "date" : cols[0],
+    date =
+      c.state.dataset.column_spec?.date_column ??
+      (cols.includes("date") ? "date" : cols[0]),
     numeric = cols.filter((k) => typeof rows[0][k] === "number"),
     series = panel("Séries do dataset");
   series.append(
@@ -781,7 +781,6 @@ function simulation(c) {
     const f = panel("Plano futuro explícito"),
       channels = a.source.media_columns,
       config = jsonInput("Gastos e controles por período", {
-        horizon: 4,
         media_plan: Object.fromEntries(
           channels.map((ch) => [ch, [1000, 1000, 1000, 1000]]),
         ),
@@ -901,6 +900,7 @@ function reports(c) {
   c.root.append(p);
 }
 export const views = {
+  ...growthViews,
   overview,
   data,
   quality,

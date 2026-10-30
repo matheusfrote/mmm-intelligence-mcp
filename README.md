@@ -1,10 +1,18 @@
 # MMM Intelligence MCP — 0.4.0
 
-Servidor independente de Marketing Mix Modeling com **SDK oficial MCP 2.3**, execução local e resultados exploratórios. Há **26 ferramentas**, motor Ridge e adaptadores nativos para **Google Meridian, PyMC-Marketing e Meta Robyn**, importação CSV/JSON, qualidade de dados, comparação padronizada, projeção futura Ridge/PyMC, otimização local e dashboard.
+Servidor independente de Marketing Mix Modeling com **SDK oficial MCP 2.3**, execução local e resultados exploratórios. Há **45 ferramentas, três prompts e um template de recurso**, motor Ridge e adaptadores nativos para **Google Meridian, PyMC-Marketing e Meta Robyn**, ingestão por arquivos, validação de mídia, ciclo de Growth, comparação padronizada, projeção futura Ridge/PyMC, otimização local e dashboard.
 
 Nenhuma ferramenta altera campanhas ou orçamentos reais. Dados sintéticos são o padrão. Integração funcional é diferente de convergência estatística e identificação causal.
 
-Licença **Apache-2.0**, autorizada pelo proprietário; consulte [LICENSE](LICENSE) e [NOTICE](NOTICE). A versão 0.4.0 e o dashboard V4.2 estão publicados na [branch feat/v4-intelligence](https://github.com/matheusfrote/mmm-intelligence-mcp/tree/feat/v4-intelligence). A main permanece na entrega anterior. O [CI do código verificado](https://github.com/matheusfrote/mmm-intelligence-mcp/actions/runs/40709406231) passou nas nove combinações Windows/Linux/macOS × Python 3.11/3.12/3.13, além do job de segurança; [dashboard e contêiner](https://github.com/matheusfrote/mmm-intelligence-mcp/actions/runs/40709406223) também passaram. [Correções, evidências e limites atuais](docs/v42-followup.md).
+Extensão local de 29/10: **45 ferramentas** com ingestão CSV/TSV/JSON/JSONL/XLSX/XLS/Parquet/XML,
+joins explícitos, preparação dos quatro motores, tendências, coortes, experimentos,
+perfis de mídia, matriz crossmedia e histórico de decisões. Os gates locais mediram
+**100% de linhas e branches em Python, JavaScript e no escopo R documentado**:
+[relatório e reprodução](docs/operational-validation.md), [checklist](docs/closure-checklist.md). Veja os contratos,
+demonstração e limites em [ingestão e Growth](docs/universal-ingestion.md).
+Resultados sintéticos e cobertura de código não certificam convergência ou eficácia comercial.
+
+Licença **Apache-2.0**, autorizada pelo proprietário; consulte [LICENSE](LICENSE) e [NOTICE](NOTICE). O [histórico de CI](https://github.com/matheusfrote/mmm-intelligence-mcp/actions) identifica a revisão realmente testada. Os recibos da entrega anterior [V4.2](docs/v42-followup.md) permanecem históricos. O CI atual combina cobertura da matriz e dos três motores, exige 100% e verifica separadamente JavaScript e R. Não há publicação PyPI ou serviço externo nesta entrega.
 
 ## Começar
 
@@ -29,11 +37,19 @@ Stdio aguarda um cliente MCP, sem abrir URL. Alternativas: python server.py ou o
 
 ~~~powershell
 .\.venv\Scripts\python.exe examples\mcp_workflow.py --extended --data-dir var\minha-demo --output-dir evidence\minha-demo
+.\.venv\Scripts\python.exe examples\operational_workflow.py --native --output-dir evidence\minha-demo-integral
 .\.venv\Scripts\python.exe -m pytest -q
 .\.venv\Scripts\python.exe -m ruff check src tests examples server.py
 ~~~
 
 Use pasta de evidências nova em cada execução. O exemplo verifica descoberta, chamadas estruturadas, erros e persistência após reinício. Exporta HTML interativo, Markdown e CSV completos.
+
+O segundo comando exige os três runtimes isolados instalados e verifica as **45 ferramentas, um recurso e três prompts** pelo cliente oficial stdio. Treinos de 20 draws verificam transporte e persistência. Validação analítica exige desenho adequado, mais amostras e diagnósticos; 1.000 draws por si só não demonstram convergência.
+
+Prompts disponíveis: `audit_mmm_pipeline` (qualidade, VIF/posto e separação temporal),
+`simulate_budget_scenario` (Hill/carryover, horizonte e abstenção) e
+`growth_incrementality_test` (poder, unidade experimental e limites de inferência).
+Eles retornam orientações estruturadas e não executam ferramentas automaticamente.
 
 Artefatos V4: [dashboard](docs/validation/v4/dashboard.html), [relatório](docs/validation/v4/report.md), [CSV sintético](docs/validation/v4/demo.csv) e [índice de evidências](docs/validation/v4/README.md). O dashboard funciona localmente sem CDNs nem requisições externas. Evidências anteriores permanecem históricas.
 

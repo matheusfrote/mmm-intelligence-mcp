@@ -7,11 +7,12 @@ include IMPLEMENTATION_PROGRESS.md
 include CHANGELOG.md
 include package.json package-lock.json
 include .dockerignore deploy/Dockerfile
+include deploy/Dockerfile.tests
 include SECURITY_DEPLOY_AUDIT.md
 include MMM_*.md
 recursive-include docs *.md
-recursive-include examples *.py *.example.json *.csv
-recursive-include tests *.py
+recursive-include examples *.py *.R *.example.json *.csv
+recursive-include tests *.py *.R *.json
 recursive-include tests/web *.mjs
 recursive-include src/mmm_intelligence/web *.html *.css *.js *.svg
 recursive-include plugins *.json *.py *.md *.svg
@@ -19,6 +20,7 @@ recursive-include deploy *.py *.yaml *.template *.md
 recursive-include docs/validation/v42 *.png
 recursive-include requirements *.txt
 recursive-include requirements *.csv
+recursive-include requirements *.json
 recursive-include .github *.yml
 recursive-include .github *.md
 recursive-include src/mmm_intelligence/integrations *.R

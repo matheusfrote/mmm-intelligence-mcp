@@ -1,0 +1,63 @@
+{
+  "synthetic": true,
+  "tools_discovered": 39,
+  "source_count": 7,
+  "calls": [
+    "preview_dataset",
+    "import_source",
+    "map_dataset_schema",
+    "validate_media_dataset",
+    "preview_dataset",
+    "import_source",
+    "map_dataset_schema",
+    "validate_media_dataset",
+    "preview_dataset",
+    "import_source",
+    "map_dataset_schema",
+    "validate_media_dataset",
+    "preview_dataset",
+    "import_source",
+    "map_dataset_schema",
+    "validate_media_dataset",
+    "preview_dataset",
+    "import_source",
+    "map_dataset_schema",
+    "validate_media_dataset",
+    "preview_dataset",
+    "import_source",
+    "map_dataset_schema",
+    "validate_media_dataset",
+    "preview_dataset",
+    "import_source",
+    "map_dataset_schema",
+    "validate_media_dataset",
+    "validate_crossmedia_dataset",
+    "build_growth_dataset",
+    "check_mmm_eligibility",
+    "create_growth_diagnostic",
+    "create_growth_decision",
+    "transition_growth_decision",
+    "transition_growth_decision",
+    "import_source",
+    "transition_growth_decision",
+    "transition_growth_decision"
+  ],
+  "restart_persistence": true,
+  "mmm_eligibility": {
+    "eligible": false,
+    "backend": "ridge",
+    "blocking_reasons": [
+      "At least 52 regular observations required for this screen",
+      "No controls declared; confounding requires review"
+    ],
+    "assessment": "preliminary_design_screen",
+    "causal_identification": false,
+    "warnings": [
+      "Seasonality, lag choice, measurement changes and omitted confounding require substantive review."
+    ]
+  },
+  "external_action_executed": false,
+  "limitations": [
+    "Endpoints are descriptive; no trend significance, business recommendation or causal effect inferred."
+  ]
+}

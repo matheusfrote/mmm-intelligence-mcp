@@ -1,5 +1,12 @@
 # Arquitetura e decisões
 
+Extensão de 29/10/2026: [ingestão e Growth](universal-ingestion.md) adiciona
+universal_schemas, supplied_files, media_validation e GrowthMixin. Artefatos de
+fonte/perfil/normalização/canônico/diagnóstico/decisão ficam em reports sob envelope
+de integridade, com discriminação de tipo. Lifecycle protege referências; snapshots
+de decisão são exclusivos e sequenciais. Arquivos são conteúdo inline limitado,
+sem conexões de mídia ou acesso a caminhos recebidos do cliente.
+
 O servidor usa SDK oficial MCP 2.3 e oferece stdio por padrão ou HTTP autenticado em loopback por opção do host. O módulo `server` expõe ferramentas tipadas; `service` normaliza resultados/erros e decide autorização. A matemática não importa MCP. Persistência não importa motores estatísticos. Os adaptadores Meridian, PyMC-Marketing e Robyn usam processos/ambientes isolados; nenhum adaptador de plataforma de anúncios está incluído.
 
 ```mermaid

@@ -12,6 +12,8 @@ from threadpoolctl import threadpool_limits
 from .config import Settings
 from .datasets import generate, validate
 from .errors import MMMError
+from .growth import REQUESTS as GROWTH_REQUESTS
+from .growth import GrowthMixin
 from .modeling import train
 from .schemas import (
     AnalysisRequest,
@@ -55,8 +57,9 @@ COMPUTE_TOOLS = {
 }
 
 
-class MMMService:
+class MMMService(GrowthMixin):
     REQUESTS: dict[str, type[Contract]] = {
+        **GROWTH_REQUESTS,
         "generate_demo_dataset": GenerateRequest,
         "validate_dataset": ValidateRequest,
         "train_mmm": TrainRequest,
@@ -102,6 +105,13 @@ class MMMService:
         ):
             handler.setFormatter(formatter)
             self.log.addHandler(handler)
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        self.close()
+        return False
 
     def close(self):
         for handler in self.log.handlers[:]:
@@ -388,8 +398,10 @@ class MMMService:
         }
 
     def optimize_budget(self, request: OptimizeRequest) -> dict:
+        from .canonical import require_operation
         from .optimization import optimize
 
+        require_operation(request.backend, "optimization")
         return optimize(self.get_model(ModelRequest(model_id=request.model_id)), request)
 
     def tune_mmm(self, request: TuneRequest) -> dict:

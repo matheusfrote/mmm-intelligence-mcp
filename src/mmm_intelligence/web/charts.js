@@ -10,7 +10,7 @@ const colors = [
 function colorIndex(key, index) {
   return { spend_search: 0, spend_social: 1, spend_video: 2 }[key] ?? index;
 }
-function svg(tag, attrs = {}) {
+function svg(tag, attrs) {
   const n = document.createElementNS(NS, tag);
   for (const [k, v] of Object.entries(attrs)) n.setAttribute(k, v);
   return n;
@@ -46,6 +46,10 @@ export function lineChart(
     zoom.append(f.wrap);
     f.input.addEventListener("input", draw);
   }
+  // Range inputs clamp their initial value to the default maximum of 100.
+  // Set the endpoints after applying the dataset's actual range.
+  start.input.value = "0";
+  end.input.value = String(Math.max(0, rows.length - 1));
   keys.forEach((k, i) => {
     const l = el("label", k, `legend-${colorIndex(k, i) % 3}`),
       c = el("input");

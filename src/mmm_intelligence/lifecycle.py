@@ -6,6 +6,7 @@ from .errors import MMMError
 from .storage import digest
 
 KINDS = ("datasets", "models", "backend_models", "reports", "dashboards")
+MAX_INVENTORY = 10000
 
 
 def inventory(store):
@@ -17,7 +18,7 @@ def inventory(store):
 
         reject_links(folder)
         for item in sorted(folder.glob("*.json")):
-            if len(result) >= 10000:
+            if len(result) >= MAX_INVENTORY:
                 raise MMMError(
                     "INVENTORY_LIMIT", "Inventory exceeds 10000 artifacts; operator review required"
                 )
@@ -27,6 +28,9 @@ def inventory(store):
             result.append(
                 {
                     "kind": kind,
+                    "artifact_type": payload.get("artifact_type"),
+                    "format": payload.get("format"),
+                    "origin": payload.get("origin"),
                     "artifact_id": item.stem,
                     "sha256": digest(payload),
                     "bytes": info.st_size,
@@ -36,6 +40,14 @@ def inventory(store):
                     "dataset_id": payload.get("dataset_id"),
                     "dataset_sha256": payload.get("dataset_sha256"),
                     "model_id": payload.get("model_id"),
+                    "source_ids": list(
+                        {
+                            value
+                            for key in ("source_id", "diagnostic_id", "previous_id", "results_id")
+                            if isinstance(value := payload.get(key), str)
+                        }
+                        | set(payload.get("source_ids", []))
+                    ),
                 }
             )
     return {
@@ -61,6 +73,8 @@ def references(items, target):
                 item["kind"] in {"reports", "dashboards"}
                 and item["model_id"] == target["artifact_id"]
             )
+        elif target["kind"] == "reports":
+            linked = target["artifact_id"] in item.get("source_ids", [])
         else:
             linked = False
         if linked:
