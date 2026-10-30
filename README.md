@@ -1,12 +1,22 @@
-# MMM Intelligence MCP — 0.3.1
+# MMM Intelligence MCP — 0.4.0
 
-Servidor independente de Marketing Mix Modeling com **SDK oficial MCP 2.3**, execução local e resultados exploratórios. Há **16 ferramentas**, motor Ridge e integrações reais com **Google Meridian, PyMC-Marketing e Meta Robyn**, além de auditoria científica, otimização, incerteza condicional, importação autorizada, dashboard e relatório.
+Servidor independente de Marketing Mix Modeling com **SDK oficial MCP 2.3**, execução local e resultados exploratórios. Há **45 ferramentas, três prompts e um template de recurso**, motor Ridge e adaptadores nativos para **Google Meridian, PyMC-Marketing e Meta Robyn**, ingestão por arquivos, validação de mídia, ciclo de Growth, comparação padronizada, projeção futura Ridge/PyMC, otimização local e dashboard.
 
 Nenhuma ferramenta altera campanhas ou orçamentos reais. Dados sintéticos são o padrão. Integração funcional é diferente de convergência estatística e identificação causal.
 
-Código publicado em [GitHub](https://github.com/matheusfrote/mmm-intelligence-mcp). A [matriz CI](https://github.com/matheusfrote/mmm-intelligence-mcp/actions) verifica Windows, Linux e macOS com Python 3.11/3.12/3.13. Consulte o [registro de entrega](IMPLEMENTATION_PROGRESS.md) para resultados e limites.
+Extensão local de 29/10: **45 ferramentas** com ingestão CSV/TSV/JSON/JSONL/XLSX/XLS/Parquet/XML,
+joins explícitos, preparação dos quatro motores, tendências, coortes, experimentos,
+perfis de mídia, matriz crossmedia e histórico de decisões. Os gates locais mediram
+**100% de linhas e branches em Python, JavaScript e no escopo R documentado**:
+[relatório e reprodução](docs/operational-validation.md), [checklist](docs/closure-checklist.md). Veja os contratos,
+demonstração e limites em [ingestão e Growth](docs/universal-ingestion.md).
+Resultados sintéticos e cobertura de código não certificam convergência ou eficácia comercial.
+
+Licença **Apache-2.0**, autorizada pelo proprietário; consulte [LICENSE](LICENSE) e [NOTICE](NOTICE). O [histórico de CI](https://github.com/matheusfrote/mmm-intelligence-mcp/actions) identifica a revisão realmente testada. Os recibos da entrega anterior [V4.2](docs/v42-followup.md) permanecem históricos. O CI atual combina cobertura da matriz e dos três motores, exige 100% e verifica separadamente JavaScript e R. Não há publicação PyPI ou serviço externo nesta entrega.
 
 ## Começar
+
+**Dashboard local sem login:** depois de instalar, execute `mmm-intelligence-mcp dashboard` e abra `http://127.0.0.1:8769/app`. Não é necessário configurar ou informar token para o workspace local. O endpoint MCP separado continua protegido. [Guia do dashboard V4.2 e testes](docs/dashboard.md).
 
 Python 3.11+ para o servidor base; PyMC-Marketing 1.3 exige Python 3.12 em seu ambiente separado.
 
@@ -21,17 +31,27 @@ $env:MMM_DATA_DIR = Join-Path $PWD 'var'
 
 Stdio aguarda um cliente MCP, sem abrir URL. Alternativas: python server.py ou o entrypoint mmm-intelligence-mcp. Stdout é exclusivo do protocolo. Adapte os caminhos absolutos da [configuração de exemplo](examples/mcp-config.example.json) ao seu cliente. No Windows, use `.venv/Scripts/python.exe` como command. Nenhum cliente global é alterado pelo servidor.
 
+`mmm-intelligence-mcp doctor` verifica a instalação; `mmm-intelligence-mcp config --data-dir C:\mmm-data` imprime configuração stdio. [Instalação por checkout, wheel e ambientes isolados](docs/installation.md). O pacote não foi publicado no PyPI e não instala runtimes opcionais automaticamente.
+
 ## Demonstração completa
 
 ~~~powershell
 .\.venv\Scripts\python.exe examples\mcp_workflow.py --extended --data-dir var\minha-demo --output-dir evidence\minha-demo
+.\.venv\Scripts\python.exe examples\operational_workflow.py --native --output-dir evidence\minha-demo-integral
 .\.venv\Scripts\python.exe -m pytest -q
 .\.venv\Scripts\python.exe -m ruff check src tests examples server.py
 ~~~
 
 Use pasta de evidências nova em cada execução. O exemplo verifica descoberta, chamadas estruturadas, erros e persistência após reinício. Exporta HTML interativo, Markdown e CSV completos.
 
-Artefatos atuais de demonstração: [dashboard](docs/validation/security031/dashboard.html), [relatório](docs/validation/security031/report.md), [CSV sintético](docs/validation/security031/demo.csv), [ciclo MCP](docs/validation/security031/mcp-cycle.json) e [auditoria estruturada](docs/validation/security031/audit.json). O dashboard funciona localmente sem CDNs nem requisições externas. Evidências anteriores permanecem históricas.
+O segundo comando exige os três runtimes isolados instalados e verifica as **45 ferramentas, um recurso e três prompts** pelo cliente oficial stdio. Treinos de 20 draws verificam transporte e persistência. Validação analítica exige desenho adequado, mais amostras e diagnósticos; 1.000 draws por si só não demonstram convergência.
+
+Prompts disponíveis: `audit_mmm_pipeline` (qualidade, VIF/posto e separação temporal),
+`simulate_budget_scenario` (Hill/carryover, horizonte e abstenção) e
+`growth_incrementality_test` (poder, unidade experimental e limites de inferência).
+Eles retornam orientações estruturadas e não executam ferramentas automaticamente.
+
+Artefatos V4: [dashboard](docs/validation/v4/dashboard.html), [relatório](docs/validation/v4/report.md), [CSV sintético](docs/validation/v4/demo.csv) e [índice de evidências](docs/validation/v4/README.md). O dashboard funciona localmente sem CDNs nem requisições externas. Evidências anteriores permanecem históricas.
 
 ## Ferramentas
 
@@ -55,6 +75,16 @@ Todas recebem um objeto request e retornam ToolResponse. Confira ok; o validador
 | train_backend | Treina o motor externo verdadeiro em ambiente isolado |
 | get_backend_model | Consulta resultados do motor externo |
 | predict_backend | Recarrega o formato nativo e calcula cenário histórico suportado |
+| import_csv | Importa CSV inline com mapeamento, fuso, decimais e agregações explícitas |
+| data_quality | Examina lacunas, variabilidade, extremos, colinearidade e mudanças de nível |
+| get_analysis | Retorna contrato canônico com métricas, linhagem, intervalos e diagnósticos |
+| compare_models | Recalcula métricas nas mesmas datas e impede comparações incompatíveis |
+| model_capabilities | Explicita operações disponíveis por motor |
+| forecast_model | Projeta plano por período com controles explícitos em Ridge/PyMC |
+| export_analysis | Exporta análise em JSON, CSV ou Markdown no retorno |
+| storage_inventory | Lista artefatos verificados, tamanhos, hashes e referências |
+| retention_plan | Propõe candidatos por idade sem excluir arquivos |
+| connector_status | Declara estado dos contratos de fontes; nenhuma API conectada |
 
 Exemplo de treino local, depois de gerar o dataset:
 
@@ -76,13 +106,15 @@ Para otimizar, use model_id, horizon, total_budget e dicionários opcionais lowe
 {"request":{"dataset_id":"demo-exemplo","backend":"google_meridian","draws":50,"tune":50,"chains":2}}
 ~~~
 
-Use pymc_marketing ou meta_robyn nos outros adaptadores. Robyn requer `test_fraction=0.2`: sua divisão nativa é 60/20/20 com arredondamento próprio; valores diferentes são rejeitados. Esses volumes curtos são teste de execução, **não ajuste certificado**. predict_backend recebe model_id e media_multiplier, por exemplo {"spend_search":1.1}. Seu contrato é cenário histórico: Meridian mantém dimensões do histórico; Robyn expõe resposta nativa por canal. O horizonte futuro configurável pertence ao simulate_budget local.
+Use pymc_marketing ou meta_robyn nos outros adaptadores. Robyn requer `test_fraction=0.2`: sua divisão nativa é 60/20/20 com arredondamento próprio; valores diferentes são rejeitados. Esses volumes curtos são teste de execução, **não ajuste certificado**. predict_backend recebe model_id e media_multiplier, por exemplo {"spend_search":1.1}, para cenário histórico. Para datas futuras, `forecast_model` aceita Ridge/PyMC, plano de mídia e todos os controles por período. Meridian/Robyn retornam indisponibilidade explícita nessa operação. [Contratos e comparação](docs/comparison.md).
 
 ## Arquitetura e limites
 
 Servidor, contratos, validação, modelagem, análise, simulação, otimização, persistência, renderização e integrações são módulos separados em src/mmm_intelligence. Motores externos usam workers independentes e serialização Protobuf, NetCDF ou JSON oficial; não há fallback Ridge com outro rótulo nem uso de pickle/RDS.
 
 Bootstrap produz intervalos da **média condicional** com formas/inputs fixos; não é intervalo preditivo completo. Calibração é reponderação aproximada, sem demonstrar randomização ou transporte. Bom R² não certifica atribuição por canal. Diagnósticos e alertas permanecem visíveis, inclusive quando a convergência é ruim.
+
+O estudo V4 de 60 ajustes encontrou subcobertura e falha dos intervalos percentis para efeitos nulos na fronteira. Não use seus limites para testar existência de efeito. Os smokes bayesianos mantêm diagnósticos inadequados; não foram transformados em modelos certificados. [Resultados científicos](docs/v4-delivery.md).
 
 Importações declaram `target_type` como revenue, non_revenue ou unspecified, além de `data_context`. Meridian exige receita declarada; Robyn distingue receita/conversões e recusa tipo indefinido. Os treinos nativos curtos publicados comprovam execução, mas os diagnósticos MCMC não aprovam uso inferencial. ROI/mROI causal não são inferidos de contribuição/gasto. Consulte a [auditoria 0.3](MMM_AUDIT_REPORT.md), [matriz científica](MMM_VALIDATION_MATRIX.md), [qualidade dos dados](MMM_DATA_QUALITY.md) e [resultados executados](MMM_VALIDATION_RESULTS.md).
 

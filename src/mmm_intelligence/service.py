@@ -12,20 +12,29 @@ from threadpoolctl import threadpool_limits
 from .config import Settings
 from .datasets import generate, validate
 from .errors import MMMError
+from .growth import REQUESTS as GROWTH_REQUESTS
+from .growth import GrowthMixin
 from .modeling import train
 from .schemas import (
+    AnalysisRequest,
     AuditRequest,
     BackendPredictRequest,
     BackendRequest,
     CalibrationRequest,
+    CapabilityRequest,
+    CompareRequest,
     Contract,
+    CSVImportRequest,
     EmptyRequest,
+    ExportRequest,
+    ForecastRequest,
     GenerateRequest,
     ImportRequest,
     ModelRequest,
     OptimizeRequest,
     PublicError,
     RenderRequest,
+    RetentionRequest,
     SimulateRequest,
     ToolResponse,
     TrainRequest,
@@ -44,11 +53,13 @@ COMPUTE_TOOLS = {
     "predict_backend",
     "calibrate_experiment",
     "audit_model",
+    "forecast_model",
 }
 
 
-class MMMService:
+class MMMService(GrowthMixin):
     REQUESTS: dict[str, type[Contract]] = {
+        **GROWTH_REQUESTS,
         "generate_demo_dataset": GenerateRequest,
         "validate_dataset": ValidateRequest,
         "train_mmm": TrainRequest,
@@ -65,6 +76,16 @@ class MMMService:
         "get_backend_model": ModelRequest,
         "backend_status": EmptyRequest,
         "audit_model": AuditRequest,
+        "import_csv": CSVImportRequest,
+        "data_quality": ValidateRequest,
+        "get_analysis": AnalysisRequest,
+        "compare_models": CompareRequest,
+        "model_capabilities": CapabilityRequest,
+        "forecast_model": ForecastRequest,
+        "export_analysis": ExportRequest,
+        "storage_inventory": EmptyRequest,
+        "retention_plan": RetentionRequest,
+        "connector_status": EmptyRequest,
     }
 
     def __init__(self, settings: Settings):
@@ -84,6 +105,13 @@ class MMMService:
         ):
             handler.setFormatter(formatter)
             self.log.addHandler(handler)
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        self.close()
+        return False
 
     def close(self):
         for handler in self.log.handlers[:]:
@@ -204,6 +232,10 @@ class MMMService:
             "frequency": request.frequency,
             "units": request.units,
             "rows": request.rows,
+            "column_spec": {
+                k: getattr(request, k)
+                for k in ("media_columns", "control_columns", "target_column", "date_column")
+            },
         }
         self.authorize(payload)
         spec = ValidateRequest(
@@ -224,9 +256,152 @@ class MMMService:
             "synthetic": request.synthetic,
         }
 
+    def import_csv(self, request: CSVImportRequest) -> dict:
+        from .ingestion import parse_csv
+
+        self.authorize({"synthetic": request.synthetic})
+        parsed = parse_csv(
+            request, max_rows=self.settings.max_rows, max_bytes=self.settings.max_file_bytes
+        )
+        dataset_id = request.dataset_id or "csv-" + uuid4().hex
+        spec = ValidateRequest(
+            dataset_id=dataset_id,
+            **{
+                k: getattr(request, k)
+                for k in ("media_columns", "control_columns", "target_column", "date_column")
+            },
+        )
+        payload = {
+            "schema_version": 1,
+            "synthetic": request.synthetic,
+            "source": "explicit-inline-csv",
+            "target_type": request.target_type,
+            "data_context": request.data_context,
+            "frequency": request.frequency,
+            "units": request.units,
+            "authorization_reference": request.authorization_reference,
+            "column_spec": {
+                k: getattr(request, k)
+                for k in ("media_columns", "control_columns", "target_column", "date_column")
+            },
+            **parsed,
+        }
+        report = validate(payload, spec, self.settings.max_rows)
+        if not report["valid"]:
+            raise MMMError("DATASET_INVALID", "; ".join(report["issues"]))
+        checksum = self.store.write("datasets", dataset_id, payload)
+        return {
+            "dataset_id": dataset_id,
+            "sha256": checksum,
+            "validation": report,
+            "synthetic": request.synthetic,
+            "transformations": parsed["provenance"]["transformations"],
+        }
+
+    def data_quality(self, request: ValidateRequest) -> dict:
+        from .quality import assess
+
+        return {
+            "dataset_id": request.dataset_id,
+            **assess(self.load_dataset(request.dataset_id), request, self.settings.max_rows),
+        }
+
+    def get_analysis(self, request: AnalysisRequest) -> dict:
+        from .canonical import bundle
+
+        if request.backend == "ridge":
+            model = self.get_model(ModelRequest(model_id=request.model_id))
+            dataset = self.load_dataset(model["dataset_id"])
+        else:
+            model = self.store.read("backend_models", request.model_id)
+            self.authorize(model)
+            dataset = model["dataset"]
+            self.authorize(dataset)
+        return bundle(model, dataset, request)
+
+    def storage_inventory(self, request: EmptyRequest) -> dict:
+        from .lifecycle import inventory
+
+        result = inventory(self.store)
+        for artifact in result["artifacts"]:
+            self.authorize(artifact)
+        return result
+
+    def retention_plan(self, request: RetentionRequest) -> dict:
+        from .lifecycle import retention_plan
+
+        self.storage_inventory(EmptyRequest())
+        return retention_plan(self.store, request.older_than_days)
+
+    def connector_status(self, request: EmptyRequest) -> dict:
+        from .connectors import connector_status
+
+        return {"sources": connector_status(), "network_requests": 0}
+
+    def compare_models(self, request: CompareRequest) -> dict:
+        from .canonical import compare
+
+        return compare([self.get_analysis(r) for r in request.models], request.window_policy)
+
+    def export_analysis(self, request: ExportRequest) -> dict:
+        from .exporting import export
+
+        return export(self.get_analysis(request), request.format)
+
+    def model_capabilities(self, request: CapabilityRequest) -> dict:
+        from .canonical import capabilities
+
+        return capabilities(request.backend)
+
+    def forecast_model(self, request: ForecastRequest) -> dict:
+        from .canonical import capabilities
+        from .forecasting import decision, prepare, ridge_forecast
+        from .integrations.bridge import execute
+
+        if not capabilities(request.backend)["future_projection"]["available"]:
+            raise MMMError(
+                "OPERATION_UNAVAILABLE",
+                capabilities(request.backend)["future_projection"]["reason"],
+            )
+        if request.backend == "ridge":
+            model = self.get_model(ModelRequest(model_id=request.model_id))
+        else:
+            model = self.store.read("backend_models", request.model_id)
+            self.authorize(model)
+            self.authorize(model["dataset"])
+            if digest(model["dataset"]) != model["dataset_sha256"]:
+                raise MMMError("LINEAGE_MISMATCH", "Native dataset differs from model lineage")
+        rows, assumptions = prepare(model, request)
+        if request.backend == "ridge":
+            prediction = ridge_forecast(model, request, rows)
+        else:
+            native = execute(
+                self.store,
+                request.backend,
+                {"operation": "forecast", "model": model, "future_rows": rows},
+            )
+            prediction = native["prediction"]
+        warnings = assumptions.pop("warnings")
+        if any(v < 0 for v in prediction["mean"]):
+            warnings.append("NEGATIVE_PREDICTIONS: no clipping applied; review model suitability")
+        return {
+            "model_id": request.model_id,
+            "backend": request.backend,
+            "scope": "future_conditional_projection",
+            "synthetic": model["synthetic"],
+            "assumptions": assumptions,
+            "prediction": prediction,
+            "diagnostics": model.get("diagnostics", {}),
+            "decision_support": decision(),
+            "warnings": warnings,
+            "exploratory": True,
+        }
+
     def optimize_budget(self, request: OptimizeRequest) -> dict:
+        from .canonical import require_operation
         from .optimization import optimize
 
+        require_operation(request.backend, "optimization")
         return optimize(self.get_model(ModelRequest(model_id=request.model_id)), request)
 
     def tune_mmm(self, request: TuneRequest) -> dict:
@@ -251,15 +426,26 @@ class MMMService:
         return calibrate(self.get_model(ModelRequest(model_id=request.model_id)), request)
 
     def render_dashboard(self, request: RenderRequest) -> dict:
+        from .quality import assess
         from .rendering import dashboard
+        from .scientific import decomposition
 
         model = self.get_model(ModelRequest(model_id=request.model_id))
+        dataset = self.load_dataset(model["dataset_id"])
+        if digest(dataset) != model["dataset_sha256"]:
+            raise MMMError("LINEAGE_MISMATCH", "Dashboard dataset differs from fitted lineage")
+        context = {
+            "quality": assess(
+                dataset, TrainRequest.model_validate(model["request"]), self.settings.max_rows
+            ),
+            "decomposition": decomposition(dataset, model),
+        }
         artifact_id = request.artifact_id or "dashboard-" + uuid4().hex
         payload = {
             "model_id": request.model_id,
             "synthetic": model["synthetic"],
             "format": "html",
-            "content": dashboard(model),
+            "content": dashboard(model, context),
         }
         checksum = self.store.write("dashboards", artifact_id, payload)
         return {"artifact_id": artifact_id, "kind": "dashboards", "sha256": checksum, **payload}

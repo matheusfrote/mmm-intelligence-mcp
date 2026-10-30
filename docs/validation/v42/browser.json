@@ -1,0 +1,48 @@
+{
+  "login": false,
+  "mcpWithoutToken": 401,
+  "requests": 24,
+  "metrics": {
+    "bias_predicted_minus_observed": -42.0114496873249,
+    "mae": 98.24395239088835,
+    "rmse": 125.0415604974596,
+    "mape_nonzero_percent": 0.8214391710130137,
+    "mape_excluded_zeros": 0,
+    "wape_percent": 0.8238151918367098,
+    "r2": 0.9761583350566962
+  },
+  "scenarioTotal": 160689.55622896703,
+  "viewports": [
+    {
+      "width": 320,
+      "scrollWidth": 320
+    },
+    {
+      "width": 390,
+      "scrollWidth": 390
+    },
+    {
+      "width": 768,
+      "scrollWidth": 768
+    },
+    {
+      "width": 1024,
+      "scrollWidth": 1024
+    },
+    {
+      "width": 1440,
+      "scrollWidth": 1440
+    }
+  ],
+  "accessibility": [
+    {
+      "theme": "light",
+      "violations": []
+    },
+    {
+      "theme": "dark",
+      "violations": []
+    }
+  ],
+  "errors": []
+}

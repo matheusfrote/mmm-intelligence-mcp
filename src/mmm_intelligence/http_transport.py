@@ -14,11 +14,13 @@ from datetime import datetime, timezone
 from time import monotonic
 
 from .config import Settings
+from .growth import READ_TOOLS as GROWTH_READ_TOOLS
 from .schemas import IDENTIFIER_PATTERN, PublicError, ToolResponse
 from .service import MMMService
 
 principal = contextvars.ContextVar("mmm_principal", default=None)
-READ_TOOLS = {
+LOCAL_DASHBOARD = "_local_dashboard"
+READ_TOOLS = GROWTH_READ_TOOLS | {
     "backend_status",
     "validate_dataset",
     "get_model",
@@ -28,6 +30,15 @@ READ_TOOLS = {
     "predict_backend",
     "get_backend_model",
     "audit_model",
+    "data_quality",
+    "get_analysis",
+    "compare_models",
+    "model_capabilities",
+    "forecast_model",
+    "export_analysis",
+    "storage_inventory",
+    "retention_plan",
+    "connector_status",
 }
 
 
@@ -70,6 +81,9 @@ class TenantRouter:
 
     def __init__(self, settings, users):
         self.users = users
+        self.dashboard_service = MMMService(
+            replace(settings, data_dir=settings.data_dir / "dashboard")
+        )
         self.services = {
             name: MMMService(replace(settings, data_dir=settings.data_dir / "tenants" / name))
             for name in users
@@ -77,6 +91,8 @@ class TenantRouter:
 
     def call(self, name, args):
         user = principal.get()
+        if user == LOCAL_DASHBOARD:
+            return self.dashboard_service.call(name, args)
         if user not in self.users or (self.users[user].role == "reader" and name not in READ_TOOLS):
             return ToolResponse(
                 ok=False,
@@ -85,8 +101,17 @@ class TenantRouter:
         return self.services[user].call(name, args)
 
     def close(self):
+        self.dashboard_service.close()
         for service in self.services.values():
             service.close()
+
+    def load_dataset(self, dataset_id):
+        user = principal.get()
+        if user == LOCAL_DASHBOARD:
+            return self.dashboard_service.load_dataset(dataset_id)
+        if user not in self.users:
+            raise ValueError("Unauthorized")
+        return self.services[user].load_dataset(dataset_id)
 
 
 def validate_users(users):
@@ -136,10 +161,12 @@ def validate_users(users):
     return normalized
 
 
-def create_http_app(settings: Settings, users: dict):
+def create_http_app(settings: Settings, users: dict | None = None):
     from .server import create_server
 
-    users = validate_users(users)
+    # None is the explicit local-only launcher; an empty configured user map is
+    # still rejected for the regular authenticated HTTP server.
+    users = {} if users is None else validate_users(users)
     policy = HTTPPolicy.from_env()
     router = TenantRouter(settings, users)
     mcp, _ = create_server(settings, service_override=router)
@@ -168,6 +195,11 @@ def create_http_app(settings: Settings, users: dict):
         async def __call__(self, scope, receive, send):
             if scope["type"] != "http":
                 return await self.app(scope, receive, send)
+
+            from .web_app import ASSETS, local_dashboard_request, serve_asset
+
+            if scope["method"] == "GET" and scope["path"] in ASSETS:
+                return await serve_asset(scope, send)
 
             async def secure_send(message):
                 if message["type"] == "http.response.start":
@@ -201,6 +233,9 @@ def create_http_app(settings: Settings, users: dict):
                 ),
                 None,
             )
+            dashboard = scope["path"] == "/app/mcp"
+            if dashboard and local_dashboard_request(scope):
+                user = LOCAL_DASHBOARD
             key = user or "_unauthenticated"
             limit = policy.requests_per_minute if user else policy.unauth_per_minute
             now = monotonic()
@@ -222,6 +257,9 @@ def create_http_app(settings: Settings, users: dict):
                 )
                 await secure_send({"type": "http.response.body", "body": body})
 
+            if dashboard and user != LOCAL_DASHBOARD:
+                return await reject(403, "local_dashboard_origin_required")
+
             if len(queue) >= limit:
                 return await reject(
                     429,
@@ -236,6 +274,8 @@ def create_http_app(settings: Settings, users: dict):
             self.active[user] += 1
             reset = principal.set(user)
             try:
+                if dashboard:
+                    scope = {**scope, "path": "/mcp", "raw_path": b"/mcp"}
                 return await self.app(scope, receive, secure_send)
             finally:
                 principal.reset(reset)

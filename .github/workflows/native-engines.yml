@@ -1,0 +1,78 @@
+name: Native engines and R coverage
+on:
+  workflow_call:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  native:
+    runs-on: windows-latest
+    timeout-minutes: 60
+    env:
+      MMM_TEST_NATIVE: '1'
+      MMM_MAX_FILE_BYTES: '52428800'
+      MMM_BACKEND_TIMEOUT_SECONDS: '1800'
+      COVERAGE_FILE: var/coverage/native-parent/.coverage
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - run: "python -m pip install --require-hashes --only-binary=:all: -r requirements/base-ci.txt"
+      - run: python -m pip install --no-deps --no-build-isolation -e .
+      - name: Install the three isolated pinned Python runtimes
+        shell: pwsh
+        run: |
+          foreach ($runtimeName in @('meridian','pymc','robyn')) {
+            python -m venv "var/envs/$runtimeName"
+            $lock = if ($runtimeName -eq 'robyn') {'robyn-python'} else {$runtimeName}
+            & "var/envs/$runtimeName/Scripts/python.exe" -m pip install -r "requirements/$lock-win-py312.txt" 'coverage==7.17.0'
+            if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+            & "var/envs/$runtimeName/Scripts/python.exe" -m pip check
+            if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          }
+      - name: Install the verified portable R distribution
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory var/runtime -Force | Out-Null
+          Invoke-WebRequest https://cdn.posit.co/r/windows/R-4.5.2-windows.zip -OutFile var/runtime/R.zip
+          if ((Get-FileHash var/runtime/R.zip -Algorithm SHA256).Hash -ne '9736BD668F547394AAD32E51798273CAF76CF12C3457BD3763F396CF4E05DBE9') { throw 'R archive checksum mismatch' }
+          Expand-Archive var/runtime/R.zip var/runtime/r-portable
+          python examples/install_r_binaries.py
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Real preparation, train, restore, scenario and supported forecast
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory var/coverage/native-parent -Force | Out-Null
+          python -m coverage run -m pytest tests/test_native_cycles.py -q -s
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          python examples/coverage_gate.py record --directory var/coverage/native-parent --label native-parent
+      - name: All45 MCP tools, resource and prompts through official stdio client
+        run: python examples/operational_workflow.py --native --output-dir evidence/native-operational-ci
+      - name: R executable expression and decision/loop branch gates
+        shell: pwsh
+        run: |
+          & ./var/runtime/r-portable/R-4.5.2/bin/Rscript.exe --vanilla examples/r_worker_coverage.R $PWD.Path
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          & ./var/runtime/r-portable/R-4.5.2/bin/Rscript.exe --vanilla examples/r_worker_branches.R $PWD.Path
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: coverage-native
+          include-hidden-files: true
+          if-no-files-found: error
+          path: |
+            var/coverage/native-parent/
+            var/coverage/native/
+          retention-days: 14
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: r-coverage
+          if-no-files-found: error
+          path: |
+            evidence/r-worker-coverage/coverage.json
+            evidence/r-worker-branches/coverage.json
+          retention-days: 14
+    # Synthetic local processes only; never publishes or deploys a service.

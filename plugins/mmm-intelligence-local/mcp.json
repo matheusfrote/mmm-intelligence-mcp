@@ -1,0 +1,11 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/mcp.schema.json",
+  "mcpServers": {
+    "mmm-intelligence": {
+      "type": "stdio",
+      "command": "python",
+      "args": ["${PLUGIN_ROOT}/launch.py"],
+      "env": {"MMM_ALLOW_REAL_DATA": "false", "MMM_TRANSPORT": "stdio"}
+    }
+  }
+}

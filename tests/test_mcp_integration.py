@@ -16,7 +16,7 @@ def test_full_stdio_cycle_with_restart(tmp_path, entrypoint):
         workflow.cycle(tmp_path / "mcp-data", entrypoint=entrypoint, extended=extended)
     )
     assert report["restart_persistence"]
-    assert len(report["calls"]) == (13 if extended else 5)
+    assert len(report["calls"]) == (23 if extended else 5)
     if extended:
         audit = report["calls"]["audit_model"]["data"]
         assert audit["decomposition"]["maximum_reconciliation_error"] < 1e-8

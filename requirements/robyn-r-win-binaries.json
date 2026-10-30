@@ -1,0 +1,695 @@
+{
+  "r": "4.5.2",
+  "packages": [
+    {
+      "package": "BH",
+      "version": "1.90.0-1",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/BH_1.90.0-1.zip",
+      "sha256": "348a3bc4b9d62cbacf260cef2351b0d858fa5cd32d9d0106403ba170787513c6"
+    },
+    {
+      "package": "QuickJSR",
+      "version": "1.11.0",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/QuickJSR_1.11.0.zip",
+      "sha256": "15b6d006d2f9490a721c516c303e647923c575100c5c88f8684d92a608e0d873"
+    },
+    {
+      "package": "R6",
+      "version": "2.6.1",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/R6_2.6.1.zip",
+      "sha256": "b02d884ff593c397d32a4f4d0718e36d3720934ca13ecca02588900a37820b33"
+    },
+    {
+      "package": "RColorBrewer",
+      "version": "1.1-3",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/RColorBrewer_1.1-3.zip",
+      "sha256": "2c43fa8a49b5f3a5f7011e2e948e5bfcdeca938a0bbc68b5aebdbab5c1bd57fa"
+    },
+    {
+      "package": "Rcpp",
+      "version": "1.1.2",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/Rcpp_1.1.2.zip",
+      "sha256": "24babbbd1ce9c8edf86a51312ae19c69fb52ccbf485b302610cbec5465fa13e0"
+    },
+    {
+      "package": "RcppArmadillo",
+      "version": "15.6.2-1",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/RcppArmadillo_15.6.2-1.zip",
+      "sha256": "c944a0ce897c6d52ee5082f91b9c7e9897bb66a214250ef2d4cfae7f70f1d83c"
+    },
+    {
+      "package": "RcppEigen",
+      "version": "0.3.4.0.2",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/RcppEigen_0.3.4.0.2.zip",
+      "sha256": "8f135bcaac90361e0a5929881b9ea075305e40441fb11703e462d3fd18991734"
+    },
+    {
+      "package": "RcppParallel",
+      "version": "6.2.1",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/RcppParallel_6.2.1.zip",
+      "sha256": "97dfc206fb91ca441bf9f5dd3ea442426632dece1f77194258a8d39de1345f6e"
+    },
+    {
+      "package": "RcppTOML",
+      "version": "0.2.3",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/RcppTOML_0.2.3.zip",
+      "sha256": "59f758b1b3ed390c0fab35b304583acad07f96d046caf6bbaa4388e93301f99a"
+    },
+    {
+      "package": "Robyn",
+      "version": "3.12.1",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/Robyn_3.12.1.zip",
+      "sha256": "f2a846992d3ce8019ab95204882c2d459eecee6b92af8e3aa54dcf64e68ea976"
+    },
+    {
+      "package": "S7",
+      "version": "0.2.2",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/S7_0.2.2.zip",
+      "sha256": "dae549e53d3098d7c576cc80eb6abe0fc19bcc2dcf05d1af8dc70e9a3b466f5d"
+    },
+    {
+      "package": "StanHeaders",
+      "version": "2.39.1",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/StanHeaders_2.39.1.zip",
+      "sha256": "099e63f140a9c056257e1a549cdf673a30f48ca50f48578d7729a23033133fc7"
+    },
+    {
+      "package": "abind",
+      "version": "1.4-8",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/abind_1.4-8.zip",
+      "sha256": "e795fac87918c9af5c7e829e4784a1d3a263f83c2ea46cc68f066c7ad2b2233d"
+    },
+    {
+      "package": "askpass",
+      "version": "1.2.1",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/askpass_1.2.1.zip",
+      "sha256": "fdd217fcc8015b15df87707af79c17cbb719c5125126aa1774bc64e7499dc467"
+    },
+    {
+      "package": "backports",
+      "version": "1.5.1",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/backports_1.5.1.zip",
+      "sha256": "a51fcd24a3d01e999ebe08e1455f4e2ddc8f9bc13f3b1964480eec82168dac3c"
+    },
+    {
+      "package": "base64enc",
+      "version": "0.1-6",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/base64enc_0.1-6.zip",
+      "sha256": "905e457667e95c2550f644475b6ab770ff0e1e43b4eab8b2efe533bad8049a3e"
+    },
+    {
+      "package": "bslib",
+      "version": "0.12.0",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/bslib_0.12.0.zip",
+      "sha256": "333d4b037f1d22d38195d4cafaad509c9dbe229b185cb9c81adfa8bbc8367767"
+    },
+    {
+      "package": "cachem",
+      "version": "1.1.0",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/cachem_1.1.0.zip",
+      "sha256": "d42c3eed9a1517863a90646b43a86fb553f369072305cada78449e401f747fd3"
+    },
+    {
+      "package": "callr",
+      "version": "3.8.0",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/callr_3.8.0.zip",
+      "sha256": "5fefd31f0010e575fc53e1942e3fd8f3995a268ab9afef6de2ec30934e4a481e"
+    },
+    {
+      "package": "checkmate",
+      "version": "2.3.4",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/checkmate_2.3.4.zip",
+      "sha256": "d38e207843c305502e2f86a99bc91f56d0c53ad97f781aab36b54b77f926edc1"
+    },
+    {
+      "package": "cli",
+      "version": "3.6.6",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/cli_3.6.6.zip",
+      "sha256": "7622e5171c503ab37abe8aac1d6fadf904b5d3f6559a631a1eab71d205740757"
+    },
+    {
+      "package": "covr",
+      "version": "3.6.5",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/covr_3.6.5.zip",
+      "sha256": "4e042c8869fdb0d01aff2c8cacf2e2efa1f79082a869802a02a5c70889a05d43"
+    },
+    {
+      "package": "cpp11",
+      "version": "0.5.5",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/cpp11_0.5.5.zip",
+      "sha256": "ca5a0d32747ab47b8289ab7b8aa4357b91b2c5f35035550bd84060bd193c3104"
+    },
+    {
+      "package": "curl",
+      "version": "8.1.0",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/curl_8.1.0.zip",
+      "sha256": "235f2847806dd05fbcfc66fad65fee62500fa95ff46a171c28e7207cc6e53fba"
+    },
+    {
+      "package": "desc",
+      "version": "1.4.3",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/desc_1.4.3.zip",
+      "sha256": "941b56305b4d55e4e899332cf379e246febe970b543381cad1bc4d8ec8db42ec"
+    },
+    {
+      "package": "digest",
+      "version": "0.6.39",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/digest_0.6.39.zip",
+      "sha256": "34d976632dfc37373e71bf6e80550109dab67fc94899aab9eca2d7a058c384dd"
+    },
+    {
+      "package": "distributional",
+      "version": "0.9.0",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/distributional_0.9.0.zip",
+      "sha256": "f03356eaf15517dcd66984de9fc6972458f5561c6109c5bdbd48afcc57a6753d"
+    },
+    {
+      "package": "doParallel",
+      "version": "1.0.17",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/doParallel_1.0.17.zip",
+      "sha256": "414ec328c6d3675959875b4b469c1f0e090024c137a49fe20845ec36da680ac2"
+    },
+    {
+      "package": "doRNG",
+      "version": "1.8.6.3",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/doRNG_1.8.6.3.zip",
+      "sha256": "62b39a77608f4764adad459cf2636a4207ed78e8b0b8caffc84d271c01ebd830"
+    },
+    {
+      "package": "dplyr",
+      "version": "1.2.1",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/dplyr_1.2.1.zip",
+      "sha256": "891db94005458723f5f0734ed9312511a778648b6f2ce982fef709ad45f0293d"
+    },
+    {
+      "package": "dygraphs",
+      "version": "1.1.1.6",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/dygraphs_1.1.1.6.zip",
+      "sha256": "6315ff955af21a567be32e05b0c7027031de9eece78dedf1d9b07466d2bc7d06"
+    },
+    {
+      "package": "evaluate",
+      "version": "1.0.5",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/evaluate_1.0.5.zip",
+      "sha256": "f60208f54e29573eaf4074ce5fcee0932e066036282cd6c239fda1037c5c1317"
+    },
+    {
+      "package": "extraDistr",
+      "version": "1.10.0.5",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/extraDistr_1.10.0.5.zip",
+      "sha256": "88529115e0672e72eb5a74895194cd3441eb5f69637d18783f23c8880ecd14bf"
+    },
+    {
+      "package": "farver",
+      "version": "2.1.2",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/farver_2.1.2.zip",
+      "sha256": "8ddc9761b02c2dd0bd481949c896140cbae9930b3ed89ae85136b5e02e2a55bb"
+    },
+    {
+      "package": "fastmap",
+      "version": "1.2.0",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/fastmap_1.2.0.zip",
+      "sha256": "5f66e4590643c60abb13cacf279d44b5ceb7970b232c403727f0f1243ccf1d35"
+    },
+    {
+      "package": "fontawesome",
+      "version": "0.5.3",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/fontawesome_0.5.3.zip",
+      "sha256": "1c4d3b960df56022f11592b334e750a0ea228e17b585e26debabf7431e449f00"
+    },
+    {
+      "package": "foreach",
+      "version": "1.5.2",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/foreach_1.5.2.zip",
+      "sha256": "7f1ea1cbcca0591a5ecb719d46b209e9d4bc00e5e656981199e26616ffd93573"
+    },
+    {
+      "package": "fs",
+      "version": "2.1.0",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/fs_2.1.0.zip",
+      "sha256": "d5b5f35ff2a8bedcbb7a537dbca8e8185f41946fc1b922876e721f8a0e24ae5f"
+    },
+    {
+      "package": "generics",
+      "version": "0.1.4",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/generics_0.1.4.zip",
+      "sha256": "9618291eee73268ad623be9ce8f4f3afe56742b3f767953a23c720fd7fdaf435"
+    },
+    {
+      "package": "ggplot2",
+      "version": "4.0.3",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/ggplot2_4.0.3.zip",
+      "sha256": "a4fb3600992d110dd15a5943a154524055a193e3ff50bcae6e183c266527baa7"
+    },
+    {
+      "package": "ggridges",
+      "version": "0.5.7",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/ggridges_0.5.7.zip",
+      "sha256": "28c33c23f762f4bacb62c353006a85d19ced9957fa9f145742b9f90a7967fcc2"
+    },
+    {
+      "package": "glmnet",
+      "version": "5.1",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/glmnet_5.1.zip",
+      "sha256": "ceba174808d0b8b41c38ebcd0eb17fb713045cfe120c9c62fa770e864a9ad83a"
+    },
+    {
+      "package": "glue",
+      "version": "1.8.1",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/glue_1.8.1.zip",
+      "sha256": "feaa9c87fb08397bf26997fb2873d898f9e00ad30185f54a55ae068f9e1d4f26"
+    },
+    {
+      "package": "gridExtra",
+      "version": "2.3.1",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/gridExtra_2.3.1.zip",
+      "sha256": "3664c499fbb23dcaa69477cbd509e4bb9700370f5411b9ac2778c9b35464f882"
+    },
+    {
+      "package": "gtable",
+      "version": "0.3.6",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/gtable_0.3.6.zip",
+      "sha256": "bad6516fbc1be6273962054f2a3514a8854473003757434845c0993525aa54f5"
+    },
+    {
+      "package": "here",
+      "version": "1.0.2",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/here_1.0.2.zip",
+      "sha256": "cebb64e8ce1ba1047a12fa754599292833814f14637e7cda77dbd8b9ca6f6ffb"
+    },
+    {
+      "package": "highr",
+      "version": "0.12",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/highr_0.12.zip",
+      "sha256": "82345b819c933715b6e54f258c1e1aa361e7ca307b99345f1b2ad8296f36e0ae"
+    },
+    {
+      "package": "htmltools",
+      "version": "0.5.9",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/htmltools_0.5.9.zip",
+      "sha256": "738bfdbd1e102c2ec69945775fc27538b55614583a7cce0f9646c107a5e16a5c"
+    },
+    {
+      "package": "htmlwidgets",
+      "version": "1.6.4",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/htmlwidgets_1.6.4.zip",
+      "sha256": "9f9d245149d94ba021a5d3464a10ff4efe1f823aba981850aa67ed1a98a9592f"
+    },
+    {
+      "package": "httr",
+      "version": "1.4.9",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/httr_1.4.9.zip",
+      "sha256": "a79e3362a300795ba5c9d25e9adc8a72e0c1f86d073b49a50d0ab1931f742ab5"
+    },
+    {
+      "package": "inline",
+      "version": "0.3.21",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/inline_0.3.21.zip",
+      "sha256": "4a9f55e9359923f66b252a09d29a5b73008841fec495c7369361664e457419e1"
+    },
+    {
+      "package": "isoband",
+      "version": "0.3.0",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/isoband_0.3.0.zip",
+      "sha256": "5da62aa68a326874a96b23e39f9661b08bbbbca1949c6b75ededb1db90f9eb92"
+    },
+    {
+      "package": "iterators",
+      "version": "1.0.14",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/iterators_1.0.14.zip",
+      "sha256": "751d00dfc4f5ecf5c024db9c01e80e5155b726da803a10be079c9e0f68c1f5a5"
+    },
+    {
+      "package": "jquerylib",
+      "version": "0.1.4",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/jquerylib_0.1.4.zip",
+      "sha256": "6447ff80d9f0fbb3cef073ad6808256cabe02a5d2dc982880ba36052d3dab666"
+    },
+    {
+      "package": "jsonlite",
+      "version": "2.0.0",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/jsonlite_2.0.0.zip",
+      "sha256": "57b7a63340d4969ab66247375af1397685e7e3b41bc29ed4e9048f6d2469116b"
+    },
+    {
+      "package": "knitr",
+      "version": "1.52",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/knitr_1.52.zip",
+      "sha256": "318a08b7681ee0d6427c4b0c7c37ec0b1558321ef0337451cdc7dae1b078aeaa"
+    },
+    {
+      "package": "labeling",
+      "version": "0.4.3",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/labeling_0.4.3.zip",
+      "sha256": "ce6601084696628fc48ed783ce3610f747137e2f2ceeda7e9cb4cdab5ba62297"
+    },
+    {
+      "package": "lares",
+      "version": "5.4.1",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/lares_5.4.1.zip",
+      "sha256": "0292ee818380762c518b19adc5ac580995facdb889b236e09fe98cf3e2d982a5"
+    },
+    {
+      "package": "lifecycle",
+      "version": "1.0.5",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/lifecycle_1.0.5.zip",
+      "sha256": "b8a15d53677b447ed8e57f0faff89c49f7d8dace13382cf22d2b1bb68beac0b2"
+    },
+    {
+      "package": "loo",
+      "version": "2.10.1",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/loo_2.10.1.zip",
+      "sha256": "7c71be9f2c4a647aee4788b41a4ecbca54fb47942005b02f4256a039e570f756"
+    },
+    {
+      "package": "lubridate",
+      "version": "1.9.5",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/lubridate_1.9.5.zip",
+      "sha256": "ca466008cf3195033e6ff23bfffd1f85a443d4c0e9db7d4b4ac569b4e4f24998"
+    },
+    {
+      "package": "magrittr",
+      "version": "2.0.5",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/magrittr_2.0.5.zip",
+      "sha256": "055bb9cd93c327b3cc4a5c71234493d7727fcbca6bb9fb7feca4a1b7a39f2aec"
+    },
+    {
+      "package": "matrixStats",
+      "version": "1.5.0",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/matrixStats_1.5.0.zip",
+      "sha256": "91037e8bbafeb1bd118d7543be66ffb78af508f8a81e23ff8cf40c797e890ce1"
+    },
+    {
+      "package": "memoise",
+      "version": "2.0.1",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/memoise_2.0.1.zip",
+      "sha256": "cc09c4d02d29a01dd1d75ae768354487449f62812e7d1f877f1b1a614c962fd2"
+    },
+    {
+      "package": "mime",
+      "version": "0.13",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/mime_0.13.zip",
+      "sha256": "be4b24390fe9238ff2c68b397269c637bf1b127f7de5d1e0474aec5ff10a4a1b"
+    },
+    {
+      "package": "nloptr",
+      "version": "2.2.1",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/nloptr_2.2.1.zip",
+      "sha256": "6e928e66eef03ab2f0f4a364bbb55c6da77c87b056ce83d0b3afabbe2f528fa2"
+    },
+    {
+      "package": "numDeriv",
+      "version": "2016.8-1.1",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/numDeriv_2016.8-1.1.zip",
+      "sha256": "0df596925b695a2ba0bc327b71340921ba6550e8cbdc53e49024e41b50e2cdac"
+    },
+    {
+      "package": "openssl",
+      "version": "2.4.2",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/openssl_2.4.2.zip",
+      "sha256": "99150652fbc21a6ec2641f9202215f2484211fe731b6a05dae877ca37ca7da9f"
+    },
+    {
+      "package": "openxlsx",
+      "version": "4.2.9",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/openxlsx_4.2.9.zip",
+      "sha256": "7563d684deb20d9d5ca6a78e8d17ee683c7ee8bdf6e975535bfd2e21ace89428"
+    },
+    {
+      "package": "otel",
+      "version": "0.2.0",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/otel_0.2.0.zip",
+      "sha256": "4aced7e766a36dafadd6a09fc2c3f7dc1d0b057f5b181d8a1a4d97ef841fd4f3"
+    },
+    {
+      "package": "pROC",
+      "version": "1.19.1",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/pROC_1.19.1.zip",
+      "sha256": "06e6fe12223dfac1a493492321994389643459b2e1a67b213917b708ac7fbccc"
+    },
+    {
+      "package": "patchwork",
+      "version": "1.3.2",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/patchwork_1.3.2.zip",
+      "sha256": "ea46584bdd13d36c8c20781ef6886b41bfc650b56fa543a3dd651481fb6db92f"
+    },
+    {
+      "package": "pillar",
+      "version": "1.11.1",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/pillar_1.11.1.zip",
+      "sha256": "d738e63a0a4dc5f8d87d11935d55026aa52e2ec6a2535dbae07d6c42939cf5eb"
+    },
+    {
+      "package": "pkgbuild",
+      "version": "1.4.8",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/pkgbuild_1.4.8.zip",
+      "sha256": "bf9e3c44c1e4146d6fd31d0ce8cf5da98959dd8045e0717be18299cd2decde4e"
+    },
+    {
+      "package": "pkgconfig",
+      "version": "2.0.3",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/pkgconfig_2.0.3.zip",
+      "sha256": "c641fe2f2af83bdfa30c772c5f455f2e889ff61e48e4e0b3b93e3ff19d0691b8"
+    },
+    {
+      "package": "png",
+      "version": "0.1-9",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/png_0.1-9.zip",
+      "sha256": "8421c6db45feedf966e659013106a0626671c0072d314db8ebec0e7b0f226015"
+    },
+    {
+      "package": "posterior",
+      "version": "1.7.0",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/posterior_1.7.0.zip",
+      "sha256": "9c04660816e82f0bbd3c9a9da3030516aa88e57b29d0f54f9ceb0914c88ba221"
+    },
+    {
+      "package": "processx",
+      "version": "3.9.0",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/processx_3.9.0.zip",
+      "sha256": "9db452d61f7d26bab2badac400cea25ff6d4063c33dc6209613ee97c34a55b30"
+    },
+    {
+      "package": "prophet",
+      "version": "1.1.7",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/prophet_1.1.7.zip",
+      "sha256": "819a23d3e3a586593f0f03242eb35470d3d0e4372b5a1dca9dfeb37b99b32502"
+    },
+    {
+      "package": "ps",
+      "version": "1.9.3",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/ps_1.9.3.zip",
+      "sha256": "d7b7afb55122e4430c52be38c1ccecd4da9c965e34dbed158f6387c149c4ca0a"
+    },
+    {
+      "package": "purrr",
+      "version": "1.2.2",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/purrr_1.2.2.zip",
+      "sha256": "37270b2703b7c40494ecf9fb50541226c9f68cc7596f47dc636c5c65f47bb67b"
+    },
+    {
+      "package": "rappdirs",
+      "version": "0.3.4",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/rappdirs_0.3.4.zip",
+      "sha256": "0534ebb16efe096fa971631461c9f82c0ab9af8236a464a4d2738fb10ac17c04"
+    },
+    {
+      "package": "reticulate",
+      "version": "1.47.0",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/reticulate_1.47.0.zip",
+      "sha256": "d75f8bda4e9542893211eb4a12c7a8e0996b0f4cf25e615ed23ef828f5388f95"
+    },
+    {
+      "package": "rex",
+      "version": "1.2.2",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/rex_1.2.2.zip",
+      "sha256": "4c818b919f80c1583b53d36a8de7cd30eef7fc881f5632a499d97723d73a2493"
+    },
+    {
+      "package": "rlang",
+      "version": "1.3.0",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/rlang_1.3.0.zip",
+      "sha256": "af276d114d9a85703b002e36876cf27ecfa77ac2439ec35c730b389f4916bb88"
+    },
+    {
+      "package": "rmarkdown",
+      "version": "2.32",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/rmarkdown_2.32.zip",
+      "sha256": "bd6ff533944e9fff29297db68403cd2bdfda8966deab1fdd775cd0a893ace614"
+    },
+    {
+      "package": "rngtools",
+      "version": "1.5.2",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/rngtools_1.5.2.zip",
+      "sha256": "c5990569fa2190bfb28b4b1292c7b4e2b84e9477f3bac916014bbe69d25335b5"
+    },
+    {
+      "package": "rpart.plot",
+      "version": "3.1.5",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/rpart.plot_3.1.5.zip",
+      "sha256": "49d488534f40425f0f2041aed808e444f3d71d22827d80462a123e2ddf4ee188"
+    },
+    {
+      "package": "rprojroot",
+      "version": "2.1.1",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/rprojroot_2.1.1.zip",
+      "sha256": "a14af699b9e892fe420cccfdf01878dd8afa94c7e84a41f345b852d1a53f56df"
+    },
+    {
+      "package": "rstan",
+      "version": "2.32.7",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/rstan_2.32.7.zip",
+      "sha256": "aeb47a83ede7446cd38694105ae34cb8e032ab0a1104febc4a73f11448572738"
+    },
+    {
+      "package": "rstantools",
+      "version": "2.7.1",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/rstantools_2.7.1.zip",
+      "sha256": "5b9c97b50251f946be0d8a3a312dd062b29251e44ea5d467040c463078bcbae4"
+    },
+    {
+      "package": "rvest",
+      "version": "1.0.5",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/rvest_1.0.5.zip",
+      "sha256": "e74c9bd473969153662b856b6adb4e36ce739e35f276c482d82b0a86bb15e86a"
+    },
+    {
+      "package": "sass",
+      "version": "0.4.10",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/sass_0.4.10.zip",
+      "sha256": "b6627aea15a569e17bfce4703a02c467b0557add5a1346f657066c413a5b2c92"
+    },
+    {
+      "package": "scales",
+      "version": "1.4.0",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/scales_1.4.0.zip",
+      "sha256": "5ad36ba5a6741a5b500dfd994259538b51bbed3bd91705302da6254105f5c23e"
+    },
+    {
+      "package": "selectr",
+      "version": "0.8-0",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/selectr_0.8-0.zip",
+      "sha256": "382646de58cf06835d79cc02e7f2f4d09151ca4905a929eb6016eff24cf3089a"
+    },
+    {
+      "package": "shape",
+      "version": "1.4.6.1",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/shape_1.4.6.1.zip",
+      "sha256": "50c0e54dfc89b6145fc0942f6d27a679ce9852a75ead604968d88b176fabeede"
+    },
+    {
+      "package": "stringi",
+      "version": "1.8.9",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/stringi_1.8.9.zip",
+      "sha256": "0762b244121481bbcccde805b75f7bcf62780d4f8713629998dd40468133b335"
+    },
+    {
+      "package": "stringr",
+      "version": "1.6.0",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/stringr_1.6.0.zip",
+      "sha256": "692873ca10a5064db82603ad50c8d6cb8d9ffff58eb18faa6370c35d79119a37"
+    },
+    {
+      "package": "sys",
+      "version": "3.4.3",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/sys_3.4.3.zip",
+      "sha256": "bd81cc4139fe076636cb628693b59c472c31127950bb551afb3a6935fffe4b43"
+    },
+    {
+      "package": "tensorA",
+      "version": "0.36.2.1",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/tensorA_0.36.2.1.zip",
+      "sha256": "cdba937f9982f18f38989091beced22356bf6ec9701aadb4860a10cbdbc13f2e"
+    },
+    {
+      "package": "tibble",
+      "version": "3.3.1",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/tibble_3.3.1.zip",
+      "sha256": "f3cfb2a812ba69f299c71cf975a850211f92bd3e0afa8693ed79c87bb7598cbe"
+    },
+    {
+      "package": "tidyr",
+      "version": "1.3.2",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/tidyr_1.3.2.zip",
+      "sha256": "7695c9c9654a53e95d75a23bc65dcad6ac1d4b2018dde0e46f84d85a104e8a63"
+    },
+    {
+      "package": "tidyselect",
+      "version": "1.2.1",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/tidyselect_1.2.1.zip",
+      "sha256": "2b44100397e8b3f7513257c400537c3b49db2545d79ffc9905a4e950366d3c00"
+    },
+    {
+      "package": "timechange",
+      "version": "0.4.0",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/timechange_0.4.0.zip",
+      "sha256": "7b4e9953a495b0e9cab511aca5985e1f8abe784d7733488a88707ef1e9a59fe1"
+    },
+    {
+      "package": "tinytex",
+      "version": "0.61",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/tinytex_0.61.zip",
+      "sha256": "81d828c1c69f1596ac7953685b2e8dfe51afe1dea2210bc603419c2b6c99803d"
+    },
+    {
+      "package": "utf8",
+      "version": "1.2.6",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/utf8_1.2.6.zip",
+      "sha256": "7ff557e47c1fadab373644513c5135173f57ee02e0524e674d1a5f0b5c843489"
+    },
+    {
+      "package": "vctrs",
+      "version": "0.7.3",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/vctrs_0.7.3.zip",
+      "sha256": "856f1513f266b8c0d8b2207bf39397a0d54a603498bf59e167817a5acbd6a0cd"
+    },
+    {
+      "package": "viridisLite",
+      "version": "0.4.3",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/viridisLite_0.4.3.zip",
+      "sha256": "14e6988043e443ffc90f1a031eaafae97ea5d103fd8d05a7db2b04733c09d6fd"
+    },
+    {
+      "package": "withr",
+      "version": "3.0.3",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/withr_3.0.3.zip",
+      "sha256": "2834bf2c74b05ed3ff3c1a76c6b01edb6c6e1ab13aba3cd3ab15ed53df31f066"
+    },
+    {
+      "package": "xfun",
+      "version": "0.62",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/xfun_0.62.zip",
+      "sha256": "f9b31d03f1b0a7a8446489db38e4209dceec6eabb73cbfade23f58a14e382a9e"
+    },
+    {
+      "package": "xml2",
+      "version": "1.6.0",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/xml2_1.6.0.zip",
+      "sha256": "79f7aff15c96ad8b4443b11fe272a0453d6df04d0aabb675d403e2511501efcd"
+    },
+    {
+      "package": "xts",
+      "version": "0.14.3",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/xts_0.14.3.zip",
+      "sha256": "1736adca3b3f3bbefef82a67117457aad69476cbe86e983c006b2f32432b6019"
+    },
+    {
+      "package": "yaml",
+      "version": "2.3.12",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/yaml_2.3.12.zip",
+      "sha256": "10958af2b46c67c542814eb2e225172a3a9ca0a59aa0a49754a3b31cbfa84d37"
+    },
+    {
+      "package": "zip",
+      "version": "3.0.2",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/zip_3.0.2.zip",
+      "sha256": "29b26d3bd33f2b581740ec0e98eabfcd81c2cf3b8fd0b905c23fc8fd07561c8c"
+    },
+    {
+      "package": "zoo",
+      "version": "1.9-1",
+      "url": "https://cloud.r-project.org/bin/windows/contrib/4.5/zoo_1.9-1.zip",
+      "sha256": "d9754101f87c8129d87dc9c0fb23e619c88d61f8898644994891b329ffb949ba"
+    }
+  ]
+}

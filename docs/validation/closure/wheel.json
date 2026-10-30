@@ -1,0 +1,37 @@
+{
+  "wheel": "mmm_intelligence_mcp-0.4.0-py3-none-any.whl",
+  "sha256": "d8b671d8faba7710d743d33c4379160a23ed55f9f104b0a69482715026581519",
+  "clean_venv": true,
+  "import_origin_verified": true,
+  "doctor": {
+    "version": "0.4.0",
+    "python": "3.12.14",
+    "base_runtime_ok": true,
+    "dependencies": {
+      "mcp": "2.3.0",
+      "numpy": "2.4.6",
+      "scipy": "1.17.1",
+      "pydantic": "2.14.1",
+      "threadpoolctl": "3.7.0"
+    },
+    "optional_runtimes": {
+      "google_meridian": {
+        "executable_present": false,
+        "library_verified": false
+      },
+      "pymc_marketing": {
+        "executable_present": false,
+        "library_verified": false
+      },
+      "meta_robyn": {
+        "executable_present": false,
+        "library_verified": false
+      }
+    },
+    "scope": "Read-only metadata; run backend_smoke for native execution. No credentials printed."
+  },
+  "console_script_verified": true,
+  "tools_discovered": 45,
+  "local_calls": 23,
+  "restart_persistence": true
+}

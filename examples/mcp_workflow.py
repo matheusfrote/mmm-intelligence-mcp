@@ -3,6 +3,7 @@
 import argparse
 import asyncio
 import csv
+import io
 import json
 import os
 import platform
@@ -21,6 +22,25 @@ CORE_TOOLS = {
     "simulate_budget",
 }
 TOOLS = CORE_TOOLS | {
+    "join_datasets",
+    "prepare_mmm_dataset",
+    "analyze_growth",
+    "analyze_cohorts",
+    "plan_experiment",
+    "analyze_experiment",
+    "preview_dataset",
+    "import_source",
+    "map_dataset_schema",
+    "register_media_profile",
+    "list_media_profiles",
+    "validate_media_dataset",
+    "validate_crossmedia_dataset",
+    "build_growth_dataset",
+    "check_mmm_eligibility",
+    "create_growth_diagnostic",
+    "create_growth_decision",
+    "transition_growth_decision",
+    "get_growth_artifact",
     "backend_status",
     "import_dataset",
     "optimize_budget",
@@ -32,6 +52,16 @@ TOOLS = CORE_TOOLS | {
     "predict_backend",
     "get_backend_model",
     "audit_model",
+    "import_csv",
+    "data_quality",
+    "get_analysis",
+    "compare_models",
+    "model_capabilities",
+    "forecast_model",
+    "export_analysis",
+    "storage_inventory",
+    "retention_plan",
+    "connector_status",
 }
 
 
@@ -114,7 +144,7 @@ async def cycle(data_dir: Path, *, entrypoint: str = "module", extended: bool = 
                 audited = await call("audit_model", {"model_id": fit["model_id"]})
                 assert audited["decomposition"]["maximum_reconciliation_error"] < 1e-8
                 assert not audited["decision_support"]["business_recommendation_eligible"]
-                await call(
+                tuned = await call(
                     "tune_mmm",
                     {
                         "dataset_id": demo["dataset_id"],
@@ -138,6 +168,56 @@ async def cycle(data_dir: Path, *, entrypoint: str = "module", extended: bool = 
                 )
                 await call("render_dashboard", {"model_id": fit["model_id"]})
                 await call("generate_report", {"model_id": fit["model_id"]})
+                stream = io.StringIO()
+                raw = generate(GenerateRequest())["rows"]
+                writer = csv.DictWriter(stream, fieldnames=list(raw[0]))
+                writer.writeheader()
+                writer.writerows(raw)
+                await call(
+                    "import_csv",
+                    {
+                        "csv_text": stream.getvalue(),
+                        "synthetic": True,
+                        "authorization_reference": "synthetic-csv-example",
+                    },
+                )
+                await call("data_quality", {"dataset_id": demo["dataset_id"]})
+                await call("get_analysis", {"backend": "ridge", "model_id": fit["model_id"]})
+                await call(
+                    "compare_models",
+                    {
+                        "models": [
+                            {"backend": "ridge", "model_id": fit["model_id"]},
+                            {"backend": "ridge", "model_id": tuned["model_id"]},
+                        ]
+                    },
+                )
+                await call("model_capabilities", {"backend": "pymc_marketing"})
+                future = await call(
+                    "forecast_model",
+                    {
+                        "backend": "ridge",
+                        "model_id": fit["model_id"],
+                        "media_plan": {
+                            c: [1000.0, 1100.0, 900.0, 1000.0]
+                            for c in model["request"]["media_columns"]
+                        },
+                        "future_controls": {
+                            c: [v] * 4 for c, v in model["state"]["last_controls"].items()
+                        },
+                    },
+                )
+                assert future["prediction"]["dates"][0] > model["state"]["last_date"]
+                await call(
+                    "export_analysis",
+                    {"backend": "ridge", "model_id": fit["model_id"], "format": "json"},
+                )
+                await call("storage_inventory", {})
+                assert not (await call("retention_plan", {"older_than_days": 0}))["deleted"]
+                assert all(
+                    not c["live_verified"]
+                    for c in (await call("connector_status", {}))["sources"].values()
+                )
             invalid = await session.call_tool(
                 "simulate_budget",
                 {

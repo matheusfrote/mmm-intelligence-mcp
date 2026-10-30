@@ -1,0 +1,28 @@
+# Linux deployment scaffold. Never started automatically; requires reviewed configuration.
+services:
+  mcp:
+    profiles: [operator-approved]
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    network_mode: host
+    read_only: true
+    restart: unless-stopped
+    cpus: 2
+    mem_limit: 4g
+    pids_limit: 256
+    security_opt: [no-new-privileges:true]
+    cap_drop: [ALL]
+    tmpfs: [/tmp:size=256m,mode=1777]
+    environment:
+      MMM_PORT: 8769
+      MMM_HTTP_REQUESTS_PER_MINUTE: 120
+      MMM_HTTP_MAX_CONCURRENT: 4
+    volumes:
+      - artifacts:/artifacts
+    secrets: [mmm_users]
+secrets:
+  mmm_users:
+    file: ${MMM_USERS_FILE:?Set the path to the reviewed JSON of user token hashes}
+volumes:
+  artifacts: {}

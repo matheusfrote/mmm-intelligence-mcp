@@ -1,0 +1,10 @@
+{
+  "executed_on": "2026-10-27",
+  "data": "synthetic only",
+  "python": {"passed": 195, "failed": 0, "seconds": 37.41, "warnings": 1, "warning_note": "Pre-existing SciPy trf_linear RuntimeWarning in temporal backtest test"},
+  "web": {"passed": 1, "failed": 0, "browser": "Chrome", "real_mcp_requests": 24, "login": false, "authorization_header_sent": false, "mcp_unauthenticated_status": 401, "viewports": [320,390,768,1024,1440], "horizontal_overflow": false, "axe_violations_light": 0, "axe_violations_dark": 0, "scope": "Automated WCAG-tag checks on overview, not manual accessibility certification"},
+  "static_checks": {"ruff": "passed", "formatted_python_files": 75, "mypy_source_files": 32, "bandit": "passed", "recognized_secret_findings": 0},
+  "plugin": {"kind": "local stdio authoring package", "archive": "mmm-intelligence-local-0.1.0.zip", "sha256": "2a415617fb886f6f4378289751a4095ce11187e73eb877cdf338b1e0479109dd", "bytes": 313487, "reproducible": true, "bundled_subprocess_tools_discovered": 26, "generate_and_validate": "passed", "installed_in_host": false, "submitted": false},
+  "deployment": {"structural_templates_checked": true, "docker_executed": false, "public_https_verified": false, "oauth_implemented": false, "deployed": false},
+  "git": {"branch": "feat/v4-intelligence", "commit_created": false, "push_performed": false}
+}

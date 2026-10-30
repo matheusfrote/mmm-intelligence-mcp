@@ -5,6 +5,7 @@ from itertools import product
 import numpy as np
 
 from .datasets import validate
+from .diagnostics import ABSTENTION
 from .errors import MMMError
 from .modeling import adstock, design_matrix, hill, metrics, train
 from .schemas import TrainRequest
@@ -38,6 +39,7 @@ def decision_support(model: dict, warnings=()) -> dict:
             reasons.append(prefix)
     return {
         "status": "abstain_from_budget_change" if reasons else "human_review_required",
+        "message": ABSTENTION,
         "business_recommendation_eligible": False,
         "reasons": sorted(set(reasons)),
         "policy": "Conservative evidence screens, not universal statistical acceptance thresholds. Numeric optimization remains an exploratory candidate.",

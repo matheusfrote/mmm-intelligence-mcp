@@ -24,6 +24,16 @@ def test_source_and_wheel_include_workers_but_exclude_private_runtime(tmp_path):
     assert "IMPLEMENTATION_PROGRESS.md" in names
     assert "MMM_AUDIT_REPORT.md" in names
     assert "SECURITY_DEPLOY_AUDIT.md" in names
+    assert "docs/validation/v4/demo.csv" in names
+    assert "tests/web/dashboard.test.mjs" in names
+    assert "tests/fixtures/dashboard-models.json" in names
+    assert "tests/r/native_cases.R" in names
+    assert "examples/r_worker_coverage.R" in names
+    assert "deploy/Dockerfile.tests" in names
+    assert "requirements/robyn-r-win-binaries.json" in names
+    assert "examples/operational_workflow.py" in names
+    assert "package-lock.json" in names
+    assert "LICENSE" in names and "NOTICE" in names
     assert not any(
         n.startswith(("var/", "evidence/", ".venv/"))
         or n.endswith(".local.json")
@@ -32,3 +42,18 @@ def test_source_and_wheel_include_workers_but_exclude_private_runtime(tmp_path):
     )
     with zipfile.ZipFile(next(tmp_path.glob("*.whl"))) as archive:
         assert "mmm_intelligence/integrations/robyn_worker.R" in archive.namelist()
+        for name in (
+            "index.html",
+            "app.js",
+            "client.js",
+            "views.js",
+            "charts.js",
+            "ui.js",
+            "app.css",
+            "icon.svg",
+        ):
+            assert "mmm_intelligence/web/" + name in archive.namelist()
+        metadata = next(n for n in archive.namelist() if n.endswith(".dist-info/METADATA"))
+        assert "License-Expression: Apache-2.0" in archive.read(metadata).decode()
+        assert any(n.endswith("/licenses/LICENSE") for n in archive.namelist())
+        assert any(n.endswith("/licenses/NOTICE") for n in archive.namelist())

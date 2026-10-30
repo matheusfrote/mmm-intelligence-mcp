@@ -1,10 +1,4 @@
 # Local native Meta Robyn adapter. Host supplies private paths; no arbitrary R code input.
-args <- commandArgs(trailingOnly=TRUE)
-suppressPackageStartupMessages(library(jsonlite))
-suppressPackageStartupMessages(library(Robyn))
-payload <- fromJSON(args[1], simplifyVector=TRUE)
-root <- dirname(args[2])
-native <- file.path(root, "model.robyn.json")
 
 robyn_split_indices <- function(n, train_size) {
   stopifnot(length(n)==1L, is.finite(n), n>=3L,
@@ -81,6 +75,13 @@ prediction_summary <- function(output, selected, observed_data=NULL,
   summary
 }
 
+main <- function(args=commandArgs(trailingOnly=TRUE)) {
+  stopifnot(length(args)==2L)
+  suppressPackageStartupMessages(library(jsonlite))
+  suppressPackageStartupMessages(library(Robyn))
+  payload <- fromJSON(args[1], simplifyVector=TRUE)
+  root <- dirname(args[2])
+  native <- file.path(root, "model.robyn.json")
 if(payload$operation == "train") {
   req <- payload$request
   target_type <- payload$dataset$target_type
@@ -164,10 +165,17 @@ if(payload$operation == "train") {
       stopifnot(channel %in% stored$request$media_columns)
       original <- restored$InputCollect$dt_input[[channel]]
       response <- robyn_response(InputCollect=restored$InputCollect,OutputCollect=restored$OutputCollect,
-        select_model=selected,metric_name=channel,metric_value=mean(original)*multipliers[[channel]],
+        select_model=selected,metric_name=channel,metric_value=sum(original)*multipliers[[channel]],
         date_range="all",quiet=TRUE)
       responses[[channel]] <- list(response_total=response$response_total,
-                                  response_carryover=response$response_carryover)
+        response_carryover=response$response_carryover,
+        response_total_semantics="Historical series retained for compatibility; scenario uses scenario_mean_response",
+        requested_multiplier=multipliers[[channel]],
+        scenario_spend_total=sum(original)*multipliers[[channel]],
+        scenario_mean_spend=response$sim_mean_spend,
+        scenario_mean_carryover=response$sim_mean_carryover,
+        scenario_mean_response=response$sim_mean_response,
+        scenario_scope="Native conditional mean response over historical dates, not future total revenue")
     }
     result <- list(backend="meta_robyn",model_id=stored$model_id,scope="native_channel_response",
                    responses=responses,exploratory=TRUE,
@@ -180,3 +188,6 @@ if(payload$operation == "train") {
   }
 }
 write_json(result,args[2],auto_unbox=TRUE,digits=16,null="null",na="null")
+}
+
+if(sys.nframe()==0L) main()

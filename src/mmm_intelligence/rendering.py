@@ -80,7 +80,14 @@ def report(model: dict) -> str:
     return "\n".join(rows)
 
 
-def dashboard(model: dict) -> str:
+def dashboard(model: dict, analytical: dict | None = None) -> str:
+    from .dashboard_panels import enhance_dashboard
+
+    model = {
+        **model,
+        "dashboard_context": analytical or {},
+        "decision_support": decision_support(model),
+    }
     payload = (
         json.dumps(model, ensure_ascii=True, allow_nan=False)
         .replace("<", "\\u003c")
@@ -126,6 +133,7 @@ function recalc(){const budget=Number($('budget').value),n=Number($('horizon').v
     template = template.replace(
         "<section><h2>Explore um cenário", notice + "<section><h2>Explore um cenário"
     )
+    template = enhance_dashboard(template)
     rendered = template.replace("__TITLE__", title).replace("__DATA__", payload)
     script = rendered.split("<script>", 1)[1].split("</script>", 1)[0]
     script_hash = base64.b64encode(hashlib.sha256(script.encode()).digest()).decode()

@@ -1,0 +1,3415 @@
+{
+  "synthetic": true,
+  "tools": 45,
+  "profiles": 18,
+  "formats": [
+    "csv",
+    "tsv",
+    "json",
+    "jsonl",
+    "xlsx",
+    "xls",
+    "parquet",
+    "xml"
+  ],
+  "format_equivalence_verified": true,
+  "calls": [
+    "list_media_profiles",
+    "preview_dataset",
+    "import_source",
+    "map_dataset_schema",
+    "validate_media_dataset",
+    "preview_dataset",
+    "import_source",
+    "map_dataset_schema",
+    "validate_media_dataset",
+    "preview_dataset",
+    "import_source",
+    "map_dataset_schema",
+    "validate_media_dataset",
+    "preview_dataset",
+    "import_source",
+    "map_dataset_schema",
+    "validate_media_dataset",
+    "preview_dataset",
+    "import_source",
+    "map_dataset_schema",
+    "validate_media_dataset",
+    "preview_dataset",
+    "import_source",
+    "map_dataset_schema",
+    "validate_media_dataset",
+    "preview_dataset",
+    "import_source",
+    "map_dataset_schema",
+    "validate_media_dataset",
+    "preview_dataset",
+    "import_source",
+    "map_dataset_schema",
+    "validate_media_dataset",
+    "preview_dataset",
+    "import_source",
+    "map_dataset_schema",
+    "validate_media_dataset",
+    "preview_dataset",
+    "import_source",
+    "map_dataset_schema",
+    "validate_media_dataset",
+    "preview_dataset",
+    "import_source",
+    "map_dataset_schema",
+    "validate_media_dataset",
+    "preview_dataset",
+    "import_source",
+    "map_dataset_schema",
+    "validate_media_dataset",
+    "preview_dataset",
+    "import_source",
+    "map_dataset_schema",
+    "validate_media_dataset",
+    "preview_dataset",
+    "import_source",
+    "map_dataset_schema",
+    "validate_media_dataset",
+    "preview_dataset",
+    "import_source",
+    "map_dataset_schema",
+    "validate_media_dataset",
+    "preview_dataset",
+    "import_source",
+    "map_dataset_schema",
+    "validate_media_dataset",
+    "preview_dataset",
+    "import_source",
+    "map_dataset_schema",
+    "validate_media_dataset",
+    "preview_dataset",
+    "import_source",
+    "map_dataset_schema",
+    "validate_media_dataset",
+    "validate_crossmedia_dataset",
+    "preview_dataset",
+    "import_source",
+    "map_dataset_schema",
+    "preview_dataset",
+    "import_source",
+    "map_dataset_schema",
+    "preview_dataset",
+    "import_source",
+    "map_dataset_schema",
+    "preview_dataset",
+    "import_source",
+    "map_dataset_schema",
+    "preview_dataset",
+    "import_source",
+    "map_dataset_schema",
+    "preview_dataset",
+    "import_source",
+    "map_dataset_schema",
+    "preview_dataset",
+    "import_source",
+    "map_dataset_schema",
+    "preview_dataset",
+    "import_source",
+    "map_dataset_schema",
+    "join_datasets",
+    "join_datasets",
+    "build_growth_dataset",
+    "register_media_profile",
+    "preview_dataset",
+    "import_source",
+    "map_dataset_schema",
+    "analyze_growth",
+    "prepare_mmm_dataset",
+    "train_mmm",
+    "get_model",
+    "prepare_mmm_dataset",
+    "train_backend",
+    "get_backend_model",
+    "prepare_mmm_dataset",
+    "train_backend",
+    "get_backend_model",
+    "prepare_mmm_dataset",
+    "train_backend",
+    "get_backend_model",
+    "preview_dataset",
+    "import_source",
+    "analyze_cohorts",
+    "plan_experiment",
+    "analyze_experiment",
+    "create_growth_diagnostic",
+    "create_growth_decision",
+    "transition_growth_decision",
+    "transition_growth_decision",
+    "transition_growth_decision",
+    "transition_growth_decision",
+    "predict_backend",
+    "predict_backend",
+    "predict_backend",
+    "predict_backend",
+    "predict_backend",
+    "predict_backend",
+    "predict_backend"
+  ],
+  "crossmedia": {
+    "coverage_matrix": [
+      {
+        "artifact_id": "normalized-4290624e51d2432f8b1e740e0b5b3890",
+        "channel_confirmed": "tv",
+        "channel_detected": null,
+        "units": {
+          "insertions": "count"
+        },
+        "dataset_applicability": {
+          "state": "applicable",
+          "profile": "tv",
+          "version": "1",
+          "reason": "Metric intersection with the explicitly selected profile"
+        },
+        "analysis_applicability": {
+          "growth": {
+            "state": "applicable",
+            "reason": "Profile compatibility and complete valid observations required"
+          },
+          "mmm": {
+            "state": "undetermined",
+            "reason": "Requires explicit KPI, media, controls and backend eligibility assessment"
+          }
+        },
+        "field_applicability": {
+          "audience": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile tv version 1"
+          },
+          "date": {
+            "state": "applicable",
+            "present": true,
+            "null_count": 0,
+            "reason": "Explicit selected profile tv version 1"
+          },
+          "frequency": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile tv version 1"
+          },
+          "grp": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile tv version 1"
+          },
+          "insertions": {
+            "state": "applicable",
+            "present": true,
+            "null_count": 0,
+            "reason": "Explicit selected profile tv version 1"
+          },
+          "rating": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile tv version 1"
+          },
+          "reach": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile tv version 1"
+          },
+          "share": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile tv version 1"
+          },
+          "spend": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile tv version 1"
+          },
+          "trp": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile tv version 1"
+          }
+        },
+        "validation_version": "1",
+        "status": "valid",
+        "missing_required": [],
+        "not_applicable": [
+          "circulation",
+          "clicks",
+          "conversions",
+          "cpa",
+          "cpc",
+          "ctr",
+          "engagements",
+          "impressions",
+          "leads",
+          "pageviews",
+          "print_run",
+          "readers",
+          "retention",
+          "revenue",
+          "sales",
+          "sessions",
+          "subscribers",
+          "users",
+          "views",
+          "watch_time"
+        ],
+        "optional_absent": [
+          "audience",
+          "frequency",
+          "grp",
+          "rating",
+          "reach",
+          "share",
+          "spend",
+          "trp"
+        ],
+        "errors": [],
+        "warnings": [],
+        "duplicates": 0,
+        "gaps": [],
+        "row_count": 2,
+        "period": [
+          "2026-01-05",
+          "2026-01-12"
+        ],
+        "completeness_percent": 100.0,
+        "unknown_units": [],
+        "growth_compatible": true,
+        "mmm_eligible": false,
+        "mmm_reason": "Use check_mmm_eligibility with an explicit outcome, media inputs and engine; numerical validity alone is insufficient."
+      },
+      {
+        "artifact_id": "normalized-d7eaf511eddf4d169d119313926d9a91",
+        "channel_confirmed": "radio",
+        "channel_detected": null,
+        "units": {
+          "insertions": "count"
+        },
+        "dataset_applicability": {
+          "state": "applicable",
+          "profile": "radio",
+          "version": "1",
+          "reason": "Metric intersection with the explicitly selected profile"
+        },
+        "analysis_applicability": {
+          "growth": {
+            "state": "applicable",
+            "reason": "Profile compatibility and complete valid observations required"
+          },
+          "mmm": {
+            "state": "undetermined",
+            "reason": "Requires explicit KPI, media, controls and backend eligibility assessment"
+          }
+        },
+        "field_applicability": {
+          "audience": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile radio version 1"
+          },
+          "date": {
+            "state": "applicable",
+            "present": true,
+            "null_count": 0,
+            "reason": "Explicit selected profile radio version 1"
+          },
+          "frequency": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile radio version 1"
+          },
+          "grp": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile radio version 1"
+          },
+          "insertions": {
+            "state": "applicable",
+            "present": true,
+            "null_count": 0,
+            "reason": "Explicit selected profile radio version 1"
+          },
+          "rating": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile radio version 1"
+          },
+          "reach": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile radio version 1"
+          },
+          "share": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile radio version 1"
+          },
+          "spend": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile radio version 1"
+          },
+          "trp": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile radio version 1"
+          }
+        },
+        "validation_version": "1",
+        "status": "valid",
+        "missing_required": [],
+        "not_applicable": [
+          "circulation",
+          "clicks",
+          "conversions",
+          "cpa",
+          "cpc",
+          "ctr",
+          "engagements",
+          "impressions",
+          "leads",
+          "pageviews",
+          "print_run",
+          "readers",
+          "retention",
+          "revenue",
+          "sales",
+          "sessions",
+          "subscribers",
+          "users",
+          "views",
+          "watch_time"
+        ],
+        "optional_absent": [
+          "audience",
+          "frequency",
+          "grp",
+          "rating",
+          "reach",
+          "share",
+          "spend",
+          "trp"
+        ],
+        "errors": [],
+        "warnings": [],
+        "duplicates": 0,
+        "gaps": [],
+        "row_count": 2,
+        "period": [
+          "2026-01-05",
+          "2026-01-12"
+        ],
+        "completeness_percent": 100.0,
+        "unknown_units": [],
+        "growth_compatible": true,
+        "mmm_eligible": false,
+        "mmm_reason": "Use check_mmm_eligibility with an explicit outcome, media inputs and engine; numerical validity alone is insufficient."
+      },
+      {
+        "artifact_id": "normalized-337e1dfb1c024865a5fe8706f0c6aca1",
+        "channel_confirmed": "print",
+        "channel_detected": null,
+        "units": {
+          "circulation": "count"
+        },
+        "dataset_applicability": {
+          "state": "applicable",
+          "profile": "print",
+          "version": "1",
+          "reason": "Metric intersection with the explicitly selected profile"
+        },
+        "analysis_applicability": {
+          "growth": {
+            "state": "applicable",
+            "reason": "Profile compatibility and complete valid observations required"
+          },
+          "mmm": {
+            "state": "undetermined",
+            "reason": "Requires explicit KPI, media, controls and backend eligibility assessment"
+          }
+        },
+        "field_applicability": {
+          "circulation": {
+            "state": "applicable",
+            "present": true,
+            "null_count": 0,
+            "reason": "Explicit selected profile print version 1"
+          },
+          "date": {
+            "state": "applicable",
+            "present": true,
+            "null_count": 0,
+            "reason": "Explicit selected profile print version 1"
+          },
+          "insertions": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile print version 1"
+          },
+          "print_run": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile print version 1"
+          },
+          "reach": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile print version 1"
+          },
+          "readers": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile print version 1"
+          },
+          "spend": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile print version 1"
+          }
+        },
+        "validation_version": "1",
+        "status": "valid",
+        "missing_required": [],
+        "not_applicable": [
+          "audience",
+          "clicks",
+          "conversions",
+          "cpa",
+          "cpc",
+          "ctr",
+          "engagements",
+          "frequency",
+          "grp",
+          "impressions",
+          "leads",
+          "pageviews",
+          "rating",
+          "retention",
+          "revenue",
+          "sales",
+          "sessions",
+          "share",
+          "subscribers",
+          "trp",
+          "users",
+          "views",
+          "watch_time"
+        ],
+        "optional_absent": [
+          "insertions",
+          "print_run",
+          "reach",
+          "readers",
+          "spend"
+        ],
+        "errors": [],
+        "warnings": [],
+        "duplicates": 0,
+        "gaps": [],
+        "row_count": 2,
+        "period": [
+          "2026-01-05",
+          "2026-01-12"
+        ],
+        "completeness_percent": 100.0,
+        "unknown_units": [],
+        "growth_compatible": true,
+        "mmm_eligible": false,
+        "mmm_reason": "Use check_mmm_eligibility with an explicit outcome, media inputs and engine; numerical validity alone is insufficient."
+      },
+      {
+        "artifact_id": "normalized-700544175e3a4303874992cfc0ae898c",
+        "channel_confirmed": "website",
+        "channel_detected": null,
+        "units": {
+          "sessions": "count"
+        },
+        "dataset_applicability": {
+          "state": "applicable",
+          "profile": "website",
+          "version": "1",
+          "reason": "Metric intersection with the explicitly selected profile"
+        },
+        "analysis_applicability": {
+          "growth": {
+            "state": "applicable",
+            "reason": "Profile compatibility and complete valid observations required"
+          },
+          "mmm": {
+            "state": "undetermined",
+            "reason": "Requires explicit KPI, media, controls and backend eligibility assessment"
+          }
+        },
+        "field_applicability": {
+          "clicks": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile website version 1"
+          },
+          "conversions": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile website version 1"
+          },
+          "ctr": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile website version 1"
+          },
+          "date": {
+            "state": "applicable",
+            "present": true,
+            "null_count": 0,
+            "reason": "Explicit selected profile website version 1"
+          },
+          "impressions": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile website version 1"
+          },
+          "leads": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile website version 1"
+          },
+          "pageviews": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile website version 1"
+          },
+          "revenue": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile website version 1"
+          },
+          "sales": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile website version 1"
+          },
+          "sessions": {
+            "state": "applicable",
+            "present": true,
+            "null_count": 0,
+            "reason": "Explicit selected profile website version 1"
+          },
+          "spend": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile website version 1"
+          },
+          "users": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile website version 1"
+          }
+        },
+        "validation_version": "1",
+        "status": "valid",
+        "missing_required": [],
+        "not_applicable": [
+          "audience",
+          "circulation",
+          "cpa",
+          "cpc",
+          "engagements",
+          "frequency",
+          "grp",
+          "insertions",
+          "print_run",
+          "rating",
+          "reach",
+          "readers",
+          "retention",
+          "share",
+          "subscribers",
+          "trp",
+          "views",
+          "watch_time"
+        ],
+        "optional_absent": [
+          "clicks",
+          "conversions",
+          "ctr",
+          "impressions",
+          "leads",
+          "pageviews",
+          "revenue",
+          "sales",
+          "spend",
+          "users"
+        ],
+        "errors": [],
+        "warnings": [],
+        "duplicates": 0,
+        "gaps": [],
+        "row_count": 2,
+        "period": [
+          "2026-01-05",
+          "2026-01-12"
+        ],
+        "completeness_percent": 100.0,
+        "unknown_units": [],
+        "growth_compatible": true,
+        "mmm_eligible": false,
+        "mmm_reason": "Use check_mmm_eligibility with an explicit outcome, media inputs and engine; numerical validity alone is insufficient."
+      },
+      {
+        "artifact_id": "normalized-e18fa61430754ae3a07eb5f78a18dd23",
+        "channel_confirmed": "seo",
+        "channel_detected": null,
+        "units": {
+          "clicks": "count"
+        },
+        "dataset_applicability": {
+          "state": "applicable",
+          "profile": "seo",
+          "version": "1",
+          "reason": "Metric intersection with the explicitly selected profile"
+        },
+        "analysis_applicability": {
+          "growth": {
+            "state": "applicable",
+            "reason": "Profile compatibility and complete valid observations required"
+          },
+          "mmm": {
+            "state": "undetermined",
+            "reason": "Requires explicit KPI, media, controls and backend eligibility assessment"
+          }
+        },
+        "field_applicability": {
+          "clicks": {
+            "state": "applicable",
+            "present": true,
+            "null_count": 0,
+            "reason": "Explicit selected profile seo version 1"
+          },
+          "conversions": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile seo version 1"
+          },
+          "ctr": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile seo version 1"
+          },
+          "date": {
+            "state": "applicable",
+            "present": true,
+            "null_count": 0,
+            "reason": "Explicit selected profile seo version 1"
+          },
+          "impressions": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile seo version 1"
+          },
+          "position": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile seo version 1"
+          },
+          "revenue": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile seo version 1"
+          },
+          "sales": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile seo version 1"
+          },
+          "sessions": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile seo version 1"
+          }
+        },
+        "validation_version": "1",
+        "status": "valid",
+        "missing_required": [],
+        "not_applicable": [
+          "audience",
+          "circulation",
+          "cpa",
+          "cpc",
+          "engagements",
+          "frequency",
+          "grp",
+          "insertions",
+          "leads",
+          "pageviews",
+          "print_run",
+          "rating",
+          "reach",
+          "readers",
+          "retention",
+          "share",
+          "spend",
+          "subscribers",
+          "trp",
+          "users",
+          "views",
+          "watch_time"
+        ],
+        "optional_absent": [
+          "conversions",
+          "ctr",
+          "impressions",
+          "position",
+          "revenue",
+          "sales",
+          "sessions"
+        ],
+        "errors": [],
+        "warnings": [],
+        "duplicates": 0,
+        "gaps": [],
+        "row_count": 2,
+        "period": [
+          "2026-01-05",
+          "2026-01-12"
+        ],
+        "completeness_percent": 100.0,
+        "unknown_units": [],
+        "growth_compatible": true,
+        "mmm_eligible": false,
+        "mmm_reason": "Use check_mmm_eligibility with an explicit outcome, media inputs and engine; numerical validity alone is insufficient."
+      },
+      {
+        "artifact_id": "normalized-44970dbeba0746ef8118e7486fa15b59",
+        "channel_confirmed": "search_ads",
+        "channel_detected": null,
+        "units": {
+          "clicks": "count"
+        },
+        "dataset_applicability": {
+          "state": "applicable",
+          "profile": "search_ads",
+          "version": "1",
+          "reason": "Metric intersection with the explicitly selected profile"
+        },
+        "analysis_applicability": {
+          "growth": {
+            "state": "applicable",
+            "reason": "Profile compatibility and complete valid observations required"
+          },
+          "mmm": {
+            "state": "undetermined",
+            "reason": "Requires explicit KPI, media, controls and backend eligibility assessment"
+          }
+        },
+        "field_applicability": {
+          "clicks": {
+            "state": "applicable",
+            "present": true,
+            "null_count": 0,
+            "reason": "Explicit selected profile search_ads version 1"
+          },
+          "conversions": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile search_ads version 1"
+          },
+          "cpa": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile search_ads version 1"
+          },
+          "cpc": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile search_ads version 1"
+          },
+          "ctr": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile search_ads version 1"
+          },
+          "date": {
+            "state": "applicable",
+            "present": true,
+            "null_count": 0,
+            "reason": "Explicit selected profile search_ads version 1"
+          },
+          "impressions": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile search_ads version 1"
+          },
+          "leads": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile search_ads version 1"
+          },
+          "revenue": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile search_ads version 1"
+          },
+          "sales": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile search_ads version 1"
+          },
+          "spend": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile search_ads version 1"
+          }
+        },
+        "validation_version": "1",
+        "status": "valid",
+        "missing_required": [],
+        "not_applicable": [
+          "audience",
+          "circulation",
+          "engagements",
+          "frequency",
+          "grp",
+          "insertions",
+          "pageviews",
+          "print_run",
+          "rating",
+          "reach",
+          "readers",
+          "retention",
+          "sessions",
+          "share",
+          "subscribers",
+          "trp",
+          "users",
+          "views",
+          "watch_time"
+        ],
+        "optional_absent": [
+          "conversions",
+          "cpa",
+          "cpc",
+          "ctr",
+          "impressions",
+          "leads",
+          "revenue",
+          "sales",
+          "spend"
+        ],
+        "errors": [],
+        "warnings": [],
+        "duplicates": 0,
+        "gaps": [],
+        "row_count": 2,
+        "period": [
+          "2026-01-05",
+          "2026-01-12"
+        ],
+        "completeness_percent": 100.0,
+        "unknown_units": [],
+        "growth_compatible": true,
+        "mmm_eligible": false,
+        "mmm_reason": "Use check_mmm_eligibility with an explicit outcome, media inputs and engine; numerical validity alone is insufficient."
+      },
+      {
+        "artifact_id": "normalized-94bfce8231f64777804f105f2c45beb6",
+        "channel_confirmed": "youtube_organic",
+        "channel_detected": null,
+        "units": {
+          "views": "count"
+        },
+        "dataset_applicability": {
+          "state": "applicable",
+          "profile": "youtube_organic",
+          "version": "1",
+          "reason": "Metric intersection with the explicitly selected profile"
+        },
+        "analysis_applicability": {
+          "growth": {
+            "state": "applicable",
+            "reason": "Profile compatibility and complete valid observations required"
+          },
+          "mmm": {
+            "state": "undetermined",
+            "reason": "Requires explicit KPI, media, controls and backend eligibility assessment"
+          }
+        },
+        "field_applicability": {
+          "clicks": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile youtube_organic version 1"
+          },
+          "conversions": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile youtube_organic version 1"
+          },
+          "cpa": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile youtube_organic version 1"
+          },
+          "cpc": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile youtube_organic version 1"
+          },
+          "ctr": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile youtube_organic version 1"
+          },
+          "date": {
+            "state": "applicable",
+            "present": true,
+            "null_count": 0,
+            "reason": "Explicit selected profile youtube_organic version 1"
+          },
+          "engagements": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile youtube_organic version 1"
+          },
+          "frequency": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile youtube_organic version 1"
+          },
+          "impressions": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile youtube_organic version 1"
+          },
+          "leads": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile youtube_organic version 1"
+          },
+          "reach": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile youtube_organic version 1"
+          },
+          "retention": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile youtube_organic version 1"
+          },
+          "revenue": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile youtube_organic version 1"
+          },
+          "sales": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile youtube_organic version 1"
+          },
+          "spend": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile youtube_organic version 1"
+          },
+          "subscribers": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile youtube_organic version 1"
+          },
+          "views": {
+            "state": "applicable",
+            "present": true,
+            "null_count": 0,
+            "reason": "Explicit selected profile youtube_organic version 1"
+          },
+          "watch_time": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile youtube_organic version 1"
+          }
+        },
+        "validation_version": "1",
+        "status": "valid",
+        "missing_required": [],
+        "not_applicable": [
+          "audience",
+          "circulation",
+          "grp",
+          "insertions",
+          "pageviews",
+          "print_run",
+          "rating",
+          "readers",
+          "sessions",
+          "share",
+          "trp",
+          "users"
+        ],
+        "optional_absent": [
+          "clicks",
+          "conversions",
+          "cpa",
+          "cpc",
+          "ctr",
+          "engagements",
+          "frequency",
+          "impressions",
+          "leads",
+          "reach",
+          "retention",
+          "revenue",
+          "sales",
+          "spend",
+          "subscribers",
+          "watch_time"
+        ],
+        "errors": [],
+        "warnings": [],
+        "duplicates": 0,
+        "gaps": [],
+        "row_count": 2,
+        "period": [
+          "2026-01-05",
+          "2026-01-12"
+        ],
+        "completeness_percent": 100.0,
+        "unknown_units": [],
+        "growth_compatible": true,
+        "mmm_eligible": false,
+        "mmm_reason": "Use check_mmm_eligibility with an explicit outcome, media inputs and engine; numerical validity alone is insufficient."
+      },
+      {
+        "artifact_id": "normalized-1a44a0135a23455a91dec74501f17e84",
+        "channel_confirmed": "youtube_paid",
+        "channel_detected": null,
+        "units": {
+          "views": "count"
+        },
+        "dataset_applicability": {
+          "state": "applicable",
+          "profile": "youtube_paid",
+          "version": "1",
+          "reason": "Metric intersection with the explicitly selected profile"
+        },
+        "analysis_applicability": {
+          "growth": {
+            "state": "applicable",
+            "reason": "Profile compatibility and complete valid observations required"
+          },
+          "mmm": {
+            "state": "undetermined",
+            "reason": "Requires explicit KPI, media, controls and backend eligibility assessment"
+          }
+        },
+        "field_applicability": {
+          "clicks": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile youtube_paid version 1"
+          },
+          "conversions": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile youtube_paid version 1"
+          },
+          "cpa": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile youtube_paid version 1"
+          },
+          "cpc": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile youtube_paid version 1"
+          },
+          "ctr": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile youtube_paid version 1"
+          },
+          "date": {
+            "state": "applicable",
+            "present": true,
+            "null_count": 0,
+            "reason": "Explicit selected profile youtube_paid version 1"
+          },
+          "engagements": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile youtube_paid version 1"
+          },
+          "frequency": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile youtube_paid version 1"
+          },
+          "impressions": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile youtube_paid version 1"
+          },
+          "leads": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile youtube_paid version 1"
+          },
+          "reach": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile youtube_paid version 1"
+          },
+          "retention": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile youtube_paid version 1"
+          },
+          "revenue": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile youtube_paid version 1"
+          },
+          "sales": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile youtube_paid version 1"
+          },
+          "spend": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile youtube_paid version 1"
+          },
+          "subscribers": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile youtube_paid version 1"
+          },
+          "views": {
+            "state": "applicable",
+            "present": true,
+            "null_count": 0,
+            "reason": "Explicit selected profile youtube_paid version 1"
+          },
+          "watch_time": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile youtube_paid version 1"
+          }
+        },
+        "validation_version": "1",
+        "status": "valid",
+        "missing_required": [],
+        "not_applicable": [
+          "audience",
+          "circulation",
+          "grp",
+          "insertions",
+          "pageviews",
+          "print_run",
+          "rating",
+          "readers",
+          "sessions",
+          "share",
+          "trp",
+          "users"
+        ],
+        "optional_absent": [
+          "clicks",
+          "conversions",
+          "cpa",
+          "cpc",
+          "ctr",
+          "engagements",
+          "frequency",
+          "impressions",
+          "leads",
+          "reach",
+          "retention",
+          "revenue",
+          "sales",
+          "spend",
+          "subscribers",
+          "watch_time"
+        ],
+        "errors": [],
+        "warnings": [],
+        "duplicates": 0,
+        "gaps": [],
+        "row_count": 2,
+        "period": [
+          "2026-01-05",
+          "2026-01-12"
+        ],
+        "completeness_percent": 100.0,
+        "unknown_units": [],
+        "growth_compatible": true,
+        "mmm_eligible": false,
+        "mmm_reason": "Use check_mmm_eligibility with an explicit outcome, media inputs and engine; numerical validity alone is insufficient."
+      },
+      {
+        "artifact_id": "normalized-b73d9e152b054e37a9da9cd3544d9755",
+        "channel_confirmed": "tiktok_organic",
+        "channel_detected": null,
+        "units": {
+          "views": "count"
+        },
+        "dataset_applicability": {
+          "state": "applicable",
+          "profile": "tiktok_organic",
+          "version": "1",
+          "reason": "Metric intersection with the explicitly selected profile"
+        },
+        "analysis_applicability": {
+          "growth": {
+            "state": "applicable",
+            "reason": "Profile compatibility and complete valid observations required"
+          },
+          "mmm": {
+            "state": "undetermined",
+            "reason": "Requires explicit KPI, media, controls and backend eligibility assessment"
+          }
+        },
+        "field_applicability": {
+          "clicks": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile tiktok_organic version 1"
+          },
+          "conversions": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile tiktok_organic version 1"
+          },
+          "cpa": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile tiktok_organic version 1"
+          },
+          "cpc": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile tiktok_organic version 1"
+          },
+          "ctr": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile tiktok_organic version 1"
+          },
+          "date": {
+            "state": "applicable",
+            "present": true,
+            "null_count": 0,
+            "reason": "Explicit selected profile tiktok_organic version 1"
+          },
+          "engagements": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile tiktok_organic version 1"
+          },
+          "frequency": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile tiktok_organic version 1"
+          },
+          "impressions": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile tiktok_organic version 1"
+          },
+          "leads": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile tiktok_organic version 1"
+          },
+          "reach": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile tiktok_organic version 1"
+          },
+          "retention": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile tiktok_organic version 1"
+          },
+          "revenue": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile tiktok_organic version 1"
+          },
+          "sales": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile tiktok_organic version 1"
+          },
+          "spend": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile tiktok_organic version 1"
+          },
+          "subscribers": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile tiktok_organic version 1"
+          },
+          "views": {
+            "state": "applicable",
+            "present": true,
+            "null_count": 0,
+            "reason": "Explicit selected profile tiktok_organic version 1"
+          },
+          "watch_time": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile tiktok_organic version 1"
+          }
+        },
+        "validation_version": "1",
+        "status": "valid",
+        "missing_required": [],
+        "not_applicable": [
+          "audience",
+          "circulation",
+          "grp",
+          "insertions",
+          "pageviews",
+          "print_run",
+          "rating",
+          "readers",
+          "sessions",
+          "share",
+          "trp",
+          "users"
+        ],
+        "optional_absent": [
+          "clicks",
+          "conversions",
+          "cpa",
+          "cpc",
+          "ctr",
+          "engagements",
+          "frequency",
+          "impressions",
+          "leads",
+          "reach",
+          "retention",
+          "revenue",
+          "sales",
+          "spend",
+          "subscribers",
+          "watch_time"
+        ],
+        "errors": [],
+        "warnings": [],
+        "duplicates": 0,
+        "gaps": [],
+        "row_count": 2,
+        "period": [
+          "2026-01-05",
+          "2026-01-12"
+        ],
+        "completeness_percent": 100.0,
+        "unknown_units": [],
+        "growth_compatible": true,
+        "mmm_eligible": false,
+        "mmm_reason": "Use check_mmm_eligibility with an explicit outcome, media inputs and engine; numerical validity alone is insufficient."
+      },
+      {
+        "artifact_id": "normalized-29f114b6ca7b4999b55cf7fac84025cb",
+        "channel_confirmed": "tiktok_paid",
+        "channel_detected": null,
+        "units": {
+          "views": "count"
+        },
+        "dataset_applicability": {
+          "state": "applicable",
+          "profile": "tiktok_paid",
+          "version": "1",
+          "reason": "Metric intersection with the explicitly selected profile"
+        },
+        "analysis_applicability": {
+          "growth": {
+            "state": "applicable",
+            "reason": "Profile compatibility and complete valid observations required"
+          },
+          "mmm": {
+            "state": "undetermined",
+            "reason": "Requires explicit KPI, media, controls and backend eligibility assessment"
+          }
+        },
+        "field_applicability": {
+          "clicks": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile tiktok_paid version 1"
+          },
+          "conversions": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile tiktok_paid version 1"
+          },
+          "cpa": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile tiktok_paid version 1"
+          },
+          "cpc": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile tiktok_paid version 1"
+          },
+          "ctr": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile tiktok_paid version 1"
+          },
+          "date": {
+            "state": "applicable",
+            "present": true,
+            "null_count": 0,
+            "reason": "Explicit selected profile tiktok_paid version 1"
+          },
+          "engagements": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile tiktok_paid version 1"
+          },
+          "frequency": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile tiktok_paid version 1"
+          },
+          "impressions": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile tiktok_paid version 1"
+          },
+          "leads": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile tiktok_paid version 1"
+          },
+          "reach": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile tiktok_paid version 1"
+          },
+          "retention": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile tiktok_paid version 1"
+          },
+          "revenue": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile tiktok_paid version 1"
+          },
+          "sales": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile tiktok_paid version 1"
+          },
+          "spend": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile tiktok_paid version 1"
+          },
+          "subscribers": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile tiktok_paid version 1"
+          },
+          "views": {
+            "state": "applicable",
+            "present": true,
+            "null_count": 0,
+            "reason": "Explicit selected profile tiktok_paid version 1"
+          },
+          "watch_time": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile tiktok_paid version 1"
+          }
+        },
+        "validation_version": "1",
+        "status": "valid",
+        "missing_required": [],
+        "not_applicable": [
+          "audience",
+          "circulation",
+          "grp",
+          "insertions",
+          "pageviews",
+          "print_run",
+          "rating",
+          "readers",
+          "sessions",
+          "share",
+          "trp",
+          "users"
+        ],
+        "optional_absent": [
+          "clicks",
+          "conversions",
+          "cpa",
+          "cpc",
+          "ctr",
+          "engagements",
+          "frequency",
+          "impressions",
+          "leads",
+          "reach",
+          "retention",
+          "revenue",
+          "sales",
+          "spend",
+          "subscribers",
+          "watch_time"
+        ],
+        "errors": [],
+        "warnings": [],
+        "duplicates": 0,
+        "gaps": [],
+        "row_count": 2,
+        "period": [
+          "2026-01-05",
+          "2026-01-12"
+        ],
+        "completeness_percent": 100.0,
+        "unknown_units": [],
+        "growth_compatible": true,
+        "mmm_eligible": false,
+        "mmm_reason": "Use check_mmm_eligibility with an explicit outcome, media inputs and engine; numerical validity alone is insufficient."
+      },
+      {
+        "artifact_id": "normalized-041545327bed402e91fe17ddb3dee363",
+        "channel_confirmed": "kwai_organic",
+        "channel_detected": null,
+        "units": {
+          "views": "count"
+        },
+        "dataset_applicability": {
+          "state": "applicable",
+          "profile": "kwai_organic",
+          "version": "1",
+          "reason": "Metric intersection with the explicitly selected profile"
+        },
+        "analysis_applicability": {
+          "growth": {
+            "state": "applicable",
+            "reason": "Profile compatibility and complete valid observations required"
+          },
+          "mmm": {
+            "state": "undetermined",
+            "reason": "Requires explicit KPI, media, controls and backend eligibility assessment"
+          }
+        },
+        "field_applicability": {
+          "clicks": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile kwai_organic version 1"
+          },
+          "conversions": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile kwai_organic version 1"
+          },
+          "cpa": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile kwai_organic version 1"
+          },
+          "cpc": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile kwai_organic version 1"
+          },
+          "ctr": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile kwai_organic version 1"
+          },
+          "date": {
+            "state": "applicable",
+            "present": true,
+            "null_count": 0,
+            "reason": "Explicit selected profile kwai_organic version 1"
+          },
+          "engagements": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile kwai_organic version 1"
+          },
+          "frequency": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile kwai_organic version 1"
+          },
+          "impressions": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile kwai_organic version 1"
+          },
+          "leads": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile kwai_organic version 1"
+          },
+          "reach": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile kwai_organic version 1"
+          },
+          "retention": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile kwai_organic version 1"
+          },
+          "revenue": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile kwai_organic version 1"
+          },
+          "sales": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile kwai_organic version 1"
+          },
+          "spend": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile kwai_organic version 1"
+          },
+          "subscribers": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile kwai_organic version 1"
+          },
+          "views": {
+            "state": "applicable",
+            "present": true,
+            "null_count": 0,
+            "reason": "Explicit selected profile kwai_organic version 1"
+          },
+          "watch_time": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile kwai_organic version 1"
+          }
+        },
+        "validation_version": "1",
+        "status": "valid",
+        "missing_required": [],
+        "not_applicable": [
+          "audience",
+          "circulation",
+          "grp",
+          "insertions",
+          "pageviews",
+          "print_run",
+          "rating",
+          "readers",
+          "sessions",
+          "share",
+          "trp",
+          "users"
+        ],
+        "optional_absent": [
+          "clicks",
+          "conversions",
+          "cpa",
+          "cpc",
+          "ctr",
+          "engagements",
+          "frequency",
+          "impressions",
+          "leads",
+          "reach",
+          "retention",
+          "revenue",
+          "sales",
+          "spend",
+          "subscribers",
+          "watch_time"
+        ],
+        "errors": [],
+        "warnings": [],
+        "duplicates": 0,
+        "gaps": [],
+        "row_count": 2,
+        "period": [
+          "2026-01-05",
+          "2026-01-12"
+        ],
+        "completeness_percent": 100.0,
+        "unknown_units": [],
+        "growth_compatible": true,
+        "mmm_eligible": false,
+        "mmm_reason": "Use check_mmm_eligibility with an explicit outcome, media inputs and engine; numerical validity alone is insufficient."
+      },
+      {
+        "artifact_id": "normalized-739c417099e345b19e198dee4c8ae08d",
+        "channel_confirmed": "kwai_paid",
+        "channel_detected": null,
+        "units": {
+          "views": "count"
+        },
+        "dataset_applicability": {
+          "state": "applicable",
+          "profile": "kwai_paid",
+          "version": "1",
+          "reason": "Metric intersection with the explicitly selected profile"
+        },
+        "analysis_applicability": {
+          "growth": {
+            "state": "applicable",
+            "reason": "Profile compatibility and complete valid observations required"
+          },
+          "mmm": {
+            "state": "undetermined",
+            "reason": "Requires explicit KPI, media, controls and backend eligibility assessment"
+          }
+        },
+        "field_applicability": {
+          "clicks": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile kwai_paid version 1"
+          },
+          "conversions": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile kwai_paid version 1"
+          },
+          "cpa": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile kwai_paid version 1"
+          },
+          "cpc": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile kwai_paid version 1"
+          },
+          "ctr": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile kwai_paid version 1"
+          },
+          "date": {
+            "state": "applicable",
+            "present": true,
+            "null_count": 0,
+            "reason": "Explicit selected profile kwai_paid version 1"
+          },
+          "engagements": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile kwai_paid version 1"
+          },
+          "frequency": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile kwai_paid version 1"
+          },
+          "impressions": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile kwai_paid version 1"
+          },
+          "leads": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile kwai_paid version 1"
+          },
+          "reach": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile kwai_paid version 1"
+          },
+          "retention": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile kwai_paid version 1"
+          },
+          "revenue": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile kwai_paid version 1"
+          },
+          "sales": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile kwai_paid version 1"
+          },
+          "spend": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile kwai_paid version 1"
+          },
+          "subscribers": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile kwai_paid version 1"
+          },
+          "views": {
+            "state": "applicable",
+            "present": true,
+            "null_count": 0,
+            "reason": "Explicit selected profile kwai_paid version 1"
+          },
+          "watch_time": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile kwai_paid version 1"
+          }
+        },
+        "validation_version": "1",
+        "status": "valid",
+        "missing_required": [],
+        "not_applicable": [
+          "audience",
+          "circulation",
+          "grp",
+          "insertions",
+          "pageviews",
+          "print_run",
+          "rating",
+          "readers",
+          "sessions",
+          "share",
+          "trp",
+          "users"
+        ],
+        "optional_absent": [
+          "clicks",
+          "conversions",
+          "cpa",
+          "cpc",
+          "ctr",
+          "engagements",
+          "frequency",
+          "impressions",
+          "leads",
+          "reach",
+          "retention",
+          "revenue",
+          "sales",
+          "spend",
+          "subscribers",
+          "watch_time"
+        ],
+        "errors": [],
+        "warnings": [],
+        "duplicates": 0,
+        "gaps": [],
+        "row_count": 2,
+        "period": [
+          "2026-01-05",
+          "2026-01-12"
+        ],
+        "completeness_percent": 100.0,
+        "unknown_units": [],
+        "growth_compatible": true,
+        "mmm_eligible": false,
+        "mmm_reason": "Use check_mmm_eligibility with an explicit outcome, media inputs and engine; numerical validity alone is insufficient."
+      },
+      {
+        "artifact_id": "normalized-ac79041fe37741af938bc6061968c421",
+        "channel_confirmed": "facebook_organic",
+        "channel_detected": null,
+        "units": {
+          "engagements": "count"
+        },
+        "dataset_applicability": {
+          "state": "applicable",
+          "profile": "facebook_organic",
+          "version": "1",
+          "reason": "Metric intersection with the explicitly selected profile"
+        },
+        "analysis_applicability": {
+          "growth": {
+            "state": "applicable",
+            "reason": "Profile compatibility and complete valid observations required"
+          },
+          "mmm": {
+            "state": "undetermined",
+            "reason": "Requires explicit KPI, media, controls and backend eligibility assessment"
+          }
+        },
+        "field_applicability": {
+          "clicks": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile facebook_organic version 1"
+          },
+          "conversions": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile facebook_organic version 1"
+          },
+          "cpa": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile facebook_organic version 1"
+          },
+          "cpc": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile facebook_organic version 1"
+          },
+          "ctr": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile facebook_organic version 1"
+          },
+          "date": {
+            "state": "applicable",
+            "present": true,
+            "null_count": 0,
+            "reason": "Explicit selected profile facebook_organic version 1"
+          },
+          "engagements": {
+            "state": "applicable",
+            "present": true,
+            "null_count": 0,
+            "reason": "Explicit selected profile facebook_organic version 1"
+          },
+          "frequency": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile facebook_organic version 1"
+          },
+          "impressions": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile facebook_organic version 1"
+          },
+          "leads": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile facebook_organic version 1"
+          },
+          "reach": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile facebook_organic version 1"
+          },
+          "retention": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile facebook_organic version 1"
+          },
+          "revenue": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile facebook_organic version 1"
+          },
+          "sales": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile facebook_organic version 1"
+          },
+          "spend": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile facebook_organic version 1"
+          },
+          "subscribers": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile facebook_organic version 1"
+          },
+          "views": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile facebook_organic version 1"
+          },
+          "watch_time": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile facebook_organic version 1"
+          }
+        },
+        "validation_version": "1",
+        "status": "valid",
+        "missing_required": [],
+        "not_applicable": [
+          "audience",
+          "circulation",
+          "grp",
+          "insertions",
+          "pageviews",
+          "print_run",
+          "rating",
+          "readers",
+          "sessions",
+          "share",
+          "trp",
+          "users"
+        ],
+        "optional_absent": [
+          "clicks",
+          "conversions",
+          "cpa",
+          "cpc",
+          "ctr",
+          "frequency",
+          "impressions",
+          "leads",
+          "reach",
+          "retention",
+          "revenue",
+          "sales",
+          "spend",
+          "subscribers",
+          "views",
+          "watch_time"
+        ],
+        "errors": [],
+        "warnings": [],
+        "duplicates": 0,
+        "gaps": [],
+        "row_count": 2,
+        "period": [
+          "2026-01-05",
+          "2026-01-12"
+        ],
+        "completeness_percent": 100.0,
+        "unknown_units": [],
+        "growth_compatible": true,
+        "mmm_eligible": false,
+        "mmm_reason": "Use check_mmm_eligibility with an explicit outcome, media inputs and engine; numerical validity alone is insufficient."
+      },
+      {
+        "artifact_id": "normalized-df710b2fe36a45afb815639a66abac99",
+        "channel_confirmed": "facebook_boosted",
+        "channel_detected": null,
+        "units": {
+          "engagements": "count"
+        },
+        "dataset_applicability": {
+          "state": "applicable",
+          "profile": "facebook_boosted",
+          "version": "1",
+          "reason": "Metric intersection with the explicitly selected profile"
+        },
+        "analysis_applicability": {
+          "growth": {
+            "state": "applicable",
+            "reason": "Profile compatibility and complete valid observations required"
+          },
+          "mmm": {
+            "state": "undetermined",
+            "reason": "Requires explicit KPI, media, controls and backend eligibility assessment"
+          }
+        },
+        "field_applicability": {
+          "clicks": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile facebook_boosted version 1"
+          },
+          "conversions": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile facebook_boosted version 1"
+          },
+          "cpa": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile facebook_boosted version 1"
+          },
+          "cpc": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile facebook_boosted version 1"
+          },
+          "ctr": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile facebook_boosted version 1"
+          },
+          "date": {
+            "state": "applicable",
+            "present": true,
+            "null_count": 0,
+            "reason": "Explicit selected profile facebook_boosted version 1"
+          },
+          "engagements": {
+            "state": "applicable",
+            "present": true,
+            "null_count": 0,
+            "reason": "Explicit selected profile facebook_boosted version 1"
+          },
+          "frequency": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile facebook_boosted version 1"
+          },
+          "impressions": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile facebook_boosted version 1"
+          },
+          "leads": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile facebook_boosted version 1"
+          },
+          "reach": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile facebook_boosted version 1"
+          },
+          "retention": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile facebook_boosted version 1"
+          },
+          "revenue": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile facebook_boosted version 1"
+          },
+          "sales": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile facebook_boosted version 1"
+          },
+          "spend": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile facebook_boosted version 1"
+          },
+          "subscribers": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile facebook_boosted version 1"
+          },
+          "views": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile facebook_boosted version 1"
+          },
+          "watch_time": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile facebook_boosted version 1"
+          }
+        },
+        "validation_version": "1",
+        "status": "valid",
+        "missing_required": [],
+        "not_applicable": [
+          "audience",
+          "circulation",
+          "grp",
+          "insertions",
+          "pageviews",
+          "print_run",
+          "rating",
+          "readers",
+          "sessions",
+          "share",
+          "trp",
+          "users"
+        ],
+        "optional_absent": [
+          "clicks",
+          "conversions",
+          "cpa",
+          "cpc",
+          "ctr",
+          "frequency",
+          "impressions",
+          "leads",
+          "reach",
+          "retention",
+          "revenue",
+          "sales",
+          "spend",
+          "subscribers",
+          "views",
+          "watch_time"
+        ],
+        "errors": [],
+        "warnings": [],
+        "duplicates": 0,
+        "gaps": [],
+        "row_count": 2,
+        "period": [
+          "2026-01-05",
+          "2026-01-12"
+        ],
+        "completeness_percent": 100.0,
+        "unknown_units": [],
+        "growth_compatible": true,
+        "mmm_eligible": false,
+        "mmm_reason": "Use check_mmm_eligibility with an explicit outcome, media inputs and engine; numerical validity alone is insufficient."
+      },
+      {
+        "artifact_id": "normalized-c23c9d4a2aad437eabd75e4b5c925ef8",
+        "channel_confirmed": "facebook_ads",
+        "channel_detected": null,
+        "units": {
+          "engagements": "count"
+        },
+        "dataset_applicability": {
+          "state": "applicable",
+          "profile": "facebook_ads",
+          "version": "1",
+          "reason": "Metric intersection with the explicitly selected profile"
+        },
+        "analysis_applicability": {
+          "growth": {
+            "state": "applicable",
+            "reason": "Profile compatibility and complete valid observations required"
+          },
+          "mmm": {
+            "state": "undetermined",
+            "reason": "Requires explicit KPI, media, controls and backend eligibility assessment"
+          }
+        },
+        "field_applicability": {
+          "clicks": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile facebook_ads version 1"
+          },
+          "conversions": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile facebook_ads version 1"
+          },
+          "cpa": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile facebook_ads version 1"
+          },
+          "cpc": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile facebook_ads version 1"
+          },
+          "ctr": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile facebook_ads version 1"
+          },
+          "date": {
+            "state": "applicable",
+            "present": true,
+            "null_count": 0,
+            "reason": "Explicit selected profile facebook_ads version 1"
+          },
+          "engagements": {
+            "state": "applicable",
+            "present": true,
+            "null_count": 0,
+            "reason": "Explicit selected profile facebook_ads version 1"
+          },
+          "frequency": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile facebook_ads version 1"
+          },
+          "impressions": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile facebook_ads version 1"
+          },
+          "leads": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile facebook_ads version 1"
+          },
+          "reach": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile facebook_ads version 1"
+          },
+          "retention": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile facebook_ads version 1"
+          },
+          "revenue": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile facebook_ads version 1"
+          },
+          "sales": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile facebook_ads version 1"
+          },
+          "spend": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile facebook_ads version 1"
+          },
+          "subscribers": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile facebook_ads version 1"
+          },
+          "views": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile facebook_ads version 1"
+          },
+          "watch_time": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile facebook_ads version 1"
+          }
+        },
+        "validation_version": "1",
+        "status": "valid",
+        "missing_required": [],
+        "not_applicable": [
+          "audience",
+          "circulation",
+          "grp",
+          "insertions",
+          "pageviews",
+          "print_run",
+          "rating",
+          "readers",
+          "sessions",
+          "share",
+          "trp",
+          "users"
+        ],
+        "optional_absent": [
+          "clicks",
+          "conversions",
+          "cpa",
+          "cpc",
+          "ctr",
+          "frequency",
+          "impressions",
+          "leads",
+          "reach",
+          "retention",
+          "revenue",
+          "sales",
+          "spend",
+          "subscribers",
+          "views",
+          "watch_time"
+        ],
+        "errors": [],
+        "warnings": [],
+        "duplicates": 0,
+        "gaps": [],
+        "row_count": 2,
+        "period": [
+          "2026-01-05",
+          "2026-01-12"
+        ],
+        "completeness_percent": 100.0,
+        "unknown_units": [],
+        "growth_compatible": true,
+        "mmm_eligible": false,
+        "mmm_reason": "Use check_mmm_eligibility with an explicit outcome, media inputs and engine; numerical validity alone is insufficient."
+      },
+      {
+        "artifact_id": "normalized-03abb08e46584485a07981b8741552a7",
+        "channel_confirmed": "instagram_organic",
+        "channel_detected": null,
+        "units": {
+          "engagements": "count"
+        },
+        "dataset_applicability": {
+          "state": "applicable",
+          "profile": "instagram_organic",
+          "version": "1",
+          "reason": "Metric intersection with the explicitly selected profile"
+        },
+        "analysis_applicability": {
+          "growth": {
+            "state": "applicable",
+            "reason": "Profile compatibility and complete valid observations required"
+          },
+          "mmm": {
+            "state": "undetermined",
+            "reason": "Requires explicit KPI, media, controls and backend eligibility assessment"
+          }
+        },
+        "field_applicability": {
+          "clicks": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile instagram_organic version 1"
+          },
+          "conversions": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile instagram_organic version 1"
+          },
+          "cpa": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile instagram_organic version 1"
+          },
+          "cpc": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile instagram_organic version 1"
+          },
+          "ctr": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile instagram_organic version 1"
+          },
+          "date": {
+            "state": "applicable",
+            "present": true,
+            "null_count": 0,
+            "reason": "Explicit selected profile instagram_organic version 1"
+          },
+          "engagements": {
+            "state": "applicable",
+            "present": true,
+            "null_count": 0,
+            "reason": "Explicit selected profile instagram_organic version 1"
+          },
+          "frequency": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile instagram_organic version 1"
+          },
+          "impressions": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile instagram_organic version 1"
+          },
+          "leads": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile instagram_organic version 1"
+          },
+          "reach": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile instagram_organic version 1"
+          },
+          "retention": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile instagram_organic version 1"
+          },
+          "revenue": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile instagram_organic version 1"
+          },
+          "sales": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile instagram_organic version 1"
+          },
+          "spend": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile instagram_organic version 1"
+          },
+          "subscribers": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile instagram_organic version 1"
+          },
+          "views": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile instagram_organic version 1"
+          },
+          "watch_time": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile instagram_organic version 1"
+          }
+        },
+        "validation_version": "1",
+        "status": "valid",
+        "missing_required": [],
+        "not_applicable": [
+          "audience",
+          "circulation",
+          "grp",
+          "insertions",
+          "pageviews",
+          "print_run",
+          "rating",
+          "readers",
+          "sessions",
+          "share",
+          "trp",
+          "users"
+        ],
+        "optional_absent": [
+          "clicks",
+          "conversions",
+          "cpa",
+          "cpc",
+          "ctr",
+          "frequency",
+          "impressions",
+          "leads",
+          "reach",
+          "retention",
+          "revenue",
+          "sales",
+          "spend",
+          "subscribers",
+          "views",
+          "watch_time"
+        ],
+        "errors": [],
+        "warnings": [],
+        "duplicates": 0,
+        "gaps": [],
+        "row_count": 2,
+        "period": [
+          "2026-01-05",
+          "2026-01-12"
+        ],
+        "completeness_percent": 100.0,
+        "unknown_units": [],
+        "growth_compatible": true,
+        "mmm_eligible": false,
+        "mmm_reason": "Use check_mmm_eligibility with an explicit outcome, media inputs and engine; numerical validity alone is insufficient."
+      },
+      {
+        "artifact_id": "normalized-dd1aacff43024087a8ba1c4931b1bd96",
+        "channel_confirmed": "instagram_boosted",
+        "channel_detected": null,
+        "units": {
+          "engagements": "count"
+        },
+        "dataset_applicability": {
+          "state": "applicable",
+          "profile": "instagram_boosted",
+          "version": "1",
+          "reason": "Metric intersection with the explicitly selected profile"
+        },
+        "analysis_applicability": {
+          "growth": {
+            "state": "applicable",
+            "reason": "Profile compatibility and complete valid observations required"
+          },
+          "mmm": {
+            "state": "undetermined",
+            "reason": "Requires explicit KPI, media, controls and backend eligibility assessment"
+          }
+        },
+        "field_applicability": {
+          "clicks": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile instagram_boosted version 1"
+          },
+          "conversions": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile instagram_boosted version 1"
+          },
+          "cpa": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile instagram_boosted version 1"
+          },
+          "cpc": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile instagram_boosted version 1"
+          },
+          "ctr": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile instagram_boosted version 1"
+          },
+          "date": {
+            "state": "applicable",
+            "present": true,
+            "null_count": 0,
+            "reason": "Explicit selected profile instagram_boosted version 1"
+          },
+          "engagements": {
+            "state": "applicable",
+            "present": true,
+            "null_count": 0,
+            "reason": "Explicit selected profile instagram_boosted version 1"
+          },
+          "frequency": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile instagram_boosted version 1"
+          },
+          "impressions": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile instagram_boosted version 1"
+          },
+          "leads": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile instagram_boosted version 1"
+          },
+          "reach": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile instagram_boosted version 1"
+          },
+          "retention": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile instagram_boosted version 1"
+          },
+          "revenue": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile instagram_boosted version 1"
+          },
+          "sales": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile instagram_boosted version 1"
+          },
+          "spend": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile instagram_boosted version 1"
+          },
+          "subscribers": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile instagram_boosted version 1"
+          },
+          "views": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile instagram_boosted version 1"
+          },
+          "watch_time": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile instagram_boosted version 1"
+          }
+        },
+        "validation_version": "1",
+        "status": "valid",
+        "missing_required": [],
+        "not_applicable": [
+          "audience",
+          "circulation",
+          "grp",
+          "insertions",
+          "pageviews",
+          "print_run",
+          "rating",
+          "readers",
+          "sessions",
+          "share",
+          "trp",
+          "users"
+        ],
+        "optional_absent": [
+          "clicks",
+          "conversions",
+          "cpa",
+          "cpc",
+          "ctr",
+          "frequency",
+          "impressions",
+          "leads",
+          "reach",
+          "retention",
+          "revenue",
+          "sales",
+          "spend",
+          "subscribers",
+          "views",
+          "watch_time"
+        ],
+        "errors": [],
+        "warnings": [],
+        "duplicates": 0,
+        "gaps": [],
+        "row_count": 2,
+        "period": [
+          "2026-01-05",
+          "2026-01-12"
+        ],
+        "completeness_percent": 100.0,
+        "unknown_units": [],
+        "growth_compatible": true,
+        "mmm_eligible": false,
+        "mmm_reason": "Use check_mmm_eligibility with an explicit outcome, media inputs and engine; numerical validity alone is insufficient."
+      },
+      {
+        "artifact_id": "normalized-622a66928f2d4b738b0743f785b3a257",
+        "channel_confirmed": "instagram_ads",
+        "channel_detected": null,
+        "units": {
+          "engagements": "count"
+        },
+        "dataset_applicability": {
+          "state": "applicable",
+          "profile": "instagram_ads",
+          "version": "1",
+          "reason": "Metric intersection with the explicitly selected profile"
+        },
+        "analysis_applicability": {
+          "growth": {
+            "state": "applicable",
+            "reason": "Profile compatibility and complete valid observations required"
+          },
+          "mmm": {
+            "state": "undetermined",
+            "reason": "Requires explicit KPI, media, controls and backend eligibility assessment"
+          }
+        },
+        "field_applicability": {
+          "clicks": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile instagram_ads version 1"
+          },
+          "conversions": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile instagram_ads version 1"
+          },
+          "cpa": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile instagram_ads version 1"
+          },
+          "cpc": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile instagram_ads version 1"
+          },
+          "ctr": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile instagram_ads version 1"
+          },
+          "date": {
+            "state": "applicable",
+            "present": true,
+            "null_count": 0,
+            "reason": "Explicit selected profile instagram_ads version 1"
+          },
+          "engagements": {
+            "state": "applicable",
+            "present": true,
+            "null_count": 0,
+            "reason": "Explicit selected profile instagram_ads version 1"
+          },
+          "frequency": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile instagram_ads version 1"
+          },
+          "impressions": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile instagram_ads version 1"
+          },
+          "leads": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile instagram_ads version 1"
+          },
+          "reach": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile instagram_ads version 1"
+          },
+          "retention": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile instagram_ads version 1"
+          },
+          "revenue": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile instagram_ads version 1"
+          },
+          "sales": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile instagram_ads version 1"
+          },
+          "spend": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile instagram_ads version 1"
+          },
+          "subscribers": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile instagram_ads version 1"
+          },
+          "views": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile instagram_ads version 1"
+          },
+          "watch_time": {
+            "state": "applicable",
+            "present": false,
+            "null_count": null,
+            "reason": "Explicit selected profile instagram_ads version 1"
+          }
+        },
+        "validation_version": "1",
+        "status": "valid",
+        "missing_required": [],
+        "not_applicable": [
+          "audience",
+          "circulation",
+          "grp",
+          "insertions",
+          "pageviews",
+          "print_run",
+          "rating",
+          "readers",
+          "sessions",
+          "share",
+          "trp",
+          "users"
+        ],
+        "optional_absent": [
+          "clicks",
+          "conversions",
+          "cpa",
+          "cpc",
+          "ctr",
+          "frequency",
+          "impressions",
+          "leads",
+          "reach",
+          "retention",
+          "revenue",
+          "sales",
+          "spend",
+          "subscribers",
+          "views",
+          "watch_time"
+        ],
+        "errors": [],
+        "warnings": [],
+        "duplicates": 0,
+        "gaps": [],
+        "row_count": 2,
+        "period": [
+          "2026-01-05",
+          "2026-01-12"
+        ],
+        "completeness_percent": 100.0,
+        "unknown_units": [],
+        "growth_compatible": true,
+        "mmm_eligible": false,
+        "mmm_reason": "Use check_mmm_eligibility with an explicit outcome, media inputs and engine; numerical validity alone is insufficient."
+      }
+    ],
+    "incompatibilities": [],
+    "shared_dates": [
+      "2026-01-05",
+      "2026-01-12"
+    ],
+    "crossmedia_reach": null,
+    "warnings": [
+      "Audience, reach, impressions, circulation and GRPs remain distinct. No deduplicated crossmedia reach."
+    ]
+  },
+  "models": {
+    "ridge": {
+      "preparation": {
+        "dataset_id": "prepared-ab9903e0f4d64095af55c287e3015522",
+        "sha256": "803df5cf44302d5c3c9ad8e5b6cc8008be84dd1d53f0124bdc1fdb9eb21aa816",
+        "training_tool": "train_mmm",
+        "training_request": {
+          "dataset_id": "prepared-ab9903e0f4d64095af55c287e3015522",
+          "media_columns": [
+            "spend_search",
+            "spend_social",
+            "spend_video"
+          ],
+          "control_columns": [
+            "price_index",
+            "promotion"
+          ],
+          "target_column": "revenue",
+          "date_column": "date",
+          "test_fraction": 0.2,
+          "warmup_periods": 8,
+          "model_id": null,
+          "ridge_alpha": 0.1,
+          "adstock_decay": 0.5,
+          "saturation_multiplier": 1.0,
+          "bootstrap_samples": 0,
+          "bootstrap_block_size": 4,
+          "bootstrap_seed": 42
+        },
+        "source_ids": [
+          "normalized-cb23f57890804345928919e3b52cadba"
+        ],
+        "warnings": [
+          "No causal identification or convergence guarantee.",
+          "Native adapters use spend as the media exposure proxy; independent exposure and geo inputs are not invented."
+        ]
+      },
+      "native_cycle_verified": true,
+      "model_id": "model-bc7422506faf4c40bd223e9e7602e51e",
+      "expected": null,
+      "convergence_certified": false,
+      "restart_scenario_verified": true
+    },
+    "google_meridian": {
+      "preparation": {
+        "dataset_id": "prepared-a0b2e2835f6740ba82285f26ee69c37f",
+        "sha256": "df2c54242e9730fd15a07ae3f3f009238236c32e0446dcb8d4f94e8c4fc8cfb8",
+        "training_tool": "train_backend",
+        "training_request": {
+          "dataset_id": "prepared-a0b2e2835f6740ba82285f26ee69c37f",
+          "media_columns": [
+            "spend_search",
+            "spend_social",
+            "spend_video"
+          ],
+          "control_columns": [
+            "price_index",
+            "promotion"
+          ],
+          "target_column": "revenue",
+          "date_column": "date",
+          "test_fraction": 0.2,
+          "warmup_periods": 8,
+          "backend": "google_meridian",
+          "model_id": null,
+          "draws": 100,
+          "tune": 100,
+          "chains": 2,
+          "seed": 42
+        },
+        "source_ids": [
+          "normalized-cb23f57890804345928919e3b52cadba"
+        ],
+        "warnings": [
+          "No causal identification or convergence guarantee.",
+          "Native adapters use spend as the media exposure proxy; independent exposure and geo inputs are not invented."
+        ]
+      },
+      "native_cycle_verified": true,
+      "model_id": "google_meridian-8a75bb80acc54ae39c15ebadcda6991a",
+      "expected": [
+        20671.672332473267,
+        21639.2576564562,
+        20668.40829841354,
+        21026.717292489662,
+        20650.669031134672,
+        19102.668462644036,
+        19721.13669211225,
+        18363.217918084774,
+        19482.397922443186,
+        19516.107327525646,
+        20287.375590926687,
+        22558.472345466194,
+        23321.48643133515,
+        21132.58980962326,
+        22408.30525365781,
+        20842.465144500708,
+        21407.53975584548,
+        20074.788176197348,
+        17235.155013036077,
+        19130.74454782487,
+        19441.532615405406
+      ],
+      "convergence_certified": false,
+      "scenario_effect_verified": true,
+      "restart_scenario_verified": true
+    },
+    "pymc_marketing": {
+      "preparation": {
+        "dataset_id": "prepared-3ef6ca275d534fdbb59c079145d7a3f9",
+        "sha256": "dca9e0d774d6fd85f4fad57eb7e93432b5747f1f5c8d4d7e764d25e9f346ffc6",
+        "training_tool": "train_backend",
+        "training_request": {
+          "dataset_id": "prepared-3ef6ca275d534fdbb59c079145d7a3f9",
+          "media_columns": [
+            "spend_search",
+            "spend_social",
+            "spend_video"
+          ],
+          "control_columns": [
+            "price_index",
+            "promotion"
+          ],
+          "target_column": "revenue",
+          "date_column": "date",
+          "test_fraction": 0.2,
+          "warmup_periods": 8,
+          "backend": "pymc_marketing",
+          "model_id": null,
+          "draws": 100,
+          "tune": 100,
+          "chains": 2,
+          "seed": 42
+        },
+        "source_ids": [
+          "normalized-cb23f57890804345928919e3b52cadba"
+        ],
+        "warnings": [
+          "No causal identification or convergence guarantee.",
+          "Native adapters use spend as the media exposure proxy; independent exposure and geo inputs are not invented."
+        ]
+      },
+      "native_cycle_verified": true,
+      "model_id": "pymc_marketing-cbe677bfb0694a22ae77739513821b18",
+      "expected": [
+        11742.715246680258,
+        12004.206214886075,
+        11969.175501263,
+        11598.85994405104,
+        11731.989678830452,
+        10989.492658335166,
+        11442.19182967433,
+        10758.76636680531,
+        11250.44383809244,
+        11071.646699967952,
+        11670.355420557757,
+        11992.131515501864,
+        12623.153642307343,
+        11096.378839454144,
+        12169.426924511095,
+        11981.839109294671,
+        11562.364410984857,
+        11354.863398817572,
+        10625.230433519613,
+        11126.637573534053,
+        11935.465767874253
+      ],
+      "convergence_certified": false,
+      "scenario_effect_verified": true,
+      "restart_scenario_verified": true
+    },
+    "meta_robyn": {
+      "preparation": {
+        "dataset_id": "prepared-f49604b1d5564516834cb284c555897f",
+        "sha256": "aa22fd64c2279817bbddd895a3d63ab132bbcf0ffb43d166939da4b579230242",
+        "training_tool": "train_backend",
+        "training_request": {
+          "dataset_id": "prepared-f49604b1d5564516834cb284c555897f",
+          "media_columns": [
+            "spend_search",
+            "spend_social",
+            "spend_video"
+          ],
+          "control_columns": [
+            "price_index",
+            "promotion"
+          ],
+          "target_column": "revenue",
+          "date_column": "date",
+          "test_fraction": 0.2,
+          "warmup_periods": 8,
+          "backend": "meta_robyn",
+          "model_id": null,
+          "draws": 100,
+          "tune": 100,
+          "chains": 2,
+          "seed": 42
+        },
+        "source_ids": [
+          "normalized-cb23f57890804345928919e3b52cadba"
+        ],
+        "warnings": [
+          "No causal identification or convergence guarantee.",
+          "Native adapters use spend as the media exposure proxy; independent exposure and geo inputs are not invented."
+        ]
+      },
+      "native_cycle_verified": true,
+      "model_id": "meta_robyn-31cce9ae561746b5b45e8813b9b5892b",
+      "expected": [
+        11933.41290199263,
+        11572.161361580609,
+        11638.38547384612,
+        11106.73750901301,
+        11527.101797914796,
+        10811.584072383652,
+        11096.56528078589,
+        11349.782691094919,
+        11878.470366339767,
+        12156.176034119253,
+        12735.157589798637,
+        11139.533631522014,
+        12331.531769732603,
+        12003.721125351203,
+        11387.39779225818,
+        11468.947225376056,
+        10702.019191535559,
+        11160.687953632727,
+        11829.578295933929
+      ],
+      "convergence_certified": false,
+      "scenario_effect_verified": true,
+      "restart_scenario_verified": true
+    }
+  },
+  "artifact_reload_verified": true,
+  "artifacts": [
+    "growth-e898725020954b3aae95f096a41fee92",
+    "normalized-8e253221f79e443cb82685e9e7274430",
+    "growth_analysis-4b5eee3ff3ac4b9f80e17815474d5493",
+    "cohort_analysis-ce6674914c554203b93202c9b0996c20",
+    "experiment_plan-22f719a3b81143c7a31cc971a200c887",
+    "experiment_result-88b8ec85483b4d7286e4f3035390fbcf",
+    "decision-b2ed213d1f614aa880ab375dba78394d-r4"
+  ],
+  "native_cycles_requested": true,
+  "causal_identification": false,
+  "production_modified": false
+}

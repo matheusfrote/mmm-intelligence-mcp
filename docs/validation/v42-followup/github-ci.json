@@ -1,0 +1,91 @@
+{
+  "checked_on": "2026-10-28",
+  "commit": "c5f8eaa4b5072e8e459bdf27010c3dbab015ec40",
+  "scope": "Hosted base-package matrix, security, browser and Docker smoke. Native engines and public deployment not certified.",
+  "runs": [
+    {
+      "id": 40709406231,
+      "url": "https://github.com/matheusfrote/mmm-intelligence-mcp/actions/runs/40709406231",
+      "jobs": [
+        {
+          "id": 122890248860,
+          "name": "test (windows-latest, 3.11)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 122890248939,
+          "name": "test (macos-latest, 3.13)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 122890248956,
+          "name": "test (windows-latest, 3.12)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 122890248957,
+          "name": "security",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 122890248989,
+          "name": "test (ubuntu-latest, 3.12)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 122890249049,
+          "name": "test (macos-latest, 3.11)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 122890249105,
+          "name": "test (ubuntu-latest, 3.13)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 122890249412,
+          "name": "test (macos-latest, 3.12)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 122890249505,
+          "name": "test (windows-latest, 3.13)",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 122890250194,
+          "name": "test (ubuntu-latest, 3.11)",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    },
+    {
+      "id": 40709406223,
+      "url": "https://github.com/matheusfrote/mmm-intelligence-mcp/actions/runs/40709406223",
+      "jobs": [
+        {
+          "id": 122890248781,
+          "name": "container",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 122890249242,
+          "name": "browser",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ]
+}

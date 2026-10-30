@@ -1,6 +1,6 @@
 # Contrato das ferramentas
 
-Atualização 0.3: há 16 ferramentas e o cliente oficial é SDK MCP 2.3. Os nomes Python do cliente são `structured_content` e `is_error`; o JSON do protocolo preserva seus aliases de wire. O envelope `ok/data/error` continua.
+Atualização 0.4: há 26 ferramentas e o cliente oficial é SDK MCP 2.3. Os nomes Python do cliente são `structured_content` e `is_error`; o JSON do protocolo preserva seus aliases de wire. O envelope `ok/data/error` continua.
 
 Robyn exige `test_fraction=0.2`, correspondente ao split nativo 60/20/20 e seu arredondamento; outros valores falham na validação antes de iniciar worker. `tune_mmm` valida toda a série, incluindo o holdout externo, sem usar o holdout para selecionar hiperparâmetros. Calibração cujo erro padrão/lift exceda o intervalo numérico retorna `CALIBRATION_NUMERIC_RANGE`, sem apresentar NaN como sucesso.
 
@@ -25,6 +25,48 @@ Cada chamada tem `arguments = {"request": {...}}`. IDs: 1–64 caracteres ASCII 
 | train_backend | dataset_id, backend | model_id; draws=100; tune=100; chains=2; seed=42; schema/split |
 | get_backend_model | model_id | nenhum |
 | predict_backend | model_id | media_multiplier={}, cenário histórico nativo |
+| import_csv | csv_text, synthetic, authorization_reference | metadata de import_dataset; delimiter=comma, decimal_separator=dot, date_format=%Y-%m-%d, column_mapping={}, timezone=null; políticas abaixo |
+| data_quality | dataset_id | schema/split iguais a validate_dataset |
+| get_analysis | model_id | backend=ridge; max_rhat=1.01; min_ess_per_chain=100 |
+| compare_models | models, lista de 2–5 entradas get_analysis distintas | window_policy=exact ou intersection |
+| model_capabilities | backend | ridge, google_meridian, pymc_marketing, meta_robyn |
+| forecast_model | model_id, media_plan, future_controls | backend=ridge; vetores de 1–104 períodos, gasto total até 1e9 |
+| export_analysis | model_id | campos de get_analysis; format=json, csv ou markdown |
+| storage_inventory | nenhum | request={} |
+| retention_plan | nenhum | older_than_days=90, de 0 a 36500 |
+| connector_status | nenhum | request={} |
+
+CSV aceita até 4 milhões de caracteres, sujeito ao limite em bytes/linhas do host e
+4 MiB do corpo HTTP. Delimitadores: vírgula, ponto-e-vírgula ou tab; decimal ponto ou
+vírgula, sem separadores de milhar. Datas ISO, DMY, MDY ou iso_datetime; timestamp exige
+offset e timezone de destino explícitos (UTC, offset fixo ou IANA disponível no host).
+Todas as colunas devem ser mapeadas; extras não são descartados. Fórmulas, ausentes,
+NaN, valores não finitos, negativos em gasto/KPI e cabeçalhos duplicados são recusados.
+
+sort_dates=false e duplicate_policy=reject são padrões. Para agregar duplicados,
+declare duplicate_policy=aggregate e reducers para todas as variáveis numéricas.
+Gasto/KPI exigem sum; controles podem usar sum/mean/last. Conversão diária→semanal
+requer source_frequency=daily, frequency=weekly, aggregate_weekly=true, sete dias
+completos por semana iniciada na segunda-feira e reducers explícitos. Nenhuma imputação.
+Original CSV, SHA-256 e transformações ficam na proveniência. CSV/JSON reais exigem
+flag do host e referência de autorização. IDs repetidos não sobrescrevem artefatos.
+
+data_quality adiciona missing_periods, resumo de colunas, correlações e alertas
+blocking/severe/moderate/informational. IQR=0 torna o screen de extremos indefinido;
+correlação e mudança de nível são indícios descritivos, não diagnósticos causais.
+Inventário lê apenas JSONs verificados, sem payloads ou caminhos do host; plano de
+retenção não apaga nada. Não existe ferramenta MCP de exclusão.
+
+get_analysis/compare_models/forecast_model não substituem saídas nativas. Consulte
+[comparação](comparison.md) para semântica, limitações e operações indisponíveis.
+export_analysis retorna content/format, sem criar arquivo remoto. CSV inclui
+somente datas e valores numéricos de avaliação, evitando fórmulas de planilha.
+
+Erros V4: CSV_HEADER/CSV_ROW/CSV_VALUE/CSV_PARSE, ROW_LIMIT, DUPLICATE_DATES,
+UNSORTED_DATES, INCOMPLETE_PERIOD, TIMEZONE_UNAVAILABLE, INCOMPARABLE_MODELS,
+INCOMPARABLE_WINDOWS, BACKEND_MISMATCH, OPERATION_UNAVAILABLE e INVENTORY_LIMIT.
+O CLI de exclusão também retorna HASH_MISMATCH/ARTIFACT_REFERENCED. Erros de esquema
+no transporte podem ser is_error=true antes de chegar ao envelope da aplicação.
 
 O treino local aceita `bootstrap_samples=0` (0–500), `bootstrap_block_size=4` (1–26) e `bootstrap_seed=42`. Com draws, a simulação devolve intervalos centrais condicionais de 90% da média; calibração exige pelo menos 20 draws. A seleção de formas admite até 25 combinações e preserva o teste externo. Veja [método](methodology.md).
 

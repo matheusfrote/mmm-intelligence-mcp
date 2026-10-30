@@ -1,0 +1,3572 @@
+{
+  "synthetic": true,
+  "transport": "stdio",
+  "native_models_retrained": false,
+  "exact": {
+    "schema_version": "1.0",
+    "ok": false,
+    "exploratory": true,
+    "disclaimer": "Exploratory statistical association, not demonstrated causal attribution. Synthetic data do not establish market effectiveness. Simulations and any intervals are conditional on the model and assumptions; no real campaign or budget is changed.",
+    "data": null,
+    "error": {
+      "code": "INCOMPARABLE_WINDOWS",
+      "message": "Test dates differ; explicitly request intersection to compare their overlap"
+    },
+    "warnings": []
+  },
+  "intersection": {
+    "schema_version": "1.0",
+    "ok": true,
+    "exploratory": true,
+    "disclaimer": "Exploratory statistical association, not demonstrated causal attribution. Synthetic data do not establish market effectiveness. Simulations and any intervals are conditional on the model and assumptions; no real campaign or budget is changed.",
+    "data": {
+      "schema_version": "1.0",
+      "source": {
+        "dataset_id": "demo-31f5ab9f38f94daca837d291d9ebaa1c",
+        "dataset_sha256": "43ab06c77a76626f99ba135c46eef0b11696b53bc7fe4acb9a6d5319cef22e88",
+        "synthetic": true,
+        "frequency": "weekly",
+        "target_column": "revenue",
+        "target_type": "revenue",
+        "units": {
+          "spend": "synthetic_currency_per_period",
+          "target": "synthetic_revenue"
+        },
+        "data_context": {
+          "kpi_definition": "synthetic revenue; constructed DGP",
+          "source_reference": "built-in-demo-v1"
+        },
+        "media_columns": [
+          "spend_search",
+          "spend_social",
+          "spend_video"
+        ]
+      },
+      "models": [
+        {
+          "backend": "pymc_marketing",
+          "model_id": "pymc_marketing-afa3023a66d14ae6b844f6a30f454f8e",
+          "framework_version": "1.3.0",
+          "training_dates": [
+            "2023-01-02",
+            "2023-01-09",
+            "2023-01-16",
+            "2023-01-23",
+            "2023-01-30",
+            "2023-02-06",
+            "2023-02-13",
+            "2023-02-20",
+            "2023-02-27",
+            "2023-03-06",
+            "2023-03-13",
+            "2023-03-20",
+            "2023-03-27",
+            "2023-04-03",
+            "2023-04-10",
+            "2023-04-17",
+            "2023-04-24",
+            "2023-05-01",
+            "2023-05-08",
+            "2023-05-15",
+            "2023-05-22",
+            "2023-05-29",
+            "2023-06-05",
+            "2023-06-12",
+            "2023-06-19",
+            "2023-06-26",
+            "2023-07-03",
+            "2023-07-10",
+            "2023-07-17",
+            "2023-07-24",
+            "2023-07-31",
+            "2023-08-07",
+            "2023-08-14",
+            "2023-08-21",
+            "2023-08-28",
+            "2023-09-04",
+            "2023-09-11",
+            "2023-09-18",
+            "2023-09-25",
+            "2023-10-02",
+            "2023-10-09",
+            "2023-10-16",
+            "2023-10-23",
+            "2023-10-30",
+            "2023-11-06",
+            "2023-11-13",
+            "2023-11-20",
+            "2023-11-27",
+            "2023-12-04",
+            "2023-12-11",
+            "2023-12-18",
+            "2023-12-25",
+            "2024-01-01",
+            "2024-01-08",
+            "2024-01-15",
+            "2024-01-22",
+            "2024-01-29",
+            "2024-02-05",
+            "2024-02-12",
+            "2024-02-19",
+            "2024-02-26",
+            "2024-03-04",
+            "2024-03-11",
+            "2024-03-18",
+            "2024-03-25",
+            "2024-04-01",
+            "2024-04-08",
+            "2024-04-15",
+            "2024-04-22",
+            "2024-04-29",
+            "2024-05-06",
+            "2024-05-13",
+            "2024-05-20",
+            "2024-05-27",
+            "2024-06-03",
+            "2024-06-10",
+            "2024-06-17",
+            "2024-06-24",
+            "2024-07-01",
+            "2024-07-08",
+            "2024-07-15",
+            "2024-07-22",
+            "2024-07-29",
+            "2024-08-05",
+            "2024-08-12",
+            "2024-08-19",
+            "2024-08-26",
+            "2024-09-02",
+            "2024-09-09",
+            "2024-09-16",
+            "2024-09-23",
+            "2024-09-30",
+            "2024-10-07",
+            "2024-10-14",
+            "2024-10-21",
+            "2024-10-28",
+            "2024-11-04",
+            "2024-11-11",
+            "2024-11-18",
+            "2024-11-25",
+            "2024-12-02",
+            "2024-12-09",
+            "2024-12-16",
+            "2024-12-23",
+            "2024-12-30",
+            "2025-01-06",
+            "2025-01-13",
+            "2025-01-20",
+            "2025-01-27",
+            "2025-02-03",
+            "2025-02-10",
+            "2025-02-17",
+            "2025-02-24",
+            "2025-03-03",
+            "2025-03-10",
+            "2025-03-17",
+            "2025-03-24",
+            "2025-03-31",
+            "2025-04-07",
+            "2025-04-14",
+            "2025-04-21",
+            "2025-04-28",
+            "2025-05-05",
+            "2025-05-12"
+          ],
+          "metrics": {
+            "bias_predicted_minus_observed": -425.6715266392074,
+            "mae": 425.6715266392074,
+            "rmse": 468.7342236567559,
+            "mape_nonzero_percent": 3.6433598251092945,
+            "mape_excluded_zeros": 0,
+            "wape_percent": 3.5622699973930536,
+            "r2": 0.6817313858907907
+          },
+          "baseline_metrics": {
+            "bias_predicted_minus_observed": 293.3434315095353,
+            "mae": 716.1828553642068,
+            "rmse": 881.1269873089225,
+            "mape_nonzero_percent": 6.1906400133564565,
+            "mape_excluded_zeros": 0,
+            "wape_percent": 5.993439867716574,
+            "r2": -0.12465026940586399
+          },
+          "diagnostic_assessment": {
+            "status": "inadequate",
+            "failed_screens": [
+              "r_hat_max",
+              "ess_bulk_min",
+              "ess_tail_min"
+            ],
+            "missing_or_insufficient": [
+              "fewer_than_four_chains",
+              "draws:short_run",
+              "tune:short_run"
+            ],
+            "policy": {
+              "max_rhat_exclusive": 1.01,
+              "minimum_ess_per_chain": 100,
+              "minimum_chains": 4,
+              "minimum_draws_and_tune_screen": 400
+            },
+            "reference": "https://mc-stan.org/learn-stan/diagnostics-warnings.html",
+            "scope": "Rank R-hat, bulk/tail ESS and divergences only; inspect mixing, PPC, priors and identification separately. Sample-count screens are operational, not universal guarantees.",
+            "business_recommendation_eligible": false,
+            "convergence_certified": false
+          },
+          "interval_semantics": {
+            "type": "posterior_predictive_observed",
+            "level": 0.9
+          },
+          "evaluation_intervals": {
+            "dates": [
+              "2025-06-02",
+              "2025-06-09",
+              "2025-06-16",
+              "2025-06-23",
+              "2025-06-30",
+              "2025-07-07",
+              "2025-07-14",
+              "2025-07-21",
+              "2025-07-28",
+              "2025-08-04",
+              "2025-08-11",
+              "2025-08-18",
+              "2025-08-25",
+              "2025-09-01",
+              "2025-09-08",
+              "2025-09-15",
+              "2025-09-22",
+              "2025-09-29",
+              "2025-10-06",
+              "2025-10-13",
+              "2025-10-20",
+              "2025-10-27",
+              "2025-11-03",
+              "2025-11-10",
+              "2025-11-17",
+              "2025-11-24",
+              "2025-12-01",
+              "2025-12-08",
+              "2025-12-15",
+              "2025-12-22"
+            ],
+            "lower": [
+              11588.778852707415,
+              12417.080525020736,
+              11857.15969082007,
+              11786.639501208127,
+              12199.599828519853,
+              12932.099263903558,
+              12406.610943223757,
+              12823.308038432273,
+              12139.372662088776,
+              12261.337734983925,
+              11751.335349633664,
+              11202.932897341005,
+              10792.942727859978,
+              9637.358346995556,
+              9115.249604863588,
+              9382.972255923713,
+              9801.394661435534,
+              10296.43775474939,
+              11384.051336580322,
+              11078.438688114024,
+              10767.625584006655,
+              10690.004511446765,
+              10194.966520177411,
+              11005.186232971468,
+              10259.021405964722,
+              10442.81825794429,
+              11662.067280671878,
+              10914.204122148076,
+              11385.313237165456,
+              11541.041218597251
+            ],
+            "upper": [
+              12252.185648621999,
+              13055.55584185001,
+              12396.611495924784,
+              12357.934386922334,
+              12874.69616426926,
+              13538.557063720122,
+              13043.624598950311,
+              13404.918230856132,
+              12741.081803524843,
+              12855.896156340039,
+              12308.429743100873,
+              11816.846855865193,
+              11466.735268834407,
+              10366.200549853715,
+              10031.717915314843,
+              10262.992243458788,
+              10547.93645761061,
+              10988.842471454427,
+              12053.536261582769,
+              11774.27909123791,
+              11414.6713007437,
+              11376.772221406462,
+              11023.456902903845,
+              11645.091608136112,
+              10959.328897090523,
+              11231.3839077541,
+              12270.20270698152,
+              11460.811216168619,
+              12071.830760019171,
+              12152.876814174164
+            ]
+          },
+          "configuration": {
+            "adstock": {
+              "__type__": "pymc_marketing.mmm.components.adstock.GeometricAdstock",
+              "l_max": 8,
+              "mode": "After",
+              "normalize": true,
+              "prefix": "adstock",
+              "priors": {
+                "alpha": {
+                  "dims": [
+                    "channel"
+                  ],
+                  "dist": "Beta",
+                  "kwargs": {
+                    "alpha": 1,
+                    "beta": 3
+                  }
+                }
+              }
+            },
+            "interval_type": "posterior_predictive_observed",
+            "model_config": {
+              "adstock_alpha": {
+                "dims": [
+                  "channel"
+                ],
+                "dist": "Beta",
+                "kwargs": {
+                  "alpha": 1,
+                  "beta": 3
+                }
+              },
+              "gamma_control": {
+                "dims": [
+                  "control"
+                ],
+                "dist": "Normal",
+                "kwargs": {
+                  "mu": 0,
+                  "sigma": 2
+                }
+              },
+              "gamma_fourier": {
+                "dims": [
+                  "fourier_mode"
+                ],
+                "dist": "Laplace",
+                "kwargs": {
+                  "b": 1,
+                  "mu": 0
+                }
+              },
+              "intercept": {
+                "dims": [],
+                "dist": "Normal",
+                "kwargs": {
+                  "mu": 0,
+                  "sigma": 2
+                }
+              },
+              "likelihood": {
+                "dims": [
+                  "date"
+                ],
+                "dist": "Normal",
+                "kwargs": {
+                  "sigma": {
+                    "dims": [],
+                    "dist": "HalfNormal",
+                    "kwargs": {
+                      "sigma": 2
+                    }
+                  }
+                }
+              },
+              "saturation_beta": {
+                "dims": [
+                  "channel"
+                ],
+                "dist": "HalfNormal",
+                "kwargs": {
+                  "sigma": 2
+                }
+              },
+              "saturation_lam": {
+                "dims": [
+                  "channel"
+                ],
+                "dist": "Gamma",
+                "kwargs": {
+                  "alpha": 3,
+                  "beta": 1
+                }
+              }
+            },
+            "prior_source": "package_defaults_no_custom_priors",
+            "saturation": {
+              "__type__": "pymc_marketing.mmm.components.saturation.LogisticSaturation",
+              "prefix": "saturation",
+              "priors": {
+                "beta": {
+                  "dims": [
+                    "channel"
+                  ],
+                  "dist": "HalfNormal",
+                  "kwargs": {
+                    "sigma": 2
+                  }
+                },
+                "lam": {
+                  "dims": [
+                    "channel"
+                  ],
+                  "dist": "Gamma",
+                  "kwargs": {
+                    "alpha": 3,
+                    "beta": 1
+                  }
+                }
+              }
+            },
+            "target_type": "revenue"
+          },
+          "warnings": [
+            "FUNCTIONAL_SAMPLING_ONLY: inspect R-hat/ESS/divergences before statistical use",
+            "Predictive intervals are conditional on model assumptions; no causal guarantee"
+          ]
+        },
+        {
+          "backend": "google_meridian",
+          "model_id": "google_meridian-731a1b3817e741beaaeef7addb345713",
+          "framework_version": "2.1.0",
+          "training_dates": [
+            "2023-01-02",
+            "2023-01-09",
+            "2023-01-16",
+            "2023-01-23",
+            "2023-01-30",
+            "2023-02-06",
+            "2023-02-13",
+            "2023-02-20",
+            "2023-02-27",
+            "2023-03-06",
+            "2023-03-13",
+            "2023-03-20",
+            "2023-03-27",
+            "2023-04-03",
+            "2023-04-10",
+            "2023-04-17",
+            "2023-04-24",
+            "2023-05-01",
+            "2023-05-08",
+            "2023-05-15",
+            "2023-05-22",
+            "2023-05-29",
+            "2023-06-05",
+            "2023-06-12",
+            "2023-06-19",
+            "2023-06-26",
+            "2023-07-03",
+            "2023-07-10",
+            "2023-07-17",
+            "2023-07-24",
+            "2023-07-31",
+            "2023-08-07",
+            "2023-08-14",
+            "2023-08-21",
+            "2023-08-28",
+            "2023-09-04",
+            "2023-09-11",
+            "2023-09-18",
+            "2023-09-25",
+            "2023-10-02",
+            "2023-10-09",
+            "2023-10-16",
+            "2023-10-23",
+            "2023-10-30",
+            "2023-11-06",
+            "2023-11-13",
+            "2023-11-20",
+            "2023-11-27",
+            "2023-12-04",
+            "2023-12-11",
+            "2023-12-18",
+            "2023-12-25",
+            "2024-01-01",
+            "2024-01-08",
+            "2024-01-15",
+            "2024-01-22",
+            "2024-01-29",
+            "2024-02-05",
+            "2024-02-12",
+            "2024-02-19",
+            "2024-02-26",
+            "2024-03-04",
+            "2024-03-11",
+            "2024-03-18",
+            "2024-03-25",
+            "2024-04-01",
+            "2024-04-08",
+            "2024-04-15",
+            "2024-04-22",
+            "2024-04-29",
+            "2024-05-06",
+            "2024-05-13",
+            "2024-05-20",
+            "2024-05-27",
+            "2024-06-03",
+            "2024-06-10",
+            "2024-06-17",
+            "2024-06-24",
+            "2024-07-01",
+            "2024-07-08",
+            "2024-07-15",
+            "2024-07-22",
+            "2024-07-29",
+            "2024-08-05",
+            "2024-08-12",
+            "2024-08-19",
+            "2024-08-26",
+            "2024-09-02",
+            "2024-09-09",
+            "2024-09-16",
+            "2024-09-23",
+            "2024-09-30",
+            "2024-10-07",
+            "2024-10-14",
+            "2024-10-21",
+            "2024-10-28",
+            "2024-11-04",
+            "2024-11-11",
+            "2024-11-18",
+            "2024-11-25",
+            "2024-12-02",
+            "2024-12-09",
+            "2024-12-16",
+            "2024-12-23",
+            "2024-12-30",
+            "2025-01-06",
+            "2025-01-13",
+            "2025-01-20",
+            "2025-01-27",
+            "2025-02-03",
+            "2025-02-10",
+            "2025-02-17",
+            "2025-02-24",
+            "2025-03-03",
+            "2025-03-10",
+            "2025-03-17",
+            "2025-03-24",
+            "2025-03-31",
+            "2025-04-07",
+            "2025-04-14",
+            "2025-04-21",
+            "2025-04-28",
+            "2025-05-05",
+            "2025-05-12"
+          ],
+          "metrics": {
+            "bias_predicted_minus_observed": 1906.0407082461393,
+            "mae": 1906.0407082461393,
+            "rmse": 2017.2309746637166,
+            "mape_nonzero_percent": 16.338652430646313,
+            "mape_excluded_zeros": 0,
+            "wape_percent": 15.950871044635281,
+            "r2": -4.89456473747596
+          },
+          "baseline_metrics": {
+            "bias_predicted_minus_observed": 293.3434315095353,
+            "mae": 716.1828553642068,
+            "rmse": 881.1269873089225,
+            "mape_nonzero_percent": 6.1906400133564565,
+            "mape_excluded_zeros": 0,
+            "wape_percent": 5.993439867716574,
+            "r2": -0.12465026940586399
+          },
+          "diagnostic_assessment": {
+            "status": "inadequate",
+            "failed_screens": [
+              "r_hat_max",
+              "divergences",
+              "ess_bulk_min",
+              "ess_tail_min"
+            ],
+            "missing_or_insufficient": [
+              "tune",
+              "r_hat_undefined_count:undefined_parameters",
+              "fewer_than_four_chains",
+              "draws:short_run"
+            ],
+            "policy": {
+              "max_rhat_exclusive": 1.01,
+              "minimum_ess_per_chain": 100,
+              "minimum_chains": 4,
+              "minimum_draws_and_tune_screen": 400
+            },
+            "reference": "https://mc-stan.org/learn-stan/diagnostics-warnings.html",
+            "scope": "Rank R-hat, bulk/tail ESS and divergences only; inspect mixing, PPC, priors and identification separately. Sample-count screens are operational, not universal guarantees.",
+            "business_recommendation_eligible": false,
+            "convergence_certified": false
+          },
+          "interval_semantics": {
+            "type": "conditional_expected_outcome",
+            "level": 0.9
+          },
+          "evaluation_intervals": {
+            "dates": [
+              "2025-06-02",
+              "2025-06-09",
+              "2025-06-16",
+              "2025-06-23",
+              "2025-06-30",
+              "2025-07-07",
+              "2025-07-14",
+              "2025-07-21",
+              "2025-07-28",
+              "2025-08-04",
+              "2025-08-11",
+              "2025-08-18",
+              "2025-08-25",
+              "2025-09-01",
+              "2025-09-08",
+              "2025-09-15",
+              "2025-09-22",
+              "2025-09-29",
+              "2025-10-06",
+              "2025-10-13",
+              "2025-10-20",
+              "2025-10-27",
+              "2025-11-03",
+              "2025-11-10",
+              "2025-11-17",
+              "2025-11-24",
+              "2025-12-01",
+              "2025-12-08",
+              "2025-12-15",
+              "2025-12-22"
+            ],
+            "lower": [
+              12756.49380636518,
+              13477.729281981963,
+              13046.255501653557,
+              13027.745306588764,
+              13347.681197003078,
+              14225.200465558439,
+              13569.349369200803,
+              14243.2854264633,
+              13564.498367635655,
+              13945.437595772482,
+              13760.271186168256,
+              13488.25189434404,
+              13242.471365977215,
+              12237.44902291696,
+              12341.94428787234,
+              12868.477612692017,
+              13194.735935784754,
+              13241.413855493018,
+              13764.127366576002,
+              13887.493236821432,
+              13610.630392183733,
+              13571.191695474045,
+              13295.689427050438,
+              13383.799209265631,
+              12878.730208678046,
+              13149.774412420995,
+              13880.69621997562,
+              13115.548598566269,
+              13402.630410364261,
+              13386.241510674703
+            ],
+            "upper": [
+              13354.790055959867,
+              14084.611249535918,
+              13567.301009637215,
+              13557.833241524551,
+              14063.471843178291,
+              14971.688072098337,
+              14336.49963565072,
+              14993.017833449461,
+              14367.08811538282,
+              14690.129020913264,
+              14519.456529657047,
+              14294.721552437913,
+              14104.79114221566,
+              13085.790572042855,
+              13157.737217178252,
+              13686.76611569641,
+              14008.347787844095,
+              14168.516720954776,
+              14870.340215102064,
+              14811.508896009027,
+              14584.37866256849,
+              14522.721928427993,
+              14231.892246557487,
+              14584.38783916105,
+              13878.47290323264,
+              14261.876842867201,
+              15227.81502722328,
+              14400.508005033287,
+              14753.647332494687,
+              14730.79902272913
+            ]
+          },
+          "configuration": {
+            "configured_priors": {
+              "alphaM": {
+                "distributionType": "Uniform",
+                "parameters": {
+                  "allow_nan_stats": {
+                    "intValue": 1
+                  },
+                  "high": {
+                    "scalarValue": 1.0
+                  },
+                  "low": {
+                    "scalarValue": 0.0
+                  },
+                  "name": {
+                    "stringValue": "alpha_m"
+                  },
+                  "validate_args": {
+                    "intValue": 0
+                  }
+                }
+              },
+              "alphaOm": {
+                "distributionType": "Uniform",
+                "parameters": {
+                  "allow_nan_stats": {
+                    "intValue": 1
+                  },
+                  "high": {
+                    "scalarValue": 1.0
+                  },
+                  "low": {
+                    "scalarValue": 0.0
+                  },
+                  "name": {
+                    "stringValue": "alpha_om"
+                  },
+                  "validate_args": {
+                    "intValue": 0
+                  }
+                }
+              },
+              "alphaOrf": {
+                "distributionType": "Uniform",
+                "parameters": {
+                  "allow_nan_stats": {
+                    "intValue": 1
+                  },
+                  "high": {
+                    "scalarValue": 1.0
+                  },
+                  "low": {
+                    "scalarValue": 0.0
+                  },
+                  "name": {
+                    "stringValue": "alpha_orf"
+                  },
+                  "validate_args": {
+                    "intValue": 0
+                  }
+                }
+              },
+              "alphaRf": {
+                "distributionType": "Uniform",
+                "parameters": {
+                  "allow_nan_stats": {
+                    "intValue": 1
+                  },
+                  "high": {
+                    "scalarValue": 1.0
+                  },
+                  "low": {
+                    "scalarValue": 0.0
+                  },
+                  "name": {
+                    "stringValue": "alpha_rf"
+                  },
+                  "validate_args": {
+                    "intValue": 0
+                  }
+                }
+              },
+              "betaM": {
+                "distributionType": "HalfNormal",
+                "parameters": {
+                  "allow_nan_stats": {
+                    "intValue": 1
+                  },
+                  "name": {
+                    "stringValue": "beta_m"
+                  },
+                  "scale": {
+                    "scalarValue": 5.0
+                  },
+                  "validate_args": {
+                    "intValue": 0
+                  }
+                }
+              },
+              "betaOm": {
+                "distributionType": "HalfNormal",
+                "parameters": {
+                  "allow_nan_stats": {
+                    "intValue": 1
+                  },
+                  "name": {
+                    "stringValue": "beta_om"
+                  },
+                  "scale": {
+                    "scalarValue": 5.0
+                  },
+                  "validate_args": {
+                    "intValue": 0
+                  }
+                }
+              },
+              "betaOrf": {
+                "distributionType": "HalfNormal",
+                "parameters": {
+                  "allow_nan_stats": {
+                    "intValue": 1
+                  },
+                  "name": {
+                    "stringValue": "beta_orf"
+                  },
+                  "scale": {
+                    "scalarValue": 5.0
+                  },
+                  "validate_args": {
+                    "intValue": 0
+                  }
+                }
+              },
+              "betaRf": {
+                "distributionType": "HalfNormal",
+                "parameters": {
+                  "allow_nan_stats": {
+                    "intValue": 1
+                  },
+                  "name": {
+                    "stringValue": "beta_rf"
+                  },
+                  "scale": {
+                    "scalarValue": 5.0
+                  },
+                  "validate_args": {
+                    "intValue": 0
+                  }
+                }
+              },
+              "contributionM": {
+                "distributionType": "Beta",
+                "parameters": {
+                  "allow_nan_stats": {
+                    "intValue": 1
+                  },
+                  "concentration0": {
+                    "scalarValue": 99.0
+                  },
+                  "concentration1": {
+                    "scalarValue": 1.0
+                  },
+                  "force_probs_to_zero_outside_support": {
+                    "intValue": 0
+                  },
+                  "name": {
+                    "stringValue": "contribution_m"
+                  },
+                  "validate_args": {
+                    "intValue": 0
+                  }
+                }
+              },
+              "contributionN": {
+                "distributionType": "TruncatedNormal",
+                "parameters": {
+                  "allow_nan_stats": {
+                    "intValue": 1
+                  },
+                  "high": {
+                    "scalarValue": 1.0
+                  },
+                  "loc": {
+                    "scalarValue": 0.0
+                  },
+                  "low": {
+                    "scalarValue": -1.0
+                  },
+                  "name": {
+                    "stringValue": "contribution_n"
+                  },
+                  "scale": {
+                    "scalarValue": 0.1
+                  },
+                  "validate_args": {
+                    "intValue": 0
+                  }
+                }
+              },
+              "contributionOm": {
+                "distributionType": "Beta",
+                "parameters": {
+                  "allow_nan_stats": {
+                    "intValue": 1
+                  },
+                  "concentration0": {
+                    "scalarValue": 99.0
+                  },
+                  "concentration1": {
+                    "scalarValue": 1.0
+                  },
+                  "force_probs_to_zero_outside_support": {
+                    "intValue": 0
+                  },
+                  "name": {
+                    "stringValue": "contribution_om"
+                  },
+                  "validate_args": {
+                    "intValue": 0
+                  }
+                }
+              },
+              "contributionOrf": {
+                "distributionType": "Beta",
+                "parameters": {
+                  "allow_nan_stats": {
+                    "intValue": 1
+                  },
+                  "concentration0": {
+                    "scalarValue": 99.0
+                  },
+                  "concentration1": {
+                    "scalarValue": 1.0
+                  },
+                  "force_probs_to_zero_outside_support": {
+                    "intValue": 0
+                  },
+                  "name": {
+                    "stringValue": "contribution_orf"
+                  },
+                  "validate_args": {
+                    "intValue": 0
+                  }
+                }
+              },
+              "contributionRf": {
+                "distributionType": "Beta",
+                "parameters": {
+                  "allow_nan_stats": {
+                    "intValue": 1
+                  },
+                  "concentration0": {
+                    "scalarValue": 99.0
+                  },
+                  "concentration1": {
+                    "scalarValue": 1.0
+                  },
+                  "force_probs_to_zero_outside_support": {
+                    "intValue": 0
+                  },
+                  "name": {
+                    "stringValue": "contribution_rf"
+                  },
+                  "validate_args": {
+                    "intValue": 0
+                  }
+                }
+              },
+              "ecM": {
+                "distributionType": "TruncatedNormal",
+                "parameters": {
+                  "allow_nan_stats": {
+                    "intValue": 1
+                  },
+                  "high": {
+                    "scalarValue": 10.0
+                  },
+                  "loc": {
+                    "scalarValue": 0.8
+                  },
+                  "low": {
+                    "scalarValue": 0.1
+                  },
+                  "name": {
+                    "stringValue": "ec_m"
+                  },
+                  "scale": {
+                    "scalarValue": 0.8
+                  },
+                  "validate_args": {
+                    "intValue": 0
+                  }
+                }
+              },
+              "ecOm": {
+                "distributionType": "TruncatedNormal",
+                "parameters": {
+                  "allow_nan_stats": {
+                    "intValue": 1
+                  },
+                  "high": {
+                    "scalarValue": 10.0
+                  },
+                  "loc": {
+                    "scalarValue": 0.8
+                  },
+                  "low": {
+                    "scalarValue": 0.1
+                  },
+                  "name": {
+                    "stringValue": "ec_om"
+                  },
+                  "scale": {
+                    "scalarValue": 0.8
+                  },
+                  "validate_args": {
+                    "intValue": 0
+                  }
+                }
+              },
+              "ecOrf": {
+                "distributionType": "TransformedDistribution",
+                "parameters": {
+                  "bijector": {
+                    "bijectorValue": {
+                      "bijectorType": "Shift",
+                      "parameters": {
+                        "name": {
+                          "stringValue": "shift"
+                        },
+                        "shift": {
+                          "scalarValue": 0.1
+                        },
+                        "validate_args": {
+                          "intValue": 0
+                        }
+                      }
+                    }
+                  },
+                  "distribution": {
+                    "distributionValue": {
+                      "distributionType": "LogNormal",
+                      "parameters": {
+                        "allow_nan_stats": {
+                          "intValue": 1
+                        },
+                        "loc": {
+                          "scalarValue": 0.7
+                        },
+                        "name": {
+                          "stringValue": "LogNormal"
+                        },
+                        "scale": {
+                          "scalarValue": 0.4
+                        },
+                        "validate_args": {
+                          "intValue": 0
+                        }
+                      }
+                    }
+                  },
+                  "kwargs_split_fn": {
+                    "functionParam": {
+                      "usesDefault": true
+                    }
+                  },
+                  "name": {
+                    "stringValue": "ec_orf"
+                  },
+                  "parameters": {
+                    "noneValue": true
+                  },
+                  "validate_args": {
+                    "intValue": 0
+                  }
+                }
+              },
+              "ecRf": {
+                "distributionType": "TransformedDistribution",
+                "parameters": {
+                  "bijector": {
+                    "bijectorValue": {
+                      "bijectorType": "Shift",
+                      "parameters": {
+                        "name": {
+                          "stringValue": "shift"
+                        },
+                        "shift": {
+                          "scalarValue": 0.1
+                        },
+                        "validate_args": {
+                          "intValue": 0
+                        }
+                      }
+                    }
+                  },
+                  "distribution": {
+                    "distributionValue": {
+                      "distributionType": "LogNormal",
+                      "parameters": {
+                        "allow_nan_stats": {
+                          "intValue": 1
+                        },
+                        "loc": {
+                          "scalarValue": 0.7
+                        },
+                        "name": {
+                          "stringValue": "LogNormal"
+                        },
+                        "scale": {
+                          "scalarValue": 0.4
+                        },
+                        "validate_args": {
+                          "intValue": 0
+                        }
+                      }
+                    }
+                  },
+                  "kwargs_split_fn": {
+                    "functionParam": {
+                      "usesDefault": true
+                    }
+                  },
+                  "name": {
+                    "stringValue": "ec_rf"
+                  },
+                  "parameters": {
+                    "noneValue": true
+                  },
+                  "validate_args": {
+                    "intValue": 0
+                  }
+                }
+              },
+              "etaM": {
+                "distributionType": "HalfNormal",
+                "parameters": {
+                  "allow_nan_stats": {
+                    "intValue": 1
+                  },
+                  "name": {
+                    "stringValue": "eta_m"
+                  },
+                  "scale": {
+                    "scalarValue": 1.0
+                  },
+                  "validate_args": {
+                    "intValue": 0
+                  }
+                }
+              },
+              "etaOm": {
+                "distributionType": "HalfNormal",
+                "parameters": {
+                  "allow_nan_stats": {
+                    "intValue": 1
+                  },
+                  "name": {
+                    "stringValue": "eta_om"
+                  },
+                  "scale": {
+                    "scalarValue": 1.0
+                  },
+                  "validate_args": {
+                    "intValue": 0
+                  }
+                }
+              },
+              "etaOrf": {
+                "distributionType": "HalfNormal",
+                "parameters": {
+                  "allow_nan_stats": {
+                    "intValue": 1
+                  },
+                  "name": {
+                    "stringValue": "eta_orf"
+                  },
+                  "scale": {
+                    "scalarValue": 1.0
+                  },
+                  "validate_args": {
+                    "intValue": 0
+                  }
+                }
+              },
+              "etaRf": {
+                "distributionType": "HalfNormal",
+                "parameters": {
+                  "allow_nan_stats": {
+                    "intValue": 1
+                  },
+                  "name": {
+                    "stringValue": "eta_rf"
+                  },
+                  "scale": {
+                    "scalarValue": 1.0
+                  },
+                  "validate_args": {
+                    "intValue": 0
+                  }
+                }
+              },
+              "gammaC": {
+                "distributionType": "Normal",
+                "parameters": {
+                  "allow_nan_stats": {
+                    "intValue": 1
+                  },
+                  "loc": {
+                    "scalarValue": 0.0
+                  },
+                  "name": {
+                    "stringValue": "gamma_c"
+                  },
+                  "scale": {
+                    "scalarValue": 5.0
+                  },
+                  "validate_args": {
+                    "intValue": 0
+                  }
+                }
+              },
+              "gammaN": {
+                "distributionType": "Normal",
+                "parameters": {
+                  "allow_nan_stats": {
+                    "intValue": 1
+                  },
+                  "loc": {
+                    "scalarValue": 0.0
+                  },
+                  "name": {
+                    "stringValue": "gamma_n"
+                  },
+                  "scale": {
+                    "scalarValue": 5.0
+                  },
+                  "validate_args": {
+                    "intValue": 0
+                  }
+                }
+              },
+              "knotValues": {
+                "distributionType": "Normal",
+                "parameters": {
+                  "allow_nan_stats": {
+                    "intValue": 1
+                  },
+                  "loc": {
+                    "scalarValue": 0.0
+                  },
+                  "name": {
+                    "stringValue": "knot_values"
+                  },
+                  "scale": {
+                    "scalarValue": 5.0
+                  },
+                  "validate_args": {
+                    "intValue": 0
+                  }
+                }
+              },
+              "mroiM": {
+                "distributionType": "LogNormal",
+                "parameters": {
+                  "allow_nan_stats": {
+                    "intValue": 1
+                  },
+                  "loc": {
+                    "scalarValue": 0.0
+                  },
+                  "name": {
+                    "stringValue": "mroi_m"
+                  },
+                  "scale": {
+                    "scalarValue": 0.5
+                  },
+                  "validate_args": {
+                    "intValue": 0
+                  }
+                }
+              },
+              "mroiRf": {
+                "distributionType": "LogNormal",
+                "parameters": {
+                  "allow_nan_stats": {
+                    "intValue": 1
+                  },
+                  "loc": {
+                    "scalarValue": 0.0
+                  },
+                  "name": {
+                    "stringValue": "mroi_rf"
+                  },
+                  "scale": {
+                    "scalarValue": 0.5
+                  },
+                  "validate_args": {
+                    "intValue": 0
+                  }
+                }
+              },
+              "roiM": {
+                "distributionType": "LogNormal",
+                "parameters": {
+                  "allow_nan_stats": {
+                    "intValue": 1
+                  },
+                  "loc": {
+                    "scalarValue": 0.2
+                  },
+                  "name": {
+                    "stringValue": "roi_m"
+                  },
+                  "scale": {
+                    "scalarValue": 0.9
+                  },
+                  "validate_args": {
+                    "intValue": 0
+                  }
+                }
+              },
+              "roiRf": {
+                "distributionType": "LogNormal",
+                "parameters": {
+                  "allow_nan_stats": {
+                    "intValue": 1
+                  },
+                  "loc": {
+                    "scalarValue": 0.2
+                  },
+                  "name": {
+                    "stringValue": "roi_rf"
+                  },
+                  "scale": {
+                    "scalarValue": 0.9
+                  },
+                  "validate_args": {
+                    "intValue": 0
+                  }
+                }
+              },
+              "sigma": {
+                "distributionType": "HalfNormal",
+                "parameters": {
+                  "allow_nan_stats": {
+                    "intValue": 1
+                  },
+                  "name": {
+                    "stringValue": "sigma"
+                  },
+                  "scale": {
+                    "scalarValue": 5.0
+                  },
+                  "validate_args": {
+                    "intValue": 0
+                  }
+                }
+              },
+              "slopeM": {
+                "distributionType": "Deterministic",
+                "parameters": {
+                  "allow_nan_stats": {
+                    "intValue": 1
+                  },
+                  "atol": {
+                    "noneValue": true
+                  },
+                  "loc": {
+                    "scalarValue": 1.0
+                  },
+                  "name": {
+                    "stringValue": "slope_m"
+                  },
+                  "rtol": {
+                    "noneValue": true
+                  },
+                  "validate_args": {
+                    "intValue": 0
+                  }
+                }
+              },
+              "slopeOm": {
+                "distributionType": "Deterministic",
+                "parameters": {
+                  "allow_nan_stats": {
+                    "intValue": 1
+                  },
+                  "atol": {
+                    "noneValue": true
+                  },
+                  "loc": {
+                    "scalarValue": 1.0
+                  },
+                  "name": {
+                    "stringValue": "slope_om"
+                  },
+                  "rtol": {
+                    "noneValue": true
+                  },
+                  "validate_args": {
+                    "intValue": 0
+                  }
+                }
+              },
+              "slopeOrf": {
+                "distributionType": "LogNormal",
+                "parameters": {
+                  "allow_nan_stats": {
+                    "intValue": 1
+                  },
+                  "loc": {
+                    "scalarValue": 0.7
+                  },
+                  "name": {
+                    "stringValue": "slope_orf"
+                  },
+                  "scale": {
+                    "scalarValue": 0.4
+                  },
+                  "validate_args": {
+                    "intValue": 0
+                  }
+                }
+              },
+              "slopeRf": {
+                "distributionType": "LogNormal",
+                "parameters": {
+                  "allow_nan_stats": {
+                    "intValue": 1
+                  },
+                  "loc": {
+                    "scalarValue": 0.7
+                  },
+                  "name": {
+                    "stringValue": "slope_rf"
+                  },
+                  "scale": {
+                    "scalarValue": 0.4
+                  },
+                  "validate_args": {
+                    "intValue": 0
+                  }
+                }
+              },
+              "tauGExclBaseline": {
+                "distributionType": "Normal",
+                "parameters": {
+                  "allow_nan_stats": {
+                    "intValue": 1
+                  },
+                  "loc": {
+                    "scalarValue": 0.0
+                  },
+                  "name": {
+                    "stringValue": "tau_g_excl_baseline"
+                  },
+                  "scale": {
+                    "scalarValue": 5.0
+                  },
+                  "validate_args": {
+                    "intValue": 0
+                  }
+                }
+              },
+              "xiC": {
+                "distributionType": "HalfNormal",
+                "parameters": {
+                  "allow_nan_stats": {
+                    "intValue": 1
+                  },
+                  "name": {
+                    "stringValue": "xi_c"
+                  },
+                  "scale": {
+                    "scalarValue": 5.0
+                  },
+                  "validate_args": {
+                    "intValue": 0
+                  }
+                }
+              },
+              "xiN": {
+                "distributionType": "HalfNormal",
+                "parameters": {
+                  "allow_nan_stats": {
+                    "intValue": 1
+                  },
+                  "name": {
+                    "stringValue": "xi_n"
+                  },
+                  "scale": {
+                    "scalarValue": 5.0
+                  },
+                  "validate_args": {
+                    "intValue": 0
+                  }
+                }
+              }
+            },
+            "effective_broadcast_priors": {
+              "alphaM": {
+                "distributionType": "BatchBroadcast",
+                "parameters": {
+                  "distribution": {
+                    "distributionValue": {
+                      "distributionType": "Uniform",
+                      "parameters": {
+                        "allow_nan_stats": {
+                          "intValue": 1
+                        },
+                        "high": {
+                          "scalarValue": 1.0
+                        },
+                        "low": {
+                          "scalarValue": 0.0
+                        },
+                        "name": {
+                          "stringValue": "alpha_m"
+                        },
+                        "validate_args": {
+                          "intValue": 0
+                        }
+                      }
+                    }
+                  },
+                  "name": {
+                    "stringValue": "alpha_m"
+                  },
+                  "to_shape": {
+                    "noneValue": true
+                  },
+                  "validate_args": {
+                    "intValue": 0
+                  },
+                  "with_shape": {
+                    "intValue": 3
+                  }
+                }
+              },
+              "alphaOm": {
+                "distributionType": "BatchBroadcast",
+                "parameters": {
+                  "distribution": {
+                    "distributionValue": {
+                      "distributionType": "Uniform",
+                      "parameters": {
+                        "allow_nan_stats": {
+                          "intValue": 1
+                        },
+                        "high": {
+                          "scalarValue": 1.0
+                        },
+                        "low": {
+                          "scalarValue": 0.0
+                        },
+                        "name": {
+                          "stringValue": "alpha_om"
+                        },
+                        "validate_args": {
+                          "intValue": 0
+                        }
+                      }
+                    }
+                  },
+                  "name": {
+                    "stringValue": "alpha_om"
+                  },
+                  "to_shape": {
+                    "noneValue": true
+                  },
+                  "validate_args": {
+                    "intValue": 0
+                  },
+                  "with_shape": {
+                    "intValue": 0
+                  }
+                }
+              },
+              "alphaOrf": {
+                "distributionType": "BatchBroadcast",
+                "parameters": {
+                  "distribution": {
+                    "distributionValue": {
+                      "distributionType": "Uniform",
+                      "parameters": {
+                        "allow_nan_stats": {
+                          "intValue": 1
+                        },
+                        "high": {
+                          "scalarValue": 1.0
+                        },
+                        "low": {
+                          "scalarValue": 0.0
+                        },
+                        "name": {
+                          "stringValue": "alpha_orf"
+                        },
+                        "validate_args": {
+                          "intValue": 0
+                        }
+                      }
+                    }
+                  },
+                  "name": {
+                    "stringValue": "alpha_orf"
+                  },
+                  "to_shape": {
+                    "noneValue": true
+                  },
+                  "validate_args": {
+                    "intValue": 0
+                  },
+                  "with_shape": {
+                    "intValue": 0
+                  }
+                }
+              },
+              "alphaRf": {
+                "distributionType": "BatchBroadcast",
+                "parameters": {
+                  "distribution": {
+                    "distributionValue": {
+                      "distributionType": "Uniform",
+                      "parameters": {
+                        "allow_nan_stats": {
+                          "intValue": 1
+                        },
+                        "high": {
+                          "scalarValue": 1.0
+                        },
+                        "low": {
+                          "scalarValue": 0.0
+                        },
+                        "name": {
+                          "stringValue": "alpha_rf"
+                        },
+                        "validate_args": {
+                          "intValue": 0
+                        }
+                      }
+                    }
+                  },
+                  "name": {
+                    "stringValue": "alpha_rf"
+                  },
+                  "to_shape": {
+                    "noneValue": true
+                  },
+                  "validate_args": {
+                    "intValue": 0
+                  },
+                  "with_shape": {
+                    "intValue": 0
+                  }
+                }
+              },
+              "betaM": {
+                "distributionType": "BatchBroadcast",
+                "parameters": {
+                  "distribution": {
+                    "distributionValue": {
+                      "distributionType": "HalfNormal",
+                      "parameters": {
+                        "allow_nan_stats": {
+                          "intValue": 1
+                        },
+                        "name": {
+                          "stringValue": "beta_m"
+                        },
+                        "scale": {
+                          "scalarValue": 5.0
+                        },
+                        "validate_args": {
+                          "intValue": 0
+                        }
+                      }
+                    }
+                  },
+                  "name": {
+                    "stringValue": "beta_m"
+                  },
+                  "to_shape": {
+                    "noneValue": true
+                  },
+                  "validate_args": {
+                    "intValue": 0
+                  },
+                  "with_shape": {
+                    "intValue": 3
+                  }
+                }
+              },
+              "betaOm": {
+                "distributionType": "BatchBroadcast",
+                "parameters": {
+                  "distribution": {
+                    "distributionValue": {
+                      "distributionType": "HalfNormal",
+                      "parameters": {
+                        "allow_nan_stats": {
+                          "intValue": 1
+                        },
+                        "name": {
+                          "stringValue": "beta_om"
+                        },
+                        "scale": {
+                          "scalarValue": 5.0
+                        },
+                        "validate_args": {
+                          "intValue": 0
+                        }
+                      }
+                    }
+                  },
+                  "name": {
+                    "stringValue": "beta_om"
+                  },
+                  "to_shape": {
+                    "noneValue": true
+                  },
+                  "validate_args": {
+                    "intValue": 0
+                  },
+                  "with_shape": {
+                    "intValue": 0
+                  }
+                }
+              },
+              "betaOrf": {
+                "distributionType": "BatchBroadcast",
+                "parameters": {
+                  "distribution": {
+                    "distributionValue": {
+                      "distributionType": "HalfNormal",
+                      "parameters": {
+                        "allow_nan_stats": {
+                          "intValue": 1
+                        },
+                        "name": {
+                          "stringValue": "beta_orf"
+                        },
+                        "scale": {
+                          "scalarValue": 5.0
+                        },
+                        "validate_args": {
+                          "intValue": 0
+                        }
+                      }
+                    }
+                  },
+                  "name": {
+                    "stringValue": "beta_orf"
+                  },
+                  "to_shape": {
+                    "noneValue": true
+                  },
+                  "validate_args": {
+                    "intValue": 0
+                  },
+                  "with_shape": {
+                    "intValue": 0
+                  }
+                }
+              },
+              "betaRf": {
+                "distributionType": "BatchBroadcast",
+                "parameters": {
+                  "distribution": {
+                    "distributionValue": {
+                      "distributionType": "HalfNormal",
+                      "parameters": {
+                        "allow_nan_stats": {
+                          "intValue": 1
+                        },
+                        "name": {
+                          "stringValue": "beta_rf"
+                        },
+                        "scale": {
+                          "scalarValue": 5.0
+                        },
+                        "validate_args": {
+                          "intValue": 0
+                        }
+                      }
+                    }
+                  },
+                  "name": {
+                    "stringValue": "beta_rf"
+                  },
+                  "to_shape": {
+                    "noneValue": true
+                  },
+                  "validate_args": {
+                    "intValue": 0
+                  },
+                  "with_shape": {
+                    "intValue": 0
+                  }
+                }
+              },
+              "contributionM": {
+                "distributionType": "BatchBroadcast",
+                "parameters": {
+                  "distribution": {
+                    "distributionValue": {
+                      "distributionType": "Beta",
+                      "parameters": {
+                        "allow_nan_stats": {
+                          "intValue": 1
+                        },
+                        "concentration0": {
+                          "scalarValue": 99.0
+                        },
+                        "concentration1": {
+                          "scalarValue": 1.0
+                        },
+                        "force_probs_to_zero_outside_support": {
+                          "intValue": 0
+                        },
+                        "name": {
+                          "stringValue": "contribution_m"
+                        },
+                        "validate_args": {
+                          "intValue": 0
+                        }
+                      }
+                    }
+                  },
+                  "name": {
+                    "stringValue": "contribution_m"
+                  },
+                  "to_shape": {
+                    "noneValue": true
+                  },
+                  "validate_args": {
+                    "intValue": 0
+                  },
+                  "with_shape": {
+                    "intValue": 3
+                  }
+                }
+              },
+              "contributionN": {
+                "distributionType": "BatchBroadcast",
+                "parameters": {
+                  "distribution": {
+                    "distributionValue": {
+                      "distributionType": "TruncatedNormal",
+                      "parameters": {
+                        "allow_nan_stats": {
+                          "intValue": 1
+                        },
+                        "high": {
+                          "scalarValue": 1.0
+                        },
+                        "loc": {
+                          "scalarValue": 0.0
+                        },
+                        "low": {
+                          "scalarValue": -1.0
+                        },
+                        "name": {
+                          "stringValue": "contribution_n"
+                        },
+                        "scale": {
+                          "scalarValue": 0.1
+                        },
+                        "validate_args": {
+                          "intValue": 0
+                        }
+                      }
+                    }
+                  },
+                  "name": {
+                    "stringValue": "contribution_n"
+                  },
+                  "to_shape": {
+                    "noneValue": true
+                  },
+                  "validate_args": {
+                    "intValue": 0
+                  },
+                  "with_shape": {
+                    "intValue": 0
+                  }
+                }
+              },
+              "contributionOm": {
+                "distributionType": "BatchBroadcast",
+                "parameters": {
+                  "distribution": {
+                    "distributionValue": {
+                      "distributionType": "Beta",
+                      "parameters": {
+                        "allow_nan_stats": {
+                          "intValue": 1
+                        },
+                        "concentration0": {
+                          "scalarValue": 99.0
+                        },
+                        "concentration1": {
+                          "scalarValue": 1.0
+                        },
+                        "force_probs_to_zero_outside_support": {
+                          "intValue": 0
+                        },
+                        "name": {
+                          "stringValue": "contribution_om"
+                        },
+                        "validate_args": {
+                          "intValue": 0
+                        }
+                      }
+                    }
+                  },
+                  "name": {
+                    "stringValue": "contribution_om"
+                  },
+                  "to_shape": {
+                    "noneValue": true
+                  },
+                  "validate_args": {
+                    "intValue": 0
+                  },
+                  "with_shape": {
+                    "intValue": 0
+                  }
+                }
+              },
+              "contributionOrf": {
+                "distributionType": "BatchBroadcast",
+                "parameters": {
+                  "distribution": {
+                    "distributionValue": {
+                      "distributionType": "Beta",
+                      "parameters": {
+                        "allow_nan_stats": {
+                          "intValue": 1
+                        },
+                        "concentration0": {
+                          "scalarValue": 99.0
+                        },
+                        "concentration1": {
+                          "scalarValue": 1.0
+                        },
+                        "force_probs_to_zero_outside_support": {
+                          "intValue": 0
+                        },
+                        "name": {
+                          "stringValue": "contribution_orf"
+                        },
+                        "validate_args": {
+                          "intValue": 0
+                        }
+                      }
+                    }
+                  },
+                  "name": {
+                    "stringValue": "contribution_orf"
+                  },
+                  "to_shape": {
+                    "noneValue": true
+                  },
+                  "validate_args": {
+                    "intValue": 0
+                  },
+                  "with_shape": {
+                    "intValue": 0
+                  }
+                }
+              },
+              "contributionRf": {
+                "distributionType": "BatchBroadcast",
+                "parameters": {
+                  "distribution": {
+                    "distributionValue": {
+                      "distributionType": "Beta",
+                      "parameters": {
+                        "allow_nan_stats": {
+                          "intValue": 1
+                        },
+                        "concentration0": {
+                          "scalarValue": 99.0
+                        },
+                        "concentration1": {
+                          "scalarValue": 1.0
+                        },
+                        "force_probs_to_zero_outside_support": {
+                          "intValue": 0
+                        },
+                        "name": {
+                          "stringValue": "contribution_rf"
+                        },
+                        "validate_args": {
+                          "intValue": 0
+                        }
+                      }
+                    }
+                  },
+                  "name": {
+                    "stringValue": "contribution_rf"
+                  },
+                  "to_shape": {
+                    "noneValue": true
+                  },
+                  "validate_args": {
+                    "intValue": 0
+                  },
+                  "with_shape": {
+                    "intValue": 0
+                  }
+                }
+              },
+              "ecM": {
+                "distributionType": "BatchBroadcast",
+                "parameters": {
+                  "distribution": {
+                    "distributionValue": {
+                      "distributionType": "TruncatedNormal",
+                      "parameters": {
+                        "allow_nan_stats": {
+                          "intValue": 1
+                        },
+                        "high": {
+                          "scalarValue": 10.0
+                        },
+                        "loc": {
+                          "scalarValue": 0.8
+                        },
+                        "low": {
+                          "scalarValue": 0.1
+                        },
+                        "name": {
+                          "stringValue": "ec_m"
+                        },
+                        "scale": {
+                          "scalarValue": 0.8
+                        },
+                        "validate_args": {
+                          "intValue": 0
+                        }
+                      }
+                    }
+                  },
+                  "name": {
+                    "stringValue": "ec_m"
+                  },
+                  "to_shape": {
+                    "noneValue": true
+                  },
+                  "validate_args": {
+                    "intValue": 0
+                  },
+                  "with_shape": {
+                    "intValue": 3
+                  }
+                }
+              },
+              "ecOm": {
+                "distributionType": "BatchBroadcast",
+                "parameters": {
+                  "distribution": {
+                    "distributionValue": {
+                      "distributionType": "TruncatedNormal",
+                      "parameters": {
+                        "allow_nan_stats": {
+                          "intValue": 1
+                        },
+                        "high": {
+                          "scalarValue": 10.0
+                        },
+                        "loc": {
+                          "scalarValue": 0.8
+                        },
+                        "low": {
+                          "scalarValue": 0.1
+                        },
+                        "name": {
+                          "stringValue": "ec_om"
+                        },
+                        "scale": {
+                          "scalarValue": 0.8
+                        },
+                        "validate_args": {
+                          "intValue": 0
+                        }
+                      }
+                    }
+                  },
+                  "name": {
+                    "stringValue": "ec_om"
+                  },
+                  "to_shape": {
+                    "noneValue": true
+                  },
+                  "validate_args": {
+                    "intValue": 0
+                  },
+                  "with_shape": {
+                    "intValue": 0
+                  }
+                }
+              },
+              "ecOrf": {
+                "distributionType": "BatchBroadcast",
+                "parameters": {
+                  "distribution": {
+                    "distributionValue": {
+                      "distributionType": "TransformedDistribution",
+                      "parameters": {
+                        "bijector": {
+                          "bijectorValue": {
+                            "bijectorType": "Shift",
+                            "parameters": {
+                              "name": {
+                                "stringValue": "shift"
+                              },
+                              "shift": {
+                                "scalarValue": 0.1
+                              },
+                              "validate_args": {
+                                "intValue": 0
+                              }
+                            }
+                          }
+                        },
+                        "distribution": {
+                          "distributionValue": {
+                            "distributionType": "LogNormal",
+                            "parameters": {
+                              "allow_nan_stats": {
+                                "intValue": 1
+                              },
+                              "loc": {
+                                "scalarValue": 0.7
+                              },
+                              "name": {
+                                "stringValue": "LogNormal"
+                              },
+                              "scale": {
+                                "scalarValue": 0.4
+                              },
+                              "validate_args": {
+                                "intValue": 0
+                              }
+                            }
+                          }
+                        },
+                        "kwargs_split_fn": {
+                          "functionParam": {
+                            "usesDefault": true
+                          }
+                        },
+                        "name": {
+                          "stringValue": "ec_orf"
+                        },
+                        "parameters": {
+                          "noneValue": true
+                        },
+                        "validate_args": {
+                          "intValue": 0
+                        }
+                      }
+                    }
+                  },
+                  "name": {
+                    "stringValue": "ec_orf"
+                  },
+                  "to_shape": {
+                    "noneValue": true
+                  },
+                  "validate_args": {
+                    "intValue": 0
+                  },
+                  "with_shape": {
+                    "intValue": 0
+                  }
+                }
+              },
+              "ecRf": {
+                "distributionType": "BatchBroadcast",
+                "parameters": {
+                  "distribution": {
+                    "distributionValue": {
+                      "distributionType": "TransformedDistribution",
+                      "parameters": {
+                        "bijector": {
+                          "bijectorValue": {
+                            "bijectorType": "Shift",
+                            "parameters": {
+                              "name": {
+                                "stringValue": "shift"
+                              },
+                              "shift": {
+                                "scalarValue": 0.1
+                              },
+                              "validate_args": {
+                                "intValue": 0
+                              }
+                            }
+                          }
+                        },
+                        "distribution": {
+                          "distributionValue": {
+                            "distributionType": "LogNormal",
+                            "parameters": {
+                              "allow_nan_stats": {
+                                "intValue": 1
+                              },
+                              "loc": {
+                                "scalarValue": 0.7
+                              },
+                              "name": {
+                                "stringValue": "LogNormal"
+                              },
+                              "scale": {
+                                "scalarValue": 0.4
+                              },
+                              "validate_args": {
+                                "intValue": 0
+                              }
+                            }
+                          }
+                        },
+                        "kwargs_split_fn": {
+                          "functionParam": {
+                            "usesDefault": true
+                          }
+                        },
+                        "name": {
+                          "stringValue": "ec_rf"
+                        },
+                        "parameters": {
+                          "noneValue": true
+                        },
+                        "validate_args": {
+                          "intValue": 0
+                        }
+                      }
+                    }
+                  },
+                  "name": {
+                    "stringValue": "ec_rf"
+                  },
+                  "to_shape": {
+                    "noneValue": true
+                  },
+                  "validate_args": {
+                    "intValue": 0
+                  },
+                  "with_shape": {
+                    "intValue": 0
+                  }
+                }
+              },
+              "etaM": {
+                "distributionType": "BatchBroadcast",
+                "parameters": {
+                  "distribution": {
+                    "distributionValue": {
+                      "distributionType": "Deterministic",
+                      "parameters": {
+                        "allow_nan_stats": {
+                          "intValue": 1
+                        },
+                        "atol": {
+                          "noneValue": true
+                        },
+                        "loc": {
+                          "tensorValue": {
+                            "doubleVal": [
+                              0.0
+                            ],
+                            "dtype": "DT_DOUBLE",
+                            "tensorShape": {}
+                          }
+                        },
+                        "name": {
+                          "stringValue": "eta_m"
+                        },
+                        "rtol": {
+                          "noneValue": true
+                        },
+                        "validate_args": {
+                          "intValue": 0
+                        }
+                      }
+                    }
+                  },
+                  "name": {
+                    "stringValue": "eta_m"
+                  },
+                  "to_shape": {
+                    "noneValue": true
+                  },
+                  "validate_args": {
+                    "intValue": 0
+                  },
+                  "with_shape": {
+                    "intValue": 3
+                  }
+                }
+              },
+              "etaOm": {
+                "distributionType": "BatchBroadcast",
+                "parameters": {
+                  "distribution": {
+                    "distributionValue": {
+                      "distributionType": "Deterministic",
+                      "parameters": {
+                        "allow_nan_stats": {
+                          "intValue": 1
+                        },
+                        "atol": {
+                          "noneValue": true
+                        },
+                        "loc": {
+                          "tensorValue": {
+                            "doubleVal": [
+                              0.0
+                            ],
+                            "dtype": "DT_DOUBLE",
+                            "tensorShape": {}
+                          }
+                        },
+                        "name": {
+                          "stringValue": "eta_om"
+                        },
+                        "rtol": {
+                          "noneValue": true
+                        },
+                        "validate_args": {
+                          "intValue": 0
+                        }
+                      }
+                    }
+                  },
+                  "name": {
+                    "stringValue": "eta_om"
+                  },
+                  "to_shape": {
+                    "noneValue": true
+                  },
+                  "validate_args": {
+                    "intValue": 0
+                  },
+                  "with_shape": {
+                    "intValue": 0
+                  }
+                }
+              },
+              "etaOrf": {
+                "distributionType": "BatchBroadcast",
+                "parameters": {
+                  "distribution": {
+                    "distributionValue": {
+                      "distributionType": "Deterministic",
+                      "parameters": {
+                        "allow_nan_stats": {
+                          "intValue": 1
+                        },
+                        "atol": {
+                          "noneValue": true
+                        },
+                        "loc": {
+                          "tensorValue": {
+                            "doubleVal": [
+                              0.0
+                            ],
+                            "dtype": "DT_DOUBLE",
+                            "tensorShape": {}
+                          }
+                        },
+                        "name": {
+                          "stringValue": "eta_orf"
+                        },
+                        "rtol": {
+                          "noneValue": true
+                        },
+                        "validate_args": {
+                          "intValue": 0
+                        }
+                      }
+                    }
+                  },
+                  "name": {
+                    "stringValue": "eta_orf"
+                  },
+                  "to_shape": {
+                    "noneValue": true
+                  },
+                  "validate_args": {
+                    "intValue": 0
+                  },
+                  "with_shape": {
+                    "intValue": 0
+                  }
+                }
+              },
+              "etaRf": {
+                "distributionType": "BatchBroadcast",
+                "parameters": {
+                  "distribution": {
+                    "distributionValue": {
+                      "distributionType": "Deterministic",
+                      "parameters": {
+                        "allow_nan_stats": {
+                          "intValue": 1
+                        },
+                        "atol": {
+                          "noneValue": true
+                        },
+                        "loc": {
+                          "tensorValue": {
+                            "doubleVal": [
+                              0.0
+                            ],
+                            "dtype": "DT_DOUBLE",
+                            "tensorShape": {}
+                          }
+                        },
+                        "name": {
+                          "stringValue": "eta_rf"
+                        },
+                        "rtol": {
+                          "noneValue": true
+                        },
+                        "validate_args": {
+                          "intValue": 0
+                        }
+                      }
+                    }
+                  },
+                  "name": {
+                    "stringValue": "eta_rf"
+                  },
+                  "to_shape": {
+                    "noneValue": true
+                  },
+                  "validate_args": {
+                    "intValue": 0
+                  },
+                  "with_shape": {
+                    "intValue": 0
+                  }
+                }
+              },
+              "gammaC": {
+                "distributionType": "BatchBroadcast",
+                "parameters": {
+                  "distribution": {
+                    "distributionValue": {
+                      "distributionType": "Normal",
+                      "parameters": {
+                        "allow_nan_stats": {
+                          "intValue": 1
+                        },
+                        "loc": {
+                          "scalarValue": 0.0
+                        },
+                        "name": {
+                          "stringValue": "gamma_c"
+                        },
+                        "scale": {
+                          "scalarValue": 5.0
+                        },
+                        "validate_args": {
+                          "intValue": 0
+                        }
+                      }
+                    }
+                  },
+                  "name": {
+                    "stringValue": "gamma_c"
+                  },
+                  "to_shape": {
+                    "noneValue": true
+                  },
+                  "validate_args": {
+                    "intValue": 0
+                  },
+                  "with_shape": {
+                    "intValue": 2
+                  }
+                }
+              },
+              "gammaN": {
+                "distributionType": "BatchBroadcast",
+                "parameters": {
+                  "distribution": {
+                    "distributionValue": {
+                      "distributionType": "Normal",
+                      "parameters": {
+                        "allow_nan_stats": {
+                          "intValue": 1
+                        },
+                        "loc": {
+                          "scalarValue": 0.0
+                        },
+                        "name": {
+                          "stringValue": "gamma_n"
+                        },
+                        "scale": {
+                          "scalarValue": 5.0
+                        },
+                        "validate_args": {
+                          "intValue": 0
+                        }
+                      }
+                    }
+                  },
+                  "name": {
+                    "stringValue": "gamma_n"
+                  },
+                  "to_shape": {
+                    "noneValue": true
+                  },
+                  "validate_args": {
+                    "intValue": 0
+                  },
+                  "with_shape": {
+                    "intValue": 0
+                  }
+                }
+              },
+              "knotValues": {
+                "distributionType": "BatchBroadcast",
+                "parameters": {
+                  "distribution": {
+                    "distributionValue": {
+                      "distributionType": "Normal",
+                      "parameters": {
+                        "allow_nan_stats": {
+                          "intValue": 1
+                        },
+                        "loc": {
+                          "scalarValue": 0.0
+                        },
+                        "name": {
+                          "stringValue": "knot_values"
+                        },
+                        "scale": {
+                          "scalarValue": 5.0
+                        },
+                        "validate_args": {
+                          "intValue": 0
+                        }
+                      }
+                    }
+                  },
+                  "name": {
+                    "stringValue": "knot_values"
+                  },
+                  "to_shape": {
+                    "noneValue": true
+                  },
+                  "validate_args": {
+                    "intValue": 0
+                  },
+                  "with_shape": {
+                    "intValue": 4
+                  }
+                }
+              },
+              "mroiM": {
+                "distributionType": "BatchBroadcast",
+                "parameters": {
+                  "distribution": {
+                    "distributionValue": {
+                      "distributionType": "LogNormal",
+                      "parameters": {
+                        "allow_nan_stats": {
+                          "intValue": 1
+                        },
+                        "loc": {
+                          "scalarValue": 0.0
+                        },
+                        "name": {
+                          "stringValue": "mroi_m"
+                        },
+                        "scale": {
+                          "scalarValue": 0.5
+                        },
+                        "validate_args": {
+                          "intValue": 0
+                        }
+                      }
+                    }
+                  },
+                  "name": {
+                    "stringValue": "mroi_m"
+                  },
+                  "to_shape": {
+                    "noneValue": true
+                  },
+                  "validate_args": {
+                    "intValue": 0
+                  },
+                  "with_shape": {
+                    "intValue": 3
+                  }
+                }
+              },
+              "mroiRf": {
+                "distributionType": "BatchBroadcast",
+                "parameters": {
+                  "distribution": {
+                    "distributionValue": {
+                      "distributionType": "LogNormal",
+                      "parameters": {
+                        "allow_nan_stats": {
+                          "intValue": 1
+                        },
+                        "loc": {
+                          "scalarValue": 0.0
+                        },
+                        "name": {
+                          "stringValue": "mroi_rf"
+                        },
+                        "scale": {
+                          "scalarValue": 0.5
+                        },
+                        "validate_args": {
+                          "intValue": 0
+                        }
+                      }
+                    }
+                  },
+                  "name": {
+                    "stringValue": "mroi_rf"
+                  },
+                  "to_shape": {
+                    "noneValue": true
+                  },
+                  "validate_args": {
+                    "intValue": 0
+                  },
+                  "with_shape": {
+                    "intValue": 0
+                  }
+                }
+              },
+              "roiM": {
+                "distributionType": "BatchBroadcast",
+                "parameters": {
+                  "distribution": {
+                    "distributionValue": {
+                      "distributionType": "LogNormal",
+                      "parameters": {
+                        "allow_nan_stats": {
+                          "intValue": 1
+                        },
+                        "loc": {
+                          "scalarValue": 0.2
+                        },
+                        "name": {
+                          "stringValue": "roi_m"
+                        },
+                        "scale": {
+                          "scalarValue": 0.9
+                        },
+                        "validate_args": {
+                          "intValue": 0
+                        }
+                      }
+                    }
+                  },
+                  "name": {
+                    "stringValue": "roi_m"
+                  },
+                  "to_shape": {
+                    "noneValue": true
+                  },
+                  "validate_args": {
+                    "intValue": 0
+                  },
+                  "with_shape": {
+                    "intValue": 3
+                  }
+                }
+              },
+              "roiRf": {
+                "distributionType": "BatchBroadcast",
+                "parameters": {
+                  "distribution": {
+                    "distributionValue": {
+                      "distributionType": "LogNormal",
+                      "parameters": {
+                        "allow_nan_stats": {
+                          "intValue": 1
+                        },
+                        "loc": {
+                          "scalarValue": 0.2
+                        },
+                        "name": {
+                          "stringValue": "roi_rf"
+                        },
+                        "scale": {
+                          "scalarValue": 0.9
+                        },
+                        "validate_args": {
+                          "intValue": 0
+                        }
+                      }
+                    }
+                  },
+                  "name": {
+                    "stringValue": "roi_rf"
+                  },
+                  "to_shape": {
+                    "noneValue": true
+                  },
+                  "validate_args": {
+                    "intValue": 0
+                  },
+                  "with_shape": {
+                    "intValue": 0
+                  }
+                }
+              },
+              "sigma": {
+                "distributionType": "BatchBroadcast",
+                "parameters": {
+                  "distribution": {
+                    "distributionValue": {
+                      "distributionType": "HalfNormal",
+                      "parameters": {
+                        "allow_nan_stats": {
+                          "intValue": 1
+                        },
+                        "name": {
+                          "stringValue": "sigma"
+                        },
+                        "scale": {
+                          "scalarValue": 5.0
+                        },
+                        "validate_args": {
+                          "intValue": 0
+                        }
+                      }
+                    }
+                  },
+                  "name": {
+                    "stringValue": "sigma"
+                  },
+                  "to_shape": {
+                    "noneValue": true
+                  },
+                  "validate_args": {
+                    "intValue": 0
+                  },
+                  "with_shape": {
+                    "listValue": {}
+                  }
+                }
+              },
+              "slopeM": {
+                "distributionType": "BatchBroadcast",
+                "parameters": {
+                  "distribution": {
+                    "distributionValue": {
+                      "distributionType": "Deterministic",
+                      "parameters": {
+                        "allow_nan_stats": {
+                          "intValue": 1
+                        },
+                        "atol": {
+                          "noneValue": true
+                        },
+                        "loc": {
+                          "scalarValue": 1.0
+                        },
+                        "name": {
+                          "stringValue": "slope_m"
+                        },
+                        "rtol": {
+                          "noneValue": true
+                        },
+                        "validate_args": {
+                          "intValue": 0
+                        }
+                      }
+                    }
+                  },
+                  "name": {
+                    "stringValue": "slope_m"
+                  },
+                  "to_shape": {
+                    "noneValue": true
+                  },
+                  "validate_args": {
+                    "intValue": 0
+                  },
+                  "with_shape": {
+                    "intValue": 3
+                  }
+                }
+              },
+              "slopeOm": {
+                "distributionType": "BatchBroadcast",
+                "parameters": {
+                  "distribution": {
+                    "distributionValue": {
+                      "distributionType": "Deterministic",
+                      "parameters": {
+                        "allow_nan_stats": {
+                          "intValue": 1
+                        },
+                        "atol": {
+                          "noneValue": true
+                        },
+                        "loc": {
+                          "scalarValue": 1.0
+                        },
+                        "name": {
+                          "stringValue": "slope_om"
+                        },
+                        "rtol": {
+                          "noneValue": true
+                        },
+                        "validate_args": {
+                          "intValue": 0
+                        }
+                      }
+                    }
+                  },
+                  "name": {
+                    "stringValue": "slope_om"
+                  },
+                  "to_shape": {
+                    "noneValue": true
+                  },
+                  "validate_args": {
+                    "intValue": 0
+                  },
+                  "with_shape": {
+                    "intValue": 0
+                  }
+                }
+              },
+              "slopeOrf": {
+                "distributionType": "BatchBroadcast",
+                "parameters": {
+                  "distribution": {
+                    "distributionValue": {
+                      "distributionType": "LogNormal",
+                      "parameters": {
+                        "allow_nan_stats": {
+                          "intValue": 1
+                        },
+                        "loc": {
+                          "scalarValue": 0.7
+                        },
+                        "name": {
+                          "stringValue": "slope_orf"
+                        },
+                        "scale": {
+                          "scalarValue": 0.4
+                        },
+                        "validate_args": {
+                          "intValue": 0
+                        }
+                      }
+                    }
+                  },
+                  "name": {
+                    "stringValue": "slope_orf"
+                  },
+                  "to_shape": {
+                    "noneValue": true
+                  },
+                  "validate_args": {
+                    "intValue": 0
+                  },
+                  "with_shape": {
+                    "intValue": 0
+                  }
+                }
+              },
+              "slopeRf": {
+                "distributionType": "BatchBroadcast",
+                "parameters": {
+                  "distribution": {
+                    "distributionValue": {
+                      "distributionType": "LogNormal",
+                      "parameters": {
+                        "allow_nan_stats": {
+                          "intValue": 1
+                        },
+                        "loc": {
+                          "scalarValue": 0.7
+                        },
+                        "name": {
+                          "stringValue": "slope_rf"
+                        },
+                        "scale": {
+                          "scalarValue": 0.4
+                        },
+                        "validate_args": {
+                          "intValue": 0
+                        }
+                      }
+                    }
+                  },
+                  "name": {
+                    "stringValue": "slope_rf"
+                  },
+                  "to_shape": {
+                    "noneValue": true
+                  },
+                  "validate_args": {
+                    "intValue": 0
+                  },
+                  "with_shape": {
+                    "intValue": 0
+                  }
+                }
+              },
+              "tauGExclBaseline": {
+                "distributionType": "BatchBroadcast",
+                "parameters": {
+                  "distribution": {
+                    "distributionValue": {
+                      "distributionType": "Deterministic",
+                      "parameters": {
+                        "allow_nan_stats": {
+                          "intValue": 1
+                        },
+                        "atol": {
+                          "noneValue": true
+                        },
+                        "loc": {
+                          "tensorValue": {
+                            "doubleVal": [
+                              0.0
+                            ],
+                            "dtype": "DT_DOUBLE",
+                            "tensorShape": {}
+                          }
+                        },
+                        "name": {
+                          "stringValue": "tau_g_excl_baseline"
+                        },
+                        "rtol": {
+                          "noneValue": true
+                        },
+                        "validate_args": {
+                          "intValue": 0
+                        }
+                      }
+                    }
+                  },
+                  "name": {
+                    "stringValue": "tau_g_excl_baseline"
+                  },
+                  "to_shape": {
+                    "noneValue": true
+                  },
+                  "validate_args": {
+                    "intValue": 0
+                  },
+                  "with_shape": {
+                    "intValue": 0
+                  }
+                }
+              },
+              "xiC": {
+                "distributionType": "BatchBroadcast",
+                "parameters": {
+                  "distribution": {
+                    "distributionValue": {
+                      "distributionType": "Deterministic",
+                      "parameters": {
+                        "allow_nan_stats": {
+                          "intValue": 1
+                        },
+                        "atol": {
+                          "noneValue": true
+                        },
+                        "loc": {
+                          "tensorValue": {
+                            "doubleVal": [
+                              0.0
+                            ],
+                            "dtype": "DT_DOUBLE",
+                            "tensorShape": {}
+                          }
+                        },
+                        "name": {
+                          "stringValue": "xi_c"
+                        },
+                        "rtol": {
+                          "noneValue": true
+                        },
+                        "validate_args": {
+                          "intValue": 0
+                        }
+                      }
+                    }
+                  },
+                  "name": {
+                    "stringValue": "xi_c"
+                  },
+                  "to_shape": {
+                    "noneValue": true
+                  },
+                  "validate_args": {
+                    "intValue": 0
+                  },
+                  "with_shape": {
+                    "intValue": 2
+                  }
+                }
+              },
+              "xiN": {
+                "distributionType": "BatchBroadcast",
+                "parameters": {
+                  "distribution": {
+                    "distributionValue": {
+                      "distributionType": "Deterministic",
+                      "parameters": {
+                        "allow_nan_stats": {
+                          "intValue": 1
+                        },
+                        "atol": {
+                          "noneValue": true
+                        },
+                        "loc": {
+                          "tensorValue": {
+                            "doubleVal": [
+                              0.0
+                            ],
+                            "dtype": "DT_DOUBLE",
+                            "tensorShape": {}
+                          }
+                        },
+                        "name": {
+                          "stringValue": "xi_n"
+                        },
+                        "rtol": {
+                          "noneValue": true
+                        },
+                        "validate_args": {
+                          "intValue": 0
+                        }
+                      }
+                    }
+                  },
+                  "name": {
+                    "stringValue": "xi_n"
+                  },
+                  "to_shape": {
+                    "noneValue": true
+                  },
+                  "validate_args": {
+                    "intValue": 0
+                  },
+                  "with_shape": {
+                    "intValue": 0
+                  }
+                }
+              }
+            },
+            "interval_type": "conditional_expected_outcome",
+            "media_prior_type": null,
+            "prior_source": "package_defaults_no_custom_priors",
+            "target_type": "revenue"
+          },
+          "warnings": [
+            "SHORT_CHAINS: functional test does not establish convergence",
+            "SPEND_PROXY: synthetic spend used as exposure proxy",
+            "Holdout target uses train-only placeholders in native preprocessing",
+            "No demonstrated causal attribution"
+          ]
+        },
+        {
+          "backend": "meta_robyn",
+          "model_id": "meta_robyn-a2b5efa56ecb4f5fbc061fd40c4c6a7a",
+          "framework_version": "3.12.1",
+          "training_dates": [
+            "2023-02-27",
+            "2023-03-06",
+            "2023-03-13",
+            "2023-03-20",
+            "2023-03-27",
+            "2023-04-03",
+            "2023-04-10",
+            "2023-04-17",
+            "2023-04-24",
+            "2023-05-01",
+            "2023-05-08",
+            "2023-05-15",
+            "2023-05-22",
+            "2023-05-29",
+            "2023-06-05",
+            "2023-06-12",
+            "2023-06-19",
+            "2023-06-26",
+            "2023-07-03",
+            "2023-07-10",
+            "2023-07-17",
+            "2023-07-24",
+            "2023-07-31",
+            "2023-08-07",
+            "2023-08-14",
+            "2023-08-21",
+            "2023-08-28",
+            "2023-09-04",
+            "2023-09-11",
+            "2023-09-18",
+            "2023-09-25",
+            "2023-10-02",
+            "2023-10-09",
+            "2023-10-16",
+            "2023-10-23",
+            "2023-10-30",
+            "2023-11-06",
+            "2023-11-13",
+            "2023-11-20",
+            "2023-11-27",
+            "2023-12-04",
+            "2023-12-11",
+            "2023-12-18",
+            "2023-12-25",
+            "2024-01-01",
+            "2024-01-08",
+            "2024-01-15",
+            "2024-01-22",
+            "2024-01-29",
+            "2024-02-05",
+            "2024-02-12",
+            "2024-02-19",
+            "2024-02-26",
+            "2024-03-04",
+            "2024-03-11",
+            "2024-03-18",
+            "2024-03-25",
+            "2024-04-01",
+            "2024-04-08",
+            "2024-04-15",
+            "2024-04-22",
+            "2024-04-29",
+            "2024-05-06",
+            "2024-05-13",
+            "2024-05-20",
+            "2024-05-27",
+            "2024-06-03",
+            "2024-06-10",
+            "2024-06-17",
+            "2024-06-24",
+            "2024-07-01",
+            "2024-07-08",
+            "2024-07-15",
+            "2024-07-22",
+            "2024-07-29",
+            "2024-08-05",
+            "2024-08-12",
+            "2024-08-19",
+            "2024-08-26",
+            "2024-09-02",
+            "2024-09-09",
+            "2024-09-16",
+            "2024-09-23",
+            "2024-09-30",
+            "2024-10-07",
+            "2024-10-14",
+            "2024-10-21",
+            "2024-10-28",
+            "2024-11-04"
+          ],
+          "metrics": {
+            "bias_predicted_minus_observed": -24.769235017620243,
+            "mae": 446.23961477292437,
+            "rmse": 538.0521039648786,
+            "mape_nonzero_percent": 3.768255737984379,
+            "mape_excluded_zeros": 0,
+            "wape_percent": 3.734395870694835,
+            "r2": 0.580637924142914
+          },
+          "baseline_metrics": {
+            "bias_predicted_minus_observed": 176.18994221519526,
+            "mae": 699.4122650852827,
+            "rmse": 849.3393283559301,
+            "mape_nonzero_percent": 5.994815337784512,
+            "mape_excluded_zeros": 0,
+            "wape_percent": 5.853093692672032,
+            "r2": -0.04496791089190477
+          },
+          "diagnostic_assessment": {
+            "status": "not_applicable",
+            "reason": "Robyn search is not MCMC; review trials, validation and stability"
+          },
+          "interval_semantics": {
+            "type": "not_available_point_prediction",
+            "level": null
+          },
+          "evaluation_intervals": null,
+          "configuration": {
+            "adstock": "geometric",
+            "dep_var_type": "revenue",
+            "hyperparameter_search": {
+              "spend_search_alphas": [
+                0.5,
+                3
+              ],
+              "spend_search_gammas": [
+                0.1,
+                0.9
+              ],
+              "spend_search_thetas": [
+                0,
+                0.8
+              ],
+              "spend_social_alphas": [
+                0.5,
+                3
+              ],
+              "spend_social_gammas": [
+                0.1,
+                0.9
+              ],
+              "spend_social_thetas": [
+                0,
+                0.8
+              ],
+              "spend_video_alphas": [
+                0.5,
+                3
+              ],
+              "spend_video_gammas": [
+                0.1,
+                0.9
+              ],
+              "spend_video_thetas": [
+                0,
+                0.8
+              ],
+              "train_size": 0.6
+            },
+            "interval_type": "not_available_point_prediction",
+            "media_input": "spend_proxy",
+            "model_type": "regularized_ridge_nevergrad",
+            "paid_media_signs": [
+              "positive",
+              "positive",
+              "positive"
+            ],
+            "priors": null,
+            "priors_status": "not_applicable_non_bayesian_model",
+            "selected_hyperparameters": [
+              {
+                "Elapsed": 0.06395792961120605,
+                "ElapsedAccum": 13.364714860916138,
+                "coef0": false,
+                "decomp.rssd": 0.27369388911310544,
+                "error_score": 0.10911821888484147,
+                "iterNG": 164,
+                "iterPar": 1,
+                "iterations": 164,
+                "lambda": 551.6350033471149,
+                "lambda_hp": 0.02089358591,
+                "lambda_max": 26278.974536005044,
+                "lambda_min_ratio": 0.0001,
+                "mape": 0,
+                "mape.qt10": true,
+                "nrmse": 0.20869078213611372,
+                "nrmse_test": null,
+                "nrmse_train": 0.138069738180923,
+                "nrmse_val": 0.20869078213611372,
+                "pos": 0,
+                "robynPareto": 1,
+                "rsq_test": null,
+                "rsq_train": 0.6615101083874321,
+                "rsq_val": -0.011410275524963875,
+                "solID": "1_164_1",
+                "spend_search_alphas": 2.32111377325,
+                "spend_search_gammas": 0.47010340423999997,
+                "spend_search_inflation": 1.6251151830561328,
+                "spend_search_inflexion": 1899.7626009392695,
+                "spend_search_thetas": 0.38609694152,
+                "spend_social_alphas": 0.920261178,
+                "spend_social_gammas": 0.57823110528,
+                "spend_social_inflation": 1.8594065242577902,
+                "spend_social_inflexion": 2706.587939595759,
+                "spend_social_thetas": 0.46650935048,
+                "spend_video_alphas": 2.398527644,
+                "spend_video_gammas": 0.65098771888,
+                "spend_video_inflation": 2.551234575807368,
+                "spend_video_inflexion": 3927.5612536060817,
+                "spend_video_thetas": 0.61263033416,
+                "train_size": 0.6,
+                "trial": 1
+              }
+            ],
+            "target_type": "revenue"
+          },
+          "warnings": [
+            "Functional reduced search, not recommended production search volume",
+            "Native temporal validation has its own rounding and warmup window",
+            "Adapter isolates outer test targets with train-only placeholders; not default Robyn behavior",
+            "Native test diagnostics use placeholders; adapter test metrics use original observations",
+            "Spend used as exposure proxy; no demonstrated causal attribution"
+          ]
+        },
+        {
+          "backend": "ridge",
+          "model_id": "model-ff5f5042061945949fcd468827f1c56b",
+          "framework_version": {
+            "mcp": "2.3.0",
+            "mmm-intelligence-mcp": "0.4.0",
+            "numpy": "2.4.6",
+            "scipy": "1.17.1"
+          },
+          "training_dates": [
+            "2023-02-27",
+            "2023-03-06",
+            "2023-03-13",
+            "2023-03-20",
+            "2023-03-27",
+            "2023-04-03",
+            "2023-04-10",
+            "2023-04-17",
+            "2023-04-24",
+            "2023-05-01",
+            "2023-05-08",
+            "2023-05-15",
+            "2023-05-22",
+            "2023-05-29",
+            "2023-06-05",
+            "2023-06-12",
+            "2023-06-19",
+            "2023-06-26",
+            "2023-07-03",
+            "2023-07-10",
+            "2023-07-17",
+            "2023-07-24",
+            "2023-07-31",
+            "2023-08-07",
+            "2023-08-14",
+            "2023-08-21",
+            "2023-08-28",
+            "2023-09-04",
+            "2023-09-11",
+            "2023-09-18",
+            "2023-09-25",
+            "2023-10-02",
+            "2023-10-09",
+            "2023-10-16",
+            "2023-10-23",
+            "2023-10-30",
+            "2023-11-06",
+            "2023-11-13",
+            "2023-11-20",
+            "2023-11-27",
+            "2023-12-04",
+            "2023-12-11",
+            "2023-12-18",
+            "2023-12-25",
+            "2024-01-01",
+            "2024-01-08",
+            "2024-01-15",
+            "2024-01-22",
+            "2024-01-29",
+            "2024-02-05",
+            "2024-02-12",
+            "2024-02-19",
+            "2024-02-26",
+            "2024-03-04",
+            "2024-03-11",
+            "2024-03-18",
+            "2024-03-25",
+            "2024-04-01",
+            "2024-04-08",
+            "2024-04-15",
+            "2024-04-22",
+            "2024-04-29",
+            "2024-05-06",
+            "2024-05-13",
+            "2024-05-20",
+            "2024-05-27",
+            "2024-06-03",
+            "2024-06-10",
+            "2024-06-17",
+            "2024-06-24",
+            "2024-07-01",
+            "2024-07-08",
+            "2024-07-15",
+            "2024-07-22",
+            "2024-07-29",
+            "2024-08-05",
+            "2024-08-12",
+            "2024-08-19",
+            "2024-08-26",
+            "2024-09-02",
+            "2024-09-09",
+            "2024-09-16",
+            "2024-09-23",
+            "2024-09-30",
+            "2024-10-07",
+            "2024-10-14",
+            "2024-10-21",
+            "2024-10-28",
+            "2024-11-04",
+            "2024-11-11",
+            "2024-11-18",
+            "2024-11-25",
+            "2024-12-02",
+            "2024-12-09",
+            "2024-12-16",
+            "2024-12-23",
+            "2024-12-30",
+            "2025-01-06",
+            "2025-01-13",
+            "2025-01-20",
+            "2025-01-27",
+            "2025-02-03",
+            "2025-02-10",
+            "2025-02-17",
+            "2025-02-24",
+            "2025-03-03",
+            "2025-03-10",
+            "2025-03-17",
+            "2025-03-24",
+            "2025-03-31",
+            "2025-04-07",
+            "2025-04-14",
+            "2025-04-21",
+            "2025-04-28",
+            "2025-05-05",
+            "2025-05-12"
+          ],
+          "metrics": {
+            "bias_predicted_minus_observed": -49.40705605745219,
+            "mae": 99.51976136413747,
+            "rmse": 126.26903814001331,
+            "mape_nonzero_percent": 0.8305962166665272,
+            "mape_excluded_zeros": 0,
+            "wape_percent": 0.8328399666620545,
+            "r2": 0.9769041351308072
+          },
+          "baseline_metrics": {
+            "bias_predicted_minus_observed": 324.5403311111338,
+            "mae": 724.5020285912996,
+            "rmse": 891.9982205542973,
+            "mape_nonzero_percent": 6.274366529330114,
+            "mape_excluded_zeros": 0,
+            "wape_percent": 6.063059608139348,
+            "r2": -0.15257305253406006
+          },
+          "diagnostic_assessment": {
+            "status": "not_applicable",
+            "reason": "Ridge is not MCMC"
+          },
+          "interval_semantics": {
+            "block_size": 4,
+            "boundary_note": "Percentile residual bootstrap can under-cover null media coefficients at the nonnegative constraint boundary. Positive interval endpoints do not establish a nonzero effect.",
+            "coverage_certified": false,
+            "method": "moving_block_residual_bootstrap",
+            "penalty_bias_note": "Residual bootstrap refits the penalized estimator; shrinkage can shift draws. Not a Bayesian posterior.",
+            "point_outside_percentile_interval": [],
+            "samples": 20,
+            "scope": "conditional mean; fixed shape and inputs; not causal or predictive noise",
+            "seed": 42,
+            "supports_null_effect_testing": false
+          },
+          "evaluation_intervals": null,
+          "configuration": {
+            "adstock_decay": 0.5,
+            "bootstrap_block_size": 4,
+            "bootstrap_samples": 20,
+            "bootstrap_seed": 42,
+            "control_columns": [
+              "price_index",
+              "promotion"
+            ],
+            "dataset_id": "comparison",
+            "date_column": "date",
+            "media_columns": [
+              "spend_search",
+              "spend_social",
+              "spend_video"
+            ],
+            "model_id": null,
+            "ridge_alpha": 0.1,
+            "saturation_multiplier": 1.0,
+            "target_column": "revenue",
+            "test_fraction": 0.2,
+            "warmup_periods": 8
+          },
+          "warnings": [
+            "FIXED_SHAPE: decay and Hill multiplier supplied, not estimated",
+            "CONDITIONAL_HOLDOUT: test predictions use observed test spend and controls",
+            "ZERO_INITIAL_STATE: prehistory unknown; warmup only approximates its removal",
+            "MEDIA_SIGN_RESTRICTION: nonnegative conditional media coefficients are an explicit modeling assumption",
+            "CONDITIONAL_UNCERTAINTY: excludes shape, confounding and future input uncertainty"
+          ]
+        }
+      ],
+      "comparison_window": {
+        "policy": "intersection",
+        "dates": [
+          "2025-06-02",
+          "2025-06-09",
+          "2025-06-16",
+          "2025-06-23",
+          "2025-06-30",
+          "2025-07-07",
+          "2025-07-14",
+          "2025-07-21",
+          "2025-07-28",
+          "2025-08-04",
+          "2025-08-11",
+          "2025-08-18",
+          "2025-08-25",
+          "2025-09-01",
+          "2025-09-08",
+          "2025-09-15",
+          "2025-09-22",
+          "2025-09-29",
+          "2025-10-06",
+          "2025-10-13",
+          "2025-10-20",
+          "2025-10-27",
+          "2025-11-03",
+          "2025-11-10",
+          "2025-11-17",
+          "2025-11-24",
+          "2025-12-01",
+          "2025-12-08",
+          "2025-12-15",
+          "2025-12-22"
+        ],
+        "rows": 30
+      },
+      "training_windows_differ": true,
+      "same_training_window": false,
+      "fair_training_protocol": null,
+      "fair_training_protocol_reason": "Matching dates alone cannot certify fairness of priors, feature information, search budgets or model selection",
+      "winner": null,
+      "business_recommendation_eligible": false,
+      "warnings": [
+        "Different training information, priors, shapes, search and interval semantics must be considered. Common evaluation dates do not establish universal superiority."
+      ]
+    },
+    "error": null,
+    "warnings": [
+      "Different training information, priors, shapes, search and interval semantics must be considered. Common evaluation dates do not establish universal superiority."
+    ]
+  }
+}

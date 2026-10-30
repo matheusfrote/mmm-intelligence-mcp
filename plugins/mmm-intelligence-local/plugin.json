@@ -1,0 +1,33 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "mmm-intelligence-local",
+  "version": "0.1.0",
+  "description": "Local exploratory Marketing Mix Modeling with synthetic-data workflows and explicit scientific limits.",
+  "author": {"name": "Matheus Frote"},
+  "repository": "https://github.com/matheusfrote/mmm-intelligence-mcp",
+  "license": "Apache-2.0",
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "MMM Intelligence",
+        "shortDescription": "Explore marketing models",
+        "longDescription": "Generate synthetic data, inspect quality, fit exploratory marketing models, compare compatible evaluations, simulate conditional allocations and export reports. Runs locally with a separately installed Python environment. Does not modify advertising campaigns. The dashboard opens locally without a login; the separate HTTP MCP endpoint retains authentication.",
+        "category": "Data & Analytics",
+        "logo": "./assets/icon.svg",
+        "composerIcon": "./assets/icon.svg",
+        "brandColor": "#176653",
+        "defaultPrompt": "Create a synthetic marketing dataset and explain its model's diagnostics and limitations."
+      },
+      "review": {
+        "prompts": [
+          "Create a synthetic dataset, check its quality and fit an exploratory marketing model.",
+          "Compare two models of the same dataset on their common test dates and explain their limitations.",
+          "Simulate a different budget allocation without changing real campaigns."
+        ]
+      },
+      "publication": {
+        "release_notes": "Local authoring package with the existing MCP server and an exploratory analysis workflow. Not submitted to the public directory."
+      }
+    }
+  }
+}

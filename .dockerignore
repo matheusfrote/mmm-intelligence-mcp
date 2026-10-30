@@ -1,0 +1,17 @@
+.git
+.venv
+var
+evidence
+dist
+build
+node_modules
+.env
+.env.*
+*.pem
+*.key
+__pycache__
+**/__pycache__
+**/*.pyc
+.pytest_cache
+.ruff_cache
+.coverage

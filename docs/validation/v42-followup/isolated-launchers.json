@@ -1,0 +1,22 @@
+[
+  {
+    "manager": "uvx",
+    "manager_version": "0.12.12",
+    "executed_at": "2026-10-28T11:48:56.958255-03:00",
+    "python": "3.12.14",
+    "tools_discovered": 26,
+    "local_calls": 23,
+    "restart_persistence": true,
+    "synthetic": true
+  },
+  {
+    "manager": "pipx",
+    "manager_version": "1.18.7",
+    "executed_at": "2026-10-28T14:37:06.87892-03:00",
+    "python": "3.12.14",
+    "tools_discovered": 26,
+    "local_calls": 23,
+    "restart_persistence": true,
+    "synthetic": true
+  }
+]

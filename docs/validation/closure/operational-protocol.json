@@ -1,0 +1,127 @@
+{
+  "synthetic": true,
+  "transport": "official_sdk_stdio",
+  "executed_tools": [
+    "analyze_cohorts",
+    "analyze_experiment",
+    "analyze_growth",
+    "audit_model",
+    "backend_status",
+    "build_growth_dataset",
+    "calibrate_experiment",
+    "check_mmm_eligibility",
+    "compare_models",
+    "connector_status",
+    "create_growth_decision",
+    "create_growth_diagnostic",
+    "data_quality",
+    "export_analysis",
+    "forecast_model",
+    "generate_demo_dataset",
+    "generate_report",
+    "get_analysis",
+    "get_backend_model",
+    "get_growth_artifact",
+    "get_model",
+    "import_csv",
+    "import_dataset",
+    "import_source",
+    "join_datasets",
+    "list_media_profiles",
+    "map_dataset_schema",
+    "model_capabilities",
+    "optimize_budget",
+    "plan_experiment",
+    "predict_backend",
+    "prepare_mmm_dataset",
+    "preview_dataset",
+    "register_media_profile",
+    "render_dashboard",
+    "retention_plan",
+    "simulate_budget",
+    "storage_inventory",
+    "train_backend",
+    "train_mmm",
+    "transition_growth_decision",
+    "tune_mmm",
+    "validate_crossmedia_dataset",
+    "validate_dataset",
+    "validate_media_dataset"
+  ],
+  "executed_tool_count": 45,
+  "missing_tools": [],
+  "complete_45_tools_verified": true,
+  "resource_templates": 1,
+  "resource_read_verified": true,
+  "prompts": {
+    "audit_mmm_pipeline": {
+      "meta": {
+        "io.modelcontextprotocol/serverInfo": {
+          "name": "MMM Intelligence MCP",
+          "version": ""
+        }
+      },
+      "description": "Audit the data and training design before any exploratory MMM fit.",
+      "messages": [
+        {
+          "role": "user",
+          "content": {
+            "type": "text",
+            "text": "Audit MMM dataset prepared-ab9903e0f4d64095af55c287e3015522.\n1. Inspect the authorized mmm://datasets/prepared-ab9903e0f4d64095af55c287e3015522 resource and call validate_dataset and data_quality. Confirm KPI, units, media/control columns, missing values, duplicate dates, regular frequency and immutable lineage. Synthetic data tests software only; real data needs host authorization.\n2. On the training partition only, inspect multicollinearity, matrix rank, standardized condition number and VIF = 1/(1-R_j^2), reporting infinite VIF for exact dependence. Include transformed media and controls with the intercept handled explicitly. If VIF is not exposed, report unavailable or document an auxiliary calculation on the training design; never invent statistics. Do not tune on the outer temporal test.\n3. Inspect carryover, saturation, controls, leakage, residuals, MAE, WAPE, R2 and baseline comparisons. Consult model_capabilities and backend_status before choosing a motor. Short native runs prove transport, not convergence. Report limitations and abstain from causal attribution or commercial budget changes without independent evidence.",
+            "annotations": null,
+            "meta": null
+          }
+        }
+      ],
+      "result_type": "complete"
+    },
+    "simulate_budget_scenario": {
+      "meta": {
+        "io.modelcontextprotocol/serverInfo": {
+          "name": "MMM Intelligence MCP",
+          "version": ""
+        }
+      },
+      "description": "Plan a conditional budget simulation with explicit horizon and safeguards.",
+      "messages": [
+        {
+          "role": "user",
+          "content": {
+            "type": "text",
+            "text": "Evaluate budget scenarios for model model-bc7422506faf4c40bd223e9e7602e51e.\n1. Read get_model or get_backend_model, get_analysis and model_capabilities. Check the horizon, total versus per-period spend, units, channel bounds, future controls, Hill saturation and historical adstock carryover.\n2. For Ridge use simulate_budget with allocations summing to one; use optimize_budget only as an explicitly requested constrained exploratory candidate. For supported future plans use forecast_model with equal-length media/control arrays. Never silently substitute Ridge for an unsupported native operation. Robyn scenario_mean_response is a native historical-date mean response point; response_total is historical, not future total revenue.\n3. Compare the reference, extrapolation, assumptions and uncertainty. Preserve the abstain policy: good predictive fit and synthetic tests do not establish causal return. Do not modify live campaigns or budgets; report conditional results and missing evidence.",
+            "annotations": null,
+            "meta": null
+          }
+        }
+      ],
+      "result_type": "complete"
+    },
+    "growth_incrementality_test": {
+      "meta": {
+        "io.modelcontextprotocol/serverInfo": {
+          "name": "MMM Intelligence MCP",
+          "version": ""
+        }
+      },
+      "description": "Predeclare a measurable experiment before interpreting incrementality.",
+      "messages": [
+        {
+          "role": "user",
+          "content": {
+            "type": "text",
+            "text": "Design an incrementality investigation from supplied artifact growth-e898725020954b3aae95f096a41fee92.\n1. Inspect get_growth_artifact and declare hypothesis, KPI, population, exclusions, randomization unit, control, assignment mechanism, baseline, minimum effect, power, alpha/comparison family, duration, observation/conversion windows, stop rule and guardrails. Use plan_experiment with explicit assumptions and sufficient sample sizes.\n2. Prefer randomized independent-unit A/B designs when appropriate. Geographic tests need enough independent regions and an adequate cluster or paired design; repeated rows from one geography are not independent units. The current analyze_experiment estimator rejects repeated units and does not implement cluster/paired inference. Do not substitute an independent-unit test for unsupported designs.\n3. Analyze observed outcomes, losses, sample-ratio mismatch, confidence intervals, guardrails and costs using analyze_experiment where applicable. Verify assignment and measurement separately: an API result does not demonstrate causal identification. Link the plan and results through the immutable decision history. Require causal evidence and human review before real budget changes; synthetic examples establish software behavior only.",
+            "annotations": null,
+            "meta": null
+          }
+        }
+      ],
+      "result_type": "complete"
+    }
+  },
+  "native_requested": true,
+  "causal_identification": false,
+  "analytical_convergence_certified": false,
+  "restart_verified": true,
+  "pymc_future_verified": true,
+  "resumed_component_receipts": true
+}

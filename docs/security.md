@@ -35,3 +35,27 @@ A revisão 0.3 consultou novamente pip-audit para o lock principal: zero achados
 A revisão [0.3.1](../SECURITY_DEPLOY_AUDIT.md) acrescenta expiração/bloqueio opcionais, revogação por configuração/reinício testada, rejeição de auth duplicado, limites de requisição/concorrência e headers no-store/nosniff/CSP. O SDK continua validando Host/Origin. Workers usam allowlist de ambiente, mensagens públicas genéricas e saída limitada a 1 MB durante a execução, inclusive antes de gerar diagnóstico. O dashboard autoriza o script gerado por hash CSP; não autoriza qualquer script inline.
 
 O lock universal com hashes é requirements/base-ci.txt. O CI instala somente wheels de dependências e fixa actions por SHA. Scanners e tipos básicos são parte dos checks. Consulte o relatório para achados baixos revisados do Bandit, cobertura limitada da busca por segredos, sete auditorias Python e limites de R/produção. O usuário optou por somente GitHub, sem deploy; não há certificação de segurança de serviço público.
+
+## Superfície V4
+
+CSV é texto inline limitado; sem leitura de caminho/URL, execução de fórmula ou
+limpeza silenciosa. Original é mantido sob a mesma autorização/raiz do dataset.
+Reader pode analisar/exportar dados da sua raiz, consultar inventário e plano;
+importação e escrita permanecem bloqueadas. forecast usa o mesmo limite de cálculo.
+Conectores não fazem rede e não recebem tokens. Exclusão não é exposta no MCP.
+
+O CLI permite excluir um único artefato com hash confirmado, sem dependentes e dentro
+da raiz autorizada. Deve rodar com servidor parado; cópias/backup não são removidos.
+Não promete segurança contra administrador hostil ou corrida de filesystem com outro
+processo que já tenha escrita. Inventário limitado a 10 mil JSONs ainda pode consumir
+I/O significativo; quotas totais e catálogo indexado permanecem evolução futura.
+
+HTML usa textContent para dados, escape de payload e hash CSP; exporta Blob local.
+Comparação não retorna binários nativos. Logs e originais reais devem permanecer privados.
+A auditoria do lock base de 76 dependências não encontrou vulnerabilidades conhecidas
+na consulta de 26/10/2026. Os três snapshots Python opcionais também foram auditados
+sem achados conhecidos; pacotes R e binários do sistema não são cobertos por pip-audit.
+Isso não garante ausência de vulnerabilidades. Strix foi encerrado por escolha do usuário.
+# Dashboard local sem autenticação manual (V4.2)
+
+O workspace local utiliza `/app/mcp` com origem estrita, conexão loopback e dados separados em `MMM_DATA_DIR/dashboard`. O endpoint `/mcp` mantém bearer, papéis e isolamento por usuário. O modo local pressupõe acesso confiável ao computador e não deve ser exposto por proxy. Consulte [o limite de acesso do dashboard](dashboard.md#acesso-e-limites).

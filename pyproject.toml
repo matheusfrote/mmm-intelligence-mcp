@@ -4,34 +4,52 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "mmm-intelligence-mcp"
-version = "0.3.1"
+version = "0.4.0"
 description = "Local exploratory Marketing Mix Modeling server using the official MCP SDK"
 readme = "README.md"
 requires-python = ">=3.11"
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE"]
+authors = [{name = "Matheus Frote"}]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Scientific/Engineering :: Information Analysis",
+]
 dependencies = [
   "mcp>=2.3,<3",
   "numpy>=2.2,<3",
   "scipy>=1.15,<2",
   "pydantic>=2.11,<3",
   "threadpoolctl>=3.1,<4",
+  "tzdata>=2025.2; platform_system == 'Windows'",
 ]
 
 [project.optional-dependencies]
-dev = ["pytest>=9.0.3,<10", "pytest-cov>=6,<8", "ruff>=0.12,<1", "build>=1.2,<2", "setuptools>=77", "pyyaml>=6,<7"]
+files = ["openpyxl>=3.1.5,<4", "defusedxml>=0.7.1,<1", "xlrd>=2.0.2,<3", "pyarrow>=21,<24", "lxml>=6,<7"]
+dev = ["pytest>=9.0.3,<10", "pytest-cov>=6,<8", "ruff>=0.12,<1", "build>=1.2,<2", "setuptools>=77", "pyyaml>=6,<7", "xlwt==1.3.0"]
 audit = ["bandit>=1.8,<2", "mypy>=1.18,<2", "pip-audit==2.10.1"]
 
 [project.scripts]
-mmm-intelligence-mcp = "mmm_intelligence.server:main"
+mmm-intelligence-mcp = "mmm_intelligence.cli:main"
+
+[project.urls]
+Repository = "https://github.com/matheusfrote/mmm-intelligence-mcp"
+Issues = "https://github.com/matheusfrote/mmm-intelligence-mcp/issues"
 
 [tool.setuptools.packages.find]
 where = ["src"]
 
 [tool.setuptools.package-data]
-mmm_intelligence = ["integrations/*.R"]
+mmm_intelligence = ["integrations/*.R", "web/*.html", "web/*.css", "web/*.js", "web/*.svg"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-ra"
+markers = ["native_transport: reduced synthetic native sampling for IPC/persistence, never production analytical validation"]
 
 [tool.ruff]
 target-version = "py311"
@@ -46,3 +64,23 @@ cache_dir = "var/mypy-cache"
 ignore_missing_imports = true
 follow_imports = "silent"
 warn_unused_ignores = true
+
+[tool.coverage.run]
+source = ["mmm_intelligence", "server", "plugins/mmm-intelligence-local"]
+branch = true
+parallel = true
+relative_files = true
+patch = ["subprocess"]
+data_file = "var/coverage/.coverage"
+
+[tool.coverage.report]
+fail_under = 100
+precision = 3
+show_missing = true
+
+[tool.coverage.paths]
+# The plugin test unpacks byte-for-byte generated copies of src, verified by its archive test.
+# Mapping combines executions of that same source; it excludes no production branches.
+source = ["src/mmm_intelligence", "plugin/server/mmm_intelligence", "*/plugin/server/mmm_intelligence", "*/src/mmm_intelligence"]
+plugin_launch = ["plugins/mmm-intelligence-local", "*/plugins/mmm-intelligence-local", "*/plugin"]
+entry_root = [".", "*/mmm", "*/mmm-intelligence-mcp"]

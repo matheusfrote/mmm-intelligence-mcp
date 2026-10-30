@@ -1,0 +1,141 @@
+{
+  "synthetic": true,
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "bootstrap_draws": 100,
+  "nominal_conditional_interval": 0.9,
+  "coverage_certified": false,
+  "scope": "Small matched fixed-shape experiment plus intentional misspecification. Time points are dependent; replications are the independent units. Null coefficients are constrained at a boundary. No prior sensitivity or native MCMC coverage tested.",
+  "summary": {
+    "matched": {
+      "replications": 10,
+      "mean_conditional_mean_coverage": 0.8730769230769232,
+      "mean_holdout_mae": 40.04454459410469,
+      "channels": {
+        "spend_search": {
+          "mean_absolute_coefficient_error": 39.017736815708574,
+          "parameter_coverage": 0.8
+        },
+        "spend_social": {
+          "mean_absolute_coefficient_error": 27.567430505871492,
+          "parameter_coverage": 1.0
+        },
+        "spend_video": {
+          "mean_absolute_coefficient_error": 17.619168957307245,
+          "parameter_coverage": 0.0
+        }
+      },
+      "all_abstained": true
+    },
+    "high_noise": {
+      "replications": 10,
+      "mean_conditional_mean_coverage": 0.8730769230769232,
+      "mean_holdout_mae": 400.445484777212,
+      "channels": {
+        "spend_search": {
+          "mean_absolute_coefficient_error": 390.17690996253555,
+          "parameter_coverage": 0.8
+        },
+        "spend_social": {
+          "mean_absolute_coefficient_error": 275.6746184167828,
+          "parameter_coverage": 1.0
+        },
+        "spend_video": {
+          "mean_absolute_coefficient_error": 176.19184111730766,
+          "parameter_coverage": 0.0
+        }
+      },
+      "all_abstained": true
+    },
+    "collinear": {
+      "replications": 10,
+      "mean_conditional_mean_coverage": 0.8673076923076923,
+      "mean_holdout_mae": 39.77411205893457,
+      "channels": {
+        "spend_search": {
+          "mean_absolute_coefficient_error": 606.1986806679132,
+          "parameter_coverage": 0.0
+        },
+        "spend_social": {
+          "mean_absolute_coefficient_error": 593.8013194044336,
+          "parameter_coverage": 0.0
+        },
+        "spend_video": {
+          "mean_absolute_coefficient_error": 18.529512972394325,
+          "parameter_coverage": 0.0
+        }
+      },
+      "all_abstained": true
+    },
+    "omitted_price": {
+      "replications": 10,
+      "mean_conditional_mean_coverage": 0.28076923076923077,
+      "mean_holdout_mae": 91.42488398061502,
+      "channels": {
+        "spend_search": {
+          "mean_absolute_coefficient_error": 58.12682514831913,
+          "parameter_coverage": 1.0
+        },
+        "spend_social": {
+          "mean_absolute_coefficient_error": 72.496890844653,
+          "parameter_coverage": 0.9
+        },
+        "spend_video": {
+          "mean_absolute_coefficient_error": 11.406102245583167,
+          "parameter_coverage": 0.0
+        }
+      },
+      "all_abstained": true
+    },
+    "structural_break": {
+      "replications": 10,
+      "mean_conditional_mean_coverage": 0.0,
+      "mean_holdout_mae": 2594.8348376397976,
+      "channels": {
+        "spend_search": {
+          "mean_absolute_coefficient_error": 39.017736815708574,
+          "parameter_coverage": 0.8
+        },
+        "spend_social": {
+          "mean_absolute_coefficient_error": 27.567430505871492,
+          "parameter_coverage": 1.0
+        },
+        "spend_video": {
+          "mean_absolute_coefficient_error": 17.619168957307245,
+          "parameter_coverage": 0.0
+        }
+      },
+      "all_abstained": true
+    },
+    "skewed_noise": {
+      "replications": 10,
+      "mean_conditional_mean_coverage": 0.8673076923076923,
+      "mean_holdout_mae": 189.13101679133723,
+      "channels": {
+        "spend_search": {
+          "mean_absolute_coefficient_error": 100.91251706541603,
+          "parameter_coverage": 1.0
+        },
+        "spend_social": {
+          "mean_absolute_coefficient_error": 159.13242661547372,
+          "parameter_coverage": 0.9
+        },
+        "spend_video": {
+          "mean_absolute_coefficient_error": 74.30465633473162,
+          "parameter_coverage": 0.0
+        }
+      },
+      "all_abstained": true
+    }
+  }
+}

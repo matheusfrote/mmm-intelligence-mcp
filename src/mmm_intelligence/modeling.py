@@ -54,6 +54,7 @@ def metrics(observed, predicted) -> dict:
     variance = float(np.sum((y - y.mean()) ** 2))
     nonzero = y != 0
     return {
+        "bias_predicted_minus_observed": float(-error.mean()),
         "mae": float(np.abs(error).mean()),
         "rmse": float(np.sqrt(np.mean(error**2))),
         "mape_nonzero_percent": float(np.mean(np.abs(error[nonzero] / y[nonzero])) * 100)
@@ -287,6 +288,8 @@ def train(dataset: dict, request: TrainRequest, model_id: str, report: dict) -> 
             "seed": request.bootstrap_seed,
             "scope": "conditional mean; fixed shape and inputs; not causal or predictive noise",
             "coverage_certified": False,
+            "supports_null_effect_testing": False,
+            "boundary_note": "Percentile residual bootstrap can under-cover null media coefficients at the nonnegative constraint boundary. Positive interval endpoints do not establish a nonzero effect.",
             "penalty_bias_note": "Residual bootstrap refits the penalized estimator; shrinkage can shift draws. Not a Bayesian posterior.",
         }
         lower, upper = np.quantile(np.asarray(draws), [0.05, 0.95], axis=0)

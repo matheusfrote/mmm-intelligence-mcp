@@ -1,5 +1,12 @@
 # Arquitetura e decisões
 
+Extensão de 29/10/2026: [ingestão e Growth](universal-ingestion.md) adiciona
+universal_schemas, supplied_files, media_validation e GrowthMixin. Artefatos de
+fonte/perfil/normalização/canônico/diagnóstico/decisão ficam em reports sob envelope
+de integridade, com discriminação de tipo. Lifecycle protege referências; snapshots
+de decisão são exclusivos e sequenciais. Arquivos são conteúdo inline limitado,
+sem conexões de mídia ou acesso a caminhos recebidos do cliente.
+
 O servidor usa SDK oficial MCP 2.3 e oferece stdio por padrão ou HTTP autenticado em loopback por opção do host. O módulo `server` expõe ferramentas tipadas; `service` normaliza resultados/erros e decide autorização. A matemática não importa MCP. Persistência não importa motores estatísticos. Os adaptadores Meridian, PyMC-Marketing e Robyn usam processos/ambientes isolados; nenhum adaptador de plataforma de anúncios está incluído.
 
 ```mermaid
@@ -36,3 +43,20 @@ Logs rotativos de até 1 MB mais três backups registram evento, ferramenta, sta
 Tarefas são locais e síncronas por ferramenta. Um semáforo recusa concorrência de cálculo por instância e BLAS usa uma thread. Workers externos têm timeout, processo separado e encerramento da árvore; no Windows recebem Job Object com limite de CPU e memória. HTTP usa bearer tokens do host, papéis e raiz separada por usuário. Não há fila durável, armazenamento compartilhado distribuído ou identidade corporativa federada. A instância HTTP fornecida escuta somente 127.0.0.1; publicação externa exige nova revisão e autorização.
 
 Artefatos adicionais ficam em `backend_models`, `reports` e `dashboards`. Modelos externos embutem bytes Protobuf, NetCDF ou JSON oficial em base64 sob o mesmo envelope de integridade. Não se usa pickle/RDS. Os workers recebem caminhos privados criados pelo host; o cliente continua fornecendo apenas IDs e dados inline. O R usa também um diretório automaticamente limpo na raiz temporária autorizada do sistema, porque não aceita espaços em seu tempdir interno no Windows.
+
+## Camadas V4 e operação futura
+
+ingestion faz parsing/transformações explícitas; quality produz screens sem alterar dados.
+canonical mantém linhagem e semântica por motor; forecasting constrói inputs futuros
+sem target; diagnostics classifica somente screens conhecidos. connectors oferece
+contratos offline e reconciliação, sem API ou credenciais. lifecycle enumera artefatos
+e propõe retenção; exclusão é operação CLI do host, não ferramenta MCP. dashboard_panels
+estende o HTML com dados da análise; exports são conteúdo local sem upload.
+
+Futuro serviço público: gateway TLS/OIDC com escopos por organização, banco de jobs
+com estados/idempotência e leases, fila durável com retry limitado, workers isolados
+por job, quotas de CPU/RAM/tempo/disco, storage por tenant com ACL, cofre de segredos,
+métricas sem payloads sensíveis e backup criptografado com ensaio de restore. Separar
+estado de autorização do contexto de tarefa e validar tenant ao iniciar e concluir
+cada job. O limite do processo local não substitui cgroup/containers/quotas distribuídas.
+Esse desenho não foi implantado: requer destino, identidade, custo e autorização.

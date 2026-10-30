@@ -1,5 +1,15 @@
 # Progresso da implementação e publicação
 
+## V4 — 26/10/2026, entrega local
+
+Baseline 015eaeff6e6606bdaac70ff66c3ea4fe193660b1 preservado; branch feat/v4-intelligence,
+sem commit/push novo. Apache-2.0 autorizada pelo proprietário e aplicada. Dez ferramentas
+adicionadas (26 totais), CSV, qualidade, comparação/forecast, CLI e governança, painel
+e ciclo de vida. 183 testes aprovados/0 falhas; 81,57% linhas, 23 chamadas MCP locais e
+reinício; três recargas nativas e futuro PyMC real; 60 ajustes/11 stress. Publicação,
+CI V4 remoto e proteção main não executados. [Relatório integral](docs/v4-delivery.md)
+e [matriz de execução](docs/v4-matrix.md). Registros abaixo são históricos.
+
 Pedido: entregar o MMM Intelligence MCP executável, revisado, testado e publicar no GitHub. Destino confirmado pelo usuário: **matheusfrote/mmm-intelligence-mcp, público**. Dados usados: exclusivamente sintéticos. Resultados estatísticos são exploratórios e não demonstram causalidade.
 
 ## Auditoria inicial
@@ -151,3 +161,58 @@ O wheel 0.3.1 foi instalado em diretório separado, com import confirmado a part
 - Push normal de ambos os commits para main confirmado; GitHub MCP consultou o commit remoto. Sem force push, merge, PR, tag de release, PyPI ou deploy.
 - [CI 40217559233](https://github.com/matheusfrote/mmm-intelligence-mcp/actions/runs/40217559233): **10 jobs aprovados**, nove combinações Windows/Linux/macOS × Python 3.11/3.12/3.13 e um job de advisories. Cada job de teste registrou 131 passed, mypy sem erros, Bandit sem achados ativos, nenhum padrão de segredo encontrado, stdio/HTTP/stress concluídos. Os dez logs foram consultados pelo MCP GitHub. Snapshot em [security031-github-ci.json](docs/validation/security031-github-ci.json).
 - Este registro é publicado em um commit posterior de documentação, com nova consulta ao CI da branch final. O veredito é aprovação da entrega local/GitHub no escopo testado, sem declaração de prontidão para Internet, pentest Strix ou validação causal.
+# Continuação V4.2 — 2026-10-27
+
+- Workspace local com dez módulos e ações MCP reais; login e exigência manual de token removidos exclusivamente do dashboard.
+- `/app/mcp` isolado por loopback/origem e raiz local própria; `/mcp` mantém bearer e tenants. CLI `dashboard` inicia sem configurar credenciais.
+- Ciclo Chrome: geração/importação CSV, qualidade, dois ajustes, comparação, simulação, otimização e HTML; numerais reconciliados com respostas MCP, teclado, 320–1440 px e axe-core claro/escuro.
+- Plugin local preparado com fonte e manifests portáveis; build ZIP determinístico e descoberta real fora do checkout. Templates remotos estruturais, sem deploy/HTTPS público/OAuth.
+- Estado detalhado e pendências reais: [entrega V4.2](docs/v42-delivery.md). Evidências históricas V4 preservadas.
+
+## Continuação e CI V4.2 — consolidado em 2026-10-29
+
+Publicação em `feat/v4-intelligence` confirmada. Correções dos caminhos do wheel no
+macOS e sincronização da navegação entregues em 3349e4e/c5f8eaa. Em 28/10, c5f8eaa
+passou em dez jobs da matriz base/segurança e dois jobs de dashboard/contêiner.
+Localmente: 198 testes, cobertura 81,50%, wheel isolado, Docker real e ciclos MCP
+completos em instalações uvx/pipx.
+
+[Relatório com links, recibos e limites](docs/v42-followup.md). O roadmap foi
+atualizado sem declarar extensões científicas, conectores, plugin público ou
+produção como concluídos. Main, release, PyPI e infraestrutura externa preservados.
+
+## Ingestão fornecida pelo usuário e Growth — 2026-10-29
+
+Acrescentadas 13 ferramentas MCP (total39), formatos CSV/TSV/JSON/JSONL/XLSX,
+18 perfis iniciais, perfis customizados imutáveis, validação crossmedia, agregação
+explícita, screen MMM e snapshots de diagnóstico/decisão/aprendizado. Controles
+existentes de dados reais, tenants, leitura por papel, hashes e exclusão preservados.
+Referências entre reports passaram a bloquear exclusão de fonte utilizada.
+
+Baseline:198 testes. Resultado:230 testes, cobertura82,41%, um aviso preexistente.
+Demo SDK:7 fontes,38 chamadas,39 ferramentas, persistência após reinício.
+Regressão E2E Chrome aprovada. Revisão independente confirmou correções e32 testes
+focais aprovados. Documentação, ferramentas, evidências e limitações:
+[ingestão e Growth](docs/universal-ingestion.md). Extensão local; não foi declarada
+conclusão integral de todos os formatos, joins, métodos experimentais e UI previstos.
+
+## Fechamento universal e operacionalização — 29/10/2026
+
+Entregues oito formatos, joins explícitos, materialização consumida pelos quatro
+motores, análises temporais/coortes/experimentos, 18 perfis e interface dedicada.
+O protocolo expõe 45 ferramentas, três prompts e um recurso. Corrigidos perda de
+horário XLSX, recorte do gráfico, referência crossmedia, projeção inválida na UI e
+uso de resposta histórica no cenário Robyn. Context manager fecha logs no Windows.
+
+Gates locais: Python com 3.659 linhas/1.316 branches, JS com 792 linhas/284 branches/207 funções,
+R com 102 expressões/22 caminhos, todos em 100% no escopo explícito. Ambiente `.venv` instalado
+com dependências extras; 115 binários R fixados por URL/versão/SHA256 e instalação
+em biblioteca nova verificada. SDK stdio sintético executou as 45 ferramentas e
+verificou persistência, recursos, prompts, cenários e futuro suportado.
+
+O [checklist vigente](docs/closure-checklist.md), o
+[relatório de validação](docs/operational-validation.md) e os
+[recibos](docs/validation/closure/) preservam contagens, limitações e reprodução.
+MCMC curto/busca reduzida são testes funcionais, sem validação causal ou certificação
+de convergência. Publicação e merge dependem da aprovação das verificações, conforme
+autorização explícita do proprietário; nenhum serviço externo é implantado.

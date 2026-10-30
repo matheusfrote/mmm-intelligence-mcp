@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta
+      name="description"
+      content="Análise exploratória de marketing, com dados e limites verificáveis."
+    />
+    <title>MMM Intelligence · Workspace</title>
+    <link rel="icon" href="/app/icon.svg" />
+    <link rel="stylesheet" href="/app/app.css" />
+    <script type="module" src="/app/app.js"></script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Ir para o conteúdo</a>
+    <aside class="sidebar">
+      <a class="brand" href="#overview"
+        ><img src="/app/icon.svg" width="32" height="32" alt="" /><span
+          >mmm<span class="brand-sub">intelligence</span></span
+        ></a
+      >
+      <p class="eyebrow">Workspace analítico</p>
+      <nav aria-label="Módulos" id="nav"></nav>
+      <footer>
+        <span class="status-dot"></span> Ambiente local
+        <p>Associação estatística.<br />Causalidade não demonstrada.</p>
+      </footer>
+    </aside>
+    <div class="workspace">
+      <header class="topbar">
+        <span class="breadcrumb"
+          >Workspace <span>/</span>
+          <strong id="breadcrumb">Visão geral</strong></span
+        >
+        <div class="actions">
+          <span class="badge">Workspace local</span
+          ><label class="theme-label"
+            >Aparência
+            <select id="theme">
+              <option value="system">Sistema</option>
+              <option value="light">Clara</option>
+              <option value="dark">Escura</option>
+            </select></label
+          >
+        </div>
+      </header>
+      <div class="contextbar">
+        <label
+          >Dataset<select id="dataset">
+            <option value="">Selecione um dataset</option>
+          </select></label
+        ><label
+          >Modelo<select id="model">
+            <option value="">Selecione um modelo</option>
+          </select></label
+        ><button id="refresh">Atualizar</button>
+      </div>
+      <main id="main" tabindex="-1">
+        <h1>Visão geral</h1>
+        <p>Carregando o workspace local…</p>
+        <noscript
+          >Ative JavaScript e abra esta interface pelo servidor local em
+          /app.</noscript
+        >
+      </main>
+      <div id="status" role="status" aria-live="polite"></div>
+      <div id="error" role="alert" hidden></div>
+      <footer class="disclaimer">
+        Exploratório · Resultados condicionais ao modelo e às premissas. Nenhuma
+        campanha ou verba real é alterada.
+      </footer>
+    </div>
+  </body>
+</html>

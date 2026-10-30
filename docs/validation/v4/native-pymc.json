@@ -1,0 +1,213 @@
+{
+  "backend": "pymc_marketing",
+  "fresh_training": false,
+  "transport": "stdio",
+  "synthetic": true,
+  "canonical_metrics": {
+    "bias_predicted_minus_observed": -418.13646504764455,
+    "mae": 418.13646504764455,
+    "rmse": 460.4149873343507,
+    "mape_nonzero_percent": 3.58052991868697,
+    "mape_excluded_zeros": 0,
+    "wape_percent": 3.5062430183651347,
+    "r2": 0.6767587966005522
+  },
+  "diagnostic_assessment": {
+    "status": "inadequate",
+    "failed_screens": [
+      "r_hat_max",
+      "ess_bulk_min",
+      "ess_tail_min"
+    ],
+    "missing_or_insufficient": [
+      "fewer_than_four_chains",
+      "draws:short_run",
+      "tune:short_run"
+    ],
+    "policy": {
+      "max_rhat_exclusive": 1.01,
+      "minimum_ess_per_chain": 100,
+      "minimum_chains": 4,
+      "minimum_draws_and_tune_screen": 400
+    },
+    "reference": "https://mc-stan.org/learn-stan/diagnostics-warnings.html",
+    "scope": "Rank R-hat, bulk/tail ESS and divergences only; inspect mixing, PPC, priors and identification separately. Sample-count screens are operational, not universal guarantees.",
+    "business_recommendation_eligible": false,
+    "convergence_certified": false
+  },
+  "reload_matches": true,
+  "capabilities": {
+    "training": {
+      "available": true,
+      "runtime": "optional"
+    },
+    "historical_evaluation": {
+      "available": true
+    },
+    "future_projection": {
+      "available": true,
+      "reason": "Explicit future plan and controls, conditional on fixed fitted parameters"
+    },
+    "optimization": {
+      "available": false,
+      "reason": "Native optimizer integration and uncertainty propagation not verified; no Ridge fallback"
+    },
+    "calibration": {
+      "available": false,
+      "reason": "Conditional bootstrap reweighting only; not a full experimental refit"
+    },
+    "multigeography": {
+      "available": false,
+      "reason": "Current API is one national time series"
+    },
+    "causal_recommendation": {
+      "available": false,
+      "reason": "Não há evidência suficiente para sustentar uma recomendação de investimento confiável com os dados e as condições atuais."
+    }
+  },
+  "forecast": {
+    "model_id": "pymc_marketing-afa3023a66d14ae6b844f6a30f454f8e",
+    "backend": "pymc_marketing",
+    "scope": "future_conditional_projection",
+    "synthetic": true,
+    "assumptions": {
+      "horizon": 4,
+      "frequency_days": 7,
+      "media_plan": {
+        "spend_search": [
+          1000.0,
+          1100.0,
+          900.0,
+          1000.0
+        ],
+        "spend_social": [
+          1000.0,
+          1100.0,
+          900.0,
+          1000.0
+        ],
+        "spend_video": [
+          1000.0,
+          1100.0,
+          900.0,
+          1000.0
+        ]
+      },
+      "future_controls": {
+        "price_index": [
+          1.0707171965431954,
+          1.0707171965431954,
+          1.0707171965431954,
+          1.0707171965431954
+        ],
+        "promotion": [
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "training_spend_ranges": {
+        "spend_search": [
+          0.0,
+          2793.950093157293
+        ],
+        "spend_social": [
+          0.0,
+          2797.7618261855964
+        ],
+        "spend_video": [
+          0.0,
+          2792.5866445939328
+        ]
+      },
+      "trend_and_seasonality": "Persisted model functions evaluated on future dates; no future baseline observations",
+      "initial_adstock": "Observed history through 2025-12-22; no refit of coefficients",
+      "uncertainty_exclusions": [
+        "Future input error",
+        "Misspecification",
+        "Unmeasured confounding"
+      ]
+    },
+    "prediction": {
+      "dates": [
+        "2025-12-29",
+        "2026-01-05",
+        "2026-01-12",
+        "2026-01-19"
+      ],
+      "mean": [
+        11620.660898443568,
+        11516.801255196136,
+        11264.477883497724,
+        11174.779974178378
+      ],
+      "lower_90": [
+        11293.356703664653,
+        11191.673570781471,
+        10941.818461464145,
+        10806.087469391741
+      ],
+      "upper_90": [
+        11938.005997314176,
+        11831.374861221137,
+        11551.007604863707,
+        11476.845425720256
+      ],
+      "samples": 100,
+      "interval_type": "posterior_predictive_observed",
+      "interval_level": 0.9,
+      "total_mean": 45576.7200113158,
+      "total_interval_90": [
+        44709.51695059706,
+        46369.413403444145
+      ]
+    },
+    "diagnostics": {
+      "chains": 2,
+      "convergence_certified": false,
+      "divergences": 0,
+      "divergences_available": true,
+      "draws": 50,
+      "ess_bulk_available": true,
+      "ess_bulk_min": 9.44583053993123,
+      "ess_bulk_undefined_count": 0,
+      "ess_tail_available": true,
+      "ess_tail_min": 10.229866530788394,
+      "ess_tail_undefined_count": 0,
+      "excluded_date_dependent_variables": [
+        "mu",
+        "yearly_seasonality_contribution",
+        "fourier_contribution",
+        "control_contribution",
+        "channel_contribution"
+      ],
+      "method": "ArviZ rank-normalized split R-hat, bulk ESS and tail ESS",
+      "r_hat_available": true,
+      "r_hat_max": 1.1833043641348375,
+      "r_hat_undefined_count": 0,
+      "summarized_variables": [
+        "adstock_alpha",
+        "saturation_lam",
+        "saturation_beta",
+        "gamma_fourier",
+        "gamma_control",
+        "intercept_contribution",
+        "y_sigma",
+        "total_media_contribution_original_scale"
+      ],
+      "tune": 50
+    },
+    "decision_support": {
+      "business_recommendation_eligible": false,
+      "message": "Não há evidência suficiente para sustentar uma recomendação de investimento confiável com os dados e as condições atuais.",
+      "required_next_step": "Review native diagnostics, prior/input sensitivity, historical support and an independent business experiment"
+    },
+    "warnings": [
+      "FUNCTIONAL_SAMPLING_ONLY: inspect R-hat/ESS/divergences before statistical use",
+      "Predictive intervals are conditional on model assumptions; no causal guarantee"
+    ],
+    "exploratory": true
+  },
+  "future_restart_reproducible": true
+}

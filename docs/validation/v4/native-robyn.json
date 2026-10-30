@@ -1,0 +1,49 @@
+{
+  "backend": "meta_robyn",
+  "fresh_training": false,
+  "transport": "stdio",
+  "synthetic": true,
+  "canonical_metrics": {
+    "bias_predicted_minus_observed": -24.769235017620243,
+    "mae": 446.23961477292437,
+    "rmse": 538.0521039648786,
+    "mape_nonzero_percent": 3.768255737984379,
+    "mape_excluded_zeros": 0,
+    "wape_percent": 3.734395870694835,
+    "r2": 0.580637924142914
+  },
+  "diagnostic_assessment": {
+    "status": "not_applicable",
+    "reason": "Robyn search is not MCMC; review trials, validation and stability"
+  },
+  "reload_matches": true,
+  "capabilities": {
+    "training": {
+      "available": true,
+      "runtime": "optional"
+    },
+    "historical_evaluation": {
+      "available": true
+    },
+    "future_projection": {
+      "available": false,
+      "reason": "Adapter exposes historical responses only; future baseline/carryover semantics not implemented and verified"
+    },
+    "optimization": {
+      "available": false,
+      "reason": "Native optimizer integration and uncertainty propagation not verified; no Ridge fallback"
+    },
+    "calibration": {
+      "available": false,
+      "reason": "Conditional bootstrap reweighting only; not a full experimental refit"
+    },
+    "multigeography": {
+      "available": false,
+      "reason": "Current API is one national time series"
+    },
+    "causal_recommendation": {
+      "available": false,
+      "reason": "Não há evidência suficiente para sustentar uma recomendação de investimento confiável com os dados e as condições atuais."
+    }
+  }
+}

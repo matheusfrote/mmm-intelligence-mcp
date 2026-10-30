@@ -40,7 +40,7 @@ O total do orçamento é dividido por `horizon` e distribuído pelas frações. 
 
 Sem `future_controls`, valores ficam constantes no último observado. Tendência/sazonalidade continuam a partir do índice temporal histórico. O retorno distingue previsão total, componente modelado de mídia, orçamento do comparador e diferença de previsões. Essa diferença não é lift causal nem lucro; quando os totais diferem, inclui também uma mudança no volume investido. O cliente de exemplo compara totais iguais.
 
-Uma verba zero ainda pode apresentar componente de mídia por carryover histórico. Efeitos após o horizonte não entram no total. Orçamentos fora da faixa de gastos do treino geram aviso de extrapolação. Não existe otimização automática nesta versão.
+Uma verba zero ainda pode apresentar componente de mídia por carryover histórico. Efeitos após o horizonte não entram no total. Orçamentos fora da faixa de gastos do treino geram aviso de extrapolação. optimize_budget calcula candidato numérico com limites, conforme a seção abaixo; não executa decisões em contas.
 
 ## Limitações explícitas
 
@@ -67,3 +67,34 @@ RMSE complementa MAE; MAPE exclui observados exatamente zero e informa a contage
 Bootstrap residual reajusta o estimador penalizado e pode deslocar os percentis por shrinkage. O ponto fora dos intervalos é sinalizado; não há recentramento artificial, posterior bayesiana ou cobertura certificada. Calibração exige mesma origem sintética/real do modelo e do experimento.
 
 Otimização compara o candidato com uma referência de mesmo orçamento, horizonte, controles e estado inicial. Derivadas são KPI condicional por gasto. Sucesso SLSQP não gera recomendação de negócio: recommended_spend=null. Abstenção e revisão humana são explícitas, inclusive para dados sintéticos, posto deficiente, incerteza ausente, extrapolação ou instabilidade. [Auditoria e limites](../MMM_AUDIT_REPORT.md).
+
+## Verificações V4
+
+Viés = média(previsto - observado); valores positivos indicam superprevisão. R-hat
+máximo deve ser menor que 1,01 e ESS bulk/tail mínimo pelo menos 100 por cadeia no
+screen padrão. Esses dois limites são configuráveis em get_analysis. Quatro cadeias,
+400 draws/tune são filtros operacionais de amostra, não prova universal de convergência.
+Divergências/falhas conhecidas classificam como inadequado; informações ausentes ou
+parâmetros indefinidos como inconclusivo; falha de estimação como não estimável.
+Adequado significa apenas os screens avaliados; mistura, PPC, priors, estabilidade,
+identificação e transporte exigem análise separada. Referência: [Stan](https://mc-stan.org/learn-stan/diagnostics-warnings.html).
+
+examples/recovery_study.py executa seis regimes × dez seeds, 100 bootstraps por ajuste,
+260 semanas, formas fixas por construção e coeficientes conhecidos 3000/1800/0. Controle
+de preço negativo, tendência e sazonalidade pertencem ao DGP. Não há afirmação de que
+formas foram aprendidas da verdade. Casos: bem especificado, ruído alto, colinearidade,
+preço omitido, quebra estrutural e ruído assimétrico. Cobertura média condicional de
+intervalos nominais 90%: 87,31%, 87,31%, 86,73%, 28,08%, 0% e 86,73%, respectivamente.
+São dez replicações independentes por regime; datas dentro de cada série são dependentes.
+Não estimar precisão Monte Carlo tratando todas as datas como replicações independentes.
+
+No canal nulo, a cobertura paramétrica percentil foi zero: a restrição não negativa e
+solução numérica na fronteira tornam o intervalo inadequado para testar efeito nulo.
+Não arredondamos/recentramos limites para aparentar cobertura. uncertainty declara
+supports_null_effect_testing=false e boundary_note. Além disso, colinearidade preservou
+boa previsão sem recuperar os coeficientes separados. Esses resultados reforçam a
+abstenção, não validam atribuição causal. Estudo pequeno não certifica cobertura geral.
+
+A projeção PyMC usa a API nativa de posterior predictive com histórico intermediário
+sem target; a Ridge usa estado terminal e bootstrap condicional. Detalhes e capacidades
+em [comparison.md](comparison.md). [Estudo reproduzível](validation/v4/recovery.json).

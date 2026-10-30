@@ -16,5 +16,6 @@ var/
 *.p12
 *.pfx
 evidence/
+node_modules/
 preservation-baseline.json
 examples/*.local.json

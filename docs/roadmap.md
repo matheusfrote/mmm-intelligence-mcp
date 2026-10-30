@@ -1,20 +1,38 @@
-# Evolução planejada: interfaces, sem integrações executáveis
+# Estado da entrega e evolução planejada
 
-> Documento histórico do planejamento 0.1. Na versão 0.2, as seis capacidades abaixo foram implementadas e receberam testes locais. Consulte [extension-report.md](extension-report.md) e [operations.md](operations.md) para situação atual, limites dos motores e evidências. Os trechos seguintes registram os critérios originais, não o status atual.
+Atualizado em 29/10/2026. [Entrega V4](v4-delivery.md), [dashboard V4.2](v42-delivery.md)
+e [continuação com CI observado](v42-followup.md) registram etapas distintas.
+Não há prazos ou automações agendadas.
 
-O pacote `integrations/contracts.py` define contratos independentes de frameworks e de MCP: `ModelingData`, `ModelBundle`, `Scenario`, `ModelBackend`, `BudgetConstraints`, `InvestmentOptimizer`, `DashboardRenderer` e `ReportRenderer`. O registro `PLANNED_CAPABILITIES` marca as seis áreas como `planned_not_implemented`.
+## Entregas verificadas
 
-Esses contratos não são adaptadores funcionais nem um mecanismo de seleção de backend. O serviço atual chama o motor Ridge local. Nenhuma biblioteca Meridian/Robyn/PyMC foi instalada para este projeto, nenhum mock é apresentado como resultado desses motores e nenhum import opcional ocorre em startup.
+| Item | Estado |
+|---|---|
+| Publicação do código | Branch `feat/v4-intelligence` no GitHub; main preservada |
+| CI da base V4.2 | Nove combinações OS/Python e segurança aprovadas no commit c5f8eaa |
+| Dashboard de treino/comparação | Dez módulos, ações MCP reais, sem login local; E2E Chrome local e Chromium no CI aprovados |
+| Contêiner | Construção, isolamento e persistência após recriação verificados localmente e no CI; imagem fixada por digest |
+| Distribuição local | Wheel/sdist, CLI, ZIP do plugin e instalação isolada uvx/pipx verificados no alcance documentado |
 
-| Área | Implementação futura | Critério antes de declarar pronta |
+## Trabalho futuro
+
+| Prioridade | Pendência | Dependência e aceite |
 |---|---|---|
-| Google Meridian | Adaptar contrato a dados e modelo do SDK oficial escolhido; ambiente isolado | Instalar versão suportada, ajuste/diagnósticos reais, persistência e integração MCP testados |
-| Meta Robyn | Bridge explícita Python/R ou processo separado com contrato serializado | R/Robyn instalados, execução completa e tradução de unidades/parâmetros comprovadas |
-| PyMC-Marketing | Adaptar features, priors, amostragem e posterior | Fit real, diagnóstico de convergência e previsão posterior testados |
-| Otimização | Consumir backend, horizonte, estado e restrições independentes | Verificar conservação/limites, casos inviáveis e comparação com malha independente |
-| Dashboards | Consumir bundle versionado e resultados de cenário | Renderização e testes de dados completos, sem mascarar ressalvas |
-| Relatórios automatizados | Renderer local separado da operação MCP | Artefato real, métricas reconciliadas, proveniência e conteúdo conferidos |
+| P0 | Release/PyPI | Publicação separada do push; escopo de publicação e conta/Trusted Publisher apropriados |
+| P0 | Proteger main | Aprovação das regras, revisão viável para mantenedor solo e nomes reais dos checks |
+| P0 | Validar decisões empresariais | Fonte autorizada, reconciliação e experimento conforme real_data_validation.md |
+| P1 | Conectores Google/Meta/vendas/GA4 | Adapter API/OAuth, cofre, paginação/retry/incremental e execução real autorizada |
+| P1 | Incerteza na fronteira/identificação fraca | Métodos e estudo de cobertura amplo; não deslocar percentis por conveniência |
+| P1 | Priors/PPC/mistura nos motores nativos | Amostragem adequada e estudo controlado; smoke curto não certifica |
+| P1 | Forecast Meridian/Robyn | Validar baseline, tendência, carryover e serialização no SDK nativo |
+| P1 | Otimizadores externos | Horizonte, limites, totais e incerteza comprovados, sem fallback Ridge |
+| P1 | CI dos motores nativos | Executar workflows PyMC/Meridian; provisionar e testar R/Robyn; a matriz base não os certifica |
+| P2 | Plugin no cliente desktop | Instalação e avaliação no host; teste stdio não substitui essa validação |
+| P2 | Plugin público | HTTPS/OAuth, políticas publicadas, identidade, países e avaliação do diretório |
+| P2 | Qualificação de produção da imagem | Scan de SO, nginx/TLS e backup/restauração no destino; smoke Docker não substitui esses checks |
+| P2 | Geo/hierarquias/reach/frequency/lift nativo | Novos contratos, dados e estudos científicos |
+| P2 | Serviço público/filas duráveis | Destino autorizado, identidade, TLS, quotas, filas, backups e observabilidade |
 
-Antes de permitir importação real: definir formato e schema, controles de acesso, consentimento, validação de origem e política de retenção. Antes de recomendar investimentos: identificação causal, calibração, incerteza, sensibilidade de formas, suporte observado e restrições de negócio. Antes de distribuir para outros ambientes: CI em Python 3.11/3.12+, testes por sistema operacional e locks apropriados. Antes de migrar o SDK MCP para outra major: adaptar APIs e repetir descoberta, execução, falhas e reinício do processo.
-
-Não há prazos ou automações agendadas. Qualquer acesso a contas, publicação ou serviço externo exige um novo escopo autorizado.
+Os controles locais não constituem uma oferta SaaS multiempresa. Serviço externo
+continua fora do escopo escolhido pelo proprietário. Strix foi encerrado por decisão
+expressa; não é uma dependência pendente desta entrega.
