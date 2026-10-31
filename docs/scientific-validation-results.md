@@ -107,7 +107,7 @@ Verificações de software concluídas na revisão das fontes registrada no
 
 | Verificação | Resultado observado |
 |---|---|
-| Regressão Windows | 723 aprovados; três ciclos nativos executados separadamente |
+| Regressão Windows | 724 aprovados; três ciclos nativos executados separadamente |
 | Regressão Linux em contêiner sem rede | 722 aprovados; três nativos e um teste exclusivo Windows omitidos pela plataforma |
 | Ciclos nativos reais | 3 aprovados, sem substituição por mocks |
 | Python, agregado Windows/Linux/workers com hashes iguais | 4.227/4.227 linhas e 1.554/1.554 decisões |
@@ -123,6 +123,22 @@ O Windows preservou um aviso numérico SciPy já observado no teste de backtest
 anterior; seus invariantes passaram. O Linux registrou aviso de permissão de cache
 pytest no bind mount, sem falha dos testes. Os recibos não equivalem à matriz
 completa do GitHub Actions; o estado remoto deve ser consultado na PR.
+
+O primeiro CI remoto aprovou os demais 24 checks, mas bloqueou a instalação R por
+divergência de SHA256. A conferência dos 115 downloads CRAN encontrou 101 outras
+divergências nas URLs das mesmas versões, além de QuickJSR. A investigação
+detalhada de QuickJSR confirmou apenas
+metadados de build na DLL, sem alteração de suas seções de código/dados; isso não
+foi usado para desativar hashes ou aprovar todos os arquivos reconstruídos.
+A instalação passou a usar o snapshot oficial Posit CRAN de **23/10/2026**, que
+preserva exatamente as 115 versões. Todos os ZIPs foram conferidos por versão,
+fixados por SHA256 e instalados em biblioteca separada. Os casos nativos R de
+treino, restauração, cenários, legado e conversões passaram novamente, com 100%
+das expressões do worker. O cache é separado por snapshot; `latest` é recusado.
+Os recibos científicos anteriores continuam associados à instalação original.
+Consulte a [investigação e validação do snapshot](validation/scientific/r-upstream-rebuild.json)
+e a documentação oficial de [snapshots](https://packagemanager.posit.co/__docs__/admin/repositories.html)
+e [binários](https://packagemanager.posit.co/__docs__/admin/serving-binaries.html).
 
 [Protocolo e comandos](scientific-validation.md) descrevem os parâmetros, limites
 e workflow manual extenso. [Ambiente](validation/scientific/environment.json)

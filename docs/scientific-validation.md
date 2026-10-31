@@ -182,6 +182,14 @@ que executou/registrou o protocolo; os resultados científicos podem ser reprova
 ou inconclusivos. Os testes rápidos, gates de cobertura e ciclo nativo curto
 permanecem no CI normal. Não há execução de campanhas ou deploy.
 
+O manifesto `requirements/robyn-r-win-binaries.json` usa o snapshot oficial Posit
+CRAN de 23/10/2026, com as 115 versões anteriores e SHA256 por arquivo. O instalador
+valida URLs, data e hashes, com cache separado por snapshot e sem fallback para
+`latest` ou para um arquivo de hash diferente. Para reconferência pelo mantenedor,
+`python examples/freeze_r_binaries.py --snapshot 2026-10-23` usa as versões do
+manifesto rastreado; `--packages-csv` permite uma atualização deliberada da lista.
+Revisar o diff e executar os ciclos nativos antes de adotar outro snapshot.
+
 ## Referências
 
 - [Stan: análise posterior e R-hat](https://mc-stan.org/docs/reference-manual/analysis.html).

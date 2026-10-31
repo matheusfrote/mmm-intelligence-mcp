@@ -4,9 +4,9 @@
   "base_main": "293828e125076814dd81c68d1d4653a95aaee11a",
   "tests": {
     "windows": {
-      "passed": 723,
+      "passed": 724,
       "skipped": 3,
-      "log_sha256": "72ed3dd30b30c58fdffa4400ab2bf55537cbcedf94fdf74db6f35cbe6a51d0fd"
+      "log_sha256": "f93239f8b8604383bbdb47a808e507fbde5cdbf00fed7711c98f6a4a8e6557f6"
     },
     "linux": {
       "passed": 722,
@@ -287,5 +287,37 @@
   "ruff": "passed",
   "mypy_source_modules": 45,
   "bandit": "passed",
-  "causal_identification": false
+  "causal_identification": false,
+  "previous_windows_regression": {
+    "passed": 723,
+    "skipped": 3,
+    "log_sha256": "72ed3dd30b30c58fdffa4400ab2bf55537cbcedf94fdf74db6f35cbe6a51d0fd"
+  },
+  "post_verification_r_snapshot": {
+    "snapshot": "2026-10-23",
+    "repository": "https://packagemanager.posit.co/cran/2026-10-23",
+    "source_versions_unchanged": 115,
+    "archives_version_checked_sha256_pinned_and_installed": 115,
+    "mutable_cran_archive_mismatches_observed": 101,
+    "additional_quickjs_rebuild_reviewed_separately": true,
+    "manifest_sha256": "4215ed438a2ba677512996865cefea43bc3137b745cee363c62e41320b2a0427",
+    "previous_git_manifest_sha256": "1133875ab0a5e41483261b8315a2783e0f6291b2174a4db464b333a669a40d01",
+    "local_validation": {
+      "status": "passed",
+      "expression_percent": 100,
+      "native_cases": [
+        "train",
+        "predict",
+        "scenario",
+        "legacy",
+        "conversion"
+      ],
+      "QuickJSR": "R 4.5.0; x86_64-w64-mingw32; 2026-08-22 04:54:10 UTC; windows",
+      "Robyn": "3.12.1"
+    },
+    "maintainer_refreeze_reproduces_identical_lock_from_tracked_manifest": true,
+    "hash_mismatch_still_rejected": true,
+    "cache_isolated_by_snapshot": true,
+    "scope": "Official dated repository and exact hashes; no independent upstream security certification or guarantee of vendor availability"
+  }
 }

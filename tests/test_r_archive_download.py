@@ -115,3 +115,15 @@ def test_actual_http_rate_limit_recovers_and_verifies(downloader, tmp_path):
     assert requests == ["/package.zip", "/package.zip"]
     assert target.read_bytes() == payload
     assert list(tmp_path.glob("*.tmp")) == []
+
+
+def test_repository_requires_a_real_snapshot_date(downloader):
+    assert (
+        downloader.binary_repository(None) == "https://cloud.r-project.org/bin/windows/contrib/4.5/"
+    )
+    assert downloader.binary_repository("2026-10-29") == (
+        "https://packagemanager.posit.co/cran/2026-10-29/bin/windows/contrib/4.5/"
+    )
+    for invalid in ("latest", "2026-02-30", "../2026-10-29", "2026-1-1"):
+        with pytest.raises(ValueError):
+            downloader.binary_repository(invalid)

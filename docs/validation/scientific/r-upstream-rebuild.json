@@ -1,0 +1,111 @@
+{
+  "package": "QuickJSR",
+  "version": "1.11.0",
+  "observed_date": "2026-10-31",
+  "previous_sha256": "15b6d006d2f9490a721c516c303e647923c575100c5c88f8684d92a608e0d873",
+  "reviewed_sha256": "eb8c9063a7cd4b7c100145ac9a4d882713bbe72e0e88cedadb6216975bc4068c",
+  "official_endpoints": {
+    "https://cloud.r-project.org/bin/windows/contrib/4.5/QuickJSR_1.11.0.zip": "eb8c9063a7cd4b7c100145ac9a4d882713bbe72e0e88cedadb6216975bc4068c",
+    "https://cran.r-project.org/bin/windows/contrib/4.5/QuickJSR_1.11.0.zip": "eb8c9063a7cd4b7c100145ac9a4d882713bbe72e0e88cedadb6216975bc4068c"
+  },
+  "same_version_in_both_official_indexes": true,
+  "previous_build": "R 4.5.3; 2026-10-23 16:09:11 UTC",
+  "reviewed_build": "R 4.5.3; 2026-10-26 00:20:39 UTC",
+  "changed_archive_members": [
+    "QuickJSR/DESCRIPTION",
+    "QuickJSR/help/paths.rds",
+    "QuickJSR/help/QuickJSR.rdb",
+    "QuickJSR/help/QuickJSR.rdx",
+    "QuickJSR/libs/x64/QuickJSR.dll",
+    "QuickJSR/libs/x64/symbols.rds",
+    "QuickJSR/MD5",
+    "QuickJSR/Meta/package.rds"
+  ],
+  "dll_changed_byte_count": 8,
+  "dll_differences_only_coff_export_timestamps_and_pe_checksum": true,
+  "dll_sections": [
+    {
+      "name": ".text",
+      "identical": true
+    },
+    {
+      "name": ".data",
+      "identical": true
+    },
+    {
+      "name": ".rdata",
+      "identical": true
+    },
+    {
+      "name": ".pdata",
+      "identical": true
+    },
+    {
+      "name": ".xdata",
+      "identical": true
+    },
+    {
+      "name": ".bss",
+      "identical": true
+    },
+    {
+      "name": ".edata",
+      "identical": false
+    },
+    {
+      "name": ".idata",
+      "identical": true
+    },
+    {
+      "name": ".CRT",
+      "identical": true
+    },
+    {
+      "name": ".tls",
+      "identical": true
+    },
+    {
+      "name": ".reloc",
+      "identical": true
+    }
+  ],
+  "interpretation": "Official binary rebuild of the same package version; executable code and data sections are byte identical. Hash verification is retained; this is not an independent upstream security audit.",
+  "local_functional_validation": {
+    "status": "passed",
+    "installed_packages": 115,
+    "runtime": "R 4.5.2",
+    "Robyn": "3.12.1",
+    "synthetic_native_training_and_serialization": true,
+    "input_sha256": "45bf7f205244a68fb9901b25cb07a3436eca714c5e81b1ebe76b24e0154797b7",
+    "native_json_sha256": "919848f10738652a7bdc722e8478b39777df493422cfbf85a2578084d5dc096e",
+    "scope": "Reduced search with the reviewed rebuild in a separate installed library; not analytical convergence"
+  },
+  "reviewed_cloud_archive_selected_for_CI": false,
+  "resolution": {
+    "snapshot": "2026-10-23",
+    "repository": "https://packagemanager.posit.co/cran/2026-10-23",
+    "source_versions_unchanged": 115,
+    "archives_version_checked_sha256_pinned_and_installed": 115,
+    "mutable_cran_archive_mismatches_observed": 101,
+    "additional_quickjs_rebuild_reviewed_separately": true,
+    "manifest_sha256": "4215ed438a2ba677512996865cefea43bc3137b745cee363c62e41320b2a0427",
+    "previous_git_manifest_sha256": "1133875ab0a5e41483261b8315a2783e0f6291b2174a4db464b333a669a40d01",
+    "local_validation": {
+      "status": "passed",
+      "expression_percent": 100,
+      "native_cases": [
+        "train",
+        "predict",
+        "scenario",
+        "legacy",
+        "conversion"
+      ],
+      "QuickJSR": "R 4.5.0; x86_64-w64-mingw32; 2026-08-22 04:54:10 UTC; windows",
+      "Robyn": "3.12.1"
+    },
+    "maintainer_refreeze_reproduces_identical_lock_from_tracked_manifest": true,
+    "hash_mismatch_still_rejected": true,
+    "cache_isolated_by_snapshot": true,
+    "scope": "Official dated repository and exact hashes; no independent upstream security certification or guarantee of vendor availability"
+  }
+}
