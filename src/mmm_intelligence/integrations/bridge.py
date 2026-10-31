@@ -85,6 +85,7 @@ def execute(store, backend: str, payload: dict) -> dict:
             "TF_NUM_INTRAOP_THREADS": "1",
             "TF_NUM_INTEROP_THREADS": "1",
             "TF_CPP_MIN_LOG_LEVEL": "2",
+            "MMM_BACKEND_TIMEOUT_SECONDS": str(timeout),
             "MPLCONFIGDIR": str(root / "mpl"),
             "NUMBA_CACHE_DIR": str(root / "numba"),
             "PYTENSOR_FLAGS": "base_compiledir="

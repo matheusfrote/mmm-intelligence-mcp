@@ -1,0 +1,291 @@
+{
+  "scope": "Observed local software verification, not statistical or causal certification",
+  "date": "2026-10-31",
+  "base_main": "293828e125076814dd81c68d1d4653a95aaee11a",
+  "tests": {
+    "windows": {
+      "passed": 723,
+      "skipped": 3,
+      "log_sha256": "72ed3dd30b30c58fdffa4400ab2bf55537cbcedf94fdf74db6f35cbe6a51d0fd"
+    },
+    "linux": {
+      "passed": 722,
+      "skipped": 4,
+      "log_sha256": "6c4d0a1f36e1e89f7b0f428a83d2b25027d1fad62454e8846db1ca32050e88fd"
+    },
+    "native_transport": {
+      "passed": 3,
+      "skipped": 0,
+      "log_sha256": "5577bfbfbb1b0802cf53f9f0431a824155f292f2d01e94ba80944e5c5718d263"
+    }
+  },
+  "python_coverage": {
+    "source_sha256": {
+      "src/mmm_intelligence/__init__.py": "28e7bab2b76f1f120dea60b3f59a661819dbf57d63caa13e6b7bed7852623101",
+      "src/mmm_intelligence/analysis.py": "40242eb80163f6a0dda725b7e43e3b0e690da419f4f17fffe4599a392d2cece0",
+      "src/mmm_intelligence/canonical.py": "cada4a556e16eb68bddb8c2aed0f5d763f67b0ee642f92c85f8cdfacb956bed5",
+      "src/mmm_intelligence/causal_validation.py": "7bc1e9d59912292dba62ba778721f47f3dd9bd284e0d5f2c414e02e3048cb0d6",
+      "src/mmm_intelligence/cli.py": "b358493b9a8ae8872c3cd6f57b4dc4ae486eaa74555990a6ac86b629c38b617c",
+      "src/mmm_intelligence/config.py": "632c6e59a9311695e0ceb33219edc21e6a5aabe9e35ee9e9a444955ecad9c142",
+      "src/mmm_intelligence/connectors.py": "30f33915052437460db401d0fd4e3cc2b2f31898f8428cffda227a2a27aea820",
+      "src/mmm_intelligence/dashboard_panels.py": "87039b5b40f9122309485e3fd173b94c0bd848bd7f4c7f9b62505cc6d480cde1",
+      "src/mmm_intelligence/datasets.py": "64e10d03a1692b7681cab1e2542933cd7a8e287259985df4c0e2af8bf5c8c6e5",
+      "src/mmm_intelligence/diagnostics.py": "b166def1e714f56c6f29b8afc07399ada8f47e10ef224aa44d981d1cfd423f7d",
+      "src/mmm_intelligence/errors.py": "3aa66605319e55ce380d7fb19fc19d75b82022ba27dd7c0518e1fbcd92397b9d",
+      "src/mmm_intelligence/experiments.py": "1ada3527222d3be0b3352d79fa34117260a80ba7bc3cab215a85283d864d20cd",
+      "src/mmm_intelligence/exporting.py": "2fc6a50ec837b5d23a37f659412c7647920c7b7b80446f71a2470e41fc71d518",
+      "src/mmm_intelligence/file_readers.py": "745c6575f34dc5e99d58438dfa02c8df0deaca8b530f2405eb83b5e1628652f4",
+      "src/mmm_intelligence/forecasting.py": "4b5784d8cc0a00276b0a66a1174674adaa062818e407a9d03f1e67ccfe170fe6",
+      "src/mmm_intelligence/growth.py": "f65db79b835e757981ad76b81558046814937b8fca91076415681563b935503e",
+      "src/mmm_intelligence/growth_analytics.py": "0ed75c322f23a8459e9a33391eebe830ab4ee2384141625849059c0b85c815a2",
+      "src/mmm_intelligence/http_transport.py": "7b9c8eea83a52a5c51682e79360f31ab02230ab787597aad8743275d19d3362d",
+      "src/mmm_intelligence/ingestion.py": "0c3fa25a2710fbbaf11182e320b5cc2210a139857e6dace7ee204341802b38fc",
+      "src/mmm_intelligence/integrations/__init__.py": "2ffd59fdb04118e5291efa21921810cce696a7b97e0ddb82c8423355dba1d205",
+      "src/mmm_intelligence/integrations/bridge.py": "d0bc56f6ce5117345b16cc4bd54f5d5dea063677a93dc6a37248b7d5a379e1be",
+      "src/mmm_intelligence/integrations/contracts.py": "2fccfd938faabdf50e9e9d6afd00ba45655e2fbb64830f9105129a1977a3364f",
+      "src/mmm_intelligence/integrations/native_scientific.py": "b96338048c5b29b5c2b294ce9a8fe821e5f5e324e0b663e3aa0446904bd41593",
+      "src/mmm_intelligence/integrations/worker.py": "889936d16db24c7230a0edc8cea5b442b89f3801b4cb60948695b85eb402784d",
+      "src/mmm_intelligence/joins.py": "26aa4df8847c1fc663fbb8675cd0a94807da546705a12fe647c988e329914141",
+      "src/mmm_intelligence/lifecycle.py": "05923ac03c2f87b6382d75349c820cb0041087d59dc31f026aec196a069626ab",
+      "src/mmm_intelligence/materialization.py": "2a77d1d1f5293a91f09aafb0369d97949d3e7f49c1184a69f781f2967acdfe35",
+      "src/mmm_intelligence/media_validation.py": "ae08081cfd46fd241af63ed0aea243a3efbcc8c09b934d24395b1d10708f9079",
+      "src/mmm_intelligence/modeling.py": "2cb7085f2321271e485fec76534600b6525a6631194f39d3e963bd7be4f62aa9",
+      "src/mmm_intelligence/monte_carlo.py": "d71b5a87c1683062edc0413bcddb53eb4416a5536714febb3fd6be23a6621281",
+      "src/mmm_intelligence/optimization.py": "9747804ee39090793a2ce0f43617a045c6e9538d948fd96c78d09095fa9d7aec",
+      "src/mmm_intelligence/quality.py": "b828be2aa1cbe5172200908c6a91cce0b7948e7d9ef3cacc45f06b3d45478899",
+      "src/mmm_intelligence/rendering.py": "ea46c4b9132a4cd0167ac4f7a13b75d90f6c59fc65f5860966f3b40527b9458a",
+      "src/mmm_intelligence/resources.py": "1cdce0dcfa23f9452932a803c1a9a5ca6ccd5604adae370146e0785b5dd11802",
+      "src/mmm_intelligence/schemas.py": "8623aa0ee799a20f754501eec7270f390c6156c25a99e9a6d221943e2b1ecf85",
+      "src/mmm_intelligence/scientific.py": "dd22444912e6e24944d3b5d52d86a807d4a1da55a10935c7e53431245e861baa",
+      "src/mmm_intelligence/server.py": "a36a905cf837b94d00dd92bd66a72cb46916416d2e26d1edf58441dcb8e72e50",
+      "src/mmm_intelligence/service.py": "5414266b6e8cd7ab14bc0fc8353e4d4400199b1b8c734263fe937b8e7c6721e9",
+      "src/mmm_intelligence/simulation.py": "9d05a2705d9b7dc1ca94bd74d8c06935a2ce9ad09b3e9880bab4828a8737c224",
+      "src/mmm_intelligence/storage.py": "c43138ea817847d635cd8ddafe47a04639132d229feef5bcdb0514212652384f",
+      "src/mmm_intelligence/supplied_files.py": "3cfba58e81563fd2c5efdd4ff4081d93497128b6f3cef1f96b568e7953be2f0b",
+      "src/mmm_intelligence/synthetic.py": "e18af833708f16a86b0d18fae2b2b6788a5c4149362f8389e2ad5d8896c58165",
+      "src/mmm_intelligence/universal_schemas.py": "d94a14af0d29d8e583d8bb82251ebd2e1417ffb52528e861aff1bbde52e17942",
+      "src/mmm_intelligence/validation.py": "7391b8071a3a9484bcd6ae3ca2eb136d677c7920e5b6d638f8c07b7081887ea5",
+      "src/mmm_intelligence/web_app.py": "e84fab0ff0c993525d7b0197f72741867a01a8f8de3d27913100dfeaca8151b9",
+      "server.py": "fdbd8e463514cb8db44f3009eb69ad84b5e5eb23607be194827a2742e908e7e7",
+      "plugins/mmm-intelligence-local/launch.py": "97406aef6afe3a62990cb389bb144ab584cfdc12582f0800a6ca88e75422d37b"
+    },
+    "manifests": [
+      "var\\coverage\\scientific-final-base\\manifest.json",
+      "var\\coverage\\scientific-edge2\\manifest.json",
+      "var\\coverage\\scientific-final-native\\manifest.json",
+      "var\\coverage\\scientific-linux\\manifest.json",
+      "var\\coverage\\native\\google_meridian-2adc77c7e91d43d78c416e5dc06c5be6\\manifest.json",
+      "var\\coverage\\native\\meta_robyn-d031d5d202dc4b6d828b28bf69609a77\\manifest.json",
+      "var\\coverage\\native\\pymc_marketing-b3d31b0d349e4b49bf23d2c381386a35\\manifest.json"
+    ],
+    "lines_covered": 4227,
+    "lines_total": 4227,
+    "branches_covered": 1554,
+    "branches_total": 1554
+  },
+  "javascript_coverage": {
+    "lines": {
+      "total": 834,
+      "covered": 834,
+      "skipped": 0,
+      "pct": 100
+    },
+    "statements": {
+      "total": 896,
+      "covered": 896,
+      "skipped": 0,
+      "pct": 100
+    },
+    "functions": {
+      "total": 217,
+      "covered": 217,
+      "skipped": 0,
+      "pct": 100
+    },
+    "branches": {
+      "total": 306,
+      "covered": 306,
+      "skipped": 0,
+      "pct": 100
+    },
+    "branchesTrue": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": "Unknown"
+    }
+  },
+  "R_coverage": {
+    "source_sha256": "6b796f6cda1092c2b3e18aaaf757e2f40499a2e5299b15027aab5ed74dce09bf",
+    "expression_percent": 100,
+    "branches_covered": 22,
+    "branches_total": 22,
+    "scope": "covr executable expressions and enumerated AST decision/loop branches; not MC/DC"
+  },
+  "operational": {
+    "synthetic": true,
+    "transport": "official_sdk_stdio",
+    "executed_tools": [
+      "analyze_cohorts",
+      "analyze_experiment",
+      "analyze_growth",
+      "audit_model",
+      "backend_status",
+      "build_growth_dataset",
+      "calibrate_experiment",
+      "check_mmm_eligibility",
+      "compare_models",
+      "connector_status",
+      "create_growth_decision",
+      "create_growth_diagnostic",
+      "data_quality",
+      "export_analysis",
+      "forecast_model",
+      "generate_demo_dataset",
+      "generate_report",
+      "get_analysis",
+      "get_backend_model",
+      "get_growth_artifact",
+      "get_model",
+      "import_csv",
+      "import_dataset",
+      "import_source",
+      "join_datasets",
+      "list_media_profiles",
+      "map_dataset_schema",
+      "model_capabilities",
+      "optimize_budget",
+      "plan_experiment",
+      "predict_backend",
+      "prepare_mmm_dataset",
+      "preview_dataset",
+      "register_media_profile",
+      "render_dashboard",
+      "retention_plan",
+      "simulate_budget",
+      "storage_inventory",
+      "train_backend",
+      "train_mmm",
+      "transition_growth_decision",
+      "tune_mmm",
+      "validate_crossmedia_dataset",
+      "validate_dataset",
+      "validate_media_dataset"
+    ],
+    "executed_tool_count": 45,
+    "missing_tools": [],
+    "complete_45_tools_verified": true,
+    "resource_templates": 1,
+    "resource_read_verified": true,
+    "native_requested": true,
+    "causal_identification": false,
+    "analytical_convergence_certified": false,
+    "restart_verified": true,
+    "pymc_future_verified": true,
+    "resumed_component_receipts": false
+  },
+  "wheel": {
+    "wheel": "mmm_intelligence_mcp-0.4.0-py3-none-any.whl",
+    "sha256": "4519973528dababc49404b99de56b9a778b70fad28c03ecdce763ccafb3297d7",
+    "clean_venv": true,
+    "import_origin_verified": true,
+    "doctor": {
+      "version": "0.4.0",
+      "python": "3.12.14",
+      "base_runtime_ok": true,
+      "dependencies": {
+        "mcp": "2.3.0",
+        "numpy": "2.4.6",
+        "scipy": "1.17.1",
+        "pydantic": "2.14.1",
+        "threadpoolctl": "3.7.0"
+      },
+      "optional_runtimes": {
+        "google_meridian": {
+          "executable_present": false,
+          "library_verified": false
+        },
+        "pymc_marketing": {
+          "executable_present": false,
+          "library_verified": false
+        },
+        "meta_robyn": {
+          "executable_present": false,
+          "library_verified": false
+        }
+      },
+      "scope": "Read-only metadata; run backend_smoke for native execution. No credentials printed."
+    },
+    "console_script_verified": true,
+    "tools_discovered": 45,
+    "local_calls": 23,
+    "restart_persistence": true
+  },
+  "container": {
+    "synthetic": true,
+    "runtime_network": "none",
+    "published_ports": false,
+    "base_image": "FROM python:3.12-slim@sha256:aa943ce411423c7582288f18707ff66eddcbaeb510502d747a72aeb34f30d159",
+    "image_id": "sha256:cc38c7086f4b0779fa3107aacfff13bfddffa0ab5ac9dec93a28c5d644562f26",
+    "initial": {
+      "uid": 10001,
+      "tools": 45,
+      "unauthenticated_mcp": 401,
+      "cross_origin_dashboard": 403,
+      "local_dashboard": 200,
+      "tenant_isolation": true,
+      "dataset_valid": true
+    },
+    "restart": {
+      "uid": 10001,
+      "tools": 45,
+      "unauthenticated_mcp": 401,
+      "cross_origin_dashboard": 403,
+      "local_dashboard": 200,
+      "tenant_isolation": true,
+      "dataset_valid": true
+    },
+    "restart_persistence": true
+  },
+  "http": {
+    "transport": "streamable-http-loopback",
+    "sdk": "2.x",
+    "created": true,
+    "tenant_isolation": true,
+    "reader_write_blocked": true,
+    "unauthorized_status": 401,
+    "security": {
+      "negative_statuses": {
+        "expired": 401,
+        "disabled": 401,
+        "Host": 421,
+        "Origin": 403,
+        "body_over_4_mib": 413,
+        "OPTIONS": 405,
+        "PATCH": 405,
+        "DELETE": 405
+      },
+      "security_headers_present": true,
+      "rate_limit_status": 429,
+      "latency": {
+        "scope": "20 sequential tools/list requests on disposable loopback; not production capacity",
+        "samples": 20,
+        "p50_ms": 12.994600008823909,
+        "p95_ms": 19.73629998974502
+      }
+    }
+  },
+  "npm_audit": {
+    "info": 0,
+    "low": 0,
+    "moderate": 0,
+    "high": 0,
+    "critical": 0,
+    "total": 0
+  },
+  "pip_audit_no_known_vulnerabilities": true,
+  "ruff": "passed",
+  "mypy_source_modules": 45,
+  "bandit": "passed",
+  "causal_identification": false
+}

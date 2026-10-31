@@ -321,6 +321,9 @@ def analyze_experiment(artifact, plan, *, _guardrail=False):
         "estimator": method,
         "estimate": {
             "difference": difference,
+            "standard_error": math.sqrt(
+                float(np.var(treatment, ddof=1)) / n1 + float(np.var(control, ddof=1)) / n0
+            ),
             "relative_difference": difference / m0 if m0 else None,
             "interval": interval,
             "confidence_level": 1 - alpha,

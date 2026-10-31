@@ -1,0 +1,1485 @@
+{
+  "curation": "Selected actual report fields; no statistical outcomes altered",
+  "execution_receipt_sha256": "a9d115882d6a16bcd74c023fa7b955e4790f31118e36a1f48afd9366dbc549af",
+  "execution_receipt_local": "evidence/scientific-ridge-final/result.json",
+  "source_unchanged_during_run": true,
+  "source_sha256": {
+    "src/mmm_intelligence/__init__.py": "28e7bab2b76f1f120dea60b3f59a661819dbf57d63caa13e6b7bed7852623101",
+    "src/mmm_intelligence/analysis.py": "40242eb80163f6a0dda725b7e43e3b0e690da419f4f17fffe4599a392d2cece0",
+    "src/mmm_intelligence/canonical.py": "cada4a556e16eb68bddb8c2aed0f5d763f67b0ee642f92c85f8cdfacb956bed5",
+    "src/mmm_intelligence/causal_validation.py": "7bc1e9d59912292dba62ba778721f47f3dd9bd284e0d5f2c414e02e3048cb0d6",
+    "src/mmm_intelligence/cli.py": "b358493b9a8ae8872c3cd6f57b4dc4ae486eaa74555990a6ac86b629c38b617c",
+    "src/mmm_intelligence/config.py": "632c6e59a9311695e0ceb33219edc21e6a5aabe9e35ee9e9a444955ecad9c142",
+    "src/mmm_intelligence/connectors.py": "30f33915052437460db401d0fd4e3cc2b2f31898f8428cffda227a2a27aea820",
+    "src/mmm_intelligence/dashboard_panels.py": "87039b5b40f9122309485e3fd173b94c0bd848bd7f4c7f9b62505cc6d480cde1",
+    "src/mmm_intelligence/datasets.py": "64e10d03a1692b7681cab1e2542933cd7a8e287259985df4c0e2af8bf5c8c6e5",
+    "src/mmm_intelligence/diagnostics.py": "b166def1e714f56c6f29b8afc07399ada8f47e10ef224aa44d981d1cfd423f7d",
+    "src/mmm_intelligence/errors.py": "3aa66605319e55ce380d7fb19fc19d75b82022ba27dd7c0518e1fbcd92397b9d",
+    "src/mmm_intelligence/experiments.py": "1ada3527222d3be0b3352d79fa34117260a80ba7bc3cab215a85283d864d20cd",
+    "src/mmm_intelligence/exporting.py": "2fc6a50ec837b5d23a37f659412c7647920c7b7b80446f71a2470e41fc71d518",
+    "src/mmm_intelligence/file_readers.py": "745c6575f34dc5e99d58438dfa02c8df0deaca8b530f2405eb83b5e1628652f4",
+    "src/mmm_intelligence/forecasting.py": "4b5784d8cc0a00276b0a66a1174674adaa062818e407a9d03f1e67ccfe170fe6",
+    "src/mmm_intelligence/growth.py": "f65db79b835e757981ad76b81558046814937b8fca91076415681563b935503e",
+    "src/mmm_intelligence/growth_analytics.py": "0ed75c322f23a8459e9a33391eebe830ab4ee2384141625849059c0b85c815a2",
+    "src/mmm_intelligence/http_transport.py": "7b9c8eea83a52a5c51682e79360f31ab02230ab787597aad8743275d19d3362d",
+    "src/mmm_intelligence/ingestion.py": "0c3fa25a2710fbbaf11182e320b5cc2210a139857e6dace7ee204341802b38fc",
+    "src/mmm_intelligence/integrations/__init__.py": "2ffd59fdb04118e5291efa21921810cce696a7b97e0ddb82c8423355dba1d205",
+    "src/mmm_intelligence/integrations/bridge.py": "d0bc56f6ce5117345b16cc4bd54f5d5dea063677a93dc6a37248b7d5a379e1be",
+    "src/mmm_intelligence/integrations/contracts.py": "2fccfd938faabdf50e9e9d6afd00ba45655e2fbb64830f9105129a1977a3364f",
+    "src/mmm_intelligence/integrations/native_scientific.py": "b96338048c5b29b5c2b294ce9a8fe821e5f5e324e0b663e3aa0446904bd41593",
+    "src/mmm_intelligence/integrations/robyn_worker.R": "6b796f6cda1092c2b3e18aaaf757e2f40499a2e5299b15027aab5ed74dce09bf",
+    "src/mmm_intelligence/integrations/worker.py": "889936d16db24c7230a0edc8cea5b442b89f3801b4cb60948695b85eb402784d",
+    "src/mmm_intelligence/joins.py": "26aa4df8847c1fc663fbb8675cd0a94807da546705a12fe647c988e329914141",
+    "src/mmm_intelligence/lifecycle.py": "05923ac03c2f87b6382d75349c820cb0041087d59dc31f026aec196a069626ab",
+    "src/mmm_intelligence/materialization.py": "2a77d1d1f5293a91f09aafb0369d97949d3e7f49c1184a69f781f2967acdfe35",
+    "src/mmm_intelligence/media_validation.py": "ae08081cfd46fd241af63ed0aea243a3efbcc8c09b934d24395b1d10708f9079",
+    "src/mmm_intelligence/modeling.py": "2cb7085f2321271e485fec76534600b6525a6631194f39d3e963bd7be4f62aa9",
+    "src/mmm_intelligence/monte_carlo.py": "d71b5a87c1683062edc0413bcddb53eb4416a5536714febb3fd6be23a6621281",
+    "src/mmm_intelligence/optimization.py": "9747804ee39090793a2ce0f43617a045c6e9538d948fd96c78d09095fa9d7aec",
+    "src/mmm_intelligence/quality.py": "b828be2aa1cbe5172200908c6a91cce0b7948e7d9ef3cacc45f06b3d45478899",
+    "src/mmm_intelligence/rendering.py": "ea46c4b9132a4cd0167ac4f7a13b75d90f6c59fc65f5860966f3b40527b9458a",
+    "src/mmm_intelligence/resources.py": "1cdce0dcfa23f9452932a803c1a9a5ca6ccd5604adae370146e0785b5dd11802",
+    "src/mmm_intelligence/schemas.py": "8623aa0ee799a20f754501eec7270f390c6156c25a99e9a6d221943e2b1ecf85",
+    "src/mmm_intelligence/scientific.py": "dd22444912e6e24944d3b5d52d86a807d4a1da55a10935c7e53431245e861baa",
+    "src/mmm_intelligence/server.py": "a36a905cf837b94d00dd92bd66a72cb46916416d2e26d1edf58441dcb8e72e50",
+    "src/mmm_intelligence/service.py": "5414266b6e8cd7ab14bc0fc8353e4d4400199b1b8c734263fe937b8e7c6721e9",
+    "src/mmm_intelligence/simulation.py": "9d05a2705d9b7dc1ca94bd74d8c06935a2ce9ad09b3e9880bab4828a8737c224",
+    "src/mmm_intelligence/storage.py": "c43138ea817847d635cd8ddafe47a04639132d229feef5bcdb0514212652384f",
+    "src/mmm_intelligence/supplied_files.py": "3cfba58e81563fd2c5efdd4ff4081d93497128b6f3cef1f96b568e7953be2f0b",
+    "src/mmm_intelligence/synthetic.py": "e18af833708f16a86b0d18fae2b2b6788a5c4149362f8389e2ad5d8896c58165",
+    "src/mmm_intelligence/universal_schemas.py": "d94a14af0d29d8e583d8bb82251ebd2e1417ffb52528e861aff1bbde52e17942",
+    "src/mmm_intelligence/validation.py": "7391b8071a3a9484bcd6ae3ca2eb136d677c7920e5b6d638f8c07b7081887ea5",
+    "src/mmm_intelligence/web/app.js": "f485cd8a2277456640aa4a14ab4391083243b1a4b9291cb56973f029f2fd25eb",
+    "src/mmm_intelligence/web/charts.js": "0a486fd3fc6e8bc9c9feaf7563cdce62ff0281ee2732d9a3480bc6543732f728",
+    "src/mmm_intelligence/web/client.js": "cb9d552ffd20ac1b43fb0bcc55e0d2e34ae63dccb5b4309c9d2b9d6a447187d2",
+    "src/mmm_intelligence/web/growth_views.js": "ffdf6ac79e3706589a55fd59273a159fe1ffa2206f859fc1bc87791d0dabb8f4",
+    "src/mmm_intelligence/web/ui.js": "d0ff4735523e7d84769ff5c298136b1104bcfa66b352ba920c2b78b86afeba7b",
+    "src/mmm_intelligence/web/views.js": "a03847d4108d6cbada5c72d1ffde8b8b7d34e622cbc0122803e16bdefa42719d",
+    "src/mmm_intelligence/web_app.py": "e84fab0ff0c993525d7b0197f72741867a01a8f8de3d27913100dfeaca8151b9",
+    "examples/scientific_protocol.py": "532abba6bd7d00b973c0ea38873e86e2eabee99cb4ee0597d57078368ee72213"
+  },
+  "reused_models": [],
+  "report": {
+    "schema_version": "scientific-v1",
+    "model_id": "scientific-ridge",
+    "backend": "ridge",
+    "synthetic": true,
+    "provenance": {
+      "created_at": "2026-10-31T13:32:04.323914+00:00",
+      "policy": {
+        "policy_version": "scientific-v1",
+        "refit": true,
+        "collect_native": true,
+        "seeds": [
+          90,
+          102
+        ],
+        "regularization": [
+          0.01,
+          0.1,
+          1.0
+        ],
+        "max_rhat": 1.01,
+        "min_ess_per_chain": 100,
+        "min_draws": 1000,
+        "max_mcse_sd_ratio": 0.05,
+        "max_relative_spread": 0.5,
+        "experiment_result_ids": [],
+        "placebo_result_ids": [],
+        "negative_control_result_ids": [],
+        "equivalence_margin": null,
+        "assumptions": {},
+        "review_reference": null,
+        "confounding_bias_grid": [],
+        "monte_carlo": {
+          "replications": 100,
+          "periods": 156,
+          "seed": 73,
+          "bootstrap_samples": 40,
+          "minimum_replications_for_assessment": 100,
+          "coverage_tolerance": 0.05,
+          "max_absolute_bias": null,
+          "max_rmse": null,
+          "scenarios": [
+            "well_specified",
+            "null_effect",
+            "collinear",
+            "omitted_confounder",
+            "tracking_break",
+            "heavy_tailed",
+            "misspecified_adstock",
+            "weak_signal",
+            "missing_target",
+            "constant_spend"
+          ]
+        },
+        "calibration": null
+      },
+      "dataset_sha256": "b33458e8601acf9e4a584dc5112f62a81da8edf4ec63519288301eb382fe3fb4",
+      "model_sha256": "0d718d897988dbeba6b6d42b914134469e7b236e5260f031c3817c698d9e5692",
+      "configuration": {
+        "adstock_decay": 0.5,
+        "bootstrap_block_size": 4,
+        "bootstrap_samples": 40,
+        "bootstrap_seed": 73,
+        "control_columns": [
+          "price_index",
+          "promotion"
+        ],
+        "dataset_id": "scientific-data",
+        "date_column": "date",
+        "media_columns": [
+          "spend_search",
+          "spend_social",
+          "spend_video"
+        ],
+        "model_id": "scientific-ridge",
+        "ridge_alpha": 0.1,
+        "saturation_multiplier": 1.0,
+        "target_column": "revenue",
+        "test_fraction": 0.2,
+        "warmup_periods": 8
+      },
+      "effective_configuration": {
+        "adstock_decay": 0.5,
+        "bootstrap_block_size": 4,
+        "bootstrap_samples": 40,
+        "bootstrap_seed": 73,
+        "control_columns": [
+          "price_index",
+          "promotion"
+        ],
+        "dataset_id": "scientific-data",
+        "date_column": "date",
+        "media_columns": [
+          "spend_search",
+          "spend_social",
+          "spend_video"
+        ],
+        "model_id": "scientific-ridge",
+        "ridge_alpha": 0.1,
+        "saturation_multiplier": 1.0,
+        "target_column": "revenue",
+        "test_fraction": 0.2,
+        "warmup_periods": 8
+      },
+      "backend": "ridge",
+      "python": "3.12.14",
+      "versions": {
+        "mmm-intelligence-mcp": "0.4.0",
+        "numpy": "2.4.6",
+        "scipy": "1.17.1"
+      },
+      "native_version": null,
+      "native_training_versions": null,
+      "seeds": [
+        90,
+        102
+      ]
+    },
+    "classifications": {
+      "operational": {
+        "status": "passed",
+        "scope": "Immutable dataset lineage and successful solver/native restoration only",
+        "dataset_lineage_verified": true
+      },
+      "statistical": {
+        "status": "failed",
+        "failed": [
+          "monte_carlo:interval_undercoverage:null_effect:spend_search",
+          "monte_carlo:interval_undercoverage:null_effect:spend_social",
+          "monte_carlo:interval_undercoverage:null_effect:spend_video"
+        ],
+        "missing": [
+          "monte_carlo:absolute_bias_tolerance_missing",
+          "monte_carlo:rmse_tolerance_missing",
+          "monte_carlo:coverage_precision_inconclusive:well_specified:spend_search",
+          "monte_carlo:coverage_precision_inconclusive:well_specified:spend_social",
+          "monte_carlo:coverage_precision_inconclusive:well_specified:spend_video"
+        ],
+        "mcmc": {
+          "status": "not_applicable",
+          "reason": "ridge is not MCMC"
+        },
+        "convergence_certified": false,
+        "scope": "Screened numerical and sensitivity diagnostics; model correctness is not guaranteed",
+        "status_before_interval_assessment": "inconclusive",
+        "uncertainty_validation": {
+          "status": "failed",
+          "failed": [
+            "interval_undercoverage:null_effect:spend_search",
+            "interval_undercoverage:null_effect:spend_social",
+            "interval_undercoverage:null_effect:spend_video"
+          ],
+          "missing": [
+            "absolute_bias_tolerance_missing",
+            "rmse_tolerance_missing",
+            "coverage_precision_inconclusive:well_specified:spend_search",
+            "coverage_precision_inconclusive:well_specified:spend_social",
+            "coverage_precision_inconclusive:well_specified:spend_video"
+          ],
+          "undercoverage": [
+            "null_effect:spend_search",
+            "null_effect:spend_social",
+            "null_effect:spend_video"
+          ],
+          "coverage_checks": [
+            {
+              "estimand": "well_specified:spend_search",
+              "coverage": 0.85,
+              "simultaneous_coverage_bounds": [
+                0.7333316375888198,
+                0.9211161679252401
+              ],
+              "minimum_coverage_policy": 0.85
+            },
+            {
+              "estimand": "well_specified:spend_social",
+              "coverage": 0.77,
+              "simultaneous_coverage_bounds": [
+                0.6436483678100072,
+                0.8612113678722676
+              ],
+              "minimum_coverage_policy": 0.85
+            },
+            {
+              "estimand": "well_specified:spend_video",
+              "coverage": 0.82,
+              "simultaneous_coverage_bounds": [
+                0.698983132225479,
+                0.8993691471016613
+              ],
+              "minimum_coverage_policy": 0.85
+            },
+            {
+              "estimand": "null_effect:spend_search",
+              "coverage": 0.0,
+              "simultaneous_coverage_bounds": [
+                -6.938893903907228e-18,
+                0.06507456355134314
+              ],
+              "minimum_coverage_policy": 0.85
+            },
+            {
+              "estimand": "null_effect:spend_social",
+              "coverage": 0.0,
+              "simultaneous_coverage_bounds": [
+                -6.938893903907228e-18,
+                0.06507456355134314
+              ],
+              "minimum_coverage_policy": 0.85
+            },
+            {
+              "estimand": "null_effect:spend_video",
+              "coverage": 0.0,
+              "simultaneous_coverage_bounds": [
+                -6.938893903907228e-18,
+                0.06507456355134314
+              ],
+              "minimum_coverage_policy": 0.85
+            }
+          ],
+          "policy": {
+            "core_scenarios": [
+              "well_specified",
+              "null_effect"
+            ],
+            "minimum_replications": 100,
+            "coverage_tolerance": 0.05,
+            "max_absolute_bias": null,
+            "max_rmse": null,
+            "coverage_family_size": 6,
+            "family_alpha": 0.05
+          },
+          "causal_identification": false,
+          "scope": "Core DGP conditional-interval screening only; inspect all adverse scenarios, failures and width; cannot certify real effects"
+        }
+      },
+      "causal": {
+        "status": "simulation_only",
+        "causal_identification": false,
+        "source_ids": [],
+        "assumptions": {
+          "random_assignment": "unknown",
+          "no_interference": "unknown",
+          "no_unmeasured_confounding": "unknown",
+          "no_post_treatment_controls": "unknown",
+          "positivity": "unknown",
+          "measurement_consistency": "unknown",
+          "prespecified_analysis": "unknown",
+          "complete_followup": "unknown"
+        },
+        "violated_assumptions": [],
+        "threats": [],
+        "missing": [
+          "causal_assumptions_require_review",
+          "independent_design_review",
+          "independent_incrementality_experiment",
+          "negative_control_evidence",
+          "placebo_evidence"
+        ],
+        "placebos": [],
+        "negative_controls": [],
+        "confounding_sensitivity": [],
+        "review_reference": null,
+        "review_reference_authenticated": false,
+        "no_unmeasured_confounding_verified": false,
+        "primary_effects": [],
+        "limitations": [
+          "Imported assignments and review declarations do not authenticate randomization or execution",
+          "Compatible placebos and negative controls do not prove exchangeability",
+          "No automatic causal claim, extrapolation across populations or budget action",
+          "Geographic experiments require independent geo units; repeated days are not independent geos",
+          "Multiplicity across separate experiments and transportability require a prespecified design review"
+        ]
+      },
+      "business_recommendation_eligible": false
+    },
+    "diagnostics": {
+      "adjusted_r2": null,
+      "adjusted_r2_reason": "Nominal OLS degrees of freedom are inappropriate for constrained regularized regression",
+      "condition_number": 74.46790286883821,
+      "feature_count": 9,
+      "matrix_rank": 9,
+      "residual_diagnostics_scope": "descriptive; no causal or independence certification",
+      "standardized_condition_number": 1.6033076806820123,
+      "standardized_matrix_rank": 9,
+      "train_durbin_watson": 1.8954301589388949,
+      "train_residual_lag1": 0.04688967806998249,
+      "train_residual_mean": -9.878994174430083e-13
+    },
+    "native_diagnostic_versions": null,
+    "stability": {
+      "status": "executed",
+      "runs": [
+        {
+          "configuration": {
+            "adstock_decay": 0.5,
+            "bootstrap_block_size": 4,
+            "bootstrap_samples": 0,
+            "bootstrap_seed": 73,
+            "control_columns": [
+              "price_index",
+              "promotion"
+            ],
+            "dataset_id": "scientific-data",
+            "date_column": "date",
+            "media_columns": [
+              "spend_search",
+              "spend_social",
+              "spend_video"
+            ],
+            "model_id": "scientific-ridge",
+            "ridge_alpha": 0.01,
+            "saturation_multiplier": 1.0,
+            "target_column": "revenue",
+            "test_fraction": 0.2,
+            "warmup_periods": 8
+          },
+          "model_sha256": "ab818a14f717cf10adb259243492c9d8f01f9d3c352d86027352959d9c4785e9",
+          "estimates": {
+            "spend_search": 2822.926095949501,
+            "spend_social": 3007.388716189769,
+            "spend_video": 2646.921377714608
+          },
+          "test_prediction": [
+            12076.69625756847,
+            11657.400941819886,
+            13243.548971176491,
+            11887.82445109396,
+            12856.004649463715,
+            12581.014092039935,
+            12475.692297028532,
+            12105.16369483876,
+            12602.399341506494,
+            12829.600264498544,
+            12184.627909733328,
+            11772.668529133029,
+            11876.486915350692,
+            11880.669358909536,
+            12142.606356106031,
+            13357.01794525394,
+            12564.167868239978,
+            12500.394012473078,
+            12493.843684177014,
+            11797.82049091302,
+            12078.50926946104,
+            13086.500931788098,
+            12321.832944306747,
+            12782.970372043972,
+            11927.12435520482,
+            11464.947261996345,
+            11525.154173615612,
+            11930.17694891908,
+            12077.669059767215,
+            11670.886079211023,
+            12060.685145231593,
+            12709.719834123876
+          ],
+          "test_metrics": {
+            "bias_predicted_minus_observed": -3.136861227352938,
+            "mae": 83.4784032854891,
+            "rmse": 99.83029715278013,
+            "mape_nonzero_percent": 0.6789813822910291,
+            "mape_excluded_zeros": 0,
+            "wape_percent": 0.680376422461616,
+            "r2": 0.9621931366211265
+          },
+          "optimization": {
+            "train_residual_lag1": 0.046276074731084915,
+            "condition_number": 74.46790286883821,
+            "matrix_rank": 9,
+            "standardized_condition_number": 1.6033076806820123,
+            "standardized_matrix_rank": 9,
+            "feature_count": 9,
+            "train_residual_mean": -4.233854646184321e-12,
+            "train_durbin_watson": 1.8965543970182397,
+            "residual_diagnostics_scope": "descriptive; no causal or independence certification",
+            "adjusted_r2": null,
+            "adjusted_r2_reason": "Nominal OLS degrees of freedom are inappropriate for constrained regularized regression"
+          },
+          "effective_configuration": {
+            "adstock_decay": 0.5,
+            "bootstrap_block_size": 4,
+            "bootstrap_samples": 0,
+            "bootstrap_seed": 73,
+            "control_columns": [
+              "price_index",
+              "promotion"
+            ],
+            "dataset_id": "scientific-data",
+            "date_column": "date",
+            "media_columns": [
+              "spend_search",
+              "spend_social",
+              "spend_video"
+            ],
+            "model_id": "scientific-ridge",
+            "ridge_alpha": 0.01,
+            "saturation_multiplier": 1.0,
+            "target_column": "revenue",
+            "test_fraction": 0.2,
+            "warmup_periods": 8
+          }
+        },
+        {
+          "configuration": {
+            "adstock_decay": 0.5,
+            "bootstrap_block_size": 4,
+            "bootstrap_samples": 0,
+            "bootstrap_seed": 73,
+            "control_columns": [
+              "price_index",
+              "promotion"
+            ],
+            "dataset_id": "scientific-data",
+            "date_column": "date",
+            "media_columns": [
+              "spend_search",
+              "spend_social",
+              "spend_video"
+            ],
+            "model_id": "scientific-ridge",
+            "ridge_alpha": 0.1,
+            "saturation_multiplier": 1.0,
+            "target_column": "revenue",
+            "test_fraction": 0.2,
+            "warmup_periods": 8
+          },
+          "model_sha256": "8942b4b4ac0349ab800829c72398d738cf9c302aefacebdc50767a76c6576d35",
+          "estimates": {
+            "spend_search": 2820.2215419050804,
+            "spend_social": 3004.9522288936787,
+            "spend_video": 2643.458583629918
+          },
+          "test_prediction": [
+            12076.655291532337,
+            11657.751785547207,
+            13242.419121415653,
+            11887.97487240085,
+            12855.147348130628,
+            12580.534454827286,
+            12475.414790367931,
+            12104.937716186574,
+            12601.848528817973,
+            12828.785639144571,
+            12184.553240992846,
+            11772.940440364004,
+            11876.764185048496,
+            11880.772338855717,
+            12142.421119007955,
+            13355.823631581465,
+            12563.6093361475,
+            12499.987650260937,
+            12493.546354949372,
+            11798.263603804768,
+            12078.591364753296,
+            13085.731374712277,
+            12321.655732709472,
+            12782.31955971958,
+            11927.376077133287,
+            11465.775767472045,
+            11525.787854130576,
+            11930.307154842529,
+            12077.864111627481,
+            11671.348663153289,
+            12060.745027095249,
+            12709.098760288716
+          ],
+          "test_metrics": {
+            "bias_predicted_minus_observed": -3.295345913977542,
+            "mae": 83.51504820147937,
+            "rmse": 99.93226278106759,
+            "mape_nonzero_percent": 0.6792894821464818,
+            "mape_excluded_zeros": 0,
+            "wape_percent": 0.6806750905705112,
+            "r2": 0.9621158661047247
+          },
+          "optimization": {
+            "train_residual_lag1": 0.04688967806998249,
+            "condition_number": 74.46790286883821,
+            "matrix_rank": 9,
+            "standardized_condition_number": 1.6033076806820123,
+            "standardized_matrix_rank": 9,
+            "feature_count": 9,
+            "train_residual_mean": -9.878994174430083e-13,
+            "train_durbin_watson": 1.8954301589388949,
+            "residual_diagnostics_scope": "descriptive; no causal or independence certification",
+            "adjusted_r2": null,
+            "adjusted_r2_reason": "Nominal OLS degrees of freedom are inappropriate for constrained regularized regression"
+          },
+          "effective_configuration": {
+            "adstock_decay": 0.5,
+            "bootstrap_block_size": 4,
+            "bootstrap_samples": 0,
+            "bootstrap_seed": 73,
+            "control_columns": [
+              "price_index",
+              "promotion"
+            ],
+            "dataset_id": "scientific-data",
+            "date_column": "date",
+            "media_columns": [
+              "spend_search",
+              "spend_social",
+              "spend_video"
+            ],
+            "model_id": "scientific-ridge",
+            "ridge_alpha": 0.1,
+            "saturation_multiplier": 1.0,
+            "target_column": "revenue",
+            "test_fraction": 0.2,
+            "warmup_periods": 8
+          }
+        },
+        {
+          "configuration": {
+            "adstock_decay": 0.5,
+            "bootstrap_block_size": 4,
+            "bootstrap_samples": 0,
+            "bootstrap_seed": 73,
+            "control_columns": [
+              "price_index",
+              "promotion"
+            ],
+            "dataset_id": "scientific-data",
+            "date_column": "date",
+            "media_columns": [
+              "spend_search",
+              "spend_social",
+              "spend_video"
+            ],
+            "model_id": "scientific-ridge",
+            "ridge_alpha": 1.0,
+            "saturation_multiplier": 1.0,
+            "target_column": "revenue",
+            "test_fraction": 0.2,
+            "warmup_periods": 8
+          },
+          "model_sha256": "427c07ba2b44c350f8ab50f57523af73b866d9140a67eb945ba02534986af583",
+          "estimates": {
+            "spend_search": 2793.449995454393,
+            "spend_social": 2980.823543767991,
+            "spend_video": 2609.292373760989
+          },
+          "test_prediction": [
+            12076.25852437444,
+            11661.233276806299,
+            13231.248975008793,
+            11889.471782680905,
+            12846.683727820295,
+            12575.797141239113,
+            12472.66599864673,
+            12102.727012256511,
+            12596.409974327358,
+            12820.741154414156,
+            12183.817443318101,
+            11775.633585621088,
+            11879.50383872068,
+            11881.803518827153,
+            12140.60436839313,
+            13344.012158251278,
+            12558.096077865277,
+            12495.972783695112,
+            12490.59974610054,
+            11802.632566409184,
+            12079.399646345484,
+            13078.105201269547,
+            12319.902032611726,
+            12775.883106191763,
+            11929.860094693004,
+            11473.95028363912,
+            11532.048099169338,
+            11931.596427832368,
+            12079.778318951478,
+            11675.921131078489,
+            12061.338678449833,
+            12702.959090110911
+          ],
+          "test_metrics": {
+            "bias_predicted_minus_observed": -4.860881285935761,
+            "mae": 83.8765053157814,
+            "rmse": 101.07821321248666,
+            "mape_nonzero_percent": 0.6823288321582054,
+            "mape_excluded_zeros": 0,
+            "wape_percent": 0.6836210848471515,
+            "r2": 0.9612420290744962
+          },
+          "optimization": {
+            "train_residual_lag1": 0.053888144699803416,
+            "condition_number": 74.46790286883821,
+            "matrix_rank": 9,
+            "standardized_condition_number": 1.6033076806820123,
+            "standardized_matrix_rank": 9,
+            "feature_count": 9,
+            "train_residual_mean": -5.786268016451905e-12,
+            "train_durbin_watson": 1.882428570992087,
+            "residual_diagnostics_scope": "descriptive; no causal or independence certification",
+            "adjusted_r2": null,
+            "adjusted_r2_reason": "Nominal OLS degrees of freedom are inappropriate for constrained regularized regression"
+          },
+          "effective_configuration": {
+            "adstock_decay": 0.5,
+            "bootstrap_block_size": 4,
+            "bootstrap_samples": 0,
+            "bootstrap_seed": 73,
+            "control_columns": [
+              "price_index",
+              "promotion"
+            ],
+            "dataset_id": "scientific-data",
+            "date_column": "date",
+            "media_columns": [
+              "spend_search",
+              "spend_social",
+              "spend_video"
+            ],
+            "model_id": "scientific-ridge",
+            "ridge_alpha": 1.0,
+            "saturation_multiplier": 1.0,
+            "target_column": "revenue",
+            "test_fraction": 0.2,
+            "warmup_periods": 8
+          }
+        },
+        {
+          "configuration": {
+            "adstock_decay": 0.5,
+            "bootstrap_block_size": 4,
+            "bootstrap_samples": 0,
+            "bootstrap_seed": 73,
+            "control_columns": [
+              "promotion"
+            ],
+            "dataset_id": "scientific-data",
+            "date_column": "date",
+            "media_columns": [
+              "spend_search",
+              "spend_social",
+              "spend_video"
+            ],
+            "model_id": "scientific-ridge",
+            "ridge_alpha": 0.01,
+            "saturation_multiplier": 1.0,
+            "target_column": "revenue",
+            "test_fraction": 0.2,
+            "warmup_periods": 8
+          },
+          "model_sha256": "5c01e8e740aac95f78ebcc9f1952a63c3f2c0133a67041711d53c7fec6eb5c9f",
+          "estimates": {
+            "spend_search": 2914.7911588075212,
+            "spend_social": 2857.999690558937,
+            "spend_video": 2518.2245691009884
+          },
+          "test_prediction": [
+            12055.311455464785,
+            11612.156862049203,
+            13252.652059981094,
+            12046.987956494442,
+            12855.090361245362,
+            12605.760089479909,
+            12458.813252163283,
+            11966.446251643172,
+            12545.761063508984,
+            12769.378301955854,
+            12196.355996834769,
+            11807.332566687342,
+            11853.589314114482,
+            11736.878185737303,
+            11990.690237201878,
+            13219.496573816063,
+            12359.13222497949,
+            12356.905419996508,
+            12536.187577904471,
+            11765.55841007759,
+            11943.084840744297,
+            12923.819184714881,
+            12291.996724462366,
+            12750.951256269824,
+            11908.085423077508,
+            11508.81158699374,
+            11512.11421129011,
+            11932.249104127399,
+            11978.135035226675,
+            11625.646942567577,
+            12020.106787772933,
+            12556.15131568475
+          ],
+          "test_metrics": {
+            "bias_predicted_minus_observed": -52.517731000034416,
+            "mae": 118.95629859791376,
+            "rmse": 144.73580086493277,
+            "mape_nonzero_percent": 0.9584888687910221,
+            "mape_excluded_zeros": 0,
+            "wape_percent": 0.9695329292839159,
+            "r2": 0.9205309800111855
+          },
+          "optimization": {
+            "train_residual_lag1": 0.1455543336970615,
+            "condition_number": 31.348282660382253,
+            "matrix_rank": 8,
+            "standardized_condition_number": 1.5128564845066343,
+            "standardized_matrix_rank": 8,
+            "feature_count": 8,
+            "train_residual_mean": -4.312259361854401e-12,
+            "train_durbin_watson": 1.708038309613438,
+            "residual_diagnostics_scope": "descriptive; no causal or independence certification",
+            "adjusted_r2": null,
+            "adjusted_r2_reason": "Nominal OLS degrees of freedom are inappropriate for constrained regularized regression"
+          },
+          "effective_configuration": {
+            "adstock_decay": 0.5,
+            "bootstrap_block_size": 4,
+            "bootstrap_samples": 0,
+            "bootstrap_seed": 73,
+            "control_columns": [
+              "promotion"
+            ],
+            "dataset_id": "scientific-data",
+            "date_column": "date",
+            "media_columns": [
+              "spend_search",
+              "spend_social",
+              "spend_video"
+            ],
+            "model_id": "scientific-ridge",
+            "ridge_alpha": 0.01,
+            "saturation_multiplier": 1.0,
+            "target_column": "revenue",
+            "test_fraction": 0.2,
+            "warmup_periods": 8
+          }
+        }
+      ],
+      "failures": [],
+      "relative_estimate_spread": {
+        "spend_search": 0.04162945361847826,
+        "spend_social": 0.049673999515467256,
+        "spend_video": 0.048621318977270934
+      },
+      "relative_predictive_spread": 0.0058571301903716415,
+      "estimate_consistency_available": true,
+      "unstable": false,
+      "policy_threshold": 0.5,
+      "winner": null,
+      "acceptance_basis": "Prespecified relative estimate/prediction spread; independent seeds, regularization and omission of first control where available",
+      "limitations": [
+        "Omitting a control is a stress test, not a recommendation to remove a confounder",
+        "Stable predictions can coexist with unidentified channel effects",
+        "No prior-sensitivity certification; defaults and effective priors are recorded"
+      ]
+    },
+    "warnings": [
+      "No automatic causal or investment certification; missing evidence remains inconclusive"
+    ],
+    "artifact_id": "scientific_validation-37fc50c74323488d958afbb6368525fd",
+    "created_at": "2026-10-31T13:32:52.421103+00:00",
+    "heldout_metrics": {
+      "bias_predicted_minus_observed": -3.295345913977542,
+      "mae": 83.51504820147937,
+      "rmse": 99.93226278106759,
+      "mape_nonzero_percent": 0.6792894821464818,
+      "mape_excluded_zeros": 0,
+      "wape_percent": 0.6806750905705112,
+      "r2": 0.9621158661047247
+    },
+    "scientific_diagnostics": {},
+    "posterior_predictive_check": {},
+    "monte_carlo": {
+      "schema_version": "monte-carlo-v1",
+      "backend": "ridge",
+      "synthetic": true,
+      "configuration": {
+        "replications": 100,
+        "periods": 156,
+        "seed": 73,
+        "bootstrap_samples": 40,
+        "minimum_replications_for_assessment": 100,
+        "coverage_tolerance": 0.05,
+        "max_absolute_bias": null,
+        "max_rmse": null,
+        "scenarios": [
+          "well_specified",
+          "null_effect",
+          "collinear",
+          "omitted_confounder",
+          "tracking_break",
+          "heavy_tailed",
+          "misspecified_adstock",
+          "weak_signal",
+          "missing_target",
+          "constant_spend"
+        ]
+      },
+      "attempted": 1000,
+      "versions": {
+        "numpy": "2.4.6",
+        "scipy": "1.17.1",
+        "mmm-intelligence-mcp": "0.4.0"
+      },
+      "summaries": [
+        {
+          "scenario": "well_specified",
+          "channel": "spend_search",
+          "attempted": 100,
+          "successful": 100,
+          "failed": 0,
+          "bias": 0.046320637132519805,
+          "bias_mcse": 0.4099573147281309,
+          "rmse": 4.079286774846215,
+          "interval_coverage": 0.85,
+          "coverage_mcse": 0.035707142142714254,
+          "coverage_interval_95": [
+            0.7671644040916763,
+            0.9069401471634337
+          ],
+          "nominal_coverage": 0.9,
+          "rank_deficient_runs": 0
+        },
+        {
+          "scenario": "well_specified",
+          "channel": "spend_social",
+          "attempted": 100,
+          "successful": 100,
+          "failed": 0,
+          "bias": -0.4560752567707029,
+          "bias_mcse": 0.4664223186282954,
+          "rmse": 4.663199844740024,
+          "interval_coverage": 0.77,
+          "coverage_mcse": 0.042083250825001625,
+          "coverage_interval_95": [
+            0.6784561697712622,
+            0.8415673411969654
+          ],
+          "nominal_coverage": 0.9,
+          "rank_deficient_runs": 0
+        },
+        {
+          "scenario": "well_specified",
+          "channel": "spend_video",
+          "attempted": 100,
+          "successful": 100,
+          "failed": 0,
+          "bias": -1.0761086923292407,
+          "bias_mcse": 0.4254836111270559,
+          "rmse": 4.368135065235597,
+          "interval_coverage": 0.82,
+          "coverage_mcse": 0.0384187454245971,
+          "coverage_interval_95": [
+            0.7333264161369926,
+            0.8829977450105364
+          ],
+          "nominal_coverage": 0.9,
+          "rank_deficient_runs": 0
+        },
+        {
+          "scenario": "null_effect",
+          "channel": "spend_search",
+          "attempted": 100,
+          "successful": 100,
+          "failed": 0,
+          "bias": 1.5641985547463582,
+          "bias_mcse": 0.24867683829233916,
+          "rmse": 2.927267315957828,
+          "interval_coverage": 0.0,
+          "coverage_mcse": 0.0,
+          "coverage_interval_95": [
+            3.469446951953614e-18,
+            0.03699349820698568
+          ],
+          "nominal_coverage": 0.9,
+          "rank_deficient_runs": 0
+        },
+        {
+          "scenario": "null_effect",
+          "channel": "spend_social",
+          "attempted": 100,
+          "successful": 100,
+          "failed": 0,
+          "bias": 1.2985677670822882,
+          "bias_mcse": 0.21370236060075487,
+          "rmse": 2.4914813744863222,
+          "interval_coverage": 0.0,
+          "coverage_mcse": 0.0,
+          "coverage_interval_95": [
+            3.469446951953614e-18,
+            0.03699349820698568
+          ],
+          "nominal_coverage": 0.9,
+          "rank_deficient_runs": 0
+        },
+        {
+          "scenario": "null_effect",
+          "channel": "spend_video",
+          "attempted": 100,
+          "successful": 100,
+          "failed": 0,
+          "bias": 1.6928272240212037,
+          "bias_mcse": 0.27968703923052696,
+          "rmse": 3.2572877001928506,
+          "interval_coverage": 0.0,
+          "coverage_mcse": 0.0,
+          "coverage_interval_95": [
+            3.469446951953614e-18,
+            0.03699349820698568
+          ],
+          "nominal_coverage": 0.9,
+          "rank_deficient_runs": 0
+        },
+        {
+          "scenario": "collinear",
+          "channel": "spend_search",
+          "attempted": 100,
+          "successful": 100,
+          "failed": 0,
+          "bias": -6.002976181775108,
+          "bias_mcse": 0.2364838972026786,
+          "rmse": 6.447655524990444,
+          "interval_coverage": 0.1,
+          "coverage_mcse": 0.030000000000000002,
+          "coverage_interval_95": [
+            0.0552291370606751,
+            0.17436566150491345
+          ],
+          "nominal_coverage": 0.9,
+          "rank_deficient_runs": 100
+        },
+        {
+          "scenario": "collinear",
+          "channel": "spend_social",
+          "attempted": 100,
+          "successful": 100,
+          "failed": 0,
+          "bias": 5.658922511392965,
+          "bias_mcse": 0.23626988240340913,
+          "rmse": 6.127799463568567,
+          "interval_coverage": 0.12,
+          "coverage_mcse": 0.03249615361854384,
+          "coverage_interval_95": [
+            0.06999406437019488,
+            0.19812099426711421
+          ],
+          "nominal_coverage": 0.9,
+          "rank_deficient_runs": 100
+        },
+        {
+          "scenario": "collinear",
+          "channel": "spend_video",
+          "attempted": 100,
+          "successful": 100,
+          "failed": 0,
+          "bias": -0.48747967480400206,
+          "bias_mcse": 0.44213339756304454,
+          "rmse": 4.426098577321849,
+          "interval_coverage": 0.83,
+          "coverage_mcse": 0.037563279941985904,
+          "coverage_interval_95": [
+            0.7445199523239887,
+            0.8910643388594006
+          ],
+          "nominal_coverage": 0.9,
+          "rank_deficient_runs": 100
+        },
+        {
+          "scenario": "omitted_confounder",
+          "channel": "spend_search",
+          "attempted": 100,
+          "successful": 100,
+          "failed": 0,
+          "bias": 142.66829169673267,
+          "bias_mcse": 2.5325286011925345,
+          "rmse": 144.87649176499949,
+          "interval_coverage": 0.0,
+          "coverage_mcse": 0.0,
+          "coverage_interval_95": [
+            3.469446951953614e-18,
+            0.03699349820698568
+          ],
+          "nominal_coverage": 0.9,
+          "rank_deficient_runs": 0
+        },
+        {
+          "scenario": "omitted_confounder",
+          "channel": "spend_social",
+          "attempted": 100,
+          "successful": 100,
+          "failed": 0,
+          "bias": 3.0091495492228155,
+          "bias_mcse": 2.5538063344964868,
+          "rmse": 25.587608986126696,
+          "interval_coverage": 0.85,
+          "coverage_mcse": 0.035707142142714254,
+          "coverage_interval_95": [
+            0.7671644040916763,
+            0.9069401471634337
+          ],
+          "nominal_coverage": 0.9,
+          "rank_deficient_runs": 0
+        },
+        {
+          "scenario": "omitted_confounder",
+          "channel": "spend_video",
+          "attempted": 100,
+          "successful": 100,
+          "failed": 0,
+          "bias": 4.061271059881843,
+          "bias_mcse": 2.452423516137487,
+          "rmse": 24.736969332756697,
+          "interval_coverage": 0.87,
+          "coverage_mcse": 0.03363034344160047,
+          "coverage_interval_95": [
+            0.7901964855992357,
+            0.9224283257275948
+          ],
+          "nominal_coverage": 0.9,
+          "rank_deficient_runs": 0
+        },
+        {
+          "scenario": "tracking_break",
+          "channel": "spend_search",
+          "attempted": 100,
+          "successful": 100,
+          "failed": 0,
+          "bias": -18.884869049842383,
+          "bias_mcse": 0.4497165763620454,
+          "rmse": 19.407744174326908,
+          "interval_coverage": 0.0,
+          "coverage_mcse": 0.0,
+          "coverage_interval_95": [
+            3.469446951953614e-18,
+            0.03699349820698568
+          ],
+          "nominal_coverage": 0.9,
+          "rank_deficient_runs": 0
+        },
+        {
+          "scenario": "tracking_break",
+          "channel": "spend_social",
+          "attempted": 100,
+          "successful": 100,
+          "failed": 0,
+          "bias": -14.001434738219034,
+          "bias_mcse": 0.40346117272755866,
+          "rmse": 14.56555819735645,
+          "interval_coverage": 0.02,
+          "coverage_mcse": 0.014,
+          "coverage_interval_95": [
+            0.00550196755016235,
+            0.07001179072854388
+          ],
+          "nominal_coverage": 0.9,
+          "rank_deficient_runs": 0
+        },
+        {
+          "scenario": "tracking_break",
+          "channel": "spend_video",
+          "attempted": 100,
+          "successful": 100,
+          "failed": 0,
+          "bias": -9.288316155860166,
+          "bias_mcse": 0.3679394985063908,
+          "rmse": 9.983756056353002,
+          "interval_coverage": 0.22,
+          "coverage_mcse": 0.04142463035441596,
+          "coverage_interval_95": [
+            0.150012823846054,
+            0.31070353514985793
+          ],
+          "nominal_coverage": 0.9,
+          "rank_deficient_runs": 0
+        },
+        {
+          "scenario": "heavy_tailed",
+          "channel": "spend_search",
+          "attempted": 100,
+          "successful": 100,
+          "failed": 0,
+          "bias": 0.022159433076143955,
+          "bias_mcse": 0.6333127749433491,
+          "rmse": 6.301421511072904,
+          "interval_coverage": 0.83,
+          "coverage_mcse": 0.037563279941985904,
+          "coverage_interval_95": [
+            0.7445199523239887,
+            0.8910643388594006
+          ],
+          "nominal_coverage": 0.9,
+          "rank_deficient_runs": 0
+        },
+        {
+          "scenario": "heavy_tailed",
+          "channel": "spend_social",
+          "attempted": 100,
+          "successful": 100,
+          "failed": 0,
+          "bias": 0.956563909245784,
+          "bias_mcse": 0.6865462776002342,
+          "rmse": 6.897698735800122,
+          "interval_coverage": 0.82,
+          "coverage_mcse": 0.0384187454245971,
+          "coverage_interval_95": [
+            0.7333264161369926,
+            0.8829977450105364
+          ],
+          "nominal_coverage": 0.9,
+          "rank_deficient_runs": 0
+        },
+        {
+          "scenario": "heavy_tailed",
+          "channel": "spend_video",
+          "attempted": 100,
+          "successful": 100,
+          "failed": 0,
+          "bias": 0.029023611239134103,
+          "bias_mcse": 0.7160543758362847,
+          "rmse": 7.124710198757855,
+          "interval_coverage": 0.79,
+          "coverage_mcse": 0.0407308237088326,
+          "coverage_interval_95": [
+            0.7002003116591013,
+            0.858343459380847
+          ],
+          "nominal_coverage": 0.9,
+          "rank_deficient_runs": 0
+        },
+        {
+          "scenario": "misspecified_adstock",
+          "channel": "spend_search",
+          "attempted": 100,
+          "successful": 100,
+          "failed": 0,
+          "bias": -32.0813831062966,
+          "bias_mcse": 0.5574784545060973,
+          "rmse": 32.55737370411786,
+          "interval_coverage": 0.0,
+          "coverage_mcse": 0.0,
+          "coverage_interval_95": [
+            3.469446951953614e-18,
+            0.03699349820698568
+          ],
+          "nominal_coverage": 0.9,
+          "rank_deficient_runs": 0
+        },
+        {
+          "scenario": "misspecified_adstock",
+          "channel": "spend_social",
+          "attempted": 100,
+          "successful": 100,
+          "failed": 0,
+          "bias": -24.285023050621806,
+          "bias_mcse": 0.5008726048384348,
+          "rmse": 24.791103400831496,
+          "interval_coverage": 0.01,
+          "coverage_mcse": 0.0099498743710662,
+          "coverage_interval_95": [
+            0.0017674320641406505,
+            0.054486196178705315
+          ],
+          "nominal_coverage": 0.9,
+          "rank_deficient_runs": 0
+        },
+        {
+          "scenario": "misspecified_adstock",
+          "channel": "spend_video",
+          "attempted": 100,
+          "successful": 100,
+          "failed": 0,
+          "bias": -15.5559319821184,
+          "bias_mcse": 0.483866093093367,
+          "rmse": 16.283904109297392,
+          "interval_coverage": 0.02,
+          "coverage_mcse": 0.014,
+          "coverage_interval_95": [
+            0.00550196755016235,
+            0.07001179072854388
+          ],
+          "nominal_coverage": 0.9,
+          "rank_deficient_runs": 0
+        },
+        {
+          "scenario": "weak_signal",
+          "channel": "spend_search",
+          "attempted": 100,
+          "successful": 100,
+          "failed": 0,
+          "bias": 893.95018238557,
+          "bias_mcse": 140.38122652322588,
+          "rmse": 1658.3512643115014,
+          "interval_coverage": 0.97,
+          "coverage_mcse": 0.017058722109231986,
+          "coverage_interval_95": [
+            0.9154806357094724,
+            0.9897454759759611
+          ],
+          "nominal_coverage": 0.9,
+          "rank_deficient_runs": 0
+        },
+        {
+          "scenario": "weak_signal",
+          "channel": "spend_social",
+          "attempted": 100,
+          "successful": 100,
+          "failed": 0,
+          "bias": 1101.1313519195996,
+          "bias_mcse": 171.83730306646606,
+          "rmse": 2033.658788482173,
+          "interval_coverage": 0.92,
+          "coverage_mcse": 0.027129319932501065,
+          "coverage_interval_95": [
+            0.8500189229905127,
+            0.9589065385156194
+          ],
+          "nominal_coverage": 0.9,
+          "rank_deficient_runs": 0
+        },
+        {
+          "scenario": "weak_signal",
+          "channel": "spend_video",
+          "attempted": 100,
+          "successful": 100,
+          "failed": 0,
+          "bias": 1103.1747770902193,
+          "bias_mcse": 162.34440270081905,
+          "rmse": 1956.0698843723196,
+          "interval_coverage": 0.94,
+          "coverage_mcse": 0.023748684174075843,
+          "coverage_interval_95": [
+            0.8752318455410406,
+            0.9722138760368118
+          ],
+          "nominal_coverage": 0.9,
+          "rank_deficient_runs": 0
+        },
+        {
+          "scenario": "missing_target",
+          "channel": "spend_search",
+          "attempted": 100,
+          "successful": 0,
+          "failed": 100,
+          "bias": null,
+          "bias_mcse": null,
+          "rmse": null,
+          "interval_coverage": null,
+          "coverage_mcse": null,
+          "coverage_interval_95": null,
+          "nominal_coverage": 0.9,
+          "rank_deficient_runs": 0
+        },
+        {
+          "scenario": "missing_target",
+          "channel": "spend_social",
+          "attempted": 100,
+          "successful": 0,
+          "failed": 100,
+          "bias": null,
+          "bias_mcse": null,
+          "rmse": null,
+          "interval_coverage": null,
+          "coverage_mcse": null,
+          "coverage_interval_95": null,
+          "nominal_coverage": 0.9,
+          "rank_deficient_runs": 0
+        },
+        {
+          "scenario": "missing_target",
+          "channel": "spend_video",
+          "attempted": 100,
+          "successful": 0,
+          "failed": 100,
+          "bias": null,
+          "bias_mcse": null,
+          "rmse": null,
+          "interval_coverage": null,
+          "coverage_mcse": null,
+          "coverage_interval_95": null,
+          "nominal_coverage": 0.9,
+          "rank_deficient_runs": 0
+        },
+        {
+          "scenario": "constant_spend",
+          "channel": "spend_search",
+          "attempted": 100,
+          "successful": 0,
+          "failed": 100,
+          "bias": null,
+          "bias_mcse": null,
+          "rmse": null,
+          "interval_coverage": null,
+          "coverage_mcse": null,
+          "coverage_interval_95": null,
+          "nominal_coverage": 0.9,
+          "rank_deficient_runs": 0
+        },
+        {
+          "scenario": "constant_spend",
+          "channel": "spend_social",
+          "attempted": 100,
+          "successful": 0,
+          "failed": 100,
+          "bias": null,
+          "bias_mcse": null,
+          "rmse": null,
+          "interval_coverage": null,
+          "coverage_mcse": null,
+          "coverage_interval_95": null,
+          "nominal_coverage": 0.9,
+          "rank_deficient_runs": 0
+        },
+        {
+          "scenario": "constant_spend",
+          "channel": "spend_video",
+          "attempted": 100,
+          "successful": 0,
+          "failed": 100,
+          "bias": null,
+          "bias_mcse": null,
+          "rmse": null,
+          "interval_coverage": null,
+          "coverage_mcse": null,
+          "coverage_interval_95": null,
+          "nominal_coverage": 0.9,
+          "rank_deficient_runs": 0
+        }
+      ],
+      "causal_identification": false,
+      "limitations": [
+        "Conditional moving-block residual bootstrap; constrained null effects may under-cover",
+        "DGP includes a train-window scaling rule; effects are interpreted only under this generator",
+        "Intervals cover conditional effect contrasts, not individual observed outcomes",
+        "Failures remain in attempted denominators; coverage denominator counts available intervals",
+        "This study evaluates constrained Ridge; native parameterizations need their own matched-estimand study",
+        "Coverage MCSE is a binomial plug-in estimate; consult Wilson intervals especially when estimated coverage is zero or one"
+      ],
+      "acceptance": {
+        "status": "failed",
+        "failed": [
+          "interval_undercoverage:null_effect:spend_search",
+          "interval_undercoverage:null_effect:spend_social",
+          "interval_undercoverage:null_effect:spend_video"
+        ],
+        "missing": [
+          "absolute_bias_tolerance_missing",
+          "rmse_tolerance_missing",
+          "coverage_precision_inconclusive:well_specified:spend_search",
+          "coverage_precision_inconclusive:well_specified:spend_social",
+          "coverage_precision_inconclusive:well_specified:spend_video"
+        ],
+        "undercoverage": [
+          "null_effect:spend_search",
+          "null_effect:spend_social",
+          "null_effect:spend_video"
+        ],
+        "coverage_checks": [
+          {
+            "estimand": "well_specified:spend_search",
+            "coverage": 0.85,
+            "simultaneous_coverage_bounds": [
+              0.7333316375888198,
+              0.9211161679252401
+            ],
+            "minimum_coverage_policy": 0.85
+          },
+          {
+            "estimand": "well_specified:spend_social",
+            "coverage": 0.77,
+            "simultaneous_coverage_bounds": [
+              0.6436483678100072,
+              0.8612113678722676
+            ],
+            "minimum_coverage_policy": 0.85
+          },
+          {
+            "estimand": "well_specified:spend_video",
+            "coverage": 0.82,
+            "simultaneous_coverage_bounds": [
+              0.698983132225479,
+              0.8993691471016613
+            ],
+            "minimum_coverage_policy": 0.85
+          },
+          {
+            "estimand": "null_effect:spend_search",
+            "coverage": 0.0,
+            "simultaneous_coverage_bounds": [
+              -6.938893903907228e-18,
+              0.06507456355134314
+            ],
+            "minimum_coverage_policy": 0.85
+          },
+          {
+            "estimand": "null_effect:spend_social",
+            "coverage": 0.0,
+            "simultaneous_coverage_bounds": [
+              -6.938893903907228e-18,
+              0.06507456355134314
+            ],
+            "minimum_coverage_policy": 0.85
+          },
+          {
+            "estimand": "null_effect:spend_video",
+            "coverage": 0.0,
+            "simultaneous_coverage_bounds": [
+              -6.938893903907228e-18,
+              0.06507456355134314
+            ],
+            "minimum_coverage_policy": 0.85
+          }
+        ],
+        "policy": {
+          "core_scenarios": [
+            "well_specified",
+            "null_effect"
+          ],
+          "minimum_replications": 100,
+          "coverage_tolerance": 0.05,
+          "max_absolute_bias": null,
+          "max_rmse": null,
+          "coverage_family_size": 6,
+          "family_alpha": 0.05
+        },
+        "causal_identification": false,
+        "scope": "Core DGP conditional-interval screening only; inspect all adverse scenarios, failures and width; cannot certify real effects"
+      }
+    }
+  }
+}

@@ -29,6 +29,13 @@ Não há decomposição nativa unificada, curvas analíticas Meridian/Robyn/PyMC
 
 ## Verificação reproduzível
 
+Resultados também apresenta a camada científica: três avaliações independentes,
+protocolo configurável, traços das cadeias por parâmetro, PPC no teste temporal,
+sensibilidade e tabelas de Monte Carlo. O relatório completo pode ser baixado
+em JSON ou incluído na exportação de análise. Estados ausentes, inconclusivos,
+reprovados e somente simulados ficam explícitos; nenhuma cor ou gráfico autoriza
+investimento. Consulte [validação científica](scientific-validation.md).
+
 ```powershell
 python -m pytest tests/test_web_app.py tests/test_appsec.py tests/test_cli.py -q
 npm ci --ignore-scripts

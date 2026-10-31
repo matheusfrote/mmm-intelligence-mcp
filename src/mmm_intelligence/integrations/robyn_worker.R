@@ -75,6 +75,12 @@ prediction_summary <- function(output, selected, observed_data=NULL,
   summary
 }
 
+search_warning <- function(trials,iterations) {
+  ifelse(trials<5L || iterations<2000L,
+    "Functional reduced search, not recommended production search volume",
+    "Diagnostics and independent stability review required; search volume alone does not validate a model")
+}
+
 main <- function(args=commandArgs(trailingOnly=TRUE)) {
   stopifnot(length(args)==2L)
   suppressPackageStartupMessages(library(jsonlite))
@@ -117,7 +123,9 @@ if(payload$operation == "train") {
     dt_holidays=NULL,adstock="geometric",hyperparameters=hyper,
     window_start=as.character(df[[req$date_column]][req$warmup_periods+1L]),
     window_end=as.character(tail(df[[req$date_column]],1)))
-  models <- robyn_run(InputCollect=input,trials=1L,iterations=max(200L,as.integer(req$draws)*4L),
+  search_trials <- ifelse(is.null(req$robyn_trials),1L,as.integer(req$robyn_trials))
+  search_iterations <- ifelse(is.null(req$robyn_iterations),max(200L,as.integer(req$draws)*4L),as.integer(req$robyn_iterations))
+  models <- robyn_run(InputCollect=input,trials=search_trials,iterations=search_iterations,
     cores=1L,ts_validation=TRUE,seed=as.integer(req$seed),nevergrad_algo="TwoPointsDE",
     intercept_sign="unconstrained",outputs=FALSE,quiet=FALSE)
   output <- robyn_outputs(InputCollect=input,OutputModels=models,pareto_fronts=1,
@@ -127,6 +135,7 @@ if(payload$operation == "train") {
   stopifnot(nrow(candidates)>0)
   candidates <- candidates[order(candidates$nrmse_val,candidates$solID),,drop=FALSE]
   selected <- as.character(candidates$solID[1])
+  selected_effects <- output$xDecompAgg[output$xDecompAgg$solID==selected & output$xDecompAgg$rn %in% media,,drop=FALSE]
   before <- prediction_summary(output,selected,observed_data,req$target_column,req$date_column)
   exported <- robyn_write(InputCollect=input,OutputCollect=output,select_model=selected,
                          add_data=TRUE,export=FALSE,quiet=TRUE)
@@ -145,9 +154,12 @@ if(payload$operation == "train") {
       priors=NULL,priors_status="not_applicable_non_bayesian_model",
       interval_type="not_available_point_prediction"),
     temporal_split=before$temporal_split,
-    diagnostics=list(trials=1L,iterations=max(200L,as.integer(req$draws)*4L),
+    native_estimates=setNames(as.list(selected_effects$coef),selected_effects$rn),
+    diagnostics=list(trials=search_trials,iterations=search_iterations,
+                     optimization_trace=models$convergence$errors,
+                     optimization_messages=models$convergence$conv_msg,
                      selection="validation_nrmse",convergence_certified=FALSE),
-    warnings=c("Functional reduced search, not recommended production search volume",
+    warnings=c(search_warning(search_trials,search_iterations),
       "Native temporal validation has its own rounding and warmup window",
       "Adapter isolates outer test targets with train-only placeholders; not default Robyn behavior",
       "Native test diagnostics use placeholders; adapter test metrics use original observations",

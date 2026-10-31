@@ -1,0 +1,23 @@
+name: Extensive scientific validation (outcomes in report)
+on:
+  workflow_dispatch:
+    inputs:
+      draws:
+        description: Posterior draws per chain; diagnostics still determine adequacy
+        type: choice
+        options: ['1000', '2000']
+        default: '1000'
+      replications:
+        description: Independent synthetic replications per adversarial scenario (Ridge)
+        type: choice
+        options: ['100', '250']
+        default: '100'
+permissions:
+  contents: read
+jobs:
+  scientific:
+    uses: ./.github/workflows/native-engines.yml
+    with:
+      scientific_extensive: true
+      scientific_draws: ${{ fromJSON(inputs.draws) }}
+      scientific_replications: ${{ fromJSON(inputs.replications) }}

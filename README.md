@@ -110,6 +110,15 @@ Use pymc_marketing ou meta_robyn nos outros adaptadores. Robyn requer `test_frac
 
 ## Arquitetura e limites
 
+A [camada de validação científica](docs/scientific-validation.md) amplia `audit_model`
+com `scientific`, preservando a chamada anterior. Ela separa funcionamento,
+adequação estatística e força da evidência causal; coleta cadeias/MCSE/PPC nos
+workers nativos, mede estabilidade e executa Monte Carlo Ridge com verdade
+conhecida. O dashboard apresenta os resultados e permite exportar o relatório.
+O workflow científico extenso é manual e separado dos smokes. Nenhum resultado
+sintético certifica campanhas reais. Consulte os [resultados executados e
+pendências científicas](docs/scientific-validation-results.md).
+
 Servidor, contratos, validação, modelagem, análise, simulação, otimização, persistência, renderização e integrações são módulos separados em src/mmm_intelligence. Motores externos usam workers independentes e serialização Protobuf, NetCDF ou JSON oficial; não há fallback Ridge com outro rótulo nem uso de pickle/RDS.
 
 Bootstrap produz intervalos da **média condicional** com formas/inputs fixos; não é intervalo preditivo completo. Calibração é reponderação aproximada, sem demonstrar randomização ou transporte. Bom R² não certifica atribuição por canal. Diagnósticos e alertas permanecem visíveis, inclusive quando a convergência é ruim.

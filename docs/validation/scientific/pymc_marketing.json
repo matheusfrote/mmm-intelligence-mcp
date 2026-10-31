@@ -1,0 +1,613 @@
+{
+  "curation": "Selected actual report fields; no statistical outcomes altered",
+  "execution_receipt_sha256": "26990985c6011d9a6d9680cd31e820af4712cb65fd9730604bbead4b73452825",
+  "execution_receipt_local": "evidence/scientific-pymc-final/result.json",
+  "source_unchanged_during_run": true,
+  "source_sha256": {
+    "src/mmm_intelligence/__init__.py": "28e7bab2b76f1f120dea60b3f59a661819dbf57d63caa13e6b7bed7852623101",
+    "src/mmm_intelligence/analysis.py": "40242eb80163f6a0dda725b7e43e3b0e690da419f4f17fffe4599a392d2cece0",
+    "src/mmm_intelligence/canonical.py": "cada4a556e16eb68bddb8c2aed0f5d763f67b0ee642f92c85f8cdfacb956bed5",
+    "src/mmm_intelligence/causal_validation.py": "7bc1e9d59912292dba62ba778721f47f3dd9bd284e0d5f2c414e02e3048cb0d6",
+    "src/mmm_intelligence/cli.py": "b358493b9a8ae8872c3cd6f57b4dc4ae486eaa74555990a6ac86b629c38b617c",
+    "src/mmm_intelligence/config.py": "632c6e59a9311695e0ceb33219edc21e6a5aabe9e35ee9e9a444955ecad9c142",
+    "src/mmm_intelligence/connectors.py": "30f33915052437460db401d0fd4e3cc2b2f31898f8428cffda227a2a27aea820",
+    "src/mmm_intelligence/dashboard_panels.py": "87039b5b40f9122309485e3fd173b94c0bd848bd7f4c7f9b62505cc6d480cde1",
+    "src/mmm_intelligence/datasets.py": "64e10d03a1692b7681cab1e2542933cd7a8e287259985df4c0e2af8bf5c8c6e5",
+    "src/mmm_intelligence/diagnostics.py": "b166def1e714f56c6f29b8afc07399ada8f47e10ef224aa44d981d1cfd423f7d",
+    "src/mmm_intelligence/errors.py": "3aa66605319e55ce380d7fb19fc19d75b82022ba27dd7c0518e1fbcd92397b9d",
+    "src/mmm_intelligence/experiments.py": "1ada3527222d3be0b3352d79fa34117260a80ba7bc3cab215a85283d864d20cd",
+    "src/mmm_intelligence/exporting.py": "2fc6a50ec837b5d23a37f659412c7647920c7b7b80446f71a2470e41fc71d518",
+    "src/mmm_intelligence/file_readers.py": "745c6575f34dc5e99d58438dfa02c8df0deaca8b530f2405eb83b5e1628652f4",
+    "src/mmm_intelligence/forecasting.py": "4b5784d8cc0a00276b0a66a1174674adaa062818e407a9d03f1e67ccfe170fe6",
+    "src/mmm_intelligence/growth.py": "f65db79b835e757981ad76b81558046814937b8fca91076415681563b935503e",
+    "src/mmm_intelligence/growth_analytics.py": "0ed75c322f23a8459e9a33391eebe830ab4ee2384141625849059c0b85c815a2",
+    "src/mmm_intelligence/http_transport.py": "7b9c8eea83a52a5c51682e79360f31ab02230ab787597aad8743275d19d3362d",
+    "src/mmm_intelligence/ingestion.py": "0c3fa25a2710fbbaf11182e320b5cc2210a139857e6dace7ee204341802b38fc",
+    "src/mmm_intelligence/integrations/__init__.py": "2ffd59fdb04118e5291efa21921810cce696a7b97e0ddb82c8423355dba1d205",
+    "src/mmm_intelligence/integrations/bridge.py": "d0bc56f6ce5117345b16cc4bd54f5d5dea063677a93dc6a37248b7d5a379e1be",
+    "src/mmm_intelligence/integrations/contracts.py": "2fccfd938faabdf50e9e9d6afd00ba45655e2fbb64830f9105129a1977a3364f",
+    "src/mmm_intelligence/integrations/native_scientific.py": "b96338048c5b29b5c2b294ce9a8fe821e5f5e324e0b663e3aa0446904bd41593",
+    "src/mmm_intelligence/integrations/robyn_worker.R": "6b796f6cda1092c2b3e18aaaf757e2f40499a2e5299b15027aab5ed74dce09bf",
+    "src/mmm_intelligence/integrations/worker.py": "889936d16db24c7230a0edc8cea5b442b89f3801b4cb60948695b85eb402784d",
+    "src/mmm_intelligence/joins.py": "26aa4df8847c1fc663fbb8675cd0a94807da546705a12fe647c988e329914141",
+    "src/mmm_intelligence/lifecycle.py": "05923ac03c2f87b6382d75349c820cb0041087d59dc31f026aec196a069626ab",
+    "src/mmm_intelligence/materialization.py": "2a77d1d1f5293a91f09aafb0369d97949d3e7f49c1184a69f781f2967acdfe35",
+    "src/mmm_intelligence/media_validation.py": "ae08081cfd46fd241af63ed0aea243a3efbcc8c09b934d24395b1d10708f9079",
+    "src/mmm_intelligence/modeling.py": "2cb7085f2321271e485fec76534600b6525a6631194f39d3e963bd7be4f62aa9",
+    "src/mmm_intelligence/monte_carlo.py": "d71b5a87c1683062edc0413bcddb53eb4416a5536714febb3fd6be23a6621281",
+    "src/mmm_intelligence/optimization.py": "9747804ee39090793a2ce0f43617a045c6e9538d948fd96c78d09095fa9d7aec",
+    "src/mmm_intelligence/quality.py": "b828be2aa1cbe5172200908c6a91cce0b7948e7d9ef3cacc45f06b3d45478899",
+    "src/mmm_intelligence/rendering.py": "ea46c4b9132a4cd0167ac4f7a13b75d90f6c59fc65f5860966f3b40527b9458a",
+    "src/mmm_intelligence/resources.py": "1cdce0dcfa23f9452932a803c1a9a5ca6ccd5604adae370146e0785b5dd11802",
+    "src/mmm_intelligence/schemas.py": "8623aa0ee799a20f754501eec7270f390c6156c25a99e9a6d221943e2b1ecf85",
+    "src/mmm_intelligence/scientific.py": "dd22444912e6e24944d3b5d52d86a807d4a1da55a10935c7e53431245e861baa",
+    "src/mmm_intelligence/server.py": "a36a905cf837b94d00dd92bd66a72cb46916416d2e26d1edf58441dcb8e72e50",
+    "src/mmm_intelligence/service.py": "5414266b6e8cd7ab14bc0fc8353e4d4400199b1b8c734263fe937b8e7c6721e9",
+    "src/mmm_intelligence/simulation.py": "9d05a2705d9b7dc1ca94bd74d8c06935a2ce9ad09b3e9880bab4828a8737c224",
+    "src/mmm_intelligence/storage.py": "c43138ea817847d635cd8ddafe47a04639132d229feef5bcdb0514212652384f",
+    "src/mmm_intelligence/supplied_files.py": "3cfba58e81563fd2c5efdd4ff4081d93497128b6f3cef1f96b568e7953be2f0b",
+    "src/mmm_intelligence/synthetic.py": "e18af833708f16a86b0d18fae2b2b6788a5c4149362f8389e2ad5d8896c58165",
+    "src/mmm_intelligence/universal_schemas.py": "d94a14af0d29d8e583d8bb82251ebd2e1417ffb52528e861aff1bbde52e17942",
+    "src/mmm_intelligence/validation.py": "7391b8071a3a9484bcd6ae3ca2eb136d677c7920e5b6d638f8c07b7081887ea5",
+    "src/mmm_intelligence/web/app.js": "f485cd8a2277456640aa4a14ab4391083243b1a4b9291cb56973f029f2fd25eb",
+    "src/mmm_intelligence/web/charts.js": "0a486fd3fc6e8bc9c9feaf7563cdce62ff0281ee2732d9a3480bc6543732f728",
+    "src/mmm_intelligence/web/client.js": "cb9d552ffd20ac1b43fb0bcc55e0d2e34ae63dccb5b4309c9d2b9d6a447187d2",
+    "src/mmm_intelligence/web/growth_views.js": "ffdf6ac79e3706589a55fd59273a159fe1ffa2206f859fc1bc87791d0dabb8f4",
+    "src/mmm_intelligence/web/ui.js": "d0ff4735523e7d84769ff5c298136b1104bcfa66b352ba920c2b78b86afeba7b",
+    "src/mmm_intelligence/web/views.js": "a03847d4108d6cbada5c72d1ffde8b8b7d34e622cbc0122803e16bdefa42719d",
+    "src/mmm_intelligence/web_app.py": "e84fab0ff0c993525d7b0197f72741867a01a8f8de3d27913100dfeaca8151b9",
+    "examples/scientific_protocol.py": "532abba6bd7d00b973c0ea38873e86e2eabee99cb4ee0597d57078368ee72213"
+  },
+  "reused_models": [
+    "pymc_marketing"
+  ],
+  "report": {
+    "schema_version": "scientific-v1",
+    "model_id": "scientific-pymc_marketing",
+    "backend": "pymc_marketing",
+    "synthetic": true,
+    "provenance": {
+      "created_at": "2026-10-31T13:36:32.890612+00:00",
+      "policy": {
+        "policy_version": "scientific-v1",
+        "refit": false,
+        "collect_native": true,
+        "seeds": [
+          59,
+          71
+        ],
+        "regularization": [
+          0.01,
+          0.1,
+          1.0
+        ],
+        "max_rhat": 1.01,
+        "min_ess_per_chain": 100,
+        "min_draws": 1000,
+        "max_mcse_sd_ratio": 0.05,
+        "max_relative_spread": 0.5,
+        "experiment_result_ids": [],
+        "placebo_result_ids": [],
+        "negative_control_result_ids": [],
+        "equivalence_margin": null,
+        "assumptions": {},
+        "review_reference": null,
+        "confounding_bias_grid": [],
+        "monte_carlo": null,
+        "calibration": null
+      },
+      "dataset_sha256": "43ab06c77a76626f99ba135c46eef0b11696b53bc7fe4acb9a6d5319cef22e88",
+      "model_sha256": "b764b1b494a4f1d0aca3ee5d7977cebc12d91168e5c78c2fa1c8d8b2cbd76bed",
+      "configuration": {
+        "backend": "pymc_marketing",
+        "chains": 4,
+        "control_columns": [
+          "price_index",
+          "promotion"
+        ],
+        "dataset_id": "scientific-data",
+        "date_column": "date",
+        "draws": 1000,
+        "media_columns": [
+          "spend_search",
+          "spend_social",
+          "spend_video"
+        ],
+        "model_id": "scientific-pymc_marketing",
+        "robyn_iterations": null,
+        "robyn_trials": null,
+        "seed": 42,
+        "target_column": "revenue",
+        "test_fraction": 0.2,
+        "tune": 1000,
+        "warmup_periods": 8
+      },
+      "effective_configuration": {
+        "adstock": {
+          "__type__": "pymc_marketing.mmm.components.adstock.GeometricAdstock",
+          "l_max": 8,
+          "mode": "After",
+          "normalize": true,
+          "prefix": "adstock",
+          "priors": {
+            "alpha": {
+              "dims": [
+                "channel"
+              ],
+              "dist": "Beta",
+              "kwargs": {
+                "alpha": 1,
+                "beta": 3
+              }
+            }
+          }
+        },
+        "interval_type": "posterior_predictive_observed",
+        "model_config": {
+          "adstock_alpha": {
+            "dims": [
+              "channel"
+            ],
+            "dist": "Beta",
+            "kwargs": {
+              "alpha": 1,
+              "beta": 3
+            }
+          },
+          "gamma_control": {
+            "dims": [
+              "control"
+            ],
+            "dist": "Normal",
+            "kwargs": {
+              "mu": 0,
+              "sigma": 2
+            }
+          },
+          "gamma_fourier": {
+            "dims": [
+              "fourier_mode"
+            ],
+            "dist": "Laplace",
+            "kwargs": {
+              "b": 1,
+              "mu": 0
+            }
+          },
+          "intercept": {
+            "dims": [],
+            "dist": "Normal",
+            "kwargs": {
+              "mu": 0,
+              "sigma": 2
+            }
+          },
+          "likelihood": {
+            "dims": [
+              "date"
+            ],
+            "dist": "Normal",
+            "kwargs": {
+              "sigma": {
+                "dims": [],
+                "dist": "HalfNormal",
+                "kwargs": {
+                  "sigma": 2
+                }
+              }
+            }
+          },
+          "saturation_beta": {
+            "dims": [
+              "channel"
+            ],
+            "dist": "HalfNormal",
+            "kwargs": {
+              "sigma": 2
+            }
+          },
+          "saturation_lam": {
+            "dims": [
+              "channel"
+            ],
+            "dist": "Gamma",
+            "kwargs": {
+              "alpha": 3,
+              "beta": 1
+            }
+          }
+        },
+        "prior_source": "package_defaults_no_custom_priors",
+        "saturation": {
+          "__type__": "pymc_marketing.mmm.components.saturation.LogisticSaturation",
+          "prefix": "saturation",
+          "priors": {
+            "beta": {
+              "dims": [
+                "channel"
+              ],
+              "dist": "HalfNormal",
+              "kwargs": {
+                "sigma": 2
+              }
+            },
+            "lam": {
+              "dims": [
+                "channel"
+              ],
+              "dist": "Gamma",
+              "kwargs": {
+                "alpha": 3,
+                "beta": 1
+              }
+            }
+          }
+        },
+        "target_type": "revenue"
+      },
+      "backend": "pymc_marketing",
+      "python": "3.12.14",
+      "versions": {
+        "mmm-intelligence-mcp": "0.4.0",
+        "numpy": "2.4.6",
+        "scipy": "1.17.1"
+      },
+      "native_version": "1.3.0",
+      "native_training_versions": null,
+      "seeds": [
+        59,
+        71
+      ]
+    },
+    "classifications": {
+      "operational": {
+        "status": "passed",
+        "scope": "Immutable dataset lineage and successful solver/native restoration only",
+        "dataset_lineage_verified": true
+      },
+      "statistical": {
+        "status": "failed",
+        "failed": [
+          "mcse_exceeds_precision_policy",
+          "predictive_discrepancy"
+        ],
+        "missing": [
+          "specification_sensitivity",
+          "native_effect_parameter_stability"
+        ],
+        "mcmc": {
+          "status": "adequate_for_screened_diagnostics",
+          "failed_screens": [],
+          "missing_or_insufficient": [],
+          "policy": {
+            "max_rhat_exclusive": 1.01,
+            "minimum_ess_per_chain": 100,
+            "minimum_chains": 4,
+            "minimum_draws_and_tune_screen": 400
+          },
+          "reference": "https://mc-stan.org/learn-stan/diagnostics-warnings.html",
+          "scope": "Rank R-hat, bulk/tail ESS and divergences only; inspect mixing, PPC, priors and identification separately. Sample-count screens are operational, not universal guarantees.",
+          "business_recommendation_eligible": false,
+          "convergence_certified": false
+        },
+        "convergence_certified": false,
+        "scope": "Screened numerical and sensitivity diagnostics; model correctness is not guaranteed"
+      },
+      "causal": {
+        "status": "simulation_only",
+        "causal_identification": false,
+        "source_ids": [],
+        "assumptions": {
+          "random_assignment": "unknown",
+          "no_interference": "unknown",
+          "no_unmeasured_confounding": "unknown",
+          "no_post_treatment_controls": "unknown",
+          "positivity": "unknown",
+          "measurement_consistency": "unknown",
+          "prespecified_analysis": "unknown",
+          "complete_followup": "unknown"
+        },
+        "violated_assumptions": [],
+        "threats": [],
+        "missing": [
+          "causal_assumptions_require_review",
+          "independent_design_review",
+          "independent_incrementality_experiment",
+          "negative_control_evidence",
+          "placebo_evidence"
+        ],
+        "placebos": [],
+        "negative_controls": [],
+        "confounding_sensitivity": [],
+        "review_reference": null,
+        "review_reference_authenticated": false,
+        "no_unmeasured_confounding_verified": false,
+        "primary_effects": [],
+        "limitations": [
+          "Imported assignments and review declarations do not authenticate randomization or execution",
+          "Compatible placebos and negative controls do not prove exchangeability",
+          "No automatic causal claim, extrapolation across populations or budget action",
+          "Geographic experiments require independent geo units; repeated days are not independent geos",
+          "Multiplicity across separate experiments and transportability require a prespecified design review"
+        ]
+      },
+      "business_recommendation_eligible": false
+    },
+    "diagnostics": {
+      "convergence_certified": false,
+      "r_hat_max": 1.0052011052821594,
+      "r_hat_available": true,
+      "r_hat_undefined_count": 0,
+      "ess_bulk_min": 789.5565661153802,
+      "ess_bulk_available": true,
+      "ess_bulk_undefined_count": 0,
+      "ess_tail_min": 470.23711998388507,
+      "ess_tail_available": true,
+      "ess_tail_undefined_count": 0,
+      "method": "ArviZ rank-normalized split R-hat, bulk ESS and tail ESS",
+      "summarized_variables": [
+        "adstock_alpha",
+        "saturation_lam",
+        "saturation_beta",
+        "gamma_fourier",
+        "gamma_control",
+        "intercept_contribution",
+        "y_sigma",
+        "total_media_contribution_original_scale"
+      ],
+      "excluded_date_dependent_variables": [
+        "mu",
+        "yearly_seasonality_contribution",
+        "fourier_contribution",
+        "control_contribution",
+        "channel_contribution"
+      ],
+      "divergences": 0,
+      "divergences_available": true,
+      "chains": 4,
+      "draws": 1000,
+      "tune": 1000
+    },
+    "native_diagnostic_versions": {
+      "pymc-marketing": "1.3.0",
+      "pymc": "6.3.2",
+      "pytensor": "3.3.4",
+      "arviz": "1.3.0",
+      "arviz-stats": "1.3.3",
+      "numpy": "2.4.6",
+      "scipy": "1.18.1"
+    },
+    "stability": {
+      "status": "not_requested",
+      "reason": "No independent refits executed"
+    },
+    "warnings": [
+      "No automatic causal or investment certification; missing evidence remains inconclusive"
+    ],
+    "artifact_id": "scientific_validation-2f5e9e8baba54cfdbf89472dbc122a5b",
+    "created_at": "2026-10-31T13:37:12.873636+00:00",
+    "heldout_metrics": {
+      "bias_predicted_minus_observed": -425.82924997314484,
+      "mae": 425.82924997314484,
+      "rmse": 464.8798148330465,
+      "mape_nonzero_percent": 3.6443438157475265,
+      "mape_excluded_zeros": 0,
+      "wape_percent": 3.570750124756218,
+      "r2": 0.6704592017795941
+    },
+    "scientific_diagnostics": {
+      "available": true,
+      "parameters": [
+        {
+          "mean": 0.5595757040530583,
+          "sd": 0.06205324012755412,
+          "mcse_mean": 0.0012739444282179229,
+          "mcse_sd": 0.0012309824397082748,
+          "r_hat": 1.0010871833718282,
+          "ess_bulk": 2625.1780744122375,
+          "ess_tail": 1867.2208678825916,
+          "parameter": "adstock_alpha[spend_search]",
+          "mcse_sd_ratio": 0.020529861544687344
+        },
+        {
+          "mean": 0.6338882846052437,
+          "sd": 0.03415882739489599,
+          "mcse_mean": 0.0006091959495411743,
+          "mcse_sd": 0.0005850818971693047,
+          "r_hat": 1.0015748084391627,
+          "ess_bulk": 3201.1066463774832,
+          "ess_tail": 2686.7199576321204,
+          "parameter": "adstock_alpha[spend_social]",
+          "mcse_sd_ratio": 0.01783421727269831
+        },
+        {
+          "mean": 0.5821055678930525,
+          "sd": 0.05470361640679152,
+          "mcse_mean": 0.0012109401460602615,
+          "mcse_sd": 0.000861281907641,
+          "r_hat": 1.0016051202314142,
+          "ess_bulk": 2031.903449211971,
+          "ess_tail": 2429.5023653792155,
+          "parameter": "adstock_alpha[spend_video]",
+          "mcse_sd_ratio": 0.022136381935983336
+        },
+        {
+          "mean": 2.0507725658150022,
+          "sd": 0.9271824609459787,
+          "mcse_mean": 0.022391074436261156,
+          "mcse_sd": 0.013311829344058388,
+          "r_hat": 1.0009363237743276,
+          "ess_bulk": 1544.2280598763773,
+          "ess_tail": 1249.46131458268,
+          "parameter": "saturation_lam[spend_search]",
+          "mcse_sd_ratio": 0.0241495880038716
+        },
+        {
+          "mean": 2.7392271345934835,
+          "sd": 0.7719540420446264,
+          "mcse_mean": 0.029306835970487607,
+          "mcse_sd": 0.025434192591544877,
+          "r_hat": 1.0029826703453362,
+          "ess_bulk": 808.0244498268573,
+          "ess_tail": 512.7837038855608,
+          "parameter": "saturation_lam[spend_social]",
+          "mcse_sd_ratio": 0.03796448282447544
+        },
+        {
+          "mean": 4.2945781901072495,
+          "sd": 0.7992398323568816,
+          "mcse_mean": 0.017891840250750832,
+          "mcse_sd": 0.018762300065680037,
+          "r_hat": 1.0007343822427504,
+          "ess_bulk": 2091.396912500483,
+          "ess_tail": 2121.4700941980254,
+          "parameter": "saturation_lam[spend_video]",
+          "mcse_sd_ratio": 0.02238607177271122
+        },
+        {
+          "mean": 0.1892978069029368,
+          "sd": 0.1366173072537056,
+          "mcse_mean": 0.004348350133730502,
+          "mcse_sd": 0.012075048093951489,
+          "r_hat": 1.0016401925014715,
+          "ess_bulk": 1432.4865263313138,
+          "ess_tail": 1280.6179345891958,
+          "parameter": "saturation_beta[spend_search]",
+          "mcse_sd_ratio": 0.03182869155556832
+        },
+        {
+          "mean": 0.1880331364803268,
+          "sd": 0.05105832532809943,
+          "mcse_mean": 0.0028717159852922496,
+          "mcse_sd": 0.007868077165214656,
+          "r_hat": 1.0052011052821594,
+          "ess_bulk": 789.5565661153802,
+          "ess_tail": 470.23711998388507,
+          "parameter": "saturation_beta[spend_social]",
+          "mcse_sd_ratio": 0.05624383421976102
+        },
+        {
+          "mean": 0.17500990691215645,
+          "sd": 0.022975492176535665,
+          "mcse_mean": 0.0005511020526895839,
+          "mcse_sd": 0.0011815302970882688,
+          "r_hat": 1.0020457098500588,
+          "ess_bulk": 2056.617838315862,
+          "ess_tail": 2370.894750927018,
+          "parameter": "saturation_beta[spend_video]",
+          "mcse_sd_ratio": 0.023986517827566348
+        },
+        {
+          "mean": 0.03813683447326996,
+          "sd": 0.002062802124564927,
+          "mcse_mean": 4.120138339638434e-05,
+          "mcse_sd": 3.56203831187496e-05,
+          "r_hat": 1.0011218226474352,
+          "ess_bulk": 2578.5387454263987,
+          "ess_tail": 2502.8888154685096,
+          "parameter": "gamma_fourier[sin_1]",
+          "mcse_sd_ratio": 0.019973502502124037
+        },
+        {
+          "mean": 0.00021861271092791775,
+          "sd": 0.0017857542306667833,
+          "mcse_mean": 2.929197359088879e-05,
+          "mcse_sd": 3.180299230824908e-05,
+          "r_hat": 1.0010015246669755,
+          "ess_bulk": 3713.609159155063,
+          "ess_tail": 2882.058758558982,
+          "parameter": "gamma_fourier[cos_1]",
+          "mcse_sd_ratio": 0.016403138286253116
+        },
+        {
+          "mean": -0.1850464110276982,
+          "sd": 0.038284673992936766,
+          "mcse_mean": 0.0007666279875758927,
+          "mcse_sd": 0.000628493733469331,
+          "r_hat": 1.0003969771344725,
+          "ess_bulk": 2507.0349733608236,
+          "ess_tail": 2628.6144248885025,
+          "parameter": "gamma_control[price_index]",
+          "mcse_sd_ratio": 0.020024409446906345
+        },
+        {
+          "mean": 0.04036111804384963,
+          "sd": 0.0029340860801094033,
+          "mcse_mean": 4.863009337637047e-05,
+          "mcse_sd": 4.835339911235056e-05,
+          "r_hat": 1.0011946325814194,
+          "ess_bulk": 3615.3511259480565,
+          "ess_tail": 2791.130703067098,
+          "parameter": "gamma_control[promotion]",
+          "mcse_sd_ratio": 0.0165741876852356
+        },
+        {
+          "mean": 0.7172199155807859,
+          "sd": 0.04866408772188835,
+          "mcse_mean": 0.0010871268926586877,
+          "mcse_sd": 0.0008656183446027862,
+          "r_hat": 1.0004430998795073,
+          "ess_bulk": 2013.347369331347,
+          "ess_tail": 2340.3024484290977,
+          "parameter": "intercept_contribution",
+          "mcse_sd_ratio": 0.022339407632000364
+        },
+        {
+          "mean": 0.012752027713273573,
+          "sd": 0.0008696334917397547,
+          "mcse_mean": 1.7414552133579318e-05,
+          "mcse_sd": 1.3737969478796842e-05,
+          "r_hat": 1.0020450912193943,
+          "ess_bulk": 2672.3329735557113,
+          "ess_tail": 2806.962771266412,
+          "parameter": "y_sigma",
+          "mcse_sd_ratio": 0.020025162667942385
+        },
+        {
+          "mean": 557621.2423060637,
+          "sd": 50315.32690015679,
+          "mcse_mean": 1070.2138333921753,
+          "mcse_sd": 848.9407110425176,
+          "r_hat": 1.0006876551029407,
+          "ess_bulk": 2188.834627387103,
+          "ess_tail": 2183.2180669786007,
+          "parameter": "total_media_contribution_original_scale",
+          "mcse_sd_ratio": 0.021270135748414274
+        }
+      ],
+      "mcse_sd_ratio_max": 0.05624383421976102,
+      "undefined_mcse_count": 0,
+      "total_trace_parameters": 16,
+      "truncated": false,
+      "trace_scope": "Up to 128 actual unrounded draw positions per chain, at most 64 scalar parameters; visual review remains a human task",
+      "diagnostics_use_full_draws": true,
+      "convergence_certified": false,
+      "method": "Native ArviZ rank-normalized split R-hat, bulk/tail ESS, MCSE; full posterior",
+      "excluded_time_dependent_variables": [
+        "mu",
+        "yearly_seasonality_contribution",
+        "fourier_contribution",
+        "control_contribution",
+        "channel_contribution"
+      ]
+    },
+    "posterior_predictive_check": {
+      "available": true,
+      "scope": "observed_outcome",
+      "evaluation_window": "held_out",
+      "replicates": 4000,
+      "periods": 32,
+      "coverage_90": 0.375,
+      "mean_interval_width": 688.9032969353625,
+      "replicated_mean_tail_probability": 0.0,
+      "replicated_sd_tail_probability": 0.99,
+      "discrepancy_flags": [
+        "mean_discrepancy"
+      ],
+      "degenerate": false,
+      "residual_lag1": 0.4410595080101797,
+      "interpretation": "Descriptive holdout posterior predictive checks; time points are dependent, tail probabilities are not frequentist p-values; no automatic model approval",
+      "causal_identification": false
+    }
+  }
+}

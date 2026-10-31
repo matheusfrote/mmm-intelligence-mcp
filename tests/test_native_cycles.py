@@ -84,6 +84,11 @@ def test_prepared_native_train_reload_scenario_with_worker_coverage(tmp_path, mo
         )
         model_id = fitted["model_id"]
         metadata = call(service, "get_backend_model", model_id=model_id)
+        assert metadata["native_estimates"], (
+            "Native channel parameter stability requires actual estimates"
+        )
+        if backend == "meta_robyn":
+            assert metadata["diagnostics"]["optimization_trace"]
         assert metadata["dataset_sha256"] == prepared["sha256"]
         expected = np.asarray(metadata["test"]["mean"])
         assert np.isfinite(expected).all() and len(expected) > 0
@@ -93,6 +98,30 @@ def test_prepared_native_train_reload_scenario_with_worker_coverage(tmp_path, mo
     try:
         actual = call(reloaded, "predict_backend", model_id=model_id)
         np.testing.assert_allclose(actual["prediction"]["mean"], expected, rtol=1e-5, atol=1e-5)
+        if backend != "meta_robyn":
+            scientific = call(
+                reloaded,
+                "audit_model",
+                model_id=model_id,
+                backend=backend,
+                scientific={"refit": False},
+            )
+            assert scientific["scientific_diagnostics"]["available"]
+            assert scientific["scientific_diagnostics"]["parameters"]
+            assert scientific["posterior_predictive_check"]["scope"] == "observed_outcome"
+            assert scientific["classifications"]["statistical"]["status"] != "passed_for_protocol"
+            assert scientific["classifications"]["causal"]["status"] == "simulation_only"
+        else:
+            scientific = call(
+                reloaded,
+                "audit_model",
+                model_id=model_id,
+                backend=backend,
+                scientific={"refit": True, "collect_native": False},
+            )
+            assert scientific["stability"]["status"] == "executed"
+            assert len(scientific["stability"]["runs"]) == 3
+            assert scientific["stability"]["estimate_consistency_available"]
         scenario = call(
             reloaded, "predict_backend", model_id=model_id, media_multiplier={"spend_search": 1.1}
         )

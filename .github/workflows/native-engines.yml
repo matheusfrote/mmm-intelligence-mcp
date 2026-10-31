@@ -1,13 +1,23 @@
 name: Native engines and R coverage
 on:
   workflow_call:
+    inputs:
+      scientific_extensive:
+        type: boolean
+        default: false
+      scientific_draws:
+        type: number
+        default: 1000
+      scientific_replications:
+        type: number
+        default: 100
   workflow_dispatch:
 permissions:
   contents: read
 jobs:
   native:
     runs-on: windows-latest
-    timeout-minutes: 60
+    timeout-minutes: ${{ inputs.scientific_extensive && 240 || 60 }}
     env:
       MMM_TEST_NATIVE: '1'
       MMM_MAX_FILE_BYTES: '52428800'
@@ -76,3 +86,23 @@ jobs:
             evidence/r-worker-branches/coverage.json
           retention-days: 14
     # Synthetic local processes only; never publishes or deploys a service.
+      - name: Extensive scientific execution; inspect statistical and causal outcomes separately
+        if: inputs.scientific_extensive
+        shell: pwsh
+        env:
+          SCIENTIFIC_DRAWS: ${{ inputs.scientific_draws }}
+          SCIENTIFIC_REPLICATIONS: ${{ inputs.scientific_replications }}
+        run: |
+          python examples/scientific_protocol.py --backend all --draws $env:SCIENTIFIC_DRAWS --tune $env:SCIENTIFIC_DRAWS --replications $env:SCIENTIFIC_REPLICATIONS --output-dir evidence/scientific-extensive
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          'Execution completed. Scientific failures and inconclusive outcomes are preserved in result.json; workflow success is not scientific approval.' >> $env:GITHUB_STEP_SUMMARY
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: ${{ always() && inputs.scientific_extensive }}
+        with:
+          name: scientific-outcomes
+          if-no-files-found: error
+          path: |
+            evidence/scientific-extensive/result.json
+            evidence/scientific-extensive/partial.json
+            evidence/scientific-extensive/*.md
+          retention-days: 30

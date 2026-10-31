@@ -10,7 +10,7 @@ import { createRequire } from "node:module";
 import { pathToFileURL } from "node:url";
 import { instrumentBrowser, collectBrowser } from "./coverage.mjs";
 import { browserUnits } from "./browser_units.mjs";
-import { viewUnits } from "./view_units.mjs";
+import { scientificViewUnits, viewUnits } from "./view_units.mjs";
 const require = createRequire(import.meta.url);
 
 test(
@@ -296,6 +296,27 @@ test(
       await nav("results");
       await clickTool("Calcular auditoria e componentes", "audit_model");
       assert.match(await page.locator("main").innerText(), /reconciliação/);
+      const science = await clickTool(
+        "Executar validação científica",
+        "audit_model",
+      );
+      assert.equal(science.classifications.causal.status, "simulation_only");
+      assert.equal(science.classifications.statistical.status, "inconclusive");
+      assert.match(
+        await page.locator("main").innerText(),
+        /Adequação estatística/,
+      );
+      const scientificDownload = page.waitForEvent("download");
+      await page
+        .getByRole("button", {
+          name: "Baixar relatório científico",
+          exact: true,
+        })
+        .click();
+      assert.equal(
+        (await scientificDownload).suggestedFilename(),
+        "validacao-cientifica.json",
+      );
       await nav("modeling");
       await clickTool("Treinar modelo", "train_mmm");
       await nav("comparison");
@@ -364,27 +385,23 @@ test(
         await page.locator("#error").innerText(),
         /Pré-visualize novamente/,
       );
-      await page
-        .getByLabel("Arquivo fornecido")
-        .setInputFiles({
-          name: "too-large.csv",
-          mimeType: "text/csv",
-          buffer: Buffer.alloc(2 * 1024 * 1024 + 1, 120),
-        });
+      await page.getByLabel("Arquivo fornecido").setInputFiles({
+        name: "too-large.csv",
+        mimeType: "text/csv",
+        buffer: Buffer.alloc(2 * 1024 * 1024 + 1, 120),
+      });
       await page
         .getByRole("button", { name: "Pré-visualizar arquivo", exact: true })
         .click();
       await idle();
       assert.match(await page.locator("#error").innerText(), /2 MiB/);
-      await page
-        .getByLabel("Arquivo fornecido")
-        .setInputFiles({
-          name: "synthetic.xml",
-          mimeType: "application/xml",
-          buffer: Buffer.from(
-            "<root><record><date>2026-01-05</date></record></root>",
-          ),
-        });
+      await page.getByLabel("Arquivo fornecido").setInputFiles({
+        name: "synthetic.xml",
+        mimeType: "application/xml",
+        buffer: Buffer.from(
+          "<root><record><date>2026-01-05</date></record></root>",
+        ),
+      });
       await page.getByLabel("Formato declarado").selectOption("xml");
       await page
         .getByLabel("Campos e caminhos XML")
@@ -812,6 +829,7 @@ test(
       );
       await browserUnits(page);
       await viewUnits(page);
+      await scientificViewUnits(page);
       const native = await new Promise((resolve, reject) => {
         const seed = spawn(python, ["tests/web/seed_native.py", data], {
           cwd: root,

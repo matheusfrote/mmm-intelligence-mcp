@@ -13,8 +13,48 @@ import os
 import subprocess  # nosec B404
 import sys
 import traceback
-from importlib.metadata import version
+from importlib.metadata import PackageNotFoundError, version
 from pathlib import Path
+
+
+def sampling_warning(request):
+    short = request["draws"] < 1000 or request["tune"] < 1000 or request["chains"] < 4
+    return (
+        "SHORT_CHAINS: functional sampling does not establish convergence"
+        if short
+        else "DIAGNOSTICS_REQUIRED: analytical sampling budget alone does not establish convergence"
+    )
+
+
+def runtime_versions(backend):
+    packages = {
+        "google_meridian": [
+            "google-meridian",
+            "jax",
+            "tensorflow",
+            "tensorflow-probability",
+            "arviz",
+            "numpy",
+            "scipy",
+        ],
+        "pymc_marketing": [
+            "pymc-marketing",
+            "pymc",
+            "pytensor",
+            "arviz",
+            "arviz-stats",
+            "numpy",
+            "scipy",
+        ],
+        "meta_robyn": ["nevergrad", "numpy", "scipy"],
+    }
+    result = {}
+    for package in packages[backend]:
+        try:
+            result[package] = version(package)
+        except PackageNotFoundError:
+            result[package] = None
+    return result
 
 
 def declared_target_type(dataset, target_column):
@@ -359,9 +399,13 @@ def pymc(payload, root):
         verify_restoration(before, after, "PyMC", 1e-7)
         # Current ArviZ exposes DataTree diagnostics through xarray accessors.
         idata = model.idata
+        from native_scientific import native_estimates
+
         return {
             "backend": "pymc_marketing",
             "backend_version": version("pymc-marketing"),
+            "native_runtime_versions": runtime_versions("pymc_marketing"),
+            "native_estimates": native_estimates(idata),
             "native_format": "netcdf-h5netcdf",
             "native_base64": base64.b64encode(native.read_bytes()).decode(),
             "dataset": dataset,
@@ -386,7 +430,7 @@ def pymc(payload, root):
                 "convergence_certified": False,
             },
             "warnings": [
-                "FUNCTIONAL_SAMPLING_ONLY: inspect R-hat/ESS/divergences before statistical use",
+                sampling_warning(req),
                 "Predictive intervals are conditional on model assumptions; no causal guarantee",
             ],
         }
@@ -413,6 +457,23 @@ def pymc(payload, root):
         progressbar=False,
         var_names=["y_original_scale"],
     )
+    if payload["operation"] == "diagnose":
+        from native_scientific import collect_chains, predictive_check
+
+        return {
+            "diagnostics": {
+                **pymc_diagnostics(model),
+                **divergence_diagnostics(model.idata),
+                **{k: req[k] for k in ("chains", "draws", "tune")},
+            },
+            "scientific_diagnostics": collect_chains(model.idata, "pymc_marketing"),
+            "diagnostic_runtime_versions": runtime_versions("pymc_marketing"),
+            "posterior_predictive_check": predictive_check(
+                np.asarray(pp["y_original_scale"]).reshape(-1, len(df) - cutoff),
+                df[req["target_column"]].iloc[cutoff:].to_numpy(),
+                df[req["date_column"]].iloc[cutoff:].tolist(),
+            ),
+        }
     return {
         "backend": "pymc_marketing",
         "model_id": stored["model_id"],
@@ -493,9 +554,13 @@ def meridian(payload, root):
         after = prediction(restored)
         verify_restoration(before, after, "Meridian", 1e-6)
         diagnostics = meridian_diagnostics(fitted.inference_data, req)
+        from native_scientific import native_estimates
+
         return {
             "backend": "google_meridian",
             "backend_version": version("google-meridian"),
+            "native_runtime_versions": runtime_versions("google_meridian"),
+            "native_estimates": native_estimates(fitted.inference_data),
             "native_format": "protobuf-binpb",
             "native_base64": base64.b64encode(native.read_bytes()).decode(),
             "dataset": dataset,
@@ -512,7 +577,7 @@ def meridian(payload, root):
             ),
             "diagnostics": diagnostics,
             "warnings": [
-                "SHORT_CHAINS: functional test does not establish convergence",
+                sampling_warning(req),
                 "SPEND_PROXY: synthetic spend used as exposure proxy",
                 "Holdout target uses train-only placeholders in native preprocessing",
                 "No demonstrated causal attribution",
@@ -542,6 +607,20 @@ def meridian(payload, root):
     )
     n = len(stored["dataset"]["rows"])
     cutoff = stored["cutoff"]
+    if payload["operation"] == "diagnose":
+        from native_scientific import collect_chains, meridian_ppc
+
+        rows = stored["dataset"]["rows"]
+        dates = [r[req["date_column"]] for r in rows]
+        observed = np.asarray([r[req["target_column"]] for r in rows])
+        return {
+            "diagnostics": meridian_diagnostics(fitted.inference_data, req),
+            "scientific_diagnostics": collect_chains(fitted.inference_data, "google_meridian"),
+            "diagnostic_runtime_versions": runtime_versions("google_meridian"),
+            "posterior_predictive_check": meridian_ppc(
+                fitted, out, observed, dates, cutoff, req["seed"]
+            ),
+        }
     return {
         "backend": "google_meridian",
         "model_id": stored["model_id"],
@@ -567,6 +646,14 @@ def pymc_future_rows(stored, future_rows):
         {c: r[c] for c in columns}
         for r in [*stored["dataset"]["rows"][stored["cutoff"] :], *future_rows]
     ]
+
+
+def r_timeout():
+    """Leave cleanup time inside the validated parent worker deadline."""
+    parent = int(os.environ.get("MMM_BACKEND_TIMEOUT_SECONDS", "900"))
+    if not 10 <= parent <= 3600:
+        raise ValueError("Backend timeout must be between 10 and 3600 seconds")
+    return parent - min(50, max(1, parent // 10))
 
 
 def main():
@@ -601,13 +688,18 @@ def main():
                     str(r_result),
                 ],
                 check=True,
-                timeout=850,
+                timeout=r_timeout(),
             )
             result = json.loads(r_result.read_text(encoding="utf-8"))
             if payload["operation"] == "train":
                 native = root / "model.robyn.json"
                 result.update(
                     native_format="robyn-json",
+                    native_runtime_versions={
+                        **runtime_versions("meta_robyn"),
+                        "R": result["r_version"],
+                        "Robyn": result["backend_version"],
+                    },
                     native_base64=base64.b64encode(native.read_bytes()).decode(),
                     dataset=payload["dataset"],
                     request=payload["request"],

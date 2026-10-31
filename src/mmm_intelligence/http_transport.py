@@ -93,7 +93,12 @@ class TenantRouter:
         user = principal.get()
         if user == LOCAL_DASHBOARD:
             return self.dashboard_service.call(name, args)
-        if user not in self.users or (self.users[user].role == "reader" and name not in READ_TOOLS):
+        creates_scientific = (
+            name == "audit_model" and isinstance(args, dict) and args.get("scientific") is not None
+        )
+        if user not in self.users or (
+            self.users[user].role == "reader" and (name not in READ_TOOLS or creates_scientific)
+        ):
             return ToolResponse(
                 ok=False,
                 error=PublicError(code="FORBIDDEN", message="Role does not authorize this tool"),

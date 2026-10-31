@@ -1,4 +1,6 @@
 # Executed by covr in the environment containing the real adapter functions.
+stopifnot(grepl("Functional",search_warning(1L,200L)))
+stopifnot(grepl("Diagnostics",search_warning(5L,2000L)))
 expect_error <- function(expr) {
   failed <- tryCatch({force(expr);FALSE}, error=function(e) TRUE)
   stopifnot(failed)

@@ -2,6 +2,83 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 
+export async function scientificViewUnits(page) {
+  const fixture = JSON.parse(
+    await readFile(resolve("tests/fixtures/scientific-reports.json"), "utf8"),
+  );
+  assert.equal(fixture.synthetic, true);
+  const rendered = await page.evaluate(async (fixture) => {
+    const { scientificEvidence, views } = await import("/app/views.js");
+    const result = [];
+    for (const [backend, report] of Object.entries(fixture.reports)) {
+      const root = document.createElement("div"),
+        analysis = { model_id: report.model_id, scientific_validation: report },
+        context = {
+          root,
+          state: { backend, analysis, dataset: {}, model: {} },
+          run: () => {
+            throw new Error("Rendering cannot run inference");
+          },
+        };
+      root.append(scientificEvidence(context, analysis));
+      if (!root.textContent.includes("Força da evidência causal"))
+        throw new Error("Missing causal dimension");
+      if (report.scientific_diagnostics?.trace_series?.length > 1) {
+        const select = root.querySelector("select");
+        select.value = "1";
+        select.dispatchEvent(new Event("change"));
+        if (
+          !root.querySelector(
+            'svg[aria-label="Traços das cadeias: ' +
+              report.scientific_diagnostics.trace_series[1].parameter +
+              '"]',
+          )
+        )
+          throw new Error("Chain selection did not redraw actual traces");
+        if (root.querySelectorAll("svg.chart").length < 2)
+          throw new Error("Native PPC graph absent");
+      }
+      result.push(backend);
+      root.replaceChildren();
+      views.reports(context);
+    }
+    // Unknown statuses and incomplete legacy fields must remain visible, never pass.
+    const root = document.createElement("div"),
+      incomplete = {
+        model_id: "legacy",
+        scientific_validation: {
+          classifications: {
+            operational: { status: "not_available" },
+            statistical: { status: "not_available" },
+            causal: { status: "not_available" },
+          },
+          scientific_diagnostics: { parameters: [], trace_series: [] },
+          posterior_predictive_check: {},
+          stability: {},
+          monte_carlo: {},
+        },
+      };
+    root.append(
+      scientificEvidence(
+        { state: { backend: "ridge", analysis: incomplete } },
+        incomplete,
+      ),
+    );
+    if (!root.textContent.includes("not_available"))
+      throw new Error("Unknown status was hidden");
+    scientificEvidence(
+      { state: { backend: "ridge" } },
+      { model_id: "old", scientific_validation: {} },
+    );
+    return result;
+  }, fixture);
+  assert.deepEqual(rendered.sort(), [
+    "google_meridian",
+    "pymc_marketing",
+    "ridge",
+  ]);
+}
+
 /** Render contracts use actual synthetic results from the real four-engine demo. */
 export async function viewUnits(page) {
   const fixture = JSON.parse(
