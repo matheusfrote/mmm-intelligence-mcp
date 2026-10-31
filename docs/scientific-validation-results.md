@@ -12,7 +12,7 @@ de campanhas, deploy ou merge automático.
 | Ridge | Solver real, regularização, omissão de controle, backtests e 1.000 repetições em dez DGPs | Operacional aprovado; incerteza reprovada por subcobertura no efeito nulo |
 | Meridian | Ajuste nativo, restauração, quatro cadeias de 1.000 draws após 1.000 warmup, PPC e três refits | Operacional aprovado; PPC reprovado; convergência completa inconclusiva por nove diagnósticos indefinidos |
 | PyMC-Marketing | Mesmo orçamento de amostragem, restauração, PPC; três refits no relatório recuperado | Operacional aprovado; MCSE e PPC reprovados apesar de R-hat/ESS compatíveis |
-| Robyn | Ciclo nativo curto e refits independentes; busca extensa registrada separadamente | Busca curta comprova transporte; não certifica adequação analítica |
+| Robyn | Ciclo nativo curto com três refits; busca extensa de cinco trials × 2.000 iterações | Operacional aprovado; critérios nativos da busca reprovados; refits com orçamento extenso permanecem ausentes |
 | Causalidade | Experimentos fabricados, testes de placebo/controle negativo, hipóteses, linhagem e calibração condicional | Somente simulação; nenhum efeito de campanha real certificado |
 
 O protocolo relata falhas em vez de ajustar critérios depois de observar os
@@ -84,8 +84,15 @@ diagnóstico/PPC sem refits. Esses eventos são distintos:
   não esgota famílias de priors, likelihoods ou desenhos geográficos.
 - A primeira busca Robyn de cinco trials × 2.000 iterações expirou no limite
   interno antigo de 850 segundos, perto de 91% da primeira etapa. O limite foi
-  corrigido e recebeu regressão automatizada; uma falha de execução não é
-  convergência nem evidência estatística negativa.
+  corrigido e recebeu regressão automatizada. A repetição concluiu pelo SDK, com
+  fontes inalteradas durante a execução, restauração e exportação verificadas.
+  Seus critérios nativos sinalizaram `DECOMP.RSSD NOT converged` (mediana) e
+  `NRMSE NOT converged` (dispersão). A classificação preserva essa reprovação;
+  não usa diagnósticos MCMC para Robyn. Os três refits do teste de transporte usam
+  orçamento reduzido; a repetição extensa foi feita com `--skip-refits` e não
+  comprova estabilidade no mesmo orçamento. Consulte o
+  [recibo Robyn](validation/scientific/meta_robyn.json). A primeira falha de
+  execução, isoladamente, não era convergência nem evidência estatística negativa.
 - Experimentos reais, autenticidade da randomização, interferência, confundimento,
   transportabilidade e unidades econômicas exigem dados e revisão independentes.
 - A calibração implementada é reponderação condicional de draws Ridge com lift/SE
