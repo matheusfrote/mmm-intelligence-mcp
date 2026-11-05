@@ -1,12 +1,128 @@
 """Bounded native diagnostics. Imported inside the isolated engine runtime."""
 
 import math
+from datetime import date
 
 import numpy as np
 
 
+def meridian_sampler_options(request):
+    """Translate the public acceptance target into Meridian's documented NUTS API."""
+    from immutabledict import immutabledict
+
+    return {
+        "dual_averaging_kwargs": immutabledict(
+            target_accept_prob=request.get("target_accept", 0.85)
+        ),
+        "max_tree_depth": 8,
+    }
+
+
+def compressed_netcdf_encoding(idata):
+    """Losslessly compress every numeric array; retain all groups, chains and draws."""
+    return {
+        group.path: {
+            name: {"zlib": True, "complevel": 4, "shuffle": True}
+            for name, variable in group.data_vars.items()
+            if variable.ndim and variable.dtype.kind in "fiu"
+        }
+        for group in idata.subtree
+    }
+
+
+def calendar_design(rows, date_column, *, seasonal=False, policy=None):
+    policy = policy or {
+        "origin": rows[0][date_column],
+        "columns": ["mmm_trend_years", *(["mmm_sin_year", "mmm_cos_year"] if seasonal else [])],
+    }
+    origin = date.fromisoformat(policy["origin"])
+    output = []
+    for row in rows:
+        if set(policy["columns"]) & set(row):
+            raise ValueError("Reserved native calendar column already present")
+        years = (date.fromisoformat(row[date_column]) - origin).days / 365.25
+        values = [years, math.sin(2 * math.pi * years), math.cos(2 * math.pi * years)]
+        output.append({**row, **dict(zip(policy["columns"], values))})
+    return output, policy
+
+
+def scale_controls(rows, columns, cutoff, policy=None):
+    if policy is None:
+        policy = {}
+        for name in columns:
+            values = np.asarray([row[name] for row in rows[:cutoff]], float)
+            policy[name] = {"mean": float(values.mean()), "scale": max(float(values.std()), 1e-12)}
+    output = [
+        {
+            **row,
+            **{name: (row[name] - spec["mean"]) / spec["scale"] for name, spec in policy.items()},
+        }
+        for row in rows
+    ]
+    return output, policy
+
+
+def verified_fixed(variables, fixed):
+    result = {}
+    for name, declaration in (fixed or {}).items():
+        if name not in variables:
+            continue
+        values = np.asarray(variables[name], float)
+        if not np.isfinite(values).all() or not np.allclose(
+            values, declaration["value"], rtol=0, atol=1e-12
+        ):
+            raise ValueError("Posterior disagrees with declared fixed parameter: " + name)
+        result[name] = {**declaration, "verified_against_posterior": True}
+    return result
+
+
+def meridian_fixed(model):
+    """Use native declared deterministic priors, never infer fixing from zero SD."""
+    fixed = {}
+    for name in model.inference_data["posterior"].data_vars:
+        if model.prior_broadcast.has_deterministic_param(name):
+            prior = getattr(model.prior_broadcast, name).distribution
+            fixed[name] = {
+                "value": np.asarray(prior.loc).tolist(),
+                "basis": "Native broadcast Deterministic prior",
+            }
+    if model.is_national:
+        fixed["tau_g"] = {
+            "value": 0,
+            "basis": "Native national model reference geo is fixed at zero",
+        }
+    variables = {
+        name: np.asarray(var) for name, var in model.inference_data["posterior"].data_vars.items()
+    }
+    return verified_fixed(variables, fixed)
+
+
 def finite(value):
     return float(value) if value is not None and math.isfinite(float(value)) else None
+
+
+def paired_effect(baseline, scenario, cutoff):
+    baseline, scenario = np.asarray(baseline, float), np.asarray(scenario, float)
+    if (
+        baseline.ndim != 2
+        or baseline.shape != scenario.shape
+        or not 0 <= cutoff < baseline.shape[1]
+        or not np.isfinite(baseline).all()
+        or not np.isfinite(scenario).all()
+    ):
+        raise ValueError("Matching finite joint posterior means and holdout required")
+    effects = (scenario[:, cutoff:] - baseline[:, cutoff:]).mean(axis=1)
+    lower, upper = np.quantile(effects, [0.05, 0.95])
+    return {
+        "estimate": float(effects.mean()),
+        "lower": float(lower),
+        "upper": float(upper),
+        "available": True,
+        "interval_type": "posterior_conditional_effect",
+        "draws": len(effects),
+        "estimand": "heldout_mean_outcome_difference_for_10pct_increase_to_one_channel_over_entire_history",
+        "causal_identification": False,
+    }
 
 
 def parameter_means(variables):
@@ -36,7 +152,8 @@ def native_estimates(idata):
     )
 
 
-def chain_report(statistics, variables):
+def chain_report(statistics, variables, fixed=None):
+    fixed = verified_fixed(variables, fixed)
     parameters, ratios, undefined = [], [], 0
     for row in statistics:
         item = {
@@ -47,9 +164,11 @@ def chain_report(statistics, variables):
         sd, mcse = item["sd"], item["mcse_mean"]
         ratio = mcse / sd if sd is not None and sd > 0 and mcse is not None and mcse >= 0 else None
         item["mcse_sd_ratio"] = ratio
-        if ratio is None:
+        is_fixed = str(row["parameter"]).split("[", 1)[0] in fixed
+        item["diagnostic_status"] = "not_applicable_fixed" if is_fixed else "sampled"
+        if ratio is None and not is_fixed:
             undefined += 1
-        else:
+        elif ratio is not None and not is_fixed:
             ratios.append(ratio)
         parameters.append(item)
     traces, total = [], 0
@@ -76,6 +195,7 @@ def chain_report(statistics, variables):
     return {
         "available": bool(parameters and traces),
         "parameters": parameters,
+        "fixed_parameters": fixed,
         "mcse_sd_ratio_max": max(ratios) if ratios else None,
         "undefined_mcse_count": undefined,
         "trace_series": traces,
@@ -87,7 +207,7 @@ def chain_report(statistics, variables):
     }
 
 
-def collect_chains(idata, backend):
+def collect_chains(idata, backend, fixed=None):
     posterior = idata["posterior"]
     variables = {}
     for name, var in posterior.data_vars.items():
@@ -104,7 +224,7 @@ def collect_chains(idata, backend):
         from arviz import summary
     table = summary(idata, var_names=list(variables), kind="all", round_to="none")
     rows = [{"parameter": str(name), **row.to_dict()} for name, row in table.iterrows()]
-    result = chain_report(rows, variables)
+    result = chain_report(rows, variables, fixed)
     result["method"] = (
         "Native ArviZ rank-normalized split R-hat, bulk/tail ESS, MCSE; full posterior"
     )

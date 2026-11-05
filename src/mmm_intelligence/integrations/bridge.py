@@ -15,6 +15,15 @@ from ..resources import run_worker
 from ..storage import reject_links
 
 
+def configured_r_library() -> Path:
+    """Host-only configuration; installed wheels need not contain local runtimes."""
+    default = Path(__file__).resolve().parents[3] / "var/runtime/r-library"
+    library = Path(os.environ.get("MMM_R_LIBRARY", str(default)))
+    if "MMM_R_LIBRARY" in os.environ and not library.is_dir():
+        raise MMMError("INVALID_CONFIG", "Configured R library directory is unavailable")
+    return library.resolve()
+
+
 def executable(backend: str) -> Path:
     if backend not in {"google_meridian", "pymc_marketing", "meta_robyn"}:
         raise MMMError("UNKNOWN_BACKEND", "Unknown modeling backend")
@@ -61,6 +70,26 @@ def worker_environment() -> dict[str, str]:
     return {key: value for key, value in os.environ.items() if key.upper() in allowed}
 
 
+def retain_failure(store, root, reason, returncode=None):
+    """Preserve bounded private diagnostics before temporary jobs are removed."""
+    destination = root / "output.json"
+    record = {
+        "reason": reason,
+        "worker_exit_code": returncode,
+        "output_bytes": destination.stat().st_size if destination.is_file() else None,
+        "result_limit_bytes": store.settings.max_file_bytes,
+    }
+    diagnostics = store.root / "logs" / ("backend-" + uuid4().hex + ".log")
+    reject_links(diagnostics)
+    with diagnostics.open("xb") as output:
+        output.write((json.dumps(record) + "\n").encode())
+        with (root / "worker.log").open("rb") as source:
+            source.seek(0, 2)
+            source.seek(max(0, source.tell() - 1_000_000))
+            output.write(source.read(1_000_000))
+    return diagnostics.name
+
+
 def execute(store, backend: str, payload: dict) -> dict:
     python = executable(backend)
     if not python.is_file():
@@ -97,7 +126,6 @@ def execute(store, backend: str, payload: dict) -> dict:
             "XDG_CACHE_HOME": str(root / "cache"),
         }
         if backend == "meta_robyn":
-            project = Path(__file__).resolve().parents[3]
             # Windows R refuses spaces in its internal temp directory. Use an
             # automatically cleaned directory in the authorized OS temp root.
             temporary_path = resources.enter_context(tempfile.TemporaryDirectory(prefix="mmm-r-"))
@@ -108,7 +136,7 @@ def execute(store, backend: str, payload: dict) -> dict:
             env.update(
                 RETICULATE_PYTHON=str(python),
                 RETICULATE_AUTOCONFIGURE="FALSE",
-                R_LIBS_USER=str(project / "var/runtime/r-library"),
+                R_LIBS_USER=str(configured_r_library()),
                 R_USER=temporary_path,
                 TMPDIR=temporary_path,
                 TEMP=temporary_path,
@@ -131,7 +159,23 @@ def execute(store, backend: str, payload: dict) -> dict:
                     timeout=timeout,
                 )
             if destination.exists() and destination.stat().st_size <= store.settings.max_file_bytes:
-                result = json.loads(destination.read_text(encoding="utf-8"))
+                try:
+                    result = json.loads(destination.read_text(encoding="utf-8"))
+                except (json.JSONDecodeError, UnicodeDecodeError) as exc:
+                    retain_failure(store, root, "invalid_json_result", completed.returncode)
+                    raise MMMError(
+                        "BACKEND_FAILED", "Native result was invalid; private diagnostics retained"
+                    ) from exc
+                if (
+                    not isinstance(result, dict)
+                    or result.get("ok") is True
+                    and not isinstance(result.get("data"), dict)
+                ):
+                    retain_failure(store, root, "invalid_result_contract", completed.returncode)
+                    raise MMMError(
+                        "BACKEND_FAILED",
+                        "Native result contract was invalid; private diagnostics retained",
+                    )
                 if result.get("ok") is True and completed.returncode == 0:
                     result["data"]["execution_limits"] = {
                         "platform": os.name,
@@ -146,17 +190,27 @@ def execute(store, backend: str, payload: dict) -> dict:
                         "process_tree_cleanup": True,
                     }
                     return result["data"]
-                diagnostics = store.root / "logs" / ("backend-" + uuid4().hex + ".log")
-                reject_links(diagnostics)
-                with diagnostics.open("xb") as output:
-                    output.write((root / "worker.log").read_bytes()[-1_000_000:])
+                retain_failure(store, root, "native_error_result", completed.returncode)
                 # Keep the bounded error diagnostic, no training rows or input paths.
                 raise MMMError(
                     "BACKEND_FAILED",
                     "Backend execution failed; inspect the private host diagnostic log",
                 )
-            raise MMMError("BACKEND_FAILED", "Backend failed without a valid bounded result")
+            reason = "oversized_result" if destination.exists() else "missing_result"
+            retain_failure(store, root, reason, completed.returncode)
+            raise MMMError(
+                "BACKEND_FAILED",
+                "Backend failed without a valid bounded result; private diagnostics retained ("
+                + reason
+                + ")",
+            )
         except subprocess.TimeoutExpired as exc:
+            retain_failure(store, root, "timeout")
             raise MMMError(
                 "BACKEND_TIMEOUT", "Backend exceeded the configured wall-clock limit"
+            ) from exc
+        except OSError as exc:
+            retain_failure(store, root, "runtime_io_failure")
+            raise MMMError(
+                "BACKEND_FAILED", "Native runtime I/O failed; private diagnostics retained"
             ) from exc

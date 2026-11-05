@@ -1,0 +1,45 @@
+{
+  "source_receipt": "var/pymc-compact-proof/receipt.json",
+  "source_receipt_sha256": "553984f0f5dd8bce74222f84b70dcda5a384f0a096dcd65b613d0c979aab7e42",
+  "result": {
+    "synthetic": true,
+    "storage_policy": {
+      "compression": "zlib-4",
+      "lossless": true,
+      "all_groups_retained": true,
+      "all_draws_retained": true,
+      "all_free_variables_retained": true,
+      "recomputed_date_deterministics": [
+        "mu",
+        "yearly_seasonality_contribution",
+        "fourier_contribution",
+        "control_contribution",
+        "channel_contribution"
+      ],
+      "scope": "Deterministic time arrays are recomputed from the saved native graph; all sampled values remain unchanged"
+    },
+    "free_variables": [
+      "adstock_alpha",
+      "gamma_control",
+      "gamma_fourier",
+      "intercept_contribution",
+      "saturation_beta",
+      "saturation_lam",
+      "y_sigma"
+    ],
+    "dropped_recomputable_deterministics": [
+      "mu",
+      "yearly_seasonality_contribution",
+      "fourier_contribution",
+      "control_contribution",
+      "channel_contribution"
+    ],
+    "retained_arrays_identical": 8,
+    "full_bytes": 60611598,
+    "compact_bytes": 1571850,
+    "draws": 2000,
+    "chains": 4,
+    "restored_prediction_identical": true,
+    "prediction_verification": "allclose, rtol=1e-7 and atol=1e-7; retained posterior arrays were checked bit-for-bit"
+  }
+}

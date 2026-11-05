@@ -1,0 +1,2140 @@
+{
+  "scope": "Actual native pilot; raw metric/estimate values unchanged. Input-rejection and independence policies reapplied to recorded trials; training provenance recovered from immutable models",
+  "source_receipt": "var/native-recovery-corrections/pymc_marketing/result.json",
+  "source_receipt_sha256": "fb6ce1244e83a7b192ef35504d593abfee3e1c61607a6610be1129f13462718f",
+  "original_acceptance": {
+    "status": "failed",
+    "failed": [
+      "native_mcmc_failed:science-refit-63c177409a1f68fe8d357e07b7c8a432ce6386d1",
+      "native_mcmc_failed:science-refit-16053d2c8677f544c5e8abed1f63a694f227ef9e"
+    ],
+    "missing": [
+      "absolute_bias_tolerance_missing",
+      "rmse_tolerance_missing",
+      "insufficient_replications_or_intervals:well_specified:spend_search",
+      "insufficient_replications_or_intervals:well_specified:spend_social",
+      "insufficient_replications_or_intervals:well_specified:spend_video",
+      "insufficient_replications_or_intervals:null_effect:spend_search",
+      "insufficient_replications_or_intervals:null_effect:spend_social",
+      "insufficient_replications_or_intervals:null_effect:spend_video",
+      "incomplete_native_execution",
+      "native_numerical_adequacy_unresolved"
+    ],
+    "undercoverage": [],
+    "coverage_checks": [],
+    "policy": {
+      "core_scenarios": [
+        "well_specified",
+        "null_effect"
+      ],
+      "minimum_replications": 100,
+      "coverage_tolerance": 0.05,
+      "max_absolute_bias": null,
+      "max_rmse": null,
+      "coverage_family_size": 6,
+      "family_alpha": 0.05
+    },
+    "causal_identification": false,
+    "scope": "Core DGP conditional-interval screening only; inspect all adverse scenarios, failures and width; cannot certify real effects"
+  },
+  "report": {
+    "schema_version": "native-recovery-v1",
+    "backend": "pymc_marketing",
+    "synthetic": true,
+    "configuration": {
+      "replications": 2,
+      "bootstrap_samples": 0,
+      "interval_method": "native_conditional_effect",
+      "scenarios": [
+        "well_specified",
+        "null_effect",
+        "missing_target",
+        "constant_spend"
+      ],
+      "periods": 156,
+      "seed": 7919,
+      "minimum_replications_for_assessment": 100,
+      "coverage_tolerance": 0.05,
+      "max_absolute_bias": null,
+      "max_rmse": null,
+      "draws": 1000,
+      "tune": 1000,
+      "robyn_trials": 5,
+      "robyn_iterations": 2000
+    },
+    "attempted": 8,
+    "replications": [
+      {
+        "scenario": "well_specified",
+        "replication": 0,
+        "seed": 111965920,
+        "seed_spawn_key": [
+          0
+        ],
+        "dataset_sha256": "080a18c7d7ce7c6bd74b07cf485f9e5f14769b98cafbe69db2da300630e745eb",
+        "status": "executed",
+        "model_id": "science-refit-007efe1d96f78363f1890902cc00024a2acaddef",
+        "model_sha256": "ec1c0f6fdc5e81b1172115e57b27b71def02cd21c84cde8d50e20c62bd2c89c4",
+        "reused": false,
+        "configuration": {
+          "dataset_id": "recovery-data-080a18c7d7ce7c6bd74b07cf485f9e5f14769b98",
+          "media_columns": [
+            "spend_search",
+            "spend_social",
+            "spend_video"
+          ],
+          "control_columns": [
+            "price_index",
+            "promotion"
+          ],
+          "target_column": "revenue",
+          "date_column": "date",
+          "test_fraction": 0.2,
+          "warmup_periods": 8,
+          "baseline": "calendar",
+          "target_accept": 0.95,
+          "prior_scale_multiplier": 1.0,
+          "robyn_algorithm": null,
+          "backend": "pymc_marketing",
+          "model_id": null,
+          "draws": 1000,
+          "tune": 1000,
+          "chains": 4,
+          "seed": 111965920,
+          "robyn_trials": null,
+          "robyn_iterations": null
+        },
+        "evaluation_dates": [
+          "2022-05-23",
+          "2022-05-30",
+          "2022-06-06",
+          "2022-06-13",
+          "2022-06-20",
+          "2022-06-27",
+          "2022-07-04",
+          "2022-07-11",
+          "2022-07-18",
+          "2022-07-25",
+          "2022-08-01",
+          "2022-08-08",
+          "2022-08-15",
+          "2022-08-22",
+          "2022-08-29",
+          "2022-09-05",
+          "2022-09-12",
+          "2022-09-19",
+          "2022-09-26",
+          "2022-10-03",
+          "2022-10-10",
+          "2022-10-17",
+          "2022-10-24",
+          "2022-10-31",
+          "2022-11-07",
+          "2022-11-14",
+          "2022-11-21",
+          "2022-11-28",
+          "2022-12-05",
+          "2022-12-12",
+          "2022-12-19",
+          "2022-12-26"
+        ],
+        "effects": {
+          "spend_search": {
+            "estimate": 37.508256977778785,
+            "lower": 26.47640053565288,
+            "upper": 49.12761856685245,
+            "available": true,
+            "interval_type": "posterior_conditional_effect",
+            "draws": 4000,
+            "estimand": "heldout_mean_outcome_difference_for_10pct_increase_to_one_channel_over_entire_history",
+            "causal_identification": false,
+            "truth": 46.416474286342506,
+            "interval_available": true,
+            "covered": true
+          },
+          "spend_social": {
+            "estimate": 31.827658809843744,
+            "lower": 22.652070081069752,
+            "upper": 41.02478830570759,
+            "available": true,
+            "interval_type": "posterior_conditional_effect",
+            "draws": 4000,
+            "estimand": "heldout_mean_outcome_difference_for_10pct_increase_to_one_channel_over_entire_history",
+            "causal_identification": false,
+            "truth": 35.14479580364238,
+            "interval_available": true,
+            "covered": true
+          },
+          "spend_video": {
+            "estimate": 24.932965137298453,
+            "lower": 15.547511141214386,
+            "upper": 35.52367956392303,
+            "available": true,
+            "interval_type": "posterior_conditional_effect",
+            "draws": 4000,
+            "estimand": "heldout_mean_outcome_difference_for_10pct_increase_to_one_channel_over_entire_history",
+            "causal_identification": false,
+            "truth": 23.247950720531094,
+            "interval_available": true,
+            "covered": true
+          }
+        },
+        "diagnostics": {
+          "convergence_certified": false,
+          "r_hat_max": 1.0027890952903307,
+          "r_hat_available": true,
+          "r_hat_undefined_count": 0,
+          "ess_bulk_min": 1093.8562703318871,
+          "ess_bulk_available": true,
+          "ess_bulk_undefined_count": 0,
+          "ess_tail_min": 992.2953445113653,
+          "ess_tail_available": true,
+          "ess_tail_undefined_count": 0,
+          "method": "ArviZ rank-normalized split R-hat, bulk ESS and tail ESS",
+          "summarized_variables": [
+            "adstock_alpha",
+            "saturation_lam",
+            "saturation_beta",
+            "gamma_fourier",
+            "gamma_control",
+            "intercept_contribution",
+            "y_sigma",
+            "total_media_contribution_original_scale"
+          ],
+          "excluded_date_dependent_variables": [],
+          "divergences": 0,
+          "divergences_available": true,
+          "chains": 4,
+          "draws": 1000,
+          "tune": 1000
+        },
+        "numerical_screen": {
+          "status": "adequate_for_screened_diagnostics",
+          "failed_screens": [],
+          "missing_or_insufficient": [],
+          "policy": {
+            "max_rhat_exclusive": 1.01,
+            "minimum_ess_per_chain": 100,
+            "minimum_chains": 4,
+            "minimum_draws_and_tune_screen": 400
+          },
+          "reference": "https://mc-stan.org/learn-stan/diagnostics-warnings.html",
+          "scope": "Rank R-hat, bulk/tail ESS and divergences only; inspect mixing, PPC, priors and identification separately. Sample-count screens are operational, not universal guarantees.",
+          "business_recommendation_eligible": false,
+          "convergence_certified": false,
+          "mcse_sd_ratio_max": 0.03216912721672504,
+          "undefined_mcse_count": 0
+        },
+        "posterior_predictive_check": {
+          "available": true,
+          "scope": "observed_outcome",
+          "evaluation_window": "held_out",
+          "replicates": 4000,
+          "periods": 32,
+          "coverage_90": 0.90625,
+          "mean_interval_width": 441.4658482356012,
+          "replicated_mean_tail_probability": 0.95975,
+          "replicated_sd_tail_probability": 0.94,
+          "discrepancy_flags": [],
+          "degenerate": false,
+          "residual_lag1": 0.16327958954746757,
+          "interpretation": "Descriptive holdout posterior predictive checks; time points are dependent, tail probabilities are not frequentist p-values; no automatic model approval",
+          "causal_identification": false
+        },
+        "native_version": "1.3.0",
+        "effective_configuration": {
+          "prior_source": "Explicit Normal/Laplace baseline priors with declared scale multiplier; native media/likelihood defaults",
+          "model_config": {
+            "intercept": {
+              "dist": "Normal",
+              "kwargs": {
+                "mu": 0,
+                "sigma": 2.0
+              }
+            },
+            "likelihood": {
+              "dist": "Normal",
+              "kwargs": {
+                "sigma": {
+                  "dist": "HalfNormal",
+                  "kwargs": {
+                    "sigma": 2
+                  },
+                  "dims": []
+                }
+              },
+              "dims": [
+                "date"
+              ]
+            },
+            "gamma_control": {
+              "dist": "Normal",
+              "kwargs": {
+                "mu": 0,
+                "sigma": 2.0
+              },
+              "dims": [
+                "control"
+              ]
+            },
+            "gamma_fourier": {
+              "dist": "Laplace",
+              "kwargs": {
+                "mu": 0,
+                "b": 1.0
+              },
+              "dims": [
+                "fourier_mode"
+              ]
+            },
+            "adstock_alpha": {
+              "dist": "Beta",
+              "kwargs": {
+                "alpha": 1,
+                "beta": 3
+              },
+              "dims": [
+                "channel"
+              ]
+            },
+            "saturation_lam": {
+              "dist": "Gamma",
+              "kwargs": {
+                "alpha": 3,
+                "beta": 1
+              },
+              "dims": [
+                "channel"
+              ]
+            },
+            "saturation_beta": {
+              "dist": "HalfNormal",
+              "kwargs": {
+                "sigma": 2
+              },
+              "dims": [
+                "channel"
+              ]
+            }
+          },
+          "adstock": {
+            "__type__": "pymc_marketing.mmm.components.adstock.GeometricAdstock",
+            "prefix": "adstock",
+            "priors": {
+              "alpha": {
+                "dist": "Beta",
+                "kwargs": {
+                  "alpha": 1,
+                  "beta": 3
+                },
+                "dims": [
+                  "channel"
+                ]
+              }
+            },
+            "l_max": 8,
+            "normalize": true,
+            "mode": "After"
+          },
+          "saturation": {
+            "__type__": "pymc_marketing.mmm.components.saturation.LogisticSaturation",
+            "prefix": "saturation",
+            "priors": {
+              "lam": {
+                "dist": "Gamma",
+                "kwargs": {
+                  "alpha": 3,
+                  "beta": 1
+                },
+                "dims": [
+                  "channel"
+                ]
+              },
+              "beta": {
+                "dist": "HalfNormal",
+                "kwargs": {
+                  "sigma": 2
+                },
+                "dims": [
+                  "channel"
+                ]
+              }
+            }
+          },
+          "target_type": "revenue",
+          "interval_type": "posterior_predictive_observed",
+          "baseline_policy": {
+            "origin": "2020-01-06",
+            "columns": [
+              "mmm_trend_years"
+            ]
+          },
+          "control_scaling": {
+            "price_index": {
+              "mean": 1.000004314106015,
+              "scale": 0.04354744080140971
+            },
+            "promotion": {
+              "mean": 0.25806451612903225,
+              "scale": 0.43756967633066246
+            },
+            "mmm_trend_years": {
+              "mean": 1.1786447638603694,
+              "scale": 0.6860010091918856
+            }
+          }
+        },
+        "metrics": {
+          "mae": 112.13337194256809,
+          "wape_percent": 1.2002809233065546,
+          "r2": 0.6625227287274571
+        },
+        "training_identity": {
+          "backend": "pymc_marketing",
+          "configuration": {
+            "backend": "pymc_marketing",
+            "baseline": "calendar",
+            "chains": 4,
+            "control_columns": [
+              "price_index",
+              "promotion"
+            ],
+            "dataset_id": "recovery-data-080a18c7d7ce7c6bd74b07cf485f9e5f14769b98",
+            "date_column": "date",
+            "draws": 1000,
+            "media_columns": [
+              "spend_search",
+              "spend_social",
+              "spend_video"
+            ],
+            "prior_scale_multiplier": 1.0,
+            "robyn_algorithm": null,
+            "robyn_iterations": null,
+            "robyn_trials": null,
+            "seed": 111965920,
+            "target_accept": 0.95,
+            "target_column": "revenue",
+            "test_fraction": 0.2,
+            "tune": 1000,
+            "warmup_periods": 8
+          },
+          "dataset_sha256": "080a18c7d7ce7c6bd74b07cf485f9e5f14769b98cafbe69db2da300630e745eb",
+          "host_numeric_versions": {
+            "numpy": "2.4.6",
+            "scipy": "1.17.1"
+          },
+          "runtime_metadata_sha256": {
+            "Lib\\site-packages\\annotated_types-0.8.0.dist-info\\METADATA": "614985b278f601b8ef863f82783b991cc3ada4b89f592eb71c7c48c5f2ef2298",
+            "Lib\\site-packages\\arviz-1.3.0.dist-info\\METADATA": "8a2a2b815891667977173c3f867db44a6862e6854bba19b167862ab68713aeed",
+            "Lib\\site-packages\\arviz_base-1.3.1.dist-info\\METADATA": "06e8b20b6f544f801d4c34b4fc1bb189183e7f12dee1a4ac30194ab00f614c75",
+            "Lib\\site-packages\\arviz_plots-1.3.2.dist-info\\METADATA": "ef00e9752e49bfee136f5a109fc6976d921f17687b329cbe706012a57b5d90ad",
+            "Lib\\site-packages\\arviz_stats-1.3.3.dist-info\\METADATA": "f8eaab5da9c271f01d5b85f6a1230463ac2f1f1a0028f78e4e694277cb974e2f",
+            "Lib\\site-packages\\better_optimize-0.5.1.dist-info\\METADATA": "5cc11ba45dbf322221b9efd6b0911c14ef815761d9568f45fc82a75c4061d449",
+            "Lib\\site-packages\\cachetools-6.2.6.dist-info\\METADATA": "b2e153f338ea9b8a589f37a427b0d70f7b8fc2fece66908b2eac54adf8a3b2db",
+            "Lib\\site-packages\\cloudpickle-3.1.2.dist-info\\METADATA": "3d0263bfe9ee4f23b244bdcaff73acbe7a1957ebf82743b6ae42693adc48d721",
+            "Lib\\site-packages\\colorama-0.4.6.dist-info\\METADATA": "7baed29eb50c3b29bdb33ff84e3177bf1bc05784f7685ecdcaa4471c7dd810cc",
+            "Lib\\site-packages\\contourpy-1.4.0.dist-info\\METADATA": "40450acd747b288a5db999c435e1e921ffee0a38c7884a80cd46934c8004568f",
+            "Lib\\site-packages\\coverage-7.17.0.dist-info\\METADATA": "a6cf0af01235caa8487fe324d6060d3ad92f625a1cf14b0a4355f7d08d5bdfa2",
+            "Lib\\site-packages\\cycler-0.12.1.dist-info\\METADATA": "23289e19b76f1e01394227696e6af2b6cd1ce79e89731209bf9195148b18ed36",
+            "Lib\\site-packages\\filelock-4.2.4.dist-info\\METADATA": "d99c0f72a7ab84c924b734018a28a5001505fe0f96280c4462b864313edddb50",
+            "Lib\\site-packages\\fonttools-4.67.0.dist-info\\METADATA": "29c6302d413178e9f01814b1f38937575546e88a8b3aa97831dfcebc120913af",
+            "Lib\\site-packages\\h5netcdf-1.8.1.dist-info\\METADATA": "fadc0c07eb8473a76f958d5a6c824822e47ee08bfa9a1e0489ad029a19bc09f8",
+            "Lib\\site-packages\\h5py-3.16.0.dist-info\\METADATA": "28e9000a32bbaab84498f77d04dd7690ac061459e2fb17e01509d0020672e0bc",
+            "Lib\\site-packages\\joblib-1.6.0.dist-info\\METADATA": "c5fd6509906c5795fd6724d97bc1709d1f266b78aff92c0156d6cf5ad7c045e3",
+            "Lib\\site-packages\\kiwisolver-1.5.1.dist-info\\METADATA": "4e635948bf0b496e7e1bf6b8f7f577504670453459bd98e8dcfb0b919257d476",
+            "Lib\\site-packages\\lazy_loader-0.6.dist-info\\METADATA": "9cd369edae6bf499af0c1acee15d0389361036907742690ac504f9b3b84d56b3",
+            "Lib\\site-packages\\llvmlite-0.50.0.dist-info\\METADATA": "358c6e3a88c4a93c41bc2799e7f080b9d7081fecc74e27c3a5f327168b5d84e3",
+            "Lib\\site-packages\\markdown_it_py-4.2.0.dist-info\\METADATA": "72c36ff516755443b1ecb61e17b2567a990230b49a504b0eb0c42d5f82448a9c",
+            "Lib\\site-packages\\matplotlib-3.11.2.dist-info\\METADATA": "e5f532226d1025af2dd15ff951df27391f66d46403b8244ea61e6b8eb3e4d806",
+            "Lib\\site-packages\\mdurl-0.1.2.dist-info\\METADATA": "b53b29d48f499367053fda3c81e7ce27d2558380ebbf83e66023b02eb7ddd25d",
+            "Lib\\site-packages\\narwhals-2.27.1.dist-info\\METADATA": "5962ef236f36fe34aff21a837a0698386dcb1f0de54462aa18b73698e6ef1a4f",
+            "Lib\\site-packages\\numba-0.68.0.dist-info\\METADATA": "2a98f87c5a389c85148c722f82bfac18712afb538a4573e71e4699d4968c9cdf",
+            "Lib\\site-packages\\numpy-2.4.6.dist-info\\METADATA": "b082c52ccbe3b880bae177c35171b52ed6c947f3ad71e3762f2723f60a411de0",
+            "Lib\\site-packages\\packaging-26.3.dist-info\\METADATA": "70fdb89fc4d4a9a043bf7372b8972bcc883fddff34ab55e9cf80d73875384763",
+            "Lib\\site-packages\\pandas-3.1.0.dist-info\\METADATA": "b2b43910a5ef734a08be961df9c484f4664ad9ec2fa5a08294d0edfa08bcdd4b",
+            "Lib\\site-packages\\patsy-1.0.3.dist-info\\METADATA": "c9d8d1a6ebfdadd02c21b9f4d15b1c26716f181c4bb6bcccb1006c9d892da31f",
+            "Lib\\site-packages\\pillow-13.0.0.dist-info\\METADATA": "140f39cb31ec9b46109828a6286f034a4848621263d6aab38d2f142083dd06c5",
+            "Lib\\site-packages\\pip-25.0.1.dist-info\\METADATA": "4fa7318cf30f979db7cec45c12cbbc2b4f88a15f12eefbf59a6291d0a03af926",
+            "Lib\\site-packages\\preliz-0.28.0.dist-info\\METADATA": "20fc97f2d5fb32ef326bb073634db32d95b77792136c789d658c258cbe2a38d6",
+            "Lib\\site-packages\\pydantic-2.14.1.dist-info\\METADATA": "4d4c8e8d5e6a27d5208f0d7949f25628e6747133034969d4d1399b1ad5394036",
+            "Lib\\site-packages\\pydantic_core-2.50.1.dist-info\\METADATA": "790c40c25f95db9b18e1d4b5ae75979ce6027b15d6f924c042553252ff43328f",
+            "Lib\\site-packages\\pygments-2.21.0.dist-info\\METADATA": "1dde075570136774c706bf0009183a793fe0ee262e4a5590cc6eff8453eedd43",
+            "Lib\\site-packages\\pymc-6.3.2.dist-info\\METADATA": "6aafc7ca4da081decae5cdf7ab94c99be2ec89ed92ab580eead41b2927ba089b",
+            "Lib\\site-packages\\pymc_extras-0.15.1.dist-info\\METADATA": "65d2045ca073406434c84c624cc00db88c5f0b60ca61f6dc8d4e8acd103ec0f9",
+            "Lib\\site-packages\\pymc_marketing-1.3.0.dist-info\\METADATA": "bdcce553813681e3ca6aae4eb063d9402f8eb494076c0ccab6ce78298bb870ea",
+            "Lib\\site-packages\\pyparsing-3.3.3.dist-info\\METADATA": "f2ca34052d720622d300023472ef8ae94fe5b57d69acbb28a8667f6dd0e13497",
+            "Lib\\site-packages\\pyprojroot-0.3.0.dist-info\\METADATA": "d4bd5bb047976042debe9b8e5de50db39fcd24c5257b60f4fe41b00dc96dbd90",
+            "Lib\\site-packages\\pytensor-3.3.4.dist-info\\METADATA": "c4f3838b111b20050213a3cad7bc55a829e6fa7732a6604c50f92fb156d6401b",
+            "Lib\\site-packages\\pytensor_distributions-0.3.3.dist-info\\METADATA": "bc0eaf0c8a18adac1d642265bfdd3848cc02cfff3dd575646efedfe392d187bc",
+            "Lib\\site-packages\\python_dateutil-3.0.0.dist-info\\METADATA": "e10ead93598aed51bdb28aa30ef64ee5d6ccc871e88741d220e504e979af4695",
+            "Lib\\site-packages\\pyyaml-6.0.3.dist-info\\METADATA": "847a701020334386852b6e07bad1053cb0ce3da9ee1846e7e9d02b24e8bb3f8d",
+            "Lib\\site-packages\\rich-15.0.0.dist-info\\METADATA": "fad34fc603fac4481bf81f8dd629492fc302c0ec31909c86644751512afb2e3b",
+            "Lib\\site-packages\\scikit_learn-1.9.1.dist-info\\METADATA": "32e503c710a61e4e04be4edb450f9f8141233ac6af3f3db59a877667538fa4ec",
+            "Lib\\site-packages\\scipy-1.18.1.dist-info\\METADATA": "c8313d18ca0168ff291fe0a3b50532f3a18b14547695e9aa7ca1c1ce6eca92dc",
+            "Lib\\site-packages\\seaborn-0.13.2.dist-info\\METADATA": "98cfe2b7a5004466cdd5c7c8ccf016ebdcfa0337fc177ea7aad27f527c53fc96",
+            "Lib\\site-packages\\setuptools-84.2.1.dist-info\\METADATA": "24939b84ead30ff4581918c8d5a95aafd377f6a8afc61f30ea18358a8786bfa4",
+            "Lib\\site-packages\\six-1.17.0.dist-info\\METADATA": "562042078c2752549f6d8a7c86dbc5dd708088a7be6d80672ec7b07100b72468",
+            "Lib\\site-packages\\threadpoolctl-3.7.0.dist-info\\METADATA": "09b19e721560cd12246402d44e53c1ede5194b8398ef60822f02cab86ccf8d1f",
+            "Lib\\site-packages\\tqdm-4.70.1.dist-info\\METADATA": "a5da70b966afea3a759716041bad7187f2ece02c22348cf9e7c0a512bbf15f57",
+            "Lib\\site-packages\\typing_extensions-4.16.0.dist-info\\METADATA": "b05084ca1d50879865178d9fff9fabeab61bdfb1f361bfbde95421ffc8f9be46",
+            "Lib\\site-packages\\typing_inspection-0.4.4.dist-info\\METADATA": "bad3d9e6342ef6750cf5128ec942327b8bebdce0b6e4d6f67cb15b27ae5118da",
+            "Lib\\site-packages\\tzdata-2026.5.dist-info\\METADATA": "e0780e8b6dc8882ce87e871a9d4589d59cb05a0c2d64f58b1ba62cde1ee91f6a",
+            "Lib\\site-packages\\xarray-2026.9.0.dist-info\\METADATA": "858a70778b214ffa02163df82d5dd7e5d42df461a9dc174157120e3c91f97c84",
+            "Lib\\site-packages\\xarray_einstats-0.11.0.dist-info\\METADATA": "55438d7fe3762b63c6ed2660295bdf53542ba3cf424560ca19c39d7d5c51e371"
+          },
+          "source_sha256": {
+            "integrations/native_scientific.py": "f0aa21298bbcfe574f9f9c0d021b7adcbc17a83482c227430703a245062ecbe3",
+            "integrations/worker.py": "d2e3027dbfa601fcb6ed26d4540fce2490218846b1c3e7b9c086107bec9815d9"
+          }
+        },
+        "native_runtime_versions": {
+          "arviz": "1.3.0",
+          "arviz-stats": "1.3.3",
+          "numpy": "2.4.6",
+          "pymc": "6.3.2",
+          "pymc-marketing": "1.3.0",
+          "pytensor": "3.3.4",
+          "scipy": "1.18.1"
+        }
+      },
+      {
+        "scenario": "well_specified",
+        "replication": 1,
+        "seed": 923434654,
+        "seed_spawn_key": [
+          1
+        ],
+        "dataset_sha256": "18a3b975357ef8fb0fe325ef569182125c8defd52f6dd6de7fe2d18c64c04baa",
+        "status": "executed",
+        "model_id": "science-refit-c34644736aca04a3e4bb798b8a2a42d11a0b1fb9",
+        "model_sha256": "623b9eac0c28f14c23cb913955f6b2cf1594e4062d0691aaa6fd373fda7b1f74",
+        "reused": false,
+        "configuration": {
+          "dataset_id": "recovery-data-18a3b975357ef8fb0fe325ef569182125c8defd5",
+          "media_columns": [
+            "spend_search",
+            "spend_social",
+            "spend_video"
+          ],
+          "control_columns": [
+            "price_index",
+            "promotion"
+          ],
+          "target_column": "revenue",
+          "date_column": "date",
+          "test_fraction": 0.2,
+          "warmup_periods": 8,
+          "baseline": "calendar",
+          "target_accept": 0.95,
+          "prior_scale_multiplier": 1.0,
+          "robyn_algorithm": null,
+          "backend": "pymc_marketing",
+          "model_id": null,
+          "draws": 1000,
+          "tune": 1000,
+          "chains": 4,
+          "seed": 923434654,
+          "robyn_trials": null,
+          "robyn_iterations": null
+        },
+        "evaluation_dates": [
+          "2022-05-23",
+          "2022-05-30",
+          "2022-06-06",
+          "2022-06-13",
+          "2022-06-20",
+          "2022-06-27",
+          "2022-07-04",
+          "2022-07-11",
+          "2022-07-18",
+          "2022-07-25",
+          "2022-08-01",
+          "2022-08-08",
+          "2022-08-15",
+          "2022-08-22",
+          "2022-08-29",
+          "2022-09-05",
+          "2022-09-12",
+          "2022-09-19",
+          "2022-09-26",
+          "2022-10-03",
+          "2022-10-10",
+          "2022-10-17",
+          "2022-10-24",
+          "2022-10-31",
+          "2022-11-07",
+          "2022-11-14",
+          "2022-11-21",
+          "2022-11-28",
+          "2022-12-05",
+          "2022-12-12",
+          "2022-12-19",
+          "2022-12-26"
+        ],
+        "effects": {
+          "spend_search": {
+            "estimate": 34.372312237329616,
+            "lower": 26.185735809194092,
+            "upper": 43.81831219756886,
+            "available": true,
+            "interval_type": "posterior_conditional_effect",
+            "draws": 4000,
+            "estimand": "heldout_mean_outcome_difference_for_10pct_increase_to_one_channel_over_entire_history",
+            "causal_identification": false,
+            "truth": 46.64885627985775,
+            "interval_available": true,
+            "covered": false
+          },
+          "spend_social": {
+            "estimate": 49.607304538392846,
+            "lower": 38.201961285995246,
+            "upper": 61.14673087096136,
+            "available": true,
+            "interval_type": "posterior_conditional_effect",
+            "draws": 4000,
+            "estimand": "heldout_mean_outcome_difference_for_10pct_increase_to_one_channel_over_entire_history",
+            "causal_identification": false,
+            "truth": 34.96388422472266,
+            "interval_available": true,
+            "covered": false
+          },
+          "spend_video": {
+            "estimate": 20.109060044041414,
+            "lower": 11.616297181669717,
+            "upper": 29.6762117583579,
+            "available": true,
+            "interval_type": "posterior_conditional_effect",
+            "draws": 4000,
+            "estimand": "heldout_mean_outcome_difference_for_10pct_increase_to_one_channel_over_entire_history",
+            "causal_identification": false,
+            "truth": 23.340161179729307,
+            "interval_available": true,
+            "covered": true
+          }
+        },
+        "diagnostics": {
+          "convergence_certified": false,
+          "r_hat_max": 1.002999623705074,
+          "r_hat_available": true,
+          "r_hat_undefined_count": 0,
+          "ess_bulk_min": 789.1101846492901,
+          "ess_bulk_available": true,
+          "ess_bulk_undefined_count": 0,
+          "ess_tail_min": 588.8159254053486,
+          "ess_tail_available": true,
+          "ess_tail_undefined_count": 0,
+          "method": "ArviZ rank-normalized split R-hat, bulk ESS and tail ESS",
+          "summarized_variables": [
+            "adstock_alpha",
+            "saturation_lam",
+            "saturation_beta",
+            "gamma_fourier",
+            "gamma_control",
+            "intercept_contribution",
+            "y_sigma",
+            "total_media_contribution_original_scale"
+          ],
+          "excluded_date_dependent_variables": [],
+          "divergences": 0,
+          "divergences_available": true,
+          "chains": 4,
+          "draws": 1000,
+          "tune": 1000
+        },
+        "numerical_screen": {
+          "status": "adequate_for_screened_diagnostics",
+          "failed_screens": [],
+          "missing_or_insufficient": [],
+          "policy": {
+            "max_rhat_exclusive": 1.01,
+            "minimum_ess_per_chain": 100,
+            "minimum_chains": 4,
+            "minimum_draws_and_tune_screen": 400
+          },
+          "reference": "https://mc-stan.org/learn-stan/diagnostics-warnings.html",
+          "scope": "Rank R-hat, bulk/tail ESS and divergences only; inspect mixing, PPC, priors and identification separately. Sample-count screens are operational, not universal guarantees.",
+          "business_recommendation_eligible": false,
+          "convergence_certified": false,
+          "mcse_sd_ratio_max": 0.038760981899965026,
+          "undefined_mcse_count": 0
+        },
+        "posterior_predictive_check": {
+          "available": true,
+          "scope": "observed_outcome",
+          "evaluation_window": "held_out",
+          "replicates": 4000,
+          "periods": 32,
+          "coverage_90": 0.8125,
+          "mean_interval_width": 432.71194239412506,
+          "replicated_mean_tail_probability": 0.16825,
+          "replicated_sd_tail_probability": 0.07025,
+          "discrepancy_flags": [],
+          "degenerate": false,
+          "residual_lag1": 0.01661664201729558,
+          "interpretation": "Descriptive holdout posterior predictive checks; time points are dependent, tail probabilities are not frequentist p-values; no automatic model approval",
+          "causal_identification": false
+        },
+        "native_version": "1.3.0",
+        "effective_configuration": {
+          "prior_source": "Explicit Normal/Laplace baseline priors with declared scale multiplier; native media/likelihood defaults",
+          "model_config": {
+            "intercept": {
+              "dist": "Normal",
+              "kwargs": {
+                "mu": 0,
+                "sigma": 2.0
+              }
+            },
+            "likelihood": {
+              "dist": "Normal",
+              "kwargs": {
+                "sigma": {
+                  "dist": "HalfNormal",
+                  "kwargs": {
+                    "sigma": 2
+                  },
+                  "dims": []
+                }
+              },
+              "dims": [
+                "date"
+              ]
+            },
+            "gamma_control": {
+              "dist": "Normal",
+              "kwargs": {
+                "mu": 0,
+                "sigma": 2.0
+              },
+              "dims": [
+                "control"
+              ]
+            },
+            "gamma_fourier": {
+              "dist": "Laplace",
+              "kwargs": {
+                "mu": 0,
+                "b": 1.0
+              },
+              "dims": [
+                "fourier_mode"
+              ]
+            },
+            "adstock_alpha": {
+              "dist": "Beta",
+              "kwargs": {
+                "alpha": 1,
+                "beta": 3
+              },
+              "dims": [
+                "channel"
+              ]
+            },
+            "saturation_lam": {
+              "dist": "Gamma",
+              "kwargs": {
+                "alpha": 3,
+                "beta": 1
+              },
+              "dims": [
+                "channel"
+              ]
+            },
+            "saturation_beta": {
+              "dist": "HalfNormal",
+              "kwargs": {
+                "sigma": 2
+              },
+              "dims": [
+                "channel"
+              ]
+            }
+          },
+          "adstock": {
+            "__type__": "pymc_marketing.mmm.components.adstock.GeometricAdstock",
+            "prefix": "adstock",
+            "priors": {
+              "alpha": {
+                "dist": "Beta",
+                "kwargs": {
+                  "alpha": 1,
+                  "beta": 3
+                },
+                "dims": [
+                  "channel"
+                ]
+              }
+            },
+            "l_max": 8,
+            "normalize": true,
+            "mode": "After"
+          },
+          "saturation": {
+            "__type__": "pymc_marketing.mmm.components.saturation.LogisticSaturation",
+            "prefix": "saturation",
+            "priors": {
+              "lam": {
+                "dist": "Gamma",
+                "kwargs": {
+                  "alpha": 3,
+                  "beta": 1
+                },
+                "dims": [
+                  "channel"
+                ]
+              },
+              "beta": {
+                "dist": "HalfNormal",
+                "kwargs": {
+                  "sigma": 2
+                },
+                "dims": [
+                  "channel"
+                ]
+              }
+            }
+          },
+          "target_type": "revenue",
+          "interval_type": "posterior_predictive_observed",
+          "baseline_policy": {
+            "origin": "2020-01-06",
+            "columns": [
+              "mmm_trend_years"
+            ]
+          },
+          "control_scaling": {
+            "price_index": {
+              "mean": 0.9894851214626605,
+              "scale": 0.05087824090507702
+            },
+            "promotion": {
+              "mean": 0.25806451612903225,
+              "scale": 0.43756967633066246
+            },
+            "mmm_trend_years": {
+              "mean": 1.1786447638603694,
+              "scale": 0.6860010091918856
+            }
+          }
+        },
+        "metrics": {
+          "mae": 120.5995274450562,
+          "wape_percent": 1.280302637222844,
+          "r2": 0.81384437170012
+        },
+        "training_identity": {
+          "backend": "pymc_marketing",
+          "configuration": {
+            "backend": "pymc_marketing",
+            "baseline": "calendar",
+            "chains": 4,
+            "control_columns": [
+              "price_index",
+              "promotion"
+            ],
+            "dataset_id": "recovery-data-18a3b975357ef8fb0fe325ef569182125c8defd5",
+            "date_column": "date",
+            "draws": 1000,
+            "media_columns": [
+              "spend_search",
+              "spend_social",
+              "spend_video"
+            ],
+            "prior_scale_multiplier": 1.0,
+            "robyn_algorithm": null,
+            "robyn_iterations": null,
+            "robyn_trials": null,
+            "seed": 923434654,
+            "target_accept": 0.95,
+            "target_column": "revenue",
+            "test_fraction": 0.2,
+            "tune": 1000,
+            "warmup_periods": 8
+          },
+          "dataset_sha256": "18a3b975357ef8fb0fe325ef569182125c8defd52f6dd6de7fe2d18c64c04baa",
+          "host_numeric_versions": {
+            "numpy": "2.4.6",
+            "scipy": "1.17.1"
+          },
+          "runtime_metadata_sha256": {
+            "Lib\\site-packages\\annotated_types-0.8.0.dist-info\\METADATA": "614985b278f601b8ef863f82783b991cc3ada4b89f592eb71c7c48c5f2ef2298",
+            "Lib\\site-packages\\arviz-1.3.0.dist-info\\METADATA": "8a2a2b815891667977173c3f867db44a6862e6854bba19b167862ab68713aeed",
+            "Lib\\site-packages\\arviz_base-1.3.1.dist-info\\METADATA": "06e8b20b6f544f801d4c34b4fc1bb189183e7f12dee1a4ac30194ab00f614c75",
+            "Lib\\site-packages\\arviz_plots-1.3.2.dist-info\\METADATA": "ef00e9752e49bfee136f5a109fc6976d921f17687b329cbe706012a57b5d90ad",
+            "Lib\\site-packages\\arviz_stats-1.3.3.dist-info\\METADATA": "f8eaab5da9c271f01d5b85f6a1230463ac2f1f1a0028f78e4e694277cb974e2f",
+            "Lib\\site-packages\\better_optimize-0.5.1.dist-info\\METADATA": "5cc11ba45dbf322221b9efd6b0911c14ef815761d9568f45fc82a75c4061d449",
+            "Lib\\site-packages\\cachetools-6.2.6.dist-info\\METADATA": "b2e153f338ea9b8a589f37a427b0d70f7b8fc2fece66908b2eac54adf8a3b2db",
+            "Lib\\site-packages\\cloudpickle-3.1.2.dist-info\\METADATA": "3d0263bfe9ee4f23b244bdcaff73acbe7a1957ebf82743b6ae42693adc48d721",
+            "Lib\\site-packages\\colorama-0.4.6.dist-info\\METADATA": "7baed29eb50c3b29bdb33ff84e3177bf1bc05784f7685ecdcaa4471c7dd810cc",
+            "Lib\\site-packages\\contourpy-1.4.0.dist-info\\METADATA": "40450acd747b288a5db999c435e1e921ffee0a38c7884a80cd46934c8004568f",
+            "Lib\\site-packages\\coverage-7.17.0.dist-info\\METADATA": "a6cf0af01235caa8487fe324d6060d3ad92f625a1cf14b0a4355f7d08d5bdfa2",
+            "Lib\\site-packages\\cycler-0.12.1.dist-info\\METADATA": "23289e19b76f1e01394227696e6af2b6cd1ce79e89731209bf9195148b18ed36",
+            "Lib\\site-packages\\filelock-4.2.4.dist-info\\METADATA": "d99c0f72a7ab84c924b734018a28a5001505fe0f96280c4462b864313edddb50",
+            "Lib\\site-packages\\fonttools-4.67.0.dist-info\\METADATA": "29c6302d413178e9f01814b1f38937575546e88a8b3aa97831dfcebc120913af",
+            "Lib\\site-packages\\h5netcdf-1.8.1.dist-info\\METADATA": "fadc0c07eb8473a76f958d5a6c824822e47ee08bfa9a1e0489ad029a19bc09f8",
+            "Lib\\site-packages\\h5py-3.16.0.dist-info\\METADATA": "28e9000a32bbaab84498f77d04dd7690ac061459e2fb17e01509d0020672e0bc",
+            "Lib\\site-packages\\joblib-1.6.0.dist-info\\METADATA": "c5fd6509906c5795fd6724d97bc1709d1f266b78aff92c0156d6cf5ad7c045e3",
+            "Lib\\site-packages\\kiwisolver-1.5.1.dist-info\\METADATA": "4e635948bf0b496e7e1bf6b8f7f577504670453459bd98e8dcfb0b919257d476",
+            "Lib\\site-packages\\lazy_loader-0.6.dist-info\\METADATA": "9cd369edae6bf499af0c1acee15d0389361036907742690ac504f9b3b84d56b3",
+            "Lib\\site-packages\\llvmlite-0.50.0.dist-info\\METADATA": "358c6e3a88c4a93c41bc2799e7f080b9d7081fecc74e27c3a5f327168b5d84e3",
+            "Lib\\site-packages\\markdown_it_py-4.2.0.dist-info\\METADATA": "72c36ff516755443b1ecb61e17b2567a990230b49a504b0eb0c42d5f82448a9c",
+            "Lib\\site-packages\\matplotlib-3.11.2.dist-info\\METADATA": "e5f532226d1025af2dd15ff951df27391f66d46403b8244ea61e6b8eb3e4d806",
+            "Lib\\site-packages\\mdurl-0.1.2.dist-info\\METADATA": "b53b29d48f499367053fda3c81e7ce27d2558380ebbf83e66023b02eb7ddd25d",
+            "Lib\\site-packages\\narwhals-2.27.1.dist-info\\METADATA": "5962ef236f36fe34aff21a837a0698386dcb1f0de54462aa18b73698e6ef1a4f",
+            "Lib\\site-packages\\numba-0.68.0.dist-info\\METADATA": "2a98f87c5a389c85148c722f82bfac18712afb538a4573e71e4699d4968c9cdf",
+            "Lib\\site-packages\\numpy-2.4.6.dist-info\\METADATA": "b082c52ccbe3b880bae177c35171b52ed6c947f3ad71e3762f2723f60a411de0",
+            "Lib\\site-packages\\packaging-26.3.dist-info\\METADATA": "70fdb89fc4d4a9a043bf7372b8972bcc883fddff34ab55e9cf80d73875384763",
+            "Lib\\site-packages\\pandas-3.1.0.dist-info\\METADATA": "b2b43910a5ef734a08be961df9c484f4664ad9ec2fa5a08294d0edfa08bcdd4b",
+            "Lib\\site-packages\\patsy-1.0.3.dist-info\\METADATA": "c9d8d1a6ebfdadd02c21b9f4d15b1c26716f181c4bb6bcccb1006c9d892da31f",
+            "Lib\\site-packages\\pillow-13.0.0.dist-info\\METADATA": "140f39cb31ec9b46109828a6286f034a4848621263d6aab38d2f142083dd06c5",
+            "Lib\\site-packages\\pip-25.0.1.dist-info\\METADATA": "4fa7318cf30f979db7cec45c12cbbc2b4f88a15f12eefbf59a6291d0a03af926",
+            "Lib\\site-packages\\preliz-0.28.0.dist-info\\METADATA": "20fc97f2d5fb32ef326bb073634db32d95b77792136c789d658c258cbe2a38d6",
+            "Lib\\site-packages\\pydantic-2.14.1.dist-info\\METADATA": "4d4c8e8d5e6a27d5208f0d7949f25628e6747133034969d4d1399b1ad5394036",
+            "Lib\\site-packages\\pydantic_core-2.50.1.dist-info\\METADATA": "790c40c25f95db9b18e1d4b5ae75979ce6027b15d6f924c042553252ff43328f",
+            "Lib\\site-packages\\pygments-2.21.0.dist-info\\METADATA": "1dde075570136774c706bf0009183a793fe0ee262e4a5590cc6eff8453eedd43",
+            "Lib\\site-packages\\pymc-6.3.2.dist-info\\METADATA": "6aafc7ca4da081decae5cdf7ab94c99be2ec89ed92ab580eead41b2927ba089b",
+            "Lib\\site-packages\\pymc_extras-0.15.1.dist-info\\METADATA": "65d2045ca073406434c84c624cc00db88c5f0b60ca61f6dc8d4e8acd103ec0f9",
+            "Lib\\site-packages\\pymc_marketing-1.3.0.dist-info\\METADATA": "bdcce553813681e3ca6aae4eb063d9402f8eb494076c0ccab6ce78298bb870ea",
+            "Lib\\site-packages\\pyparsing-3.3.3.dist-info\\METADATA": "f2ca34052d720622d300023472ef8ae94fe5b57d69acbb28a8667f6dd0e13497",
+            "Lib\\site-packages\\pyprojroot-0.3.0.dist-info\\METADATA": "d4bd5bb047976042debe9b8e5de50db39fcd24c5257b60f4fe41b00dc96dbd90",
+            "Lib\\site-packages\\pytensor-3.3.4.dist-info\\METADATA": "c4f3838b111b20050213a3cad7bc55a829e6fa7732a6604c50f92fb156d6401b",
+            "Lib\\site-packages\\pytensor_distributions-0.3.3.dist-info\\METADATA": "bc0eaf0c8a18adac1d642265bfdd3848cc02cfff3dd575646efedfe392d187bc",
+            "Lib\\site-packages\\python_dateutil-3.0.0.dist-info\\METADATA": "e10ead93598aed51bdb28aa30ef64ee5d6ccc871e88741d220e504e979af4695",
+            "Lib\\site-packages\\pyyaml-6.0.3.dist-info\\METADATA": "847a701020334386852b6e07bad1053cb0ce3da9ee1846e7e9d02b24e8bb3f8d",
+            "Lib\\site-packages\\rich-15.0.0.dist-info\\METADATA": "fad34fc603fac4481bf81f8dd629492fc302c0ec31909c86644751512afb2e3b",
+            "Lib\\site-packages\\scikit_learn-1.9.1.dist-info\\METADATA": "32e503c710a61e4e04be4edb450f9f8141233ac6af3f3db59a877667538fa4ec",
+            "Lib\\site-packages\\scipy-1.18.1.dist-info\\METADATA": "c8313d18ca0168ff291fe0a3b50532f3a18b14547695e9aa7ca1c1ce6eca92dc",
+            "Lib\\site-packages\\seaborn-0.13.2.dist-info\\METADATA": "98cfe2b7a5004466cdd5c7c8ccf016ebdcfa0337fc177ea7aad27f527c53fc96",
+            "Lib\\site-packages\\setuptools-84.2.1.dist-info\\METADATA": "24939b84ead30ff4581918c8d5a95aafd377f6a8afc61f30ea18358a8786bfa4",
+            "Lib\\site-packages\\six-1.17.0.dist-info\\METADATA": "562042078c2752549f6d8a7c86dbc5dd708088a7be6d80672ec7b07100b72468",
+            "Lib\\site-packages\\threadpoolctl-3.7.0.dist-info\\METADATA": "09b19e721560cd12246402d44e53c1ede5194b8398ef60822f02cab86ccf8d1f",
+            "Lib\\site-packages\\tqdm-4.70.1.dist-info\\METADATA": "a5da70b966afea3a759716041bad7187f2ece02c22348cf9e7c0a512bbf15f57",
+            "Lib\\site-packages\\typing_extensions-4.16.0.dist-info\\METADATA": "b05084ca1d50879865178d9fff9fabeab61bdfb1f361bfbde95421ffc8f9be46",
+            "Lib\\site-packages\\typing_inspection-0.4.4.dist-info\\METADATA": "bad3d9e6342ef6750cf5128ec942327b8bebdce0b6e4d6f67cb15b27ae5118da",
+            "Lib\\site-packages\\tzdata-2026.5.dist-info\\METADATA": "e0780e8b6dc8882ce87e871a9d4589d59cb05a0c2d64f58b1ba62cde1ee91f6a",
+            "Lib\\site-packages\\xarray-2026.9.0.dist-info\\METADATA": "858a70778b214ffa02163df82d5dd7e5d42df461a9dc174157120e3c91f97c84",
+            "Lib\\site-packages\\xarray_einstats-0.11.0.dist-info\\METADATA": "55438d7fe3762b63c6ed2660295bdf53542ba3cf424560ca19c39d7d5c51e371"
+          },
+          "source_sha256": {
+            "integrations/native_scientific.py": "f0aa21298bbcfe574f9f9c0d021b7adcbc17a83482c227430703a245062ecbe3",
+            "integrations/worker.py": "d2e3027dbfa601fcb6ed26d4540fce2490218846b1c3e7b9c086107bec9815d9"
+          }
+        },
+        "native_runtime_versions": {
+          "arviz": "1.3.0",
+          "arviz-stats": "1.3.3",
+          "numpy": "2.4.6",
+          "pymc": "6.3.2",
+          "pymc-marketing": "1.3.0",
+          "pytensor": "3.3.4",
+          "scipy": "1.18.1"
+        }
+      },
+      {
+        "scenario": "null_effect",
+        "replication": 0,
+        "seed": 2004901805,
+        "seed_spawn_key": [
+          2
+        ],
+        "dataset_sha256": "b19ee29592d2d4d75d99f4f1c5917f60dee76f5e8ce0f4671107ebb44aeedd48",
+        "status": "executed",
+        "model_id": "science-refit-63c177409a1f68fe8d357e07b7c8a432ce6386d1",
+        "model_sha256": "28cc005a23a5c5009ef4c58f026e9e915c455d59d28848636207870a32835933",
+        "reused": false,
+        "configuration": {
+          "dataset_id": "recovery-data-b19ee29592d2d4d75d99f4f1c5917f60dee76f5e",
+          "media_columns": [
+            "spend_search",
+            "spend_social",
+            "spend_video"
+          ],
+          "control_columns": [
+            "price_index",
+            "promotion"
+          ],
+          "target_column": "revenue",
+          "date_column": "date",
+          "test_fraction": 0.2,
+          "warmup_periods": 8,
+          "baseline": "calendar",
+          "target_accept": 0.95,
+          "prior_scale_multiplier": 1.0,
+          "robyn_algorithm": null,
+          "backend": "pymc_marketing",
+          "model_id": null,
+          "draws": 1000,
+          "tune": 1000,
+          "chains": 4,
+          "seed": 2004901805,
+          "robyn_trials": null,
+          "robyn_iterations": null
+        },
+        "evaluation_dates": [
+          "2022-05-23",
+          "2022-05-30",
+          "2022-06-06",
+          "2022-06-13",
+          "2022-06-20",
+          "2022-06-27",
+          "2022-07-04",
+          "2022-07-11",
+          "2022-07-18",
+          "2022-07-25",
+          "2022-08-01",
+          "2022-08-08",
+          "2022-08-15",
+          "2022-08-22",
+          "2022-08-29",
+          "2022-09-05",
+          "2022-09-12",
+          "2022-09-19",
+          "2022-09-26",
+          "2022-10-03",
+          "2022-10-10",
+          "2022-10-17",
+          "2022-10-24",
+          "2022-10-31",
+          "2022-11-07",
+          "2022-11-14",
+          "2022-11-21",
+          "2022-11-28",
+          "2022-12-05",
+          "2022-12-12",
+          "2022-12-19",
+          "2022-12-26"
+        ],
+        "effects": {
+          "spend_search": {
+            "estimate": 2.188553311929411,
+            "lower": 0.2368164424704702,
+            "upper": 5.182276770038218,
+            "available": true,
+            "interval_type": "posterior_conditional_effect",
+            "draws": 4000,
+            "estimand": "heldout_mean_outcome_difference_for_10pct_increase_to_one_channel_over_entire_history",
+            "causal_identification": false,
+            "truth": 0.0,
+            "interval_available": true,
+            "covered": false
+          },
+          "spend_social": {
+            "estimate": 1.56750959446091,
+            "lower": 0.10215528117764167,
+            "upper": 4.227107372678726,
+            "available": true,
+            "interval_type": "posterior_conditional_effect",
+            "draws": 4000,
+            "estimand": "heldout_mean_outcome_difference_for_10pct_increase_to_one_channel_over_entire_history",
+            "causal_identification": false,
+            "truth": 0.0,
+            "interval_available": true,
+            "covered": false
+          },
+          "spend_video": {
+            "estimate": 3.126097362368607,
+            "lower": 0.42928973669558845,
+            "upper": 6.849200833112422,
+            "available": true,
+            "interval_type": "posterior_conditional_effect",
+            "draws": 4000,
+            "estimand": "heldout_mean_outcome_difference_for_10pct_increase_to_one_channel_over_entire_history",
+            "causal_identification": false,
+            "truth": 0.0,
+            "interval_available": true,
+            "covered": false
+          }
+        },
+        "diagnostics": {
+          "convergence_certified": false,
+          "r_hat_max": 1.0072053723393817,
+          "r_hat_available": true,
+          "r_hat_undefined_count": 0,
+          "ess_bulk_min": 1294.2941691219298,
+          "ess_bulk_available": true,
+          "ess_bulk_undefined_count": 0,
+          "ess_tail_min": 875.4732148681932,
+          "ess_tail_available": true,
+          "ess_tail_undefined_count": 0,
+          "method": "ArviZ rank-normalized split R-hat, bulk ESS and tail ESS",
+          "summarized_variables": [
+            "adstock_alpha",
+            "saturation_lam",
+            "saturation_beta",
+            "gamma_fourier",
+            "gamma_control",
+            "intercept_contribution",
+            "y_sigma",
+            "total_media_contribution_original_scale"
+          ],
+          "excluded_date_dependent_variables": [],
+          "divergences": 17,
+          "divergences_available": true,
+          "chains": 4,
+          "draws": 1000,
+          "tune": 1000
+        },
+        "numerical_screen": {
+          "status": "inadequate",
+          "failed_screens": [
+            "divergences"
+          ],
+          "missing_or_insufficient": [],
+          "policy": {
+            "max_rhat_exclusive": 1.01,
+            "minimum_ess_per_chain": 100,
+            "minimum_chains": 4,
+            "minimum_draws_and_tune_screen": 400
+          },
+          "reference": "https://mc-stan.org/learn-stan/diagnostics-warnings.html",
+          "scope": "Rank R-hat, bulk/tail ESS and divergences only; inspect mixing, PPC, priors and identification separately. Sample-count screens are operational, not universal guarantees.",
+          "business_recommendation_eligible": false,
+          "convergence_certified": false,
+          "mcse_sd_ratio_max": 0.04086281995948623,
+          "undefined_mcse_count": 0
+        },
+        "posterior_predictive_check": {
+          "available": true,
+          "scope": "observed_outcome",
+          "evaluation_window": "held_out",
+          "replicates": 4000,
+          "periods": 32,
+          "coverage_90": 0.90625,
+          "mean_interval_width": 394.07883113245873,
+          "replicated_mean_tail_probability": 0.67775,
+          "replicated_sd_tail_probability": 0.017,
+          "discrepancy_flags": [],
+          "degenerate": false,
+          "residual_lag1": -0.07526251717966259,
+          "interpretation": "Descriptive holdout posterior predictive checks; time points are dependent, tail probabilities are not frequentist p-values; no automatic model approval",
+          "causal_identification": false
+        },
+        "native_version": "1.3.0",
+        "effective_configuration": {
+          "prior_source": "Explicit Normal/Laplace baseline priors with declared scale multiplier; native media/likelihood defaults",
+          "model_config": {
+            "intercept": {
+              "dist": "Normal",
+              "kwargs": {
+                "mu": 0,
+                "sigma": 2.0
+              }
+            },
+            "likelihood": {
+              "dist": "Normal",
+              "kwargs": {
+                "sigma": {
+                  "dist": "HalfNormal",
+                  "kwargs": {
+                    "sigma": 2
+                  },
+                  "dims": []
+                }
+              },
+              "dims": [
+                "date"
+              ]
+            },
+            "gamma_control": {
+              "dist": "Normal",
+              "kwargs": {
+                "mu": 0,
+                "sigma": 2.0
+              },
+              "dims": [
+                "control"
+              ]
+            },
+            "gamma_fourier": {
+              "dist": "Laplace",
+              "kwargs": {
+                "mu": 0,
+                "b": 1.0
+              },
+              "dims": [
+                "fourier_mode"
+              ]
+            },
+            "adstock_alpha": {
+              "dist": "Beta",
+              "kwargs": {
+                "alpha": 1,
+                "beta": 3
+              },
+              "dims": [
+                "channel"
+              ]
+            },
+            "saturation_lam": {
+              "dist": "Gamma",
+              "kwargs": {
+                "alpha": 3,
+                "beta": 1
+              },
+              "dims": [
+                "channel"
+              ]
+            },
+            "saturation_beta": {
+              "dist": "HalfNormal",
+              "kwargs": {
+                "sigma": 2
+              },
+              "dims": [
+                "channel"
+              ]
+            }
+          },
+          "adstock": {
+            "__type__": "pymc_marketing.mmm.components.adstock.GeometricAdstock",
+            "prefix": "adstock",
+            "priors": {
+              "alpha": {
+                "dist": "Beta",
+                "kwargs": {
+                  "alpha": 1,
+                  "beta": 3
+                },
+                "dims": [
+                  "channel"
+                ]
+              }
+            },
+            "l_max": 8,
+            "normalize": true,
+            "mode": "After"
+          },
+          "saturation": {
+            "__type__": "pymc_marketing.mmm.components.saturation.LogisticSaturation",
+            "prefix": "saturation",
+            "priors": {
+              "lam": {
+                "dist": "Gamma",
+                "kwargs": {
+                  "alpha": 3,
+                  "beta": 1
+                },
+                "dims": [
+                  "channel"
+                ]
+              },
+              "beta": {
+                "dist": "HalfNormal",
+                "kwargs": {
+                  "sigma": 2
+                },
+                "dims": [
+                  "channel"
+                ]
+              }
+            }
+          },
+          "target_type": "revenue",
+          "interval_type": "posterior_predictive_observed",
+          "baseline_policy": {
+            "origin": "2020-01-06",
+            "columns": [
+              "mmm_trend_years"
+            ]
+          },
+          "control_scaling": {
+            "price_index": {
+              "mean": 1.0049706688044104,
+              "scale": 0.049839889361105505
+            },
+            "promotion": {
+              "mean": 0.21774193548387097,
+              "scale": 0.41271101877174143
+            },
+            "mmm_trend_years": {
+              "mean": 1.1786447638603694,
+              "scale": 0.6860010091918856
+            }
+          }
+        },
+        "metrics": {
+          "mae": 107.19757214999063,
+          "wape_percent": 1.4896077721390089,
+          "r2": 0.7391920220667314
+        },
+        "training_identity": {
+          "backend": "pymc_marketing",
+          "configuration": {
+            "backend": "pymc_marketing",
+            "baseline": "calendar",
+            "chains": 4,
+            "control_columns": [
+              "price_index",
+              "promotion"
+            ],
+            "dataset_id": "recovery-data-b19ee29592d2d4d75d99f4f1c5917f60dee76f5e",
+            "date_column": "date",
+            "draws": 1000,
+            "media_columns": [
+              "spend_search",
+              "spend_social",
+              "spend_video"
+            ],
+            "prior_scale_multiplier": 1.0,
+            "robyn_algorithm": null,
+            "robyn_iterations": null,
+            "robyn_trials": null,
+            "seed": 2004901805,
+            "target_accept": 0.95,
+            "target_column": "revenue",
+            "test_fraction": 0.2,
+            "tune": 1000,
+            "warmup_periods": 8
+          },
+          "dataset_sha256": "b19ee29592d2d4d75d99f4f1c5917f60dee76f5e8ce0f4671107ebb44aeedd48",
+          "host_numeric_versions": {
+            "numpy": "2.4.6",
+            "scipy": "1.17.1"
+          },
+          "runtime_metadata_sha256": {
+            "Lib\\site-packages\\annotated_types-0.8.0.dist-info\\METADATA": "614985b278f601b8ef863f82783b991cc3ada4b89f592eb71c7c48c5f2ef2298",
+            "Lib\\site-packages\\arviz-1.3.0.dist-info\\METADATA": "8a2a2b815891667977173c3f867db44a6862e6854bba19b167862ab68713aeed",
+            "Lib\\site-packages\\arviz_base-1.3.1.dist-info\\METADATA": "06e8b20b6f544f801d4c34b4fc1bb189183e7f12dee1a4ac30194ab00f614c75",
+            "Lib\\site-packages\\arviz_plots-1.3.2.dist-info\\METADATA": "ef00e9752e49bfee136f5a109fc6976d921f17687b329cbe706012a57b5d90ad",
+            "Lib\\site-packages\\arviz_stats-1.3.3.dist-info\\METADATA": "f8eaab5da9c271f01d5b85f6a1230463ac2f1f1a0028f78e4e694277cb974e2f",
+            "Lib\\site-packages\\better_optimize-0.5.1.dist-info\\METADATA": "5cc11ba45dbf322221b9efd6b0911c14ef815761d9568f45fc82a75c4061d449",
+            "Lib\\site-packages\\cachetools-6.2.6.dist-info\\METADATA": "b2e153f338ea9b8a589f37a427b0d70f7b8fc2fece66908b2eac54adf8a3b2db",
+            "Lib\\site-packages\\cloudpickle-3.1.2.dist-info\\METADATA": "3d0263bfe9ee4f23b244bdcaff73acbe7a1957ebf82743b6ae42693adc48d721",
+            "Lib\\site-packages\\colorama-0.4.6.dist-info\\METADATA": "7baed29eb50c3b29bdb33ff84e3177bf1bc05784f7685ecdcaa4471c7dd810cc",
+            "Lib\\site-packages\\contourpy-1.4.0.dist-info\\METADATA": "40450acd747b288a5db999c435e1e921ffee0a38c7884a80cd46934c8004568f",
+            "Lib\\site-packages\\coverage-7.17.0.dist-info\\METADATA": "a6cf0af01235caa8487fe324d6060d3ad92f625a1cf14b0a4355f7d08d5bdfa2",
+            "Lib\\site-packages\\cycler-0.12.1.dist-info\\METADATA": "23289e19b76f1e01394227696e6af2b6cd1ce79e89731209bf9195148b18ed36",
+            "Lib\\site-packages\\filelock-4.2.4.dist-info\\METADATA": "d99c0f72a7ab84c924b734018a28a5001505fe0f96280c4462b864313edddb50",
+            "Lib\\site-packages\\fonttools-4.67.0.dist-info\\METADATA": "29c6302d413178e9f01814b1f38937575546e88a8b3aa97831dfcebc120913af",
+            "Lib\\site-packages\\h5netcdf-1.8.1.dist-info\\METADATA": "fadc0c07eb8473a76f958d5a6c824822e47ee08bfa9a1e0489ad029a19bc09f8",
+            "Lib\\site-packages\\h5py-3.16.0.dist-info\\METADATA": "28e9000a32bbaab84498f77d04dd7690ac061459e2fb17e01509d0020672e0bc",
+            "Lib\\site-packages\\joblib-1.6.0.dist-info\\METADATA": "c5fd6509906c5795fd6724d97bc1709d1f266b78aff92c0156d6cf5ad7c045e3",
+            "Lib\\site-packages\\kiwisolver-1.5.1.dist-info\\METADATA": "4e635948bf0b496e7e1bf6b8f7f577504670453459bd98e8dcfb0b919257d476",
+            "Lib\\site-packages\\lazy_loader-0.6.dist-info\\METADATA": "9cd369edae6bf499af0c1acee15d0389361036907742690ac504f9b3b84d56b3",
+            "Lib\\site-packages\\llvmlite-0.50.0.dist-info\\METADATA": "358c6e3a88c4a93c41bc2799e7f080b9d7081fecc74e27c3a5f327168b5d84e3",
+            "Lib\\site-packages\\markdown_it_py-4.2.0.dist-info\\METADATA": "72c36ff516755443b1ecb61e17b2567a990230b49a504b0eb0c42d5f82448a9c",
+            "Lib\\site-packages\\matplotlib-3.11.2.dist-info\\METADATA": "e5f532226d1025af2dd15ff951df27391f66d46403b8244ea61e6b8eb3e4d806",
+            "Lib\\site-packages\\mdurl-0.1.2.dist-info\\METADATA": "b53b29d48f499367053fda3c81e7ce27d2558380ebbf83e66023b02eb7ddd25d",
+            "Lib\\site-packages\\narwhals-2.27.1.dist-info\\METADATA": "5962ef236f36fe34aff21a837a0698386dcb1f0de54462aa18b73698e6ef1a4f",
+            "Lib\\site-packages\\numba-0.68.0.dist-info\\METADATA": "2a98f87c5a389c85148c722f82bfac18712afb538a4573e71e4699d4968c9cdf",
+            "Lib\\site-packages\\numpy-2.4.6.dist-info\\METADATA": "b082c52ccbe3b880bae177c35171b52ed6c947f3ad71e3762f2723f60a411de0",
+            "Lib\\site-packages\\packaging-26.3.dist-info\\METADATA": "70fdb89fc4d4a9a043bf7372b8972bcc883fddff34ab55e9cf80d73875384763",
+            "Lib\\site-packages\\pandas-3.1.0.dist-info\\METADATA": "b2b43910a5ef734a08be961df9c484f4664ad9ec2fa5a08294d0edfa08bcdd4b",
+            "Lib\\site-packages\\patsy-1.0.3.dist-info\\METADATA": "c9d8d1a6ebfdadd02c21b9f4d15b1c26716f181c4bb6bcccb1006c9d892da31f",
+            "Lib\\site-packages\\pillow-13.0.0.dist-info\\METADATA": "140f39cb31ec9b46109828a6286f034a4848621263d6aab38d2f142083dd06c5",
+            "Lib\\site-packages\\pip-25.0.1.dist-info\\METADATA": "4fa7318cf30f979db7cec45c12cbbc2b4f88a15f12eefbf59a6291d0a03af926",
+            "Lib\\site-packages\\preliz-0.28.0.dist-info\\METADATA": "20fc97f2d5fb32ef326bb073634db32d95b77792136c789d658c258cbe2a38d6",
+            "Lib\\site-packages\\pydantic-2.14.1.dist-info\\METADATA": "4d4c8e8d5e6a27d5208f0d7949f25628e6747133034969d4d1399b1ad5394036",
+            "Lib\\site-packages\\pydantic_core-2.50.1.dist-info\\METADATA": "790c40c25f95db9b18e1d4b5ae75979ce6027b15d6f924c042553252ff43328f",
+            "Lib\\site-packages\\pygments-2.21.0.dist-info\\METADATA": "1dde075570136774c706bf0009183a793fe0ee262e4a5590cc6eff8453eedd43",
+            "Lib\\site-packages\\pymc-6.3.2.dist-info\\METADATA": "6aafc7ca4da081decae5cdf7ab94c99be2ec89ed92ab580eead41b2927ba089b",
+            "Lib\\site-packages\\pymc_extras-0.15.1.dist-info\\METADATA": "65d2045ca073406434c84c624cc00db88c5f0b60ca61f6dc8d4e8acd103ec0f9",
+            "Lib\\site-packages\\pymc_marketing-1.3.0.dist-info\\METADATA": "bdcce553813681e3ca6aae4eb063d9402f8eb494076c0ccab6ce78298bb870ea",
+            "Lib\\site-packages\\pyparsing-3.3.3.dist-info\\METADATA": "f2ca34052d720622d300023472ef8ae94fe5b57d69acbb28a8667f6dd0e13497",
+            "Lib\\site-packages\\pyprojroot-0.3.0.dist-info\\METADATA": "d4bd5bb047976042debe9b8e5de50db39fcd24c5257b60f4fe41b00dc96dbd90",
+            "Lib\\site-packages\\pytensor-3.3.4.dist-info\\METADATA": "c4f3838b111b20050213a3cad7bc55a829e6fa7732a6604c50f92fb156d6401b",
+            "Lib\\site-packages\\pytensor_distributions-0.3.3.dist-info\\METADATA": "bc0eaf0c8a18adac1d642265bfdd3848cc02cfff3dd575646efedfe392d187bc",
+            "Lib\\site-packages\\python_dateutil-3.0.0.dist-info\\METADATA": "e10ead93598aed51bdb28aa30ef64ee5d6ccc871e88741d220e504e979af4695",
+            "Lib\\site-packages\\pyyaml-6.0.3.dist-info\\METADATA": "847a701020334386852b6e07bad1053cb0ce3da9ee1846e7e9d02b24e8bb3f8d",
+            "Lib\\site-packages\\rich-15.0.0.dist-info\\METADATA": "fad34fc603fac4481bf81f8dd629492fc302c0ec31909c86644751512afb2e3b",
+            "Lib\\site-packages\\scikit_learn-1.9.1.dist-info\\METADATA": "32e503c710a61e4e04be4edb450f9f8141233ac6af3f3db59a877667538fa4ec",
+            "Lib\\site-packages\\scipy-1.18.1.dist-info\\METADATA": "c8313d18ca0168ff291fe0a3b50532f3a18b14547695e9aa7ca1c1ce6eca92dc",
+            "Lib\\site-packages\\seaborn-0.13.2.dist-info\\METADATA": "98cfe2b7a5004466cdd5c7c8ccf016ebdcfa0337fc177ea7aad27f527c53fc96",
+            "Lib\\site-packages\\setuptools-84.2.1.dist-info\\METADATA": "24939b84ead30ff4581918c8d5a95aafd377f6a8afc61f30ea18358a8786bfa4",
+            "Lib\\site-packages\\six-1.17.0.dist-info\\METADATA": "562042078c2752549f6d8a7c86dbc5dd708088a7be6d80672ec7b07100b72468",
+            "Lib\\site-packages\\threadpoolctl-3.7.0.dist-info\\METADATA": "09b19e721560cd12246402d44e53c1ede5194b8398ef60822f02cab86ccf8d1f",
+            "Lib\\site-packages\\tqdm-4.70.1.dist-info\\METADATA": "a5da70b966afea3a759716041bad7187f2ece02c22348cf9e7c0a512bbf15f57",
+            "Lib\\site-packages\\typing_extensions-4.16.0.dist-info\\METADATA": "b05084ca1d50879865178d9fff9fabeab61bdfb1f361bfbde95421ffc8f9be46",
+            "Lib\\site-packages\\typing_inspection-0.4.4.dist-info\\METADATA": "bad3d9e6342ef6750cf5128ec942327b8bebdce0b6e4d6f67cb15b27ae5118da",
+            "Lib\\site-packages\\tzdata-2026.5.dist-info\\METADATA": "e0780e8b6dc8882ce87e871a9d4589d59cb05a0c2d64f58b1ba62cde1ee91f6a",
+            "Lib\\site-packages\\xarray-2026.9.0.dist-info\\METADATA": "858a70778b214ffa02163df82d5dd7e5d42df461a9dc174157120e3c91f97c84",
+            "Lib\\site-packages\\xarray_einstats-0.11.0.dist-info\\METADATA": "55438d7fe3762b63c6ed2660295bdf53542ba3cf424560ca19c39d7d5c51e371"
+          },
+          "source_sha256": {
+            "integrations/native_scientific.py": "f0aa21298bbcfe574f9f9c0d021b7adcbc17a83482c227430703a245062ecbe3",
+            "integrations/worker.py": "d2e3027dbfa601fcb6ed26d4540fce2490218846b1c3e7b9c086107bec9815d9"
+          }
+        },
+        "native_runtime_versions": {
+          "arviz": "1.3.0",
+          "arviz-stats": "1.3.3",
+          "numpy": "2.4.6",
+          "pymc": "6.3.2",
+          "pymc-marketing": "1.3.0",
+          "pytensor": "3.3.4",
+          "scipy": "1.18.1"
+        }
+      },
+      {
+        "scenario": "null_effect",
+        "replication": 1,
+        "seed": 1029389478,
+        "seed_spawn_key": [
+          3
+        ],
+        "dataset_sha256": "e3b4e22a12343ab45521e80f898dd84ed16d07006df34d060087181f66e86681",
+        "status": "executed",
+        "model_id": "science-refit-16053d2c8677f544c5e8abed1f63a694f227ef9e",
+        "model_sha256": "2b37ab7bd3ff5a02e44dc54ec999f77ef18eb917a6fb8a31fb35a080cbd5ba28",
+        "reused": false,
+        "configuration": {
+          "dataset_id": "recovery-data-e3b4e22a12343ab45521e80f898dd84ed16d0700",
+          "media_columns": [
+            "spend_search",
+            "spend_social",
+            "spend_video"
+          ],
+          "control_columns": [
+            "price_index",
+            "promotion"
+          ],
+          "target_column": "revenue",
+          "date_column": "date",
+          "test_fraction": 0.2,
+          "warmup_periods": 8,
+          "baseline": "calendar",
+          "target_accept": 0.95,
+          "prior_scale_multiplier": 1.0,
+          "robyn_algorithm": null,
+          "backend": "pymc_marketing",
+          "model_id": null,
+          "draws": 1000,
+          "tune": 1000,
+          "chains": 4,
+          "seed": 1029389478,
+          "robyn_trials": null,
+          "robyn_iterations": null
+        },
+        "evaluation_dates": [
+          "2022-05-23",
+          "2022-05-30",
+          "2022-06-06",
+          "2022-06-13",
+          "2022-06-20",
+          "2022-06-27",
+          "2022-07-04",
+          "2022-07-11",
+          "2022-07-18",
+          "2022-07-25",
+          "2022-08-01",
+          "2022-08-08",
+          "2022-08-15",
+          "2022-08-22",
+          "2022-08-29",
+          "2022-09-05",
+          "2022-09-12",
+          "2022-09-19",
+          "2022-09-26",
+          "2022-10-03",
+          "2022-10-10",
+          "2022-10-17",
+          "2022-10-24",
+          "2022-10-31",
+          "2022-11-07",
+          "2022-11-14",
+          "2022-11-21",
+          "2022-11-28",
+          "2022-12-05",
+          "2022-12-12",
+          "2022-12-19",
+          "2022-12-26"
+        ],
+        "effects": {
+          "spend_search": {
+            "estimate": 1.4335189283257357,
+            "lower": 0.07803527405518339,
+            "upper": 4.445934051577464,
+            "available": true,
+            "interval_type": "posterior_conditional_effect",
+            "draws": 4000,
+            "estimand": "heldout_mean_outcome_difference_for_10pct_increase_to_one_channel_over_entire_history",
+            "causal_identification": false,
+            "truth": 0.0,
+            "interval_available": true,
+            "covered": false
+          },
+          "spend_social": {
+            "estimate": 1.7063926358622432,
+            "lower": 0.09338626027300877,
+            "upper": 5.000358348615818,
+            "available": true,
+            "interval_type": "posterior_conditional_effect",
+            "draws": 4000,
+            "estimand": "heldout_mean_outcome_difference_for_10pct_increase_to_one_channel_over_entire_history",
+            "causal_identification": false,
+            "truth": 0.0,
+            "interval_available": true,
+            "covered": false
+          },
+          "spend_video": {
+            "estimate": 3.737907500260143,
+            "lower": 0.45343707164273755,
+            "upper": 7.999072104542135,
+            "available": true,
+            "interval_type": "posterior_conditional_effect",
+            "draws": 4000,
+            "estimand": "heldout_mean_outcome_difference_for_10pct_increase_to_one_channel_over_entire_history",
+            "causal_identification": false,
+            "truth": 0.0,
+            "interval_available": true,
+            "covered": false
+          }
+        },
+        "diagnostics": {
+          "convergence_certified": false,
+          "r_hat_max": 1.0050143719585576,
+          "r_hat_available": true,
+          "r_hat_undefined_count": 0,
+          "ess_bulk_min": 996.2987772361747,
+          "ess_bulk_available": true,
+          "ess_bulk_undefined_count": 0,
+          "ess_tail_min": 958.6669953985859,
+          "ess_tail_available": true,
+          "ess_tail_undefined_count": 0,
+          "method": "ArviZ rank-normalized split R-hat, bulk ESS and tail ESS",
+          "summarized_variables": [
+            "adstock_alpha",
+            "saturation_lam",
+            "saturation_beta",
+            "gamma_fourier",
+            "gamma_control",
+            "intercept_contribution",
+            "y_sigma",
+            "total_media_contribution_original_scale"
+          ],
+          "excluded_date_dependent_variables": [],
+          "divergences": 29,
+          "divergences_available": true,
+          "chains": 4,
+          "draws": 1000,
+          "tune": 1000
+        },
+        "numerical_screen": {
+          "status": "inadequate",
+          "failed_screens": [
+            "divergences"
+          ],
+          "missing_or_insufficient": [],
+          "policy": {
+            "max_rhat_exclusive": 1.01,
+            "minimum_ess_per_chain": 100,
+            "minimum_chains": 4,
+            "minimum_draws_and_tune_screen": 400
+          },
+          "reference": "https://mc-stan.org/learn-stan/diagnostics-warnings.html",
+          "scope": "Rank R-hat, bulk/tail ESS and divergences only; inspect mixing, PPC, priors and identification separately. Sample-count screens are operational, not universal guarantees.",
+          "business_recommendation_eligible": false,
+          "convergence_certified": false,
+          "mcse_sd_ratio_max": 0.03817248582643325,
+          "undefined_mcse_count": 0
+        },
+        "posterior_predictive_check": {
+          "available": true,
+          "scope": "observed_outcome",
+          "evaluation_window": "held_out",
+          "replicates": 4000,
+          "periods": 32,
+          "coverage_90": 0.9375,
+          "mean_interval_width": 486.7763842886468,
+          "replicated_mean_tail_probability": 0.20725,
+          "replicated_sd_tail_probability": 0.7755,
+          "discrepancy_flags": [],
+          "degenerate": false,
+          "residual_lag1": -0.16303115883011252,
+          "interpretation": "Descriptive holdout posterior predictive checks; time points are dependent, tail probabilities are not frequentist p-values; no automatic model approval",
+          "causal_identification": false
+        },
+        "native_version": "1.3.0",
+        "effective_configuration": {
+          "prior_source": "Explicit Normal/Laplace baseline priors with declared scale multiplier; native media/likelihood defaults",
+          "model_config": {
+            "intercept": {
+              "dist": "Normal",
+              "kwargs": {
+                "mu": 0,
+                "sigma": 2.0
+              }
+            },
+            "likelihood": {
+              "dist": "Normal",
+              "kwargs": {
+                "sigma": {
+                  "dist": "HalfNormal",
+                  "kwargs": {
+                    "sigma": 2
+                  },
+                  "dims": []
+                }
+              },
+              "dims": [
+                "date"
+              ]
+            },
+            "gamma_control": {
+              "dist": "Normal",
+              "kwargs": {
+                "mu": 0,
+                "sigma": 2.0
+              },
+              "dims": [
+                "control"
+              ]
+            },
+            "gamma_fourier": {
+              "dist": "Laplace",
+              "kwargs": {
+                "mu": 0,
+                "b": 1.0
+              },
+              "dims": [
+                "fourier_mode"
+              ]
+            },
+            "adstock_alpha": {
+              "dist": "Beta",
+              "kwargs": {
+                "alpha": 1,
+                "beta": 3
+              },
+              "dims": [
+                "channel"
+              ]
+            },
+            "saturation_lam": {
+              "dist": "Gamma",
+              "kwargs": {
+                "alpha": 3,
+                "beta": 1
+              },
+              "dims": [
+                "channel"
+              ]
+            },
+            "saturation_beta": {
+              "dist": "HalfNormal",
+              "kwargs": {
+                "sigma": 2
+              },
+              "dims": [
+                "channel"
+              ]
+            }
+          },
+          "adstock": {
+            "__type__": "pymc_marketing.mmm.components.adstock.GeometricAdstock",
+            "prefix": "adstock",
+            "priors": {
+              "alpha": {
+                "dist": "Beta",
+                "kwargs": {
+                  "alpha": 1,
+                  "beta": 3
+                },
+                "dims": [
+                  "channel"
+                ]
+              }
+            },
+            "l_max": 8,
+            "normalize": true,
+            "mode": "After"
+          },
+          "saturation": {
+            "__type__": "pymc_marketing.mmm.components.saturation.LogisticSaturation",
+            "prefix": "saturation",
+            "priors": {
+              "lam": {
+                "dist": "Gamma",
+                "kwargs": {
+                  "alpha": 3,
+                  "beta": 1
+                },
+                "dims": [
+                  "channel"
+                ]
+              },
+              "beta": {
+                "dist": "HalfNormal",
+                "kwargs": {
+                  "sigma": 2
+                },
+                "dims": [
+                  "channel"
+                ]
+              }
+            }
+          },
+          "target_type": "revenue",
+          "interval_type": "posterior_predictive_observed",
+          "baseline_policy": {
+            "origin": "2020-01-06",
+            "columns": [
+              "mmm_trend_years"
+            ]
+          },
+          "control_scaling": {
+            "price_index": {
+              "mean": 1.0058991725454212,
+              "scale": 0.04577571034336814
+            },
+            "promotion": {
+              "mean": 0.1935483870967742,
+              "scale": 0.39507899077148034
+            },
+            "mmm_trend_years": {
+              "mean": 1.1786447638603694,
+              "scale": 0.6860010091918856
+            }
+          }
+        },
+        "metrics": {
+          "mae": 95.46165253519035,
+          "wape_percent": 1.3242707136205811,
+          "r2": 0.6604730157800818
+        },
+        "training_identity": {
+          "backend": "pymc_marketing",
+          "configuration": {
+            "backend": "pymc_marketing",
+            "baseline": "calendar",
+            "chains": 4,
+            "control_columns": [
+              "price_index",
+              "promotion"
+            ],
+            "dataset_id": "recovery-data-e3b4e22a12343ab45521e80f898dd84ed16d0700",
+            "date_column": "date",
+            "draws": 1000,
+            "media_columns": [
+              "spend_search",
+              "spend_social",
+              "spend_video"
+            ],
+            "prior_scale_multiplier": 1.0,
+            "robyn_algorithm": null,
+            "robyn_iterations": null,
+            "robyn_trials": null,
+            "seed": 1029389478,
+            "target_accept": 0.95,
+            "target_column": "revenue",
+            "test_fraction": 0.2,
+            "tune": 1000,
+            "warmup_periods": 8
+          },
+          "dataset_sha256": "e3b4e22a12343ab45521e80f898dd84ed16d07006df34d060087181f66e86681",
+          "host_numeric_versions": {
+            "numpy": "2.4.6",
+            "scipy": "1.17.1"
+          },
+          "runtime_metadata_sha256": {
+            "Lib\\site-packages\\annotated_types-0.8.0.dist-info\\METADATA": "614985b278f601b8ef863f82783b991cc3ada4b89f592eb71c7c48c5f2ef2298",
+            "Lib\\site-packages\\arviz-1.3.0.dist-info\\METADATA": "8a2a2b815891667977173c3f867db44a6862e6854bba19b167862ab68713aeed",
+            "Lib\\site-packages\\arviz_base-1.3.1.dist-info\\METADATA": "06e8b20b6f544f801d4c34b4fc1bb189183e7f12dee1a4ac30194ab00f614c75",
+            "Lib\\site-packages\\arviz_plots-1.3.2.dist-info\\METADATA": "ef00e9752e49bfee136f5a109fc6976d921f17687b329cbe706012a57b5d90ad",
+            "Lib\\site-packages\\arviz_stats-1.3.3.dist-info\\METADATA": "f8eaab5da9c271f01d5b85f6a1230463ac2f1f1a0028f78e4e694277cb974e2f",
+            "Lib\\site-packages\\better_optimize-0.5.1.dist-info\\METADATA": "5cc11ba45dbf322221b9efd6b0911c14ef815761d9568f45fc82a75c4061d449",
+            "Lib\\site-packages\\cachetools-6.2.6.dist-info\\METADATA": "b2e153f338ea9b8a589f37a427b0d70f7b8fc2fece66908b2eac54adf8a3b2db",
+            "Lib\\site-packages\\cloudpickle-3.1.2.dist-info\\METADATA": "3d0263bfe9ee4f23b244bdcaff73acbe7a1957ebf82743b6ae42693adc48d721",
+            "Lib\\site-packages\\colorama-0.4.6.dist-info\\METADATA": "7baed29eb50c3b29bdb33ff84e3177bf1bc05784f7685ecdcaa4471c7dd810cc",
+            "Lib\\site-packages\\contourpy-1.4.0.dist-info\\METADATA": "40450acd747b288a5db999c435e1e921ffee0a38c7884a80cd46934c8004568f",
+            "Lib\\site-packages\\coverage-7.17.0.dist-info\\METADATA": "a6cf0af01235caa8487fe324d6060d3ad92f625a1cf14b0a4355f7d08d5bdfa2",
+            "Lib\\site-packages\\cycler-0.12.1.dist-info\\METADATA": "23289e19b76f1e01394227696e6af2b6cd1ce79e89731209bf9195148b18ed36",
+            "Lib\\site-packages\\filelock-4.2.4.dist-info\\METADATA": "d99c0f72a7ab84c924b734018a28a5001505fe0f96280c4462b864313edddb50",
+            "Lib\\site-packages\\fonttools-4.67.0.dist-info\\METADATA": "29c6302d413178e9f01814b1f38937575546e88a8b3aa97831dfcebc120913af",
+            "Lib\\site-packages\\h5netcdf-1.8.1.dist-info\\METADATA": "fadc0c07eb8473a76f958d5a6c824822e47ee08bfa9a1e0489ad029a19bc09f8",
+            "Lib\\site-packages\\h5py-3.16.0.dist-info\\METADATA": "28e9000a32bbaab84498f77d04dd7690ac061459e2fb17e01509d0020672e0bc",
+            "Lib\\site-packages\\joblib-1.6.0.dist-info\\METADATA": "c5fd6509906c5795fd6724d97bc1709d1f266b78aff92c0156d6cf5ad7c045e3",
+            "Lib\\site-packages\\kiwisolver-1.5.1.dist-info\\METADATA": "4e635948bf0b496e7e1bf6b8f7f577504670453459bd98e8dcfb0b919257d476",
+            "Lib\\site-packages\\lazy_loader-0.6.dist-info\\METADATA": "9cd369edae6bf499af0c1acee15d0389361036907742690ac504f9b3b84d56b3",
+            "Lib\\site-packages\\llvmlite-0.50.0.dist-info\\METADATA": "358c6e3a88c4a93c41bc2799e7f080b9d7081fecc74e27c3a5f327168b5d84e3",
+            "Lib\\site-packages\\markdown_it_py-4.2.0.dist-info\\METADATA": "72c36ff516755443b1ecb61e17b2567a990230b49a504b0eb0c42d5f82448a9c",
+            "Lib\\site-packages\\matplotlib-3.11.2.dist-info\\METADATA": "e5f532226d1025af2dd15ff951df27391f66d46403b8244ea61e6b8eb3e4d806",
+            "Lib\\site-packages\\mdurl-0.1.2.dist-info\\METADATA": "b53b29d48f499367053fda3c81e7ce27d2558380ebbf83e66023b02eb7ddd25d",
+            "Lib\\site-packages\\narwhals-2.27.1.dist-info\\METADATA": "5962ef236f36fe34aff21a837a0698386dcb1f0de54462aa18b73698e6ef1a4f",
+            "Lib\\site-packages\\numba-0.68.0.dist-info\\METADATA": "2a98f87c5a389c85148c722f82bfac18712afb538a4573e71e4699d4968c9cdf",
+            "Lib\\site-packages\\numpy-2.4.6.dist-info\\METADATA": "b082c52ccbe3b880bae177c35171b52ed6c947f3ad71e3762f2723f60a411de0",
+            "Lib\\site-packages\\packaging-26.3.dist-info\\METADATA": "70fdb89fc4d4a9a043bf7372b8972bcc883fddff34ab55e9cf80d73875384763",
+            "Lib\\site-packages\\pandas-3.1.0.dist-info\\METADATA": "b2b43910a5ef734a08be961df9c484f4664ad9ec2fa5a08294d0edfa08bcdd4b",
+            "Lib\\site-packages\\patsy-1.0.3.dist-info\\METADATA": "c9d8d1a6ebfdadd02c21b9f4d15b1c26716f181c4bb6bcccb1006c9d892da31f",
+            "Lib\\site-packages\\pillow-13.0.0.dist-info\\METADATA": "140f39cb31ec9b46109828a6286f034a4848621263d6aab38d2f142083dd06c5",
+            "Lib\\site-packages\\pip-25.0.1.dist-info\\METADATA": "4fa7318cf30f979db7cec45c12cbbc2b4f88a15f12eefbf59a6291d0a03af926",
+            "Lib\\site-packages\\preliz-0.28.0.dist-info\\METADATA": "20fc97f2d5fb32ef326bb073634db32d95b77792136c789d658c258cbe2a38d6",
+            "Lib\\site-packages\\pydantic-2.14.1.dist-info\\METADATA": "4d4c8e8d5e6a27d5208f0d7949f25628e6747133034969d4d1399b1ad5394036",
+            "Lib\\site-packages\\pydantic_core-2.50.1.dist-info\\METADATA": "790c40c25f95db9b18e1d4b5ae75979ce6027b15d6f924c042553252ff43328f",
+            "Lib\\site-packages\\pygments-2.21.0.dist-info\\METADATA": "1dde075570136774c706bf0009183a793fe0ee262e4a5590cc6eff8453eedd43",
+            "Lib\\site-packages\\pymc-6.3.2.dist-info\\METADATA": "6aafc7ca4da081decae5cdf7ab94c99be2ec89ed92ab580eead41b2927ba089b",
+            "Lib\\site-packages\\pymc_extras-0.15.1.dist-info\\METADATA": "65d2045ca073406434c84c624cc00db88c5f0b60ca61f6dc8d4e8acd103ec0f9",
+            "Lib\\site-packages\\pymc_marketing-1.3.0.dist-info\\METADATA": "bdcce553813681e3ca6aae4eb063d9402f8eb494076c0ccab6ce78298bb870ea",
+            "Lib\\site-packages\\pyparsing-3.3.3.dist-info\\METADATA": "f2ca34052d720622d300023472ef8ae94fe5b57d69acbb28a8667f6dd0e13497",
+            "Lib\\site-packages\\pyprojroot-0.3.0.dist-info\\METADATA": "d4bd5bb047976042debe9b8e5de50db39fcd24c5257b60f4fe41b00dc96dbd90",
+            "Lib\\site-packages\\pytensor-3.3.4.dist-info\\METADATA": "c4f3838b111b20050213a3cad7bc55a829e6fa7732a6604c50f92fb156d6401b",
+            "Lib\\site-packages\\pytensor_distributions-0.3.3.dist-info\\METADATA": "bc0eaf0c8a18adac1d642265bfdd3848cc02cfff3dd575646efedfe392d187bc",
+            "Lib\\site-packages\\python_dateutil-3.0.0.dist-info\\METADATA": "e10ead93598aed51bdb28aa30ef64ee5d6ccc871e88741d220e504e979af4695",
+            "Lib\\site-packages\\pyyaml-6.0.3.dist-info\\METADATA": "847a701020334386852b6e07bad1053cb0ce3da9ee1846e7e9d02b24e8bb3f8d",
+            "Lib\\site-packages\\rich-15.0.0.dist-info\\METADATA": "fad34fc603fac4481bf81f8dd629492fc302c0ec31909c86644751512afb2e3b",
+            "Lib\\site-packages\\scikit_learn-1.9.1.dist-info\\METADATA": "32e503c710a61e4e04be4edb450f9f8141233ac6af3f3db59a877667538fa4ec",
+            "Lib\\site-packages\\scipy-1.18.1.dist-info\\METADATA": "c8313d18ca0168ff291fe0a3b50532f3a18b14547695e9aa7ca1c1ce6eca92dc",
+            "Lib\\site-packages\\seaborn-0.13.2.dist-info\\METADATA": "98cfe2b7a5004466cdd5c7c8ccf016ebdcfa0337fc177ea7aad27f527c53fc96",
+            "Lib\\site-packages\\setuptools-84.2.1.dist-info\\METADATA": "24939b84ead30ff4581918c8d5a95aafd377f6a8afc61f30ea18358a8786bfa4",
+            "Lib\\site-packages\\six-1.17.0.dist-info\\METADATA": "562042078c2752549f6d8a7c86dbc5dd708088a7be6d80672ec7b07100b72468",
+            "Lib\\site-packages\\threadpoolctl-3.7.0.dist-info\\METADATA": "09b19e721560cd12246402d44e53c1ede5194b8398ef60822f02cab86ccf8d1f",
+            "Lib\\site-packages\\tqdm-4.70.1.dist-info\\METADATA": "a5da70b966afea3a759716041bad7187f2ece02c22348cf9e7c0a512bbf15f57",
+            "Lib\\site-packages\\typing_extensions-4.16.0.dist-info\\METADATA": "b05084ca1d50879865178d9fff9fabeab61bdfb1f361bfbde95421ffc8f9be46",
+            "Lib\\site-packages\\typing_inspection-0.4.4.dist-info\\METADATA": "bad3d9e6342ef6750cf5128ec942327b8bebdce0b6e4d6f67cb15b27ae5118da",
+            "Lib\\site-packages\\tzdata-2026.5.dist-info\\METADATA": "e0780e8b6dc8882ce87e871a9d4589d59cb05a0c2d64f58b1ba62cde1ee91f6a",
+            "Lib\\site-packages\\xarray-2026.9.0.dist-info\\METADATA": "858a70778b214ffa02163df82d5dd7e5d42df461a9dc174157120e3c91f97c84",
+            "Lib\\site-packages\\xarray_einstats-0.11.0.dist-info\\METADATA": "55438d7fe3762b63c6ed2660295bdf53542ba3cf424560ca19c39d7d5c51e371"
+          },
+          "source_sha256": {
+            "integrations/native_scientific.py": "f0aa21298bbcfe574f9f9c0d021b7adcbc17a83482c227430703a245062ecbe3",
+            "integrations/worker.py": "d2e3027dbfa601fcb6ed26d4540fce2490218846b1c3e7b9c086107bec9815d9"
+          }
+        },
+        "native_runtime_versions": {
+          "arviz": "1.3.0",
+          "arviz-stats": "1.3.3",
+          "numpy": "2.4.6",
+          "pymc": "6.3.2",
+          "pymc-marketing": "1.3.0",
+          "pytensor": "3.3.4",
+          "scipy": "1.18.1"
+        }
+      },
+      {
+        "scenario": "missing_target",
+        "replication": 0,
+        "seed": 1089408280,
+        "seed_spawn_key": [
+          4
+        ],
+        "dataset_sha256": "574ec00f8185682428417c87e68c0c559fca3dff7a82f6df6e6c0307e63d89f4",
+        "status": "failed",
+        "code": "DATASET_INVALID",
+        "failure_kind": "execution"
+      },
+      {
+        "scenario": "missing_target",
+        "replication": 1,
+        "seed": 775040288,
+        "seed_spawn_key": [
+          5
+        ],
+        "dataset_sha256": "d24ae5879f97d80e7b92337d4cdd52568466151f473a9760ad02e424d96dc9db",
+        "status": "failed",
+        "code": "DATASET_INVALID",
+        "failure_kind": "execution"
+      },
+      {
+        "scenario": "constant_spend",
+        "replication": 0,
+        "seed": 1024932617,
+        "seed_spawn_key": [
+          6
+        ],
+        "dataset_sha256": "325db78ce7be90ceaa5091bc755eb399196812da7dcd67e333c84162e139934d",
+        "status": "failed",
+        "code": "UNIDENTIFIABLE_MEDIA",
+        "failure_kind": "execution"
+      },
+      {
+        "scenario": "constant_spend",
+        "replication": 1,
+        "seed": 366659305,
+        "seed_spawn_key": [
+          7
+        ],
+        "dataset_sha256": "05d1c54a00d2298471f76fd46595205fd8def7d621c013a7ab0fd2c99dc331fd",
+        "status": "failed",
+        "code": "UNIDENTIFIABLE_MEDIA",
+        "failure_kind": "execution"
+      }
+    ],
+    "summaries": [
+      {
+        "scenario": "well_specified",
+        "channel": "spend_search",
+        "attempted": 2,
+        "successful": 2,
+        "interval_method": "native_conditional_effect",
+        "intervals_available": 2,
+        "mean_interval_width": 20.141897209787167,
+        "failed": 0,
+        "bias": -10.592380675545929,
+        "bias_mcse": 1.6841633669822078,
+        "rmse": 10.725434006247191,
+        "interval_coverage": 0.5,
+        "coverage_mcse": 0.3535533905932738,
+        "coverage_interval_95": [
+          0.09453120573423074,
+          0.9054687942657693
+        ],
+        "nominal_coverage": 0.9,
+        "rank_deficient_runs": 0
+      },
+      {
+        "scenario": "well_specified",
+        "channel": "spend_social",
+        "attempted": 2,
+        "successful": 2,
+        "interval_method": "native_conditional_effect",
+        "intervals_available": 2,
+        "mean_interval_width": 20.658743904801977,
+        "failed": 0,
+        "bias": 5.663141659935773,
+        "bias_mcse": 8.980278653734409,
+        "rmse": 10.616806401136738,
+        "interval_coverage": 0.5,
+        "coverage_mcse": 0.3535533905932738,
+        "coverage_interval_95": [
+          0.09453120573423074,
+          0.9054687942657693
+        ],
+        "nominal_coverage": 0.9,
+        "rank_deficient_runs": 0
+      },
+      {
+        "scenario": "well_specified",
+        "channel": "spend_video",
+        "attempted": 2,
+        "successful": 2,
+        "interval_method": "native_conditional_effect",
+        "intervals_available": 2,
+        "mean_interval_width": 19.018041499698416,
+        "failed": 0,
+        "bias": -0.7730433594602673,
+        "bias_mcse": 2.458057776227626,
+        "rmse": 2.576750679999662,
+        "interval_coverage": 1.0,
+        "coverage_mcse": 0.0,
+        "coverage_interval_95": [
+          0.34238022750665303,
+          1.0
+        ],
+        "nominal_coverage": 0.9,
+        "rank_deficient_runs": 0
+      },
+      {
+        "scenario": "null_effect",
+        "channel": "spend_search",
+        "attempted": 2,
+        "successful": 2,
+        "interval_method": "native_conditional_effect",
+        "intervals_available": 2,
+        "mean_interval_width": 4.656679552545015,
+        "failed": 0,
+        "bias": 1.8110361201275733,
+        "bias_mcse": 0.3775171918018376,
+        "rmse": 1.8499651506211352,
+        "interval_coverage": 0.0,
+        "coverage_mcse": 0.0,
+        "coverage_interval_95": [
+          0.0,
+          0.6576197724933469
+        ],
+        "nominal_coverage": 0.9,
+        "rank_deficient_runs": 0
+      },
+      {
+        "scenario": "null_effect",
+        "channel": "spend_social",
+        "attempted": 2,
+        "successful": 2,
+        "interval_method": "native_conditional_effect",
+        "intervals_available": 2,
+        "mean_interval_width": 4.515962089921947,
+        "failed": 0,
+        "bias": 1.6369511151615765,
+        "bias_mcse": 0.06944152070066655,
+        "rmse": 1.6384233513429765,
+        "interval_coverage": 0.0,
+        "coverage_mcse": 0.0,
+        "coverage_interval_95": [
+          0.0,
+          0.6576197724933469
+        ],
+        "nominal_coverage": 0.9,
+        "rank_deficient_runs": 0
+      },
+      {
+        "scenario": "null_effect",
+        "channel": "spend_video",
+        "attempted": 2,
+        "successful": 2,
+        "interval_method": "native_conditional_effect",
+        "intervals_available": 2,
+        "mean_interval_width": 6.982773064658115,
+        "failed": 0,
+        "bias": 3.432002431314375,
+        "bias_mcse": 0.3059050689457681,
+        "rmse": 3.445608596424512,
+        "interval_coverage": 0.0,
+        "coverage_mcse": 0.0,
+        "coverage_interval_95": [
+          0.0,
+          0.6576197724933469
+        ],
+        "nominal_coverage": 0.9,
+        "rank_deficient_runs": 0
+      },
+      {
+        "scenario": "missing_target",
+        "channel": "spend_search",
+        "attempted": 2,
+        "successful": 0,
+        "interval_method": "native_conditional_effect",
+        "intervals_available": 0,
+        "mean_interval_width": null,
+        "failed": 2,
+        "bias": null,
+        "bias_mcse": null,
+        "rmse": null,
+        "interval_coverage": null,
+        "coverage_mcse": null,
+        "coverage_interval_95": null,
+        "nominal_coverage": 0.9,
+        "rank_deficient_runs": 0
+      },
+      {
+        "scenario": "missing_target",
+        "channel": "spend_social",
+        "attempted": 2,
+        "successful": 0,
+        "interval_method": "native_conditional_effect",
+        "intervals_available": 0,
+        "mean_interval_width": null,
+        "failed": 2,
+        "bias": null,
+        "bias_mcse": null,
+        "rmse": null,
+        "interval_coverage": null,
+        "coverage_mcse": null,
+        "coverage_interval_95": null,
+        "nominal_coverage": 0.9,
+        "rank_deficient_runs": 0
+      },
+      {
+        "scenario": "missing_target",
+        "channel": "spend_video",
+        "attempted": 2,
+        "successful": 0,
+        "interval_method": "native_conditional_effect",
+        "intervals_available": 0,
+        "mean_interval_width": null,
+        "failed": 2,
+        "bias": null,
+        "bias_mcse": null,
+        "rmse": null,
+        "interval_coverage": null,
+        "coverage_mcse": null,
+        "coverage_interval_95": null,
+        "nominal_coverage": 0.9,
+        "rank_deficient_runs": 0
+      },
+      {
+        "scenario": "constant_spend",
+        "channel": "spend_search",
+        "attempted": 2,
+        "successful": 0,
+        "interval_method": "native_conditional_effect",
+        "intervals_available": 0,
+        "mean_interval_width": null,
+        "failed": 2,
+        "bias": null,
+        "bias_mcse": null,
+        "rmse": null,
+        "interval_coverage": null,
+        "coverage_mcse": null,
+        "coverage_interval_95": null,
+        "nominal_coverage": 0.9,
+        "rank_deficient_runs": 0
+      },
+      {
+        "scenario": "constant_spend",
+        "channel": "spend_social",
+        "attempted": 2,
+        "successful": 0,
+        "interval_method": "native_conditional_effect",
+        "intervals_available": 0,
+        "mean_interval_width": null,
+        "failed": 2,
+        "bias": null,
+        "bias_mcse": null,
+        "rmse": null,
+        "interval_coverage": null,
+        "coverage_mcse": null,
+        "coverage_interval_95": null,
+        "nominal_coverage": 0.9,
+        "rank_deficient_runs": 0
+      },
+      {
+        "scenario": "constant_spend",
+        "channel": "spend_video",
+        "attempted": 2,
+        "successful": 0,
+        "interval_method": "native_conditional_effect",
+        "intervals_available": 0,
+        "mean_interval_width": null,
+        "failed": 2,
+        "bias": null,
+        "bias_mcse": null,
+        "rmse": null,
+        "interval_coverage": null,
+        "coverage_mcse": null,
+        "coverage_interval_95": null,
+        "nominal_coverage": 0.9,
+        "rank_deficient_runs": 0
+      }
+    ],
+    "operational": {
+      "all_executed": false,
+      "failures": 4,
+      "expected_rejections": 4,
+      "unexpected_failures": 0,
+      "protocol_executed": true,
+      "scope": "Actual fits and explicit rejection of prespecified invalid designs; all attempts remain in denominators"
+    },
+    "causal_identification": false,
+    "limitations": [
+      "Reference DGP is fixed Hill: Logistic PyMC is a deliberate functional misspecification; finite native adstock also differs from the infinite reference",
+      "Each engine is evaluated on its declared effective holdout dates, recorded explicitly; windows must be harmonized before cross-engine comparisons",
+      "Positive continuous priors may exclude the exact zero boundary; posterior credible sets are not automatically frequentist confidence sets",
+      "Robyn native search supplies point effects; search quantiles are not sampling uncertainty and coverage stays unavailable",
+      "Small studies cannot certify coverage; execution failures remain in attempted denominators",
+      "Synthetic results never establish effects in real markets"
+    ],
+    "acceptance": {
+      "status": "failed",
+      "failed": [
+        "native_mcmc_failed:science-refit-63c177409a1f68fe8d357e07b7c8a432ce6386d1",
+        "native_mcmc_failed:science-refit-16053d2c8677f544c5e8abed1f63a694f227ef9e"
+      ],
+      "missing": [
+        "absolute_bias_tolerance_missing",
+        "rmse_tolerance_missing",
+        "insufficient_replications_or_intervals:well_specified:spend_search",
+        "insufficient_replications_or_intervals:well_specified:spend_social",
+        "insufficient_replications_or_intervals:well_specified:spend_video",
+        "insufficient_replications_or_intervals:null_effect:spend_search",
+        "insufficient_replications_or_intervals:null_effect:spend_social",
+        "insufficient_replications_or_intervals:null_effect:spend_video",
+        "native_numerical_adequacy_unresolved"
+      ],
+      "undercoverage": [],
+      "coverage_checks": [],
+      "policy": {
+        "core_scenarios": [
+          "well_specified",
+          "null_effect"
+        ],
+        "minimum_replications": 100,
+        "coverage_tolerance": 0.05,
+        "max_absolute_bias": null,
+        "max_rmse": null,
+        "coverage_family_size": 6,
+        "family_alpha": 0.05
+      },
+      "causal_identification": false,
+      "scope": "Core DGP conditional-interval screening only; inspect all adverse scenarios, failures and width; cannot certify real effects"
+    }
+  }
+}

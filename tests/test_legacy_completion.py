@@ -236,25 +236,68 @@ def test_router_local_dataset_resource_and_direct_invalid_method(tmp_path):
     )
 
 
-@pytest.mark.parametrize("failure", ["missing", "nonzero", "oversized", "timeout"])
+@pytest.mark.parametrize(
+    "failure",
+    [
+        "missing",
+        "nonzero",
+        "oversized",
+        "timeout",
+        "malformed",
+        "wrong_shape",
+        "invalid_data",
+        "os_error",
+    ],
+)
 def test_bridge_refuses_missing_nonzero_and_timed_out_results(service, monkeypatch, failure):
     monkeypatch.setattr(
         bridge, "executable", lambda backend: __import__("pathlib").Path(sys.executable)
     )
 
     def failed_worker(args, **options):
+        options["stdout"].write("bounded failure marker\n")
         if failure == "timeout":
             raise subprocess.TimeoutExpired(args, 10)
+        if failure == "os_error":
+            raise OSError("private runtime path")
         if failure != "missing":
             __import__("pathlib").Path(args[4]).write_text(
                 "x" * (service.settings.max_file_bytes + 1)
                 if failure == "oversized"
+                else "{invalid"
+                if failure == "malformed"
+                else "[]"
+                if failure == "wrong_shape"
+                else '{"ok": true, "data": []}'
+                if failure == "invalid_data"
                 else json.dumps({"ok": False, "message": "private"})
             )
-        return subprocess.CompletedProcess(args, 1)
+        return subprocess.CompletedProcess(
+            args, 0 if failure in {"wrong_shape", "invalid_data"} else 1
+        )
 
     monkeypatch.setattr(bridge, "run_worker", failed_worker)
     with pytest.raises(MMMError) as caught:
         bridge.execute(service.store, "pymc_marketing", {"synthetic": True})
     assert caught.value.code == ("BACKEND_TIMEOUT" if failure == "timeout" else "BACKEND_FAILED")
     assert not list((service.store.root / "jobs").iterdir())
+    diagnostics = list((service.store.root / "logs").glob("backend-*.log"))
+    assert len(diagnostics) == 1
+    captured = diagnostics[0].read_text()
+    assert "bounded failure marker" in captured
+    assert "output_bytes" in captured and "worker_exit_code" in captured
+
+
+def test_robyn_temporary_path_with_spaces_is_rejected_before_starting_a_worker(
+    service, monkeypatch, tmp_path
+):
+    import tempfile
+
+    temporary = tmp_path / "temporary with spaces"
+    temporary.mkdir()
+    monkeypatch.setattr(tempfile, "tempdir", str(temporary))
+    monkeypatch.setenv("MMM_ROBYN_PYTHON", sys.executable)
+    with pytest.raises(MMMError, match="without spaces"):
+        bridge.execute(service.store, "meta_robyn", {})
+    assert not list((service.store.root / "jobs").iterdir())
+    assert not list(temporary.iterdir())

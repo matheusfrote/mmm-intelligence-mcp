@@ -4,13 +4,34 @@ import math
 from datetime import date
 
 import numpy as np
-from scipy.stats import binomtest, fisher_exact, norm, t, ttest_ind
+from scipy.stats import binomtest, fisher_exact, norm, t, ttest_ind, ttest_rel
 
 from .errors import MMMError
 from .storage import digest
 
 
 def plan_experiment(request):
+    design = request.analysis_unit
+    grouping = request.pair_column if design == "paired" else request.cluster_column
+    if design == "independent":
+        if request.pair_column or request.cluster_column:
+            raise MMMError(
+                "EXPERIMENT_DESIGN", "Grouping requires an explicit paired or cluster design"
+            )
+    elif (
+        not grouping
+        or grouping in {request.unit_column, request.group_column, request.kpi}
+        or request.outcome_type != "continuous"
+        or request.cost_column
+        or (request.cluster_column if design == "paired" else request.pair_column)
+        or any(s.outcome_type != "continuous" for s in request.guardrail_specs.values())
+    ):
+        raise MMMError(
+            "EXPERIMENT_DESIGN",
+            "Declare a distinct grouping column; paired/cluster inference supports continuous outcomes without cost ratios",
+        )
+    if design == "paired" and request.expected_treatment_fraction != 0.5:
+        raise MMMError("EXPERIMENT_DESIGN", "Complete pairs require one treatment and one control")
     if request.comparison_family_size < 1 + len(request.guardrail_specs):
         raise MMMError(
             "EXPERIMENT_DESIGN", "Comparison family must include KPI and specified guardrails"
@@ -22,7 +43,8 @@ def plan_experiment(request):
         raise MMMError(
             "EXPERIMENT_DESIGN", "Guardrail specifications must refer to distinct planned metrics"
         )
-    if request.randomization_unit and request.randomization_unit != request.unit_column:
+    independent_column = request.cluster_column if design == "cluster" else request.unit_column
+    if request.randomization_unit and request.randomization_unit != independent_column:
         raise MMMError(
             "EXPERIMENT_DESIGN",
             "Aggregate outcomes to one row per randomization unit; cluster replication is not supported",
@@ -59,7 +81,9 @@ def plan_experiment(request):
             raise MMMError(
                 "EXPERIMENT_DESIGN", "Continuous planning requires a declared standard deviation"
             )
-        variance = request.standard_deviation * request.standard_deviation / (q * (1 - q))
+        variance = request.standard_deviation * request.standard_deviation
+        if design != "paired":
+            variance /= q * (1 - q)
     squared_effect = request.minimum_effect * request.minimum_effect
     critical = float(norm.isf(alpha / 2)) + float(norm.ppf(request.power))
     if (
@@ -78,6 +102,8 @@ def plan_experiment(request):
             "EXPERIMENT_RANGE", "Required sample size exceeds supported floating-point range"
         )
     total = max(math.ceil(5 / min(q, 1 - q)), math.ceil(required))
+    if design == "paired":
+        total = 2 * max(5, math.ceil(required))
     return {
         **request.model_dump(mode="json"),
         "synthetic": True,
@@ -86,7 +112,21 @@ def plan_experiment(request):
         "sample_size_control": math.ceil(total * (1 - q)),
         "sample_size_per_arm": max(math.ceil(total * q), math.ceil(total * (1 - q))),
         "power_method": "two-sided normal approximation, declared independent units, Bonferroni alpha",
-        "estimand": "difference in marginal unit-level outcome means",
+        "estimand": "equal-weight cluster mean difference"
+        if design == "cluster"
+        else "mean within-pair difference"
+        if design == "paired"
+        else "difference in marginal unit-level outcome means",
+        "planning_sd_basis": "within-pair differences"
+        if design == "paired"
+        else "cluster means"
+        if design == "cluster"
+        else "individual outcomes",
+        "sample_size_unit": "pairs per arm"
+        if design == "paired"
+        else "clusters"
+        if design == "cluster"
+        else "independent units",
         "protocol_complete": all(
             [
                 request.hypothesis,
@@ -115,6 +155,9 @@ def wilson(p, n, z):
 
 
 def analyze_experiment(artifact, plan, *, _guardrail=False):
+    design = plan.get("analysis_unit", "independent")
+    grouping = plan.get("pair_column" if design == "paired" else "cluster_column")
+    groups = {}
     arms = {plan["treatment"]: [], plan["control"]: []}
     assigned = {}
     losses = {k: 0 for k in arms}
@@ -165,6 +208,14 @@ def analyze_experiment(artifact, plan, *, _guardrail=False):
             )
         assigned[unit] = arm
         value = row[plan["kpi"]]
+        if design != "independent":
+            key = row.get(grouping)
+            if not isinstance(key, (str, int)) or isinstance(key, bool) or value is None:
+                raise MMMError(
+                    "EXPERIMENT_GROUP",
+                    "Complete outcomes and valid pair/cluster identifiers required",
+                )
+            groups.setdefault(key, []).append((arm, value))
         if value is None:
             losses[arm] += 1
             continue
@@ -178,6 +229,25 @@ def analyze_experiment(artifact, plan, *, _guardrail=False):
         if plan["outcome_type"] == "binary" and value not in {0, 1}:
             raise MMMError("EXPERIMENT_OUTCOME", "Binary outcomes must be zero or one")
         arms[arm].append(float(value))
+    if design != "independent":
+        arms = {plan["treatment"]: [], plan["control"]: []}
+        for values in groups.values():
+            if design == "paired":
+                if len(values) != 2 or {arm for arm, _ in values} != set(arms):
+                    raise MMMError(
+                        "EXPERIMENT_GROUP",
+                        "Every complete pair requires exactly one unit in each arm",
+                    )
+                for arm, value in values:
+                    arms[arm].append(float(value))
+            else:
+                if len({arm for arm, _ in values}) != 1:
+                    raise MMMError(
+                        "EXPERIMENT_GROUP", "Every cluster must be assigned to exactly one arm"
+                    )
+                arms[values[0][0]].append(float(np.mean([v for _, v in values])))
+        if design == "cluster":
+            assigned = {key: values[0][0] for key, values in groups.items()}
     treatment = np.array(arms[plan["treatment"]])
     control = np.array(arms[plan["control"]])
     n1 = len(treatment)
@@ -207,6 +277,17 @@ def analyze_experiment(artifact, plan, *, _guardrail=False):
             ).pvalue
         )
         method = "risk difference, Newcombe Wilson interval; Fisher exact two-sided p-value"
+    elif design == "paired":
+        differences = treatment - control
+        variance = float(np.var(differences, ddof=1)) / n1
+        if variance <= 0:
+            raise MMMError(
+                "EXPERIMENT_VARIANCE", "Positive within-pair sampling variance is required"
+            )
+        margin = float(t.isf(alpha / 2, n1 - 1)) * math.sqrt(variance)
+        interval = [difference - margin, difference + margin]
+        pvalue = float(ttest_rel(treatment, control, nan_policy="raise").pvalue)
+        method = "paired-unit mean difference and Student t interval"
     else:
         v1 = float(np.var(treatment, ddof=1))
         v0 = float(np.var(control, ddof=1))
@@ -217,11 +298,20 @@ def analyze_experiment(artifact, plan, *, _guardrail=False):
         margin = float(t.isf(alpha / 2, df)) * math.sqrt(variance)
         interval = [difference - margin, difference + margin]
         pvalue = float(ttest_ind(treatment, control, equal_var=False, nan_policy="raise").pvalue)
-        method = "independent-unit Welch mean difference and t interval"
+        method = (
+            "equal-weight cluster-mean Welch difference and t interval"
+            if design == "cluster"
+            else "independent-unit Welch mean difference and t interval"
+        )
+    standard_error = (
+        math.sqrt(variance)
+        if plan["outcome_type"] == "continuous"
+        else math.sqrt(float(np.var(treatment, ddof=1)) / n1 + float(np.var(control, ddof=1)) / n0)
+    )
     assigned_t = sum(v == plan["treatment"] for v in assigned.values())
     srm = (
         float(binomtest(assigned_t, len(assigned), plan["expected_treatment_fraction"]).pvalue)
-        if plan["method"] == "randomized"
+        if plan["method"] == "randomized" and design != "paired"
         else None
     )
     guardrails = {}
@@ -290,7 +380,9 @@ def analyze_experiment(artifact, plan, *, _guardrail=False):
         p1 = p0 + plan["minimum_effect"]
         planned_variance = p1 * (1 - p1) / n1 + p0 * (1 - p0) / n0
     else:
-        planned_variance = plan["standard_deviation"] ** 2 * (1 / n1 + 1 / n0)
+        planned_variance = plan["standard_deviation"] ** 2 * (
+            1 / n1 if design == "paired" else 1 / n1 + 1 / n0
+        )
     if planned_variance is not None:
         noncentral = plan["minimum_effect"] / math.sqrt(planned_variance)
         planned_power = float(norm.sf(z - noncentral) + norm.cdf(-z - noncentral))
@@ -319,11 +411,15 @@ def analyze_experiment(artifact, plan, *, _guardrail=False):
         },
         "method": plan["method"],
         "estimator": method,
+        "analysis_unit": design,
+        "independent_units": n1 if design == "paired" else n1 + n0,
+        "grouping_column": grouping if design != "independent" else None,
+        "sample_ratio_mismatch_scope": "not_applicable_complete_pairs"
+        if design == "paired"
+        else "randomization_units",
         "estimate": {
             "difference": difference,
-            "standard_error": math.sqrt(
-                float(np.var(treatment, ddof=1)) / n1 + float(np.var(control, ddof=1)) / n0
-            ),
+            "standard_error": standard_error,
             "relative_difference": difference / m0 if m0 else None,
             "interval": interval,
             "confidence_level": 1 - alpha,

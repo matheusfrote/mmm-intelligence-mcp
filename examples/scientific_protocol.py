@@ -42,6 +42,19 @@ def source_hashes():
     return sources
 
 
+def audit_timeout_seconds(backend, native_replications, skip_refits):
+    """Bound each tool request for all sequential native workers it may invoke."""
+    refits = 0 if skip_refits else 3  # Two seeds and the declared control omission.
+    recovery_fits = native_replications * 2  # Prespecified well-specified/null DGPs.
+    calls = {
+        "ridge": 1,
+        "google_meridian": 1 + 2 * refits + 3 * recovery_fits,
+        "pymc_marketing": 1 + 2 * refits + 3 * recovery_fits,
+        "meta_robyn": max(1, refits + 2 * recovery_fits),
+    }
+    return 3800 * (max(calls.values()) if backend == "all" else calls[backend])
+
+
 def reuse_models(options, output):
     """Operator-only reuse of verified synthetic state; never a tool path input."""
     from mmm_intelligence.config import Settings
@@ -126,7 +139,11 @@ async def run(options):
         "transport_smoke": options.transport_smoke,
         "reused_models": reused,
     }
-    async with Client(params, read_timeout_seconds=3800) as client:
+    # One audit may run several sequential workers. Each remains independently bounded.
+    audit_timeout = audit_timeout_seconds(
+        options.backend, options.native_replications, options.skip_refits
+    )
+    async with Client(params, read_timeout_seconds=audit_timeout) as client:
 
         async def call(name, **request):
             result = await client.call_tool(name, {"request": request})
@@ -173,12 +190,22 @@ async def run(options):
                 "refit": not options.skip_refits,
                 "seeds": [(options.seed + 17) % (2**31 - 1), (options.seed + 29) % (2**31 - 1)],
             }
+            if options.refit_draws is not None and backend in {"google_meridian", "pymc_marketing"}:
+                scientific["refit_draws"] = options.refit_draws
             if backend == "ridge":
                 scientific["monte_carlo"] = {
                     "replications": options.replications,
                     "seed": options.seed,
                     "bootstrap_samples": 40,
                     "scenarios": SCENARIOS,
+                }
+            elif options.native_replications:
+                scientific["native_monte_carlo"] = {
+                    "replications": options.native_replications,
+                    "seed": options.seed,
+                    "draws": options.draws,
+                    "tune": options.tune,
+                    "scenarios": ["well_specified", "null_effect"],
                 }
             report = await call(
                 "audit_model", model_id=model_id, backend=backend, scientific=scientific
@@ -215,10 +242,17 @@ if __name__ == "__main__":
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--reuse-store", type=Path)
     parser.add_argument("--replications", type=lambda v: bounded_integer(v, 2, 250), default=20)
+    parser.add_argument(
+        "--native-replications",
+        type=lambda v: bounded_integer(v, 2, 100),
+        default=0,
+        help="Actual isolated known-truth fits per core scenario; default disabled, never a reduced-draw substitute",
+    )
     parser.add_argument("--seed", type=int, default=42)
-    parser.add_argument("--draws", type=lambda v: bounded_integer(v, 1000, 2000), default=1000)
-    parser.add_argument("--tune", type=lambda v: bounded_integer(v, 1000, 2000), default=1000)
+    parser.add_argument("--draws", type=lambda v: bounded_integer(v, 1000, 8000), default=1000)
+    parser.add_argument("--tune", type=lambda v: bounded_integer(v, 1000, 8000), default=1000)
     parser.add_argument("--chains", type=int, choices=[4], default=4)
     parser.add_argument("--transport-smoke", action="store_true")
     parser.add_argument("--skip-refits", action="store_true")
+    parser.add_argument("--refit-draws", type=lambda v: bounded_integer(v, 1000, 8000))
     asyncio.run(run(parser.parse_args()))

@@ -1,4 +1,4 @@
-# Operação local 0.2
+# Operação local 0.4
 
 ## Ambiente principal
 
@@ -13,24 +13,26 @@ A revisão de publicação atualizou pytest para 9.0.3 por advisory conhecido e 
 Meridian e PyMC-Marketing exigem versões incompatíveis de ArviZ. Nesta máquina existem venvs Python 3.12 em `var/envs/meridian`, `var/envs/pymc` e `var/envs/robyn`. O servidor invoca workers fixos, sem shell. Comandos usados após criar cada venv:
 
 ```powershell
-.\var\envs\meridian\Scripts\python.exe -m pip install 'google-meridian[schema]==2.1.0'
-.\var\envs\pymc\Scripts\python.exe -m pip install 'pymc-marketing==1.3.0' h5netcdf
-.\var\envs\robyn\Scripts\python.exe -m pip install nevergrad 'numpy<2.4'
+.\var\envs\meridian\Scripts\python.exe -m pip install -r requirements/meridian-win-py312.txt
+.\var\envs\pymc\Scripts\python.exe -m pip install -r requirements/pymc-win-py312.txt
+.\var\envs\robyn\Scripts\python.exe -m pip install -r requirements/robyn-python-win-py312.txt
 ```
 
 Meridian persiste Protobuf oficial; PyMC usa NetCDF/h5netcdf e solicita explicitamente `y_original_scale`. Robyn usa **R Robyn 3.12.1**, não o framework web Python homônimo.
 
-R portátil 4.5.2 foi baixado de [Posit/r-builds](https://github.com/rstudio/r-builds), sem instalador/Registro/PATH, e extraído em uma pasta nova `var/runtime/r-portable`. [ZIP usado](https://cdn.posit.co/r/windows/R-4.5.2-windows.zip). É distribuição experimental/comunitária. Crie uma biblioteca privada e instale binários:
+R portátil 4.5.2 foi baixado de [Posit/r-builds](https://github.com/rstudio/r-builds), sem instalador/Registro/PATH, e extraído em uma pasta nova `var/runtime/r-portable`. [ZIP usado](https://cdn.posit.co/r/windows/R-4.5.2-windows.zip). Confira o SHA-256 do arquivo conforme o workflow nativo antes de extrair. Para os 115 pacotes R, use o instalador do manifesto versionado, com snapshot Posit CRAN 2026-10-23 e hashes por arquivo:
 
 ```powershell
-$env:R_LIBS_USER = Join-Path $PWD 'var\runtime\r-library'
-$env:RETICULATE_AUTOCONFIGURE = 'FALSE'
-.\var\runtime\r-portable\R-4.5.2\bin\Rscript.exe --vanilla -e "install.packages(c('Robyn','jsonlite'), lib=Sys.getenv('R_LIBS_USER'), repos='https://cloud.r-project.org', type='binary', dependencies=NA)"
+.\.venv\Scripts\python.exe examples/install_r_binaries.py
 ```
 
 O bridge define `RETICULATE_PYTHON` para a venv Nevergrad e `R_LIBS_USER` para a biblioteca privada. Nunca instala pacotes durante uma chamada MCP. No Windows, o R usa um diretório privado automaticamente limpo na raiz temporária autorizada do SO, pois seu tempdir não aceita espaços. Artefatos finais ficam na raiz configurada.
 
-Em outra instalação, defina caminhos absolutos em `MMM_MERIDIAN_PYTHON`, `MMM_PYMC_PYTHON`, `MMM_ROBYN_PYTHON` e `MMM_RSCRIPT`. `backend_status` confirma apenas presença do executável; não certifica bibliotecas ou convergência.
+Não substitua hashes nem use `latest` para contornar incompatibilidades. O CI dos
+runtimes nativos é Windows/Python 3.12; a matriz do servidor base em Linux/macOS
+não equivale a homologação desses runtimes nesses sistemas.
+
+Em outra instalação, defina caminhos absolutos em `MMM_MERIDIAN_PYTHON`, `MMM_PYMC_PYTHON`, `MMM_ROBYN_PYTHON`, `MMM_RSCRIPT` e `MMM_R_LIBRARY`. Esta última aponta para a biblioteca R instalada e verificada; evita procurar dependências dentro de `site-packages` ao usar o wheel. Uma biblioteca explicitamente configurada e ausente provoca `INVALID_CONFIG`, sem fallback. `backend_status` confirma apenas presença do executável; não certifica bibliotecas ou convergência.
 
 ## Aceitação real dos motores
 

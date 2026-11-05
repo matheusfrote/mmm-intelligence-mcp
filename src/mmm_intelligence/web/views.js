@@ -554,6 +554,7 @@ export function scientificEvidence(c, analysis) {
       out.append(
         table(r.scientific_diagnostics.parameters, [
           "parameter",
+          "diagnostic_status",
           "r_hat",
           "ess_bulk",
           "ess_tail",
@@ -607,18 +608,30 @@ export function scientificEvidence(c, analysis) {
           r.stability,
         ),
       );
-    if (r.monte_carlo?.summaries?.length)
+    for (const study of [r.monte_carlo, r.native_monte_carlo]) {
+      if (study?.summaries?.length)
+        out.append(
+          table(study.summaries, [
+            "scenario",
+            "channel",
+            "attempted",
+            "successful",
+            "interval_method",
+            "intervals_available",
+            "bias",
+            "rmse",
+            "interval_coverage",
+            "coverage_mcse",
+            "mean_interval_width",
+          ]),
+        );
+    }
+    if (analysis.conditional_linear_inference)
       out.append(
-        table(r.monte_carlo.summaries, [
-          "scenario",
-          "channel",
-          "attempted",
-          "successful",
-          "bias",
-          "rmse",
-          "interval_coverage",
-          "coverage_mcse",
-        ]),
+        detail(
+          "Inferência linear condicional — HC3/HAC",
+          analysis.conditional_linear_inference,
+        ),
       );
     out.append(detail("Critérios, alertas, proveniência e limitações", r));
     if (r.artifact_id)

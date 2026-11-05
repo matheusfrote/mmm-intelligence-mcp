@@ -33,6 +33,7 @@ stopifnot(length(inputs)>=3L)
 cases <- list()
 for(input in inputs) {
   payload <- jsonlite::fromJSON(input,simplifyVector=FALSE)
+  if(!payload$operation %in% c("train","predict")) next
   kind <- if(payload$operation=="train") "train" else if(length(payload$request$media_multiplier)>0L) "scenario" else "predict"
   if(is.null(cases[[kind]])) cases[[kind]] <- input
 }
@@ -46,6 +47,7 @@ cases$legacy <- legacy_path
 conversion <- legacy
 conversion$dataset$target_type <- "non_revenue"
 conversion$dataset$units$revenue <- "count"
+conversion$request$robyn_algorithm <- "TwoPointsDE"
 conversion_path <- file.path(Sys.getenv("MMM_R_COVERAGE_OUTPUT"),"conversion-input.json")
 jsonlite::write_json(conversion,conversion_path,auto_unbox=TRUE,null="null",digits=16)
 cases$conversion <- conversion_path
@@ -55,9 +57,19 @@ for(kind in names(cases)) {
   destination <- file.path(folder,"result.json")
   main(c(cases[[kind]],destination))
   actual <- jsonlite::fromJSON(destination)
-  stopifnot(actual$backend=="meta_robyn")
+  stopifnot(identical(actual$backend,"meta_robyn"))
   if(kind=="train") stopifnot(isTRUE(actual$restore_verified),all(is.finite(actual$test$mean)))
-  if(kind=="predict") stopifnot(actual$scope=="historical_restored_prediction",all(is.finite(actual$prediction$mean)))
+  if(kind=="predict") stopifnot(identical(actual$scope,"historical_restored_prediction"),length(actual$prediction$mean)>0L,all(is.finite(actual$prediction$mean)))
+  if(kind=="predict") {
+    request <- jsonlite::fromJSON(cases[[kind]],simplifyVector=FALSE)
+    request$operation <- "effect"
+    effect_input <- file.path(folder,"effect-input.json")
+    effect_output <- file.path(folder,"effect-result.json")
+    jsonlite::write_json(request,effect_input,auto_unbox=TRUE,null="null",digits=16)
+    main(c(effect_input,effect_output))
+    effect <- jsonlite::fromJSON(effect_output)
+    stopifnot(length(effect$effects)>0L,all(vapply(effect$effects,function(x)is.finite(x$estimate) && !isTRUE(x$available),logical(1))))
+  }
   if(kind=="scenario") {
     stopifnot(actual$scope=="native_channel_response",all(is.finite(actual$responses$spend_search$response_total)),is.finite(actual$responses$spend_search$scenario_mean_response))
     baseline <- jsonlite::fromJSON(cases[[kind]],simplifyVector=FALSE)

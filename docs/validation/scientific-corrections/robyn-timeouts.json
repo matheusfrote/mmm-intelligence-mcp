@@ -1,0 +1,26 @@
+{
+  "scope": "Infrastructure failures, not completed statistical results",
+  "contexts": [
+    "DE seed97",
+    "DE seed109",
+    "DE seed97 omitting first control"
+  ],
+  "attempts": [
+    {
+      "source": "var/robyn-de-comparison/data/logs/backend-737df59941cf46a7b599f0d488bd3d6e.log",
+      "sha256": "761e31781cdf5ca130daeab4591af0c76a568dcffbb021e060c52d2b35d11364",
+      "reason": "native R subprocess exceeded 3550 seconds; parent bound 3600 seconds"
+    },
+    {
+      "source": "var/robyn-de-comparison/data/logs/backend-d48aea86d3e54c93af0b7e04c9a7bdcb.log",
+      "sha256": "c437990e39b2560ec854e320eb48cd059dae90c903cadc0908afaee791a07b27",
+      "reason": "native R subprocess exceeded 3550 seconds; parent bound 3600 seconds"
+    },
+    {
+      "source": "var/robyn-de-comparison/data/logs/backend-f63998bb6ed741d5ba0a52a5e0169cd5.log",
+      "sha256": "c804ac1937b0af2c40f2b9cb6ad3444e237ad392983d5bf951ba72083fd5c0ba",
+      "reason": "native R subprocess exceeded 3550 seconds; parent bound 3600 seconds"
+    }
+  ],
+  "retry": "Same profiles through a bounded 7200-second local native R batch; MCP limit unchanged"
+}

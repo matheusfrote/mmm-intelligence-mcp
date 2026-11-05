@@ -38,9 +38,13 @@ def test_monte_carlo_reports_truth_bias_rmse_coverage_and_complete_denominators(
         assert summary["attempted"] == 3
         assert summary["successful"] + summary["failed"] == 3
         assert summary["rmse"] >= abs(summary["bias"]) - 1e-10
-        assert 0 <= summary["interval_coverage"] <= 1
-        assert summary["coverage_mcse"] >= 0
-        assert len(summary["coverage_interval_95"]) == 2
+        if summary["scenario"] == "collinear":
+            assert summary["intervals_available"] == 0
+            assert summary["interval_coverage"] is None
+        else:
+            assert 0 <= summary["interval_coverage"] <= 1
+            assert summary["coverage_mcse"] >= 0
+            assert len(summary["coverage_interval_95"]) == 2
     errors = np.array(
         [
             r["effects"]["spend_search"]["estimate"] - r["effects"]["spend_search"]["truth"]

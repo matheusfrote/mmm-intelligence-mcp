@@ -9,6 +9,7 @@ from scipy.stats import norm
 from .datasets import MEDIA, validate
 from .errors import MMMError
 from .experiments import wilson
+from .inference import linear_contrast
 from .modeling import adstock, hill, train
 from .schemas import TrainRequest
 from .storage import digest
@@ -94,6 +95,15 @@ def generate_dgp(config, seed, scenario):
         dataset["rows"][-1]["revenue"] = None
     return dataset, {
         "effect": effect,
+        "effect_by_date": {
+            c: dict(
+                zip(
+                    [r["date"] for r in dataset["rows"]],
+                    ((hill(stocks[:, j] * 1.1, half[j]) - media[:, j]) * beta[j] * scale).tolist(),
+                )
+            )
+            for j, c in enumerate(MEDIA)
+        },
         "decay": decay,
         "half_saturation": half.tolist(),
         "beta": beta.tolist(),
@@ -151,12 +161,32 @@ def run_study(config):
                     index = fitted["feature_names"].index(c)
                     estimates = np.asarray(fitted["coefficient_draws"])[:, index] * contrast
                     low, high = np.quantile(estimates, [0.05, 0.95])
+                    alternatives = {
+                        "legacy_percentile": {
+                            "available": True,
+                            "lower": float(low),
+                            "upper": float(high),
+                        }
+                    }
+                    vector = np.zeros(len(fitted["feature_names"]))
+                    vector[index] = contrast
+                    for method in ("hc3", "hac"):
+                        alternatives["projected_" + method] = linear_contrast(
+                            fitted["linear_inference"], vector, nonnegative=True, covariance=method
+                        )
+                    chosen = alternatives[config.interval_method]
                     effects[c] = {
                         "truth": truth["effect"][c],
                         "estimate": fitted["coefficients"][c] * contrast,
-                        "lower": float(low),
-                        "upper": float(high),
-                        "covered": bool(low <= truth["effect"][c] <= high),
+                        "lower": chosen.get("lower"),
+                        "upper": chosen.get("upper"),
+                        "interval_available": chosen["available"],
+                        "interval_reason": chosen.get("reason"),
+                        "alternatives": alternatives,
+                        "covered": bool(
+                            chosen["available"]
+                            and chosen["lower"] <= truth["effect"][c] <= chosen["upper"]
+                        ),
                     }
                 record.update(
                     status="executed",
@@ -172,40 +202,9 @@ def run_study(config):
                     status="failed", code=error.code, configuration=spec.model_dump(mode="json")
                 )
             records.append(record)
-    summaries = []
-    for scenario in config.scenarios:
-        selected = [r for r in records if r["scenario"] == scenario]
-        successful = [r for r in selected if r["status"] == "executed"]
-        for c in MEDIA:
-            errors = np.asarray(
-                [r["effects"][c]["estimate"] - r["effects"][c]["truth"] for r in successful]
-            )
-            count = len(errors)
-            covered = sum(r["effects"][c]["covered"] for r in successful)
-            coverage = covered / count if count else None
-            summaries.append(
-                {
-                    "scenario": scenario,
-                    "channel": c,
-                    "attempted": len(selected),
-                    "successful": count,
-                    "failed": len(selected) - count,
-                    "bias": float(errors.mean()) if count else None,
-                    "bias_mcse": float(errors.std(ddof=1) / np.sqrt(count)) if count > 1 else None,
-                    "rmse": float(np.sqrt(np.mean(errors**2))) if count else None,
-                    "interval_coverage": coverage,
-                    "coverage_mcse": float(np.sqrt(coverage * (1 - coverage) / count))
-                    if count
-                    else None,
-                    "coverage_interval_95": list(wilson(coverage, count, 1.959963984540054))
-                    if count
-                    else None,
-                    "nominal_coverage": 0.9,
-                    "rank_deficient_runs": sum(r["rank_deficient"] for r in successful),
-                }
-            )
+    summaries = summarize_records(records, config.scenarios, config.interval_method)
     result = {
-        "schema_version": "monte-carlo-v1",
+        "schema_version": "monte-carlo-v2",
         "backend": "ridge",
         "synthetic": True,
         "configuration": config.model_dump(mode="json"),
@@ -213,18 +212,87 @@ def run_study(config):
         "versions": {p: version(p) for p in ("numpy", "scipy", "mmm-intelligence-mcp")},
         "replications": records,
         "summaries": summaries,
+        "method_comparisons": [
+            row
+            for method in ("legacy_percentile", "projected_hc3", "projected_hac")
+            for row in summarize_records(records, config.scenarios, method)
+        ],
         "causal_identification": False,
         "limitations": [
-            "Conditional moving-block residual bootstrap; constrained null effects may under-cover",
-            "DGP includes a train-window scaling rule; effects are interpreted only under this generator",
-            "Intervals cover conditional effect contrasts, not individual observed outcomes",
-            "Failures remain in attempted denominators; coverage denominator counts available intervals",
-            "This study evaluates constrained Ridge; native parameterizations need their own matched-estimand study",
-            "Coverage MCSE is a binomial plug-in estimate; consult Wilson intervals especially when estimated coverage is zero or one",
+            "Legacy conditional constrained bootstrap retained for comparison; not repaired by relabeling",
+            "Projected HC3/HAC sets use unpenalized full-rank inference with fixed shapes, not a Bayesian posterior",
+            "HC3 assumes independent/martingale errors; HAC requires weak dependence and sufficient history",
+            "No sandwich correction identifies omitted confounders or repairs tracking breaks",
+            "Rank-deficient designs retain point results but refuse effect intervals",
+            "Failures remain in attempted denominators; interval coverage counts available intervals only",
+            "Synthetic recovery cannot establish effects in real campaigns",
         ],
     }
     result["acceptance"] = assess_study(result, config)
     return result
+
+
+def summarize_records(records, scenarios, method):
+    summaries = []
+    for scenario in scenarios:
+        selected = [r for r in records if r["scenario"] == scenario]
+        successful = [r for r in selected if r["status"] == "executed"]
+        for c in MEDIA:
+            errors = np.asarray(
+                [r["effects"][c]["estimate"] - r["effects"][c]["truth"] for r in successful]
+            )
+            count = len(errors)
+            intervals = [
+                (
+                    r["effects"][c],
+                    r["effects"][c].get("alternatives", {}).get(method, r["effects"][c]),
+                )
+                for r in successful
+            ]
+            available = [
+                (effect, interval)
+                for effect, interval in intervals
+                if interval.get("available", interval.get("interval_available", True))
+            ]
+            interval_count = len(available)
+            covered = sum(
+                interval["lower"] <= effect["truth"] <= interval["upper"]
+                for effect, interval in available
+            )
+            coverage = covered / interval_count if interval_count else None
+            summaries.append(
+                {
+                    "scenario": scenario,
+                    "channel": c,
+                    "attempted": len(selected),
+                    "successful": count,
+                    "interval_method": method,
+                    "intervals_available": interval_count,
+                    "mean_interval_width": float(
+                        np.mean(
+                            [interval["upper"] - interval["lower"] for _, interval in available]
+                        )
+                    )
+                    if interval_count
+                    else None,
+                    "failed": len(selected) - count,
+                    "bias": float(errors.mean()) if count else None,
+                    "bias_mcse": float(errors.std(ddof=1) / np.sqrt(count)) if count > 1 else None,
+                    "rmse": float(np.sqrt(np.mean(errors**2))) if count else None,
+                    "interval_coverage": coverage,
+                    "coverage_mcse": float(np.sqrt(coverage * (1 - coverage) / interval_count))
+                    if interval_count
+                    else None,
+                    "coverage_interval_95": list(
+                        wilson(coverage, interval_count, 1.959963984540054)
+                    )
+                    if interval_count
+                    else None,
+                    "nominal_coverage": 0.9,
+                    "rank_deficient_runs": sum(r.get("rank_deficient", False) for r in successful),
+                }
+            )
+    return summaries
 
 
 def assess_study(study, config):
@@ -250,7 +318,10 @@ def assess_study(study, config):
         key = row["scenario"] + ":" + row["channel"]
         if row["failed"]:
             failed.append("core_estimation_failure:" + key)
-        count, coverage = row["successful"], row["interval_coverage"]
+        count, coverage = (
+            row.get("intervals_available", row["successful"]),
+            row["interval_coverage"],
+        )
         if count < config.minimum_replications_for_assessment or coverage is None:
             missing.append("insufficient_replications_or_intervals:" + key)
             continue

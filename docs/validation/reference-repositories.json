@@ -1,0 +1,1137 @@
+{
+  "scope": "Triage of the user-supplied list, not a code or security audit of all repositories; no third-party scripts installed or executed",
+  "input_name": "github_repositorios_estrelados.md",
+  "input_sha256": "55192db58cb80e38088d013aae3ba420048293b784dde5f9b6928d2303e6960d",
+  "total": 211,
+  "reviewed_content_repositories": 8,
+  "metadata_only_repositories": 1,
+  "current_project": 1,
+  "other_repositories_not_audited": 201,
+  "repositories": [
+    {
+      "repository": "wendersoon/radar-cnpj-mcp",
+      "url": "https://github.com/wendersoon/radar-cnpj-mcp",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "google/adk-python",
+      "url": "https://github.com/google/adk-python",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "google/eng-practices",
+      "url": "https://github.com/google/eng-practices",
+      "review_status": "targeted_reference_read",
+      "snapshot": {
+        "repository": "google/eng-practices",
+        "ref": "3bb3ec25b3b0199f4940b1aa75f0ac5c5753301c",
+        "default_branch": "master",
+        "license": "NOASSERTION",
+        "url": "https://github.com/google/eng-practices",
+        "description": "Google's Engineering Practices documentation"
+      }
+    },
+    {
+      "repository": "google/material-design-lite",
+      "url": "https://github.com/google/material-design-lite",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "google/python-fire",
+      "url": "https://github.com/google/python-fire",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "google/comprehensive-rust",
+      "url": "https://github.com/google/comprehensive-rust",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "google/leveldb",
+      "url": "https://github.com/google/leveldb",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "google/styleguide",
+      "url": "https://github.com/google/styleguide",
+      "review_status": "metadata_only",
+      "snapshot": {
+        "repository": "google/styleguide",
+        "ref": "c03dfce4e1763d032e33696d126e5af4c7de03bf",
+        "default_branch": "gh-pages",
+        "license": "NOASSERTION",
+        "url": "https://github.com/google/styleguide",
+        "description": "Style guides for Google-originated open-source projects"
+      }
+    },
+    {
+      "repository": "google/zx",
+      "url": "https://github.com/google/zx",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "google/guava",
+      "url": "https://github.com/google/guava",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "google/material-design-icons",
+      "url": "https://github.com/google/material-design-icons",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "google/XNNPACK",
+      "url": "https://github.com/google/XNNPACK",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "google/googletest",
+      "url": "https://github.com/google/googletest",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "google/elephant-goldfish-model",
+      "url": "https://github.com/google/elephant-goldfish-model",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "matheusfrote/mmm-intelligence-mcp",
+      "url": "https://github.com/matheusfrote/mmm-intelligence-mcp",
+      "review_status": "current_project"
+    },
+    {
+      "repository": "meta-pytorch/torchtune",
+      "url": "https://github.com/meta-pytorch/torchtune",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "meta-pytorch/botorch",
+      "url": "https://github.com/meta-pytorch/botorch",
+      "review_status": "targeted_reference_read",
+      "snapshot": {
+        "repository": "meta-pytorch/botorch",
+        "ref": "b0dd01be61d517c387e234903a6e2cc38c057ea2",
+        "default_branch": "main",
+        "license": "MIT",
+        "url": "https://github.com/meta-pytorch/botorch",
+        "description": "Bayesian optimization in PyTorch"
+      }
+    },
+    {
+      "repository": "meta-pytorch/gpt-fast",
+      "url": "https://github.com/meta-pytorch/gpt-fast",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "facebookexperimental/Robyn",
+      "url": "https://github.com/facebookexperimental/Robyn",
+      "review_status": "targeted_reference_read",
+      "snapshot": {
+        "repository": "facebookexperimental/Robyn",
+        "ref": "aab4226ed5e40196cdbd82ff7fbbff55e91e1f58",
+        "default_branch": "accuracy/allocator_v2_fixes",
+        "license": "MIT",
+        "url": "https://github.com/facebookexperimental/Robyn",
+        "description": "Robyn is an experimental, AI/ML-powered and open sourced Marketing Mix Modeling (MMM) package from Meta Marketing Science. Our mission is to democratise modeling knowledge, inspire the industry through innovation, reduce human bias in the modeling process & build a strong open source marketing science community."
+      }
+    },
+    {
+      "repository": "meta/react-devtools",
+      "url": "https://github.com/meta/react-devtools",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "meta/relay",
+      "url": "https://github.com/meta/relay",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "meta/rocksdb",
+      "url": "https://github.com/meta/rocksdb",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "meta/proxygen",
+      "url": "https://github.com/meta/proxygen",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "meta/pyrefly",
+      "url": "https://github.com/meta/pyrefly",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "meta/sapling",
+      "url": "https://github.com/meta/sapling",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "meta/astryx",
+      "url": "https://github.com/meta/astryx",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "meta/zstd",
+      "url": "https://github.com/meta/zstd",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "meta/lexical",
+      "url": "https://github.com/meta/lexical",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "meta/docusaurus",
+      "url": "https://github.com/meta/docusaurus",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "meta/prophet",
+      "url": "https://github.com/meta/prophet",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "qdrant/skills",
+      "url": "https://github.com/qdrant/skills",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "qdrant/qdrant",
+      "url": "https://github.com/qdrant/qdrant",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "lucidrains/PaLM-rlhf-pytorch",
+      "url": "https://github.com/lucidrains/PaLM-rlhf-pytorch",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "Kanaries/Rath",
+      "url": "https://github.com/Kanaries/Rath",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "airbytehq/airbyte",
+      "url": "https://github.com/airbytehq/airbyte",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "uber/baseweb",
+      "url": "https://github.com/uber/baseweb",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "OpenMined/PySyft",
+      "url": "https://github.com/OpenMined/PySyft",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "vercel/turborepo",
+      "url": "https://github.com/vercel/turborepo",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "huggingface/open-r1",
+      "url": "https://github.com/huggingface/open-r1",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "pytorch/pytorch",
+      "url": "https://github.com/pytorch/pytorch",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "langchain-ai/langchain",
+      "url": "https://github.com/langchain-ai/langchain",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "ByteByteGoHq/system-design-101",
+      "url": "https://github.com/ByteByteGoHq/system-design-101",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "PenseAllen/PensePython2e",
+      "url": "https://github.com/PenseAllen/PensePython2e",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "iuricode/recursos-gratuitos",
+      "url": "https://github.com/iuricode/recursos-gratuitos",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "ohmyzsh/ohmyzsh",
+      "url": "https://github.com/ohmyzsh/ohmyzsh",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "vinta/awesome-python",
+      "url": "https://github.com/vinta/awesome-python",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "twbs/bootstrap",
+      "url": "https://github.com/twbs/bootstrap",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "trekhleb/javascript-algorithms",
+      "url": "https://github.com/trekhleb/javascript-algorithms",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "getify/You-Dont-Know-JS",
+      "url": "https://github.com/getify/You-Dont-Know-JS",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "tensorflow/tensorflow",
+      "url": "https://github.com/tensorflow/tensorflow",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "codecrafters-io/build-your-own-x",
+      "url": "https://github.com/codecrafters-io/build-your-own-x",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "react/react",
+      "url": "https://github.com/react/react",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "donnemartin/system-design-primer",
+      "url": "https://github.com/donnemartin/system-design-primer",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "public-apis/public-apis",
+      "url": "https://github.com/public-apis/public-apis",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "nilbuild/developer-roadmap",
+      "url": "https://github.com/nilbuild/developer-roadmap",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "sindresorhus/awesome",
+      "url": "https://github.com/sindresorhus/awesome",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "jwasham/coding-interview-university",
+      "url": "https://github.com/jwasham/coding-interview-university",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "EbookFoundation/free-programming-books",
+      "url": "https://github.com/EbookFoundation/free-programming-books",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "freeCodeCamp/freeCodeCamp",
+      "url": "https://github.com/freeCodeCamp/freeCodeCamp",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "camilatigre/listamaravilhosaopensource",
+      "url": "https://github.com/camilatigre/listamaravilhosaopensource",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "google/skills",
+      "url": "https://github.com/google/skills",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "wshobson/agents",
+      "url": "https://github.com/wshobson/agents",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "ethanplusai/harvey",
+      "url": "https://github.com/ethanplusai/harvey",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "Kruk2/jasna",
+      "url": "https://github.com/Kruk2/jasna",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "luongnv89/claude-howto",
+      "url": "https://github.com/luongnv89/claude-howto",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "harry0703/MoneyPrinterTurbo",
+      "url": "https://github.com/harry0703/MoneyPrinterTurbo",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "shiyu-coder/Kronos",
+      "url": "https://github.com/shiyu-coder/Kronos",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "sgl-project/sglang",
+      "url": "https://github.com/sgl-project/sglang",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "lightseekorg/tokenspeed",
+      "url": "https://github.com/lightseekorg/tokenspeed",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "yt-dlp/yt-dlp",
+      "url": "https://github.com/yt-dlp/yt-dlp",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "vllm-project/vllm",
+      "url": "https://github.com/vllm-project/vllm",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "akitaonrails/ai-memory",
+      "url": "https://github.com/akitaonrails/ai-memory",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "anthropics/claude-plugins-official",
+      "url": "https://github.com/anthropics/claude-plugins-official",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "android/skills",
+      "url": "https://github.com/android/skills",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "K-Dense-AI/scientific-agent-skills",
+      "url": "https://github.com/K-Dense-AI/scientific-agent-skills",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "HKUDS/CLI-Anything",
+      "url": "https://github.com/HKUDS/CLI-Anything",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "stablyai/orca",
+      "url": "https://github.com/stablyai/orca",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "Comfy-Org/ComfyUI",
+      "url": "https://github.com/Comfy-Org/ComfyUI",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "anomalyco/opencode",
+      "url": "https://github.com/anomalyco/opencode",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "php/php-src",
+      "url": "https://github.com/php/php-src",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "cloudflare/security-audit-skill",
+      "url": "https://github.com/cloudflare/security-audit-skill",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "Graphify-Labs/graphify",
+      "url": "https://github.com/Graphify-Labs/graphify",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "Meloong-Git/PCL",
+      "url": "https://github.com/Meloong-Git/PCL",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "DietrichGebert/ponytail",
+      "url": "https://github.com/DietrichGebert/ponytail",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "supabase/supabase",
+      "url": "https://github.com/supabase/supabase",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "fastapi/fastapi",
+      "url": "https://github.com/fastapi/fastapi",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "storytold/pdfcraft",
+      "url": "https://github.com/storytold/pdfcraft",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "PDFCraftTool/pdfcraft",
+      "url": "https://github.com/PDFCraftTool/pdfcraft",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "craft-ai-agents/craft-agents-oss",
+      "url": "https://github.com/craft-ai-agents/craft-agents-oss",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "youpi-pg/YouPI-PG",
+      "url": "https://github.com/youpi-pg/YouPI-PG",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "Gathin23/cleanyourtv",
+      "url": "https://github.com/Gathin23/cleanyourtv",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "anthropics/oss-scanner",
+      "url": "https://github.com/anthropics/oss-scanner",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "osintshifu/awesome-osint-repos",
+      "url": "https://github.com/osintshifu/awesome-osint-repos",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "jivoi/awesome-osint",
+      "url": "https://github.com/jivoi/awesome-osint",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "sherlock-project/sherlock",
+      "url": "https://github.com/sherlock-project/sherlock",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "soxoj/maigret",
+      "url": "https://github.com/soxoj/maigret",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "GLips/Figma-Context-MCP",
+      "url": "https://github.com/GLips/Figma-Context-MCP",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "budtmo/docker-android",
+      "url": "https://github.com/budtmo/docker-android",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "yusufkaraaslan/Skill_Seekers",
+      "url": "https://github.com/yusufkaraaslan/Skill_Seekers",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "czlonkowski/n8n-mcp",
+      "url": "https://github.com/czlonkowski/n8n-mcp",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "ahujasid/mcp-for-blender",
+      "url": "https://github.com/ahujasid/mcp-for-blender",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "getzep/graphiti",
+      "url": "https://github.com/getzep/graphiti",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "DeusData/codebase-memory-mcp",
+      "url": "https://github.com/DeusData/codebase-memory-mcp",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "ChromeDevTools/chrome-devtools-mcp",
+      "url": "https://github.com/ChromeDevTools/chrome-devtools-mcp",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "penpot/penpot",
+      "url": "https://github.com/penpot/penpot",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "zilliztech/claude-context",
+      "url": "https://github.com/zilliztech/claude-context",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "googleapis/mcp-toolbox",
+      "url": "https://github.com/googleapis/mcp-toolbox",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "wanshuiyin/Auto-claude-code-research-in-sleep",
+      "url": "https://github.com/wanshuiyin/Auto-claude-code-research-in-sleep",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "triggerdotdev/trigger.dev",
+      "url": "https://github.com/triggerdotdev/trigger.dev",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "reactive-resume/reactive-resume",
+      "url": "https://github.com/reactive-resume/reactive-resume",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "assafelovic/gpt-researcher",
+      "url": "https://github.com/assafelovic/gpt-researcher",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "mindsdb/mindshub",
+      "url": "https://github.com/mindsdb/mindshub",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "sansan0/TrendRadar",
+      "url": "https://github.com/sansan0/TrendRadar",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "cohnen/mcp-google-ads",
+      "url": "https://github.com/cohnen/mcp-google-ads",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "Jakedismo/codegraph-rust",
+      "url": "https://github.com/Jakedismo/codegraph-rust",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "janwilmake/openapi-mcp-server",
+      "url": "https://github.com/janwilmake/openapi-mcp-server",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "alioshr/memory-bank-mcp",
+      "url": "https://github.com/alioshr/memory-bank-mcp",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "JetBrains/mcp-jetbrains",
+      "url": "https://github.com/JetBrains/mcp-jetbrains",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "cloudflare/mcp",
+      "url": "https://github.com/cloudflare/mcp",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "open-webui/openapi-servers",
+      "url": "https://github.com/open-webui/openapi-servers",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "devflowinc/trieve",
+      "url": "https://github.com/devflowinc/trieve",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "sparfenyuk/mcp-proxy",
+      "url": "https://github.com/sparfenyuk/mcp-proxy",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "modelcontextprotocol/java-sdk",
+      "url": "https://github.com/modelcontextprotocol/java-sdk",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "shroominic/codeinterpreter-api",
+      "url": "https://github.com/shroominic/codeinterpreter-api",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "wong2/awesome-mcp-servers",
+      "url": "https://github.com/wong2/awesome-mcp-servers",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "IBM/mcp-context-forge",
+      "url": "https://github.com/IBM/mcp-context-forge",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "prest/prest",
+      "url": "https://github.com/prest/prest",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "u14app/deep-research",
+      "url": "https://github.com/u14app/deep-research",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "idosal/git-mcp",
+      "url": "https://github.com/idosal/git-mcp",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "apify/apify-mcp-server",
+      "url": "https://github.com/apify/apify-mcp-server",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "tadata-org/fastapi_mcp",
+      "url": "https://github.com/tadata-org/fastapi_mcp",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "modelscope/FunASR",
+      "url": "https://github.com/modelscope/FunASR",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "Evil0ctal/Douyin_TikTok_Download_API",
+      "url": "https://github.com/Evil0ctal/Douyin_TikTok_Download_API",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "coleam00/Archon",
+      "url": "https://github.com/coleam00/Archon",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "PrefectHQ/fastmcp",
+      "url": "https://github.com/PrefectHQ/fastmcp",
+      "review_status": "targeted_reference_read",
+      "snapshot": {
+        "repository": "PrefectHQ/fastmcp",
+        "ref": "9e553dd970a3f185f9ae99530b72b7f8055dbede",
+        "default_branch": "main",
+        "license": "Apache-2.0",
+        "url": "https://github.com/PrefectHQ/fastmcp",
+        "description": "ðŸš€ The fast, Pythonic way to build MCP servers and clients."
+      }
+    },
+    {
+      "repository": "lancedb/lancedb",
+      "url": "https://github.com/lancedb/lancedb",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "ruvnet/ruflo",
+      "url": "https://github.com/ruvnet/ruflo",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "Fission-AI/OpenSpec",
+      "url": "https://github.com/Fission-AI/OpenSpec",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "koala73/worldmonitor",
+      "url": "https://github.com/koala73/worldmonitor",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "obra/superpowers",
+      "url": "https://github.com/obra/superpowers",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "ahonn/mcp-server-gsc",
+      "url": "https://github.com/ahonn/mcp-server-gsc",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "exa-labs/exa-mcp-server",
+      "url": "https://github.com/exa-labs/exa-mcp-server",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "blazickjp/web-browser-mcp-server",
+      "url": "https://github.com/blazickjp/web-browser-mcp-server",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "firecrawl/firecrawl",
+      "url": "https://github.com/firecrawl/firecrawl",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "longbridge/gpui-kit",
+      "url": "https://github.com/longbridge/gpui-kit",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "JustVugg/colibri",
+      "url": "https://github.com/JustVugg/colibri",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "rohitg00/ai-engineering-from-scratch",
+      "url": "https://github.com/rohitg00/ai-engineering-from-scratch",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "google/artemis",
+      "url": "https://github.com/google/artemis",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "tashfeenahmed/freellmapi",
+      "url": "https://github.com/tashfeenahmed/freellmapi",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "mrexodia/ida-pro-mcp",
+      "url": "https://github.com/mrexodia/ida-pro-mcp",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "vitalysim/Awesome-Hacking-Resources",
+      "url": "https://github.com/vitalysim/Awesome-Hacking-Resources",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "rizinorg/cutter",
+      "url": "https://github.com/rizinorg/cutter",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "radareorg/radare2",
+      "url": "https://github.com/radareorg/radare2",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "iBotPeaches/Apktool",
+      "url": "https://github.com/iBotPeaches/Apktool",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "librepods-org/librepods",
+      "url": "https://github.com/librepods-org/librepods",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "JCodesMore/ai-website-cloner-template",
+      "url": "https://github.com/JCodesMore/ai-website-cloner-template",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "x64dbg/x64dbg",
+      "url": "https://github.com/x64dbg/x64dbg",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "WerWolv/ImHex",
+      "url": "https://github.com/WerWolv/ImHex",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "Hack-with-Github/Awesome-Hacking",
+      "url": "https://github.com/Hack-with-Github/Awesome-Hacking",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "agalwood/Motrix",
+      "url": "https://github.com/agalwood/Motrix",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "motrixapp/motrix-extension",
+      "url": "https://github.com/motrixapp/motrix-extension",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "smestern/treepilot",
+      "url": "https://github.com/smestern/treepilot",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "brenbuilds1/copilot-app-factory",
+      "url": "https://github.com/brenbuilds1/copilot-app-factory",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "Hunter-Thompson/stardew-mcp",
+      "url": "https://github.com/Hunter-Thompson/stardew-mcp",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "arthurspk/guiadevbrasil",
+      "url": "https://github.com/arthurspk/guiadevbrasil",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "felipe-augusto/clean-code-javascript",
+      "url": "https://github.com/felipe-augusto/clean-code-javascript",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "federico-busato/Modern-CPP-Programming",
+      "url": "https://github.com/federico-busato/Modern-CPP-Programming",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "keploy/keploy",
+      "url": "https://github.com/keploy/keploy",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "realm/SwiftLint",
+      "url": "https://github.com/realm/SwiftLint",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "usestrix/strix",
+      "url": "https://github.com/usestrix/strix",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "NationalSecurityAgency/ghidra",
+      "url": "https://github.com/NationalSecurityAgency/ghidra",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "cursor/plugins",
+      "url": "https://github.com/cursor/plugins",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "trycua/cua",
+      "url": "https://github.com/trycua/cua",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "addyosmani/agent-skills",
+      "url": "https://github.com/addyosmani/agent-skills",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "NVIDIA/OpenShell",
+      "url": "https://github.com/NVIDIA/OpenShell",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "TencentCloud/Octop",
+      "url": "https://github.com/TencentCloud/Octop",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "anthropics/claude-code",
+      "url": "https://github.com/anthropics/claude-code",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "anthropics/knowledge-work-plugins",
+      "url": "https://github.com/anthropics/knowledge-work-plugins",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "affaan-m/ECC",
+      "url": "https://github.com/affaan-m/ECC",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "vectorize-io/hindsight",
+      "url": "https://github.com/vectorize-io/hindsight",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "anthropics/financial-services",
+      "url": "https://github.com/anthropics/financial-services",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "paperclipai/paperclip",
+      "url": "https://github.com/paperclipai/paperclip",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "alibaba/open-code-review",
+      "url": "https://github.com/alibaba/open-code-review",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "lyogavin/airllm",
+      "url": "https://github.com/lyogavin/airllm",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "storytold/artcraft",
+      "url": "https://github.com/storytold/artcraft",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "mksglu/context-mode",
+      "url": "https://github.com/mksglu/context-mode",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "debpalash/VoiceStudio",
+      "url": "https://github.com/debpalash/VoiceStudio",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "bilawalsidhu/gods-eye-view",
+      "url": "https://github.com/bilawalsidhu/gods-eye-view",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "heygen-com/hyperframes",
+      "url": "https://github.com/heygen-com/hyperframes",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "cathrynlavery/diagram-design",
+      "url": "https://github.com/cathrynlavery/diagram-design",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "thedotmack/claude-mem",
+      "url": "https://github.com/thedotmack/claude-mem",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "mattpocock/skills",
+      "url": "https://github.com/mattpocock/skills",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "boykopovar/AnyPS5",
+      "url": "https://github.com/boykopovar/AnyPS5",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "vinilana/jev-gateway",
+      "url": "https://github.com/vinilana/jev-gateway",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "morluto/rea",
+      "url": "https://github.com/morluto/rea",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "NousResearch/hermes-agent",
+      "url": "https://github.com/NousResearch/hermes-agent",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "microsoft/playwright-mcp",
+      "url": "https://github.com/microsoft/playwright-mcp",
+      "review_status": "targeted_reference_read",
+      "snapshot": {
+        "repository": "microsoft/playwright-mcp",
+        "ref": "50b004fb3d3ee17f9710f067ed1b6d59fd16e4a1",
+        "default_branch": "main",
+        "license": "Apache-2.0",
+        "url": "https://github.com/microsoft/playwright-mcp",
+        "description": "Playwright MCP server"
+      }
+    },
+    {
+      "repository": "upstash/context7",
+      "url": "https://github.com/upstash/context7",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "itsmostafa/system-one-connector",
+      "url": "https://github.com/itsmostafa/system-one-connector",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "coreyhaines31/marketingskills",
+      "url": "https://github.com/coreyhaines31/marketingskills",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "ScrapeGraphAI/just-scrape",
+      "url": "https://github.com/ScrapeGraphAI/just-scrape",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "github/github-mcp-server",
+      "url": "https://github.com/github/github-mcp-server",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "googleads/google-ads-mcp",
+      "url": "https://github.com/googleads/google-ads-mcp",
+      "review_status": "targeted_reference_read",
+      "snapshot": {
+        "repository": "googleads/google-ads-mcp",
+        "ref": "7452a9d49e3d350403f2610cd7125c60f6d05264",
+        "default_branch": "main",
+        "license": "Apache-2.0",
+        "url": "https://github.com/googleads/google-ads-mcp",
+        "description": null
+      }
+    },
+    {
+      "repository": "anthropics/skills",
+      "url": "https://github.com/anthropics/skills",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "drajb/whisper-local",
+      "url": "https://github.com/drajb/whisper-local",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "matheusfrote/data-analytics-portfolio",
+      "url": "https://github.com/matheusfrote/data-analytics-portfolio",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "matheusfrote/Easy-Mix-Modeling-2",
+      "url": "https://github.com/matheusfrote/Easy-Mix-Modeling-2",
+      "review_status": "targeted_reference_read",
+      "snapshot": {
+        "repository": "matheusfrote/Easy-Mix-Modeling-2",
+        "license": null,
+        "default_branch": "main",
+        "ref": "2d350fcd1fa1ad571dc712d1403c29b06b91a314"
+      }
+    },
+    {
+      "repository": "matheusfrote/Custo-de-vida",
+      "url": "https://github.com/matheusfrote/Custo-de-vida",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "osamucadev/job-watcher",
+      "url": "https://github.com/osamucadev/job-watcher",
+      "review_status": "content_not_audited_not_selected"
+    },
+    {
+      "repository": "google/meridian",
+      "url": "https://github.com/google/meridian",
+      "review_status": "targeted_reference_read",
+      "snapshot": {
+        "repository": "google/meridian",
+        "ref": "5ada6922520e83aaf1f3146a82dc2be18c7b6fbb",
+        "default_branch": "main",
+        "license": "Apache-2.0",
+        "url": "https://github.com/google/meridian",
+        "description": "Meridian is an MMM framework that enables advertisers to set up and run their own in-house models."
+      }
+    },
+    {
+      "repository": "Universidade-Livre/ciencia-da-computacao",
+      "url": "https://github.com/Universidade-Livre/ciencia-da-computacao",
+      "review_status": "content_not_audited_not_selected"
+    }
+  ]
+}

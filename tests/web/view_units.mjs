@@ -12,7 +12,17 @@ export async function scientificViewUnits(page) {
     const result = [];
     for (const [backend, report] of Object.entries(fixture.reports)) {
       const root = document.createElement("div"),
-        analysis = { model_id: report.model_id, scientific_validation: report },
+        analysis = {
+          model_id: report.model_id,
+          scientific_validation: report,
+          conditional_linear_inference:
+            backend === "ridge"
+              ? {
+                  available: false,
+                  reason: "render-only missing inference contract",
+                }
+              : null,
+        },
         context = {
           root,
           state: { backend, analysis, dataset: {}, model: {} },
@@ -74,6 +84,7 @@ export async function scientificViewUnits(page) {
   }, fixture);
   assert.deepEqual(rendered.sort(), [
     "google_meridian",
+    "meta_robyn",
     "pymc_marketing",
     "ridge",
   ]);

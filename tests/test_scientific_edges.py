@@ -14,6 +14,122 @@ from mmm_intelligence.schemas import AuditRequest, BackendRequest, ScientificPro
 from mmm_intelligence.validation import classify_scientific, stability_study
 
 
+def test_missing_nonfinite_or_boolean_native_metrics_do_not_become_zero_effects():
+    from mmm_intelligence.validation import native_estimates
+
+    # Metadata contract only, never presented as an executed engine fit.
+    assert native_estimates({}) == {}
+    result = native_estimates(
+        {
+            "native_estimates": {"beta": 1.2},
+            "native_decomposition": [
+                {"rn": "valid", "xDecompAgg": 0, "xDecompPerc": 0.25, "roi_total": 2.0},
+                {
+                    "rn": "missing",
+                    "xDecompAgg": None,
+                    "xDecompPerc": float("nan"),
+                    "roi_total": float("inf"),
+                },
+                {"rn": "boolean", "xDecompAgg": True},
+            ],
+        }
+    )
+    assert result == {
+        "beta": 1.2,
+        "xDecompAgg:valid": 0,
+        "xDecompPerc:valid": 0.25,
+        "roi_total:valid": 2.0,
+    }
+
+
+def test_unavailable_bayesian_refits_with_default_budget_remain_explicit_failures(
+    service, dataset, monkeypatch, tmp_path
+):
+    from mmm_intelligence.schemas import BackendRequest, ScientificProtocol
+    from mmm_intelligence.validation import stability_study
+
+    monkeypatch.setenv("MMM_PYMC_PYTHON", str(tmp_path / "not-installed"))
+    request = BackendRequest(dataset_id="demo", backend="pymc_marketing")
+    result = stability_study(
+        service, {"request": request.model_dump()}, dataset, "pymc_marketing", ScientificProtocol()
+    )
+    assert result["status"] == "incomplete" and not result["runs"]
+    assert {row["code"] for row in result["failures"]} == {"BACKEND_UNAVAILABLE"}
+
+
+def test_refit_diagnostic_unavailability_is_explicit(service, monkeypatch, tmp_path):
+    from mmm_intelligence.validation import assess_refit
+
+    assert (
+        assess_refit(service, "pymc_marketing", {}, ScientificProtocol(collect_native=False))[
+            "status"
+        ]
+        == "inconclusive"
+    )
+    monkeypatch.setenv("MMM_PYMC_PYTHON", str(tmp_path / "not-installed.exe"))
+    result = assess_refit(service, "pymc_marketing", {}, ScientificProtocol())
+    assert result["missing"] == ["native_refit_diagnostics:BACKEND_UNAVAILABLE"]
+
+
+def test_explicit_refit_budget_stays_above_the_original_analytical_minimum(
+    service, trained, monkeypatch, tmp_path
+):
+    monkeypatch.setenv("MMM_PYMC_PYTHON", str(tmp_path / "not-installed.exe"))
+    model = diagnostic_fixture(trained)
+    model["request"] = BackendRequest(
+        dataset_id="demo", backend="pymc_marketing", draws=4000
+    ).model_dump(mode="json")
+    result = stability_study(
+        service,
+        model,
+        service.load_dataset("demo"),
+        "pymc_marketing",
+        ScientificProtocol(refit_draws=2000),
+    )
+    assert result["failures"] and all(
+        r["configuration"]["draws"] == 2000 for r in result["failures"]
+    )
+    with pytest.raises(ValueError):
+        ScientificProtocol(refit_draws=2000, min_draws=4000)
+    with pytest.raises(ValueError):
+        AuditRequest(model_id="model", scientific={"refit_draws": 2000})
+
+
+def test_successful_refits_with_failed_diagnostics_never_approve(service, trained):
+    model = diagnostic_fixture(trained)
+    result = classify_scientific(
+        model,
+        service.load_dataset("demo"),
+        backend="pymc_marketing",
+        stability={
+            "status": "executed",
+            "unstable": False,
+            "estimate_consistency_available": True,
+            "diagnostics_status": "failed",
+        },
+    )
+    assert result["statistical"]["status"] == "failed"
+    assert "refit_diagnostics_failed" in result["statistical"]["failed"]
+
+
+def test_refit_assessment_retains_raw_metrics_and_serializes_missing_values(trained):
+    import json
+
+    from mmm_intelligence.validation import sampling_assessment
+
+    model = diagnostic_fixture(trained)
+    result = sampling_assessment(model, ScientificProtocol())
+    assert result["metrics"]["r_hat_max"] == model["diagnostics"]["r_hat_max"]
+    assert (
+        result["metrics"]["mcse_sd_ratio_max"]
+        == model["scientific_diagnostics"]["mcse_sd_ratio_max"]
+    )
+    model["scientific_diagnostics"]["mcse_sd_ratio_max"] = float("nan")
+    result = sampling_assessment(model, ScientificProtocol())
+    assert result["metrics"]["mcse_sd_ratio_max"] is None
+    json.dumps(result, allow_nan=False)
+
+
 def diagnostic_fixture(trained):
     model = deepcopy(trained)
     model["restore_verified"] = True
@@ -80,7 +196,12 @@ def test_passing_numeric_screens_do_not_promote_causal_evidence(service, trained
         model,
         service.load_dataset("demo"),
         backend="google_meridian",
-        stability={"status": "executed", "unstable": False, "estimate_consistency_available": True},
+        stability={
+            "status": "executed",
+            "unstable": False,
+            "estimate_consistency_available": True,
+            "diagnostics_status": "passed_for_protocol",
+        },
     )
     assert result["statistical"]["status"] == "passed_for_protocol"
     assert result["causal"]["status"] == "simulation_only"
@@ -116,7 +237,7 @@ def test_rank_lineage_and_search_failures_remain_independent(service, trained):
         "iterations": 2000,
         "optimization_trace": [
             {"error_type": "NRMSE", "cuts": "2000", "flag_med": True, "flag_sd": True},
-            {"error_type": "RSSD", "cuts": "2000", "flag_med": True, "flag_sd": True},
+            {"error_type": "DECOMP.RSSD", "cuts": "2000", "flag_med": True, "flag_sd": True},
         ],
     }
     review = classify_scientific(
@@ -213,14 +334,20 @@ def test_search_budget_threshold_is_independent_of_numeric_trace_flags(service, 
         "trials": 5,
         "iterations": 2000,
         "optimization_trace": [
-            {"error_type": "NRMSE", "cuts": 2000, "flag_med": True, "flag_sd": True}
+            {"error_type": objective, "cuts": 2000, "flag_med": True, "flag_sd": True}
+            for objective in ("NRMSE", "DECOMP.RSSD")
         ],
     }
     result = classify_scientific(
         model,
         service.load_dataset("demo"),
         backend="meta_robyn",
-        stability={"status": "executed", "unstable": False, "estimate_consistency_available": True},
+        stability={
+            "status": "executed",
+            "unstable": False,
+            "estimate_consistency_available": True,
+            "diagnostics_status": "passed_for_protocol",
+        },
     )
     assert "prespecified_search_budget" not in result["statistical"]["missing"]
     assert result["statistical"]["status"] == "passed_for_protocol"

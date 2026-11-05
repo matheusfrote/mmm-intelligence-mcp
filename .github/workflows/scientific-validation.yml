@@ -5,13 +5,17 @@ on:
       draws:
         description: Posterior draws per chain; diagnostics still determine adequacy
         type: choice
-        options: ['1000', '2000']
+        options: ['1000', '2000', '4000', '8000']
         default: '1000'
       replications:
         description: Independent synthetic replications per adversarial scenario (Ridge)
         type: choice
         options: ['100', '250']
         default: '100'
+      native_recovery:
+        description: Run actual known-truth native recovery (two fits per core scenario; cannot certify coverage)
+        type: boolean
+        default: false
 permissions:
   contents: read
 jobs:
@@ -21,3 +25,12 @@ jobs:
       scientific_extensive: true
       scientific_draws: ${{ fromJSON(inputs.draws) }}
       scientific_replications: ${{ fromJSON(inputs.replications) }}
+  native-recovery:
+    if: inputs.native_recovery
+    strategy:
+      fail-fast: false
+      matrix:
+        backend: [google_meridian, pymc_marketing, meta_robyn]
+    uses: ./.github/workflows/native-engines.yml
+    with:
+      recovery_backend: ${{ matrix.backend }}

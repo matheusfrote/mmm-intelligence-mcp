@@ -484,12 +484,14 @@ class MMMService(GrowthMixin):
         return {"artifact_id": artifact_id, "kind": "reports", "sha256": checksum, **payload}
 
     def train_backend(self, request: BackendRequest) -> dict:
+        from .datasets import require_native_media_variation
         from .integrations.bridge import execute
 
         dataset = self.load_dataset(request.dataset_id)
         report = validate(dataset, request, self.settings.max_rows)
         if not report["valid"]:
             raise MMMError("DATASET_INVALID", "; ".join(report["issues"]))
+        require_native_media_variation(dataset, request)
         model_id = request.model_id or request.backend + "-" + uuid4().hex
         model = execute(
             self.store,

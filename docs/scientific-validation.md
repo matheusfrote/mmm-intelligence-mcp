@@ -33,8 +33,11 @@ legado também sinaliza aquecimento ou draws abaixo de 400 como execução curta
 Contagens são requisitos operacionais, jamais critérios suficientes de aprovação.
 Os valores são política do projeto, não limiares universais.
 
-Parâmetros com diagnósticos indefinidos permanecem visíveis e impedem aprovação
-completa. O relatório preserva resumos por parâmetro e posições reais de até 128
+Parâmetros livres com diagnósticos indefinidos permanecem visíveis e impedem
+aprovação completa. Nós fixos só ficam fora dos critérios MCMC quando o prior
+determinístico nativo (ou a referência geográfica nacional) declara o valor e
+todas as amostras confirmam esse valor. Cadeias livres constantes não recebem
+essa exceção. O relatório preserva resumos por parâmetro e posições reais de até 128
 draws por cadeia para até 64 parâmetros escalares. As estatísticas usam todas as
 amostras. Truncamento de traços é declarado; a inspeção visual é tarefa humana.
 
@@ -154,6 +157,117 @@ reader pode consultar evidência, mas não criar relatórios científicos. Só o
 dashboard local mantém acesso direto, conforme política anterior.
 
 ## Reprodução e CI
+
+Os ajustes novos usam calendário explícito: tendência e Fourier anual no Meridian,
+além do intercepto nativo, e tendência com o Fourier nativo no PyMC. O perfil
+`baseline="legacy"` permite ablação explícita. Controles do PyMC são padronizados
+apenas com o treinamento; origem temporal e transformações são persistidas e
+reutilizadas na restauração e no futuro. `prior_scale_multiplier` permite
+sensibilidade pré-especificada e `target_accept` chega ao amostrador de cada motor.
+O mapa de opções Meridian é imutável porque o backend JAX usa argumentos estáticos.
+O NetCDF PyMC usa compressão zlib sem perda, preservando grupos, cadeias e draws.
+Somente arrays determinísticos por data, que o grafo recompõe, são omitidos;
+todas as variáveis aleatórias são retidas. Os oito arrays retidos na prova de
+persistência foram comparados bit a bit, e as predições restauradas com
+`rtol=atol=1e-7`. `--refit-draws` permite um orçamento de refit declarado
+separadamente, nunca menor que o mínimo do protocolo. Cada refit tem seu próprio
+diagnóstico, incluindo métricas numéricas, e pode reprovar o resultado global.
+
+Refits científicos são artefatos imutáveis próprios, com dados, configuração,
+fontes e metadados dos runtimes na identidade. `reused=true` identifica reuso,
+sem contar o mesmo fit como nova amostra independente. Não modifique código ou
+dependências durante uma execução: uma mudança detectada invalida a captura;
+o ledger preserva os refits já concluídos. Falhas do worker conservam um log
+privado limitado, inclusive em timeout, saída ausente/excessiva, JSON inválido,
+contrato incorreto ou erro de leitura/escrita. Nenhuma falha troca de motor.
+
+### Intervalos condicionais Ridge
+
+O bootstrap residual restrito original continua identificado como
+`legacy_percentile`. Na fronteira de efeito zero, suas estimativas não negativas
+e percentis estritamente positivos podem produzir cobertura zero. A alternativa
+`projected_hc3` usa OLS sem penalização em desenho de posto completo, covariância
+sandwich HC3 e projeção monótona do conjunto de confiança no espaço não negativo.
+`projected_hac` usa Newey-West/Bartlett com três lags, preservando a correção de
+alavancagem. Projeção pode ser conservadora em zero; não corrige confundimento,
+tracking ou especificação incorreta. Desenhos sem posto completo recusam o
+intervalo em vez de fabricar precisão por pseudoinversa.
+
+As previsões pontuais e o viés/RMSE principais continuam sendo do Ridge restrito;
+o intervalo alternativo vem da inferência OLS separada. `method_comparisons`
+compara a cobertura dos três conjuntos nas mesmas repetições, sem reclassificar
+draws bootstrap como posteriores ou considerar o novo estudo uma validação dos
+draws legados. A simulação expõe o contraste OLS HC3/HAC em
+`conditional_linear_confidence`, separado do resultado pontual Ridge e de seus
+intervalos bootstrap anteriores. Shapes e controles permanecem condicionais.
+
+### Recuperação nativa e experimentos agrupados
+
+`scientific.native_monte_carlo` executa fits reais no motor solicitado e mede
+contrastes de médias condicionais sob aumento histórico de 10% em um canal,
+incluindo carryover. Meridian e PyMC usam os mesmos draws conjuntos nos dois
+cenários; ruído de observações independentes não é incerteza de efeito.
+Robyn usa suas transformações nativas e mantém a inflexão Hill de referência;
+oferece estimativa pontual e cobertura indisponível. Quantis de soluções da busca
+não são intervalos de confiança.
+
+Cada avaliação registra as datas efetivas do teste, versões, configuração,
+diagnósticos e a verdade sintética nessas mesmas datas. O DGP Hill conhecido é
+uma especificação deliberadamente diferente da saturação Logistic do PyMC.
+Priors positivos contínuos também podem excluir zero exato; esse problema de
+calibração não desaparece aumentando draws. Amostras pequenas, execução incompleta,
+intervalos ausentes ou tolerâncias de negócio não declaradas não certificam
+cobertura. O contrato público exige quatro cadeias e ao menos 1.000 draws e
+warmup; os testes de transporte reduzidos têm escopo explicitamente distinto.
+
+```powershell
+.\.venv\Scripts\python.exe examples/scientific_protocol.py --backend google_meridian --native-replications 2 --skip-refits --output-dir evidence/minha-recuperacao-nativa
+```
+
+O workflow manual oferece `native_recovery` para execuções separadas por motor.
+O timeout do cliente considera as chamadas sequenciais; cada processo continua
+limitado a até uma hora. Dois fits por cenário só verificam execução e mostram
+estimativas iniciais: a política de cobertura continua exigindo pelo menos cem
+repetições e precisão Monte Carlo suficiente.
+
+### Lotes Robyn que excedem o limite do endpoint
+
+Chamadas MCP permanecem limitadas a uma hora por worker. O operador pode usar
+`examples/robyn_offline_refit.py` para repetir um perfil DE sintético já
+declarado, com teto explícito de duas horas e os mesmos limites de CPU/memória.
+Esse CLI local usa o mesmo `robyn_worker.R`, não muda hiperparâmetros, critérios
+de busca ou motor e não cria um endpoint de comandos arbitrários. Escolha um
+diretório novo e registre também as tentativas que excederam o limite anterior.
+
+```powershell
+.\.venv\Scripts\python.exe examples/robyn_offline_refit.py --store var/robyn-de-comparison/data --model-id ID --seed 97 --timeout-seconds 7200 --output-dir var/novo-lote-de97
+.\.venv\Scripts\python.exe examples/import_robyn_batch.py --store var/robyn-de-comparison/data --batch var/novo-lote-de97
+```
+
+Substitua `ID` pelo identificador do modelo DE de referência. O importador é
+exclusivo do operador: confere hashes, identidade atual do runtime/código,
+dataset sintético, configuração e restauração nativa antes de escrever um
+modelo novo no ledger imutável. Não importa lotes reprovados operacionalmente,
+não sobrescreve modelos e não aceita arquivos arbitrários via MCP. Após importar,
+`audit_model` reutiliza explicitamente os refits; o transporte de origem fica
+registrado como `local_native_r_batch`. A importação não aprova a estatística.
+
+Planos de experimento aceitam `analysis_unit="paired"` com `pair_column` para
+pares completos de unidades distintas (uma em cada braço) e teste t da diferença
+pareada; o desvio de planejamento deve ser o das diferenças. `analysis_unit="cluster"`
+com `cluster_column` usa médias de clusters com pesos iguais e Welch entre
+clusters; o desvio de planejamento deve ser o das médias de clusters. Repetir
+indivíduos dentro dos mesmos clusters não aumenta os graus de liberdade.
+O estimando passa a ser o efeito médio por cluster, não por indivíduo.
+
+Esses dois desenhos suportam resultados contínuos e guardrails contínuos;
+desfechos binários agrupados, razões de custo, pares incompletos, clusters em
+mais de um braço e desenhos combinando par/cluster são recusados explicitamente.
+Os hashes continuam referindo-se aos dados e ao plano originais. SRM é calculado
+nos clusters; em pares completos a proporção é estrutural e SRM fica não aplicável,
+sem p-valor fictício. A calibração automática permanece conservadora e não aceita
+evidência sem os critérios de qualidade existentes. Nenhum rótulo importado
+comprova randomização, ausência de interferência ou transportabilidade.
 
 ```powershell
 .\.venv\Scripts\python.exe examples/scientific_protocol.py --backend ridge --replications 100 --output-dir evidence/minha-validacao-ridge

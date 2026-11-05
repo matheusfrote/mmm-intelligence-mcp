@@ -1,0 +1,13 @@
+{
+  "scope": "Actual recorded synthetic execution; operational and statistical outcomes remain separate",
+  "source_receipt": "var/wheel-native-proof/receipt-final.json",
+  "source_receipt_sha256": "5f002c8231c8946c278ef710d504d56a21beed75efd0ceaea98fb17a567e52dc",
+  "result": {
+    "scope": "Actual native Robyn restoration from the built wheel, outside the editable package; no causal or convergence claim",
+    "wheel_sha256": "ea4236a1f5d817af7919e3178ee794637d884c422d82f8d6fc38c2e01c12589a",
+    "configured_r_library": "C:\\Users\\Matheus\\Documents\\ChatGPT\\Marketing mix modeling\\mmm-intelligence-mcp\\var\\runtime\\r-library",
+    "model_id": "science-refit-797e77db1bcc3ca5410af05d56ecfd454f25da33",
+    "prediction_periods": 30,
+    "prediction_scope": "historical_restored_prediction"
+  }
+}

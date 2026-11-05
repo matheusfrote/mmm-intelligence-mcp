@@ -10,6 +10,18 @@ from .schemas import DatasetSpec, GenerateRequest
 MEDIA = ["spend_search", "spend_social", "spend_video"]
 
 
+def require_native_media_variation(dataset, request):
+    """A constant training channel cannot identify a response shape from these data."""
+    from .errors import MMMError
+
+    rows = dataset["rows"]
+    cutoff = len(rows) - int(np.ceil(len(rows) * request.test_fraction))
+    for channel in request.media_columns:
+        values = [r[channel] for r in rows[request.warmup_periods : cutoff]]
+        if np.ptp(values) <= 1e-12:
+            raise MMMError("UNIDENTIFIABLE_MEDIA", "Training media must vary: " + channel)
+
+
 def generate(request: GenerateRequest) -> dict:
     from .modeling import adstock, hill
 

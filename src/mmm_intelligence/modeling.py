@@ -125,6 +125,8 @@ def design_matrix(media, controls, indices, step_days):
 
 
 def train(dataset: dict, request: TrainRequest, model_id: str, report: dict) -> dict:
+    from .inference import fit_linear_inference
+
     rows = dataset["rows"]
     n, m = len(rows), len(request.media_columns)
     cutoff = n - int(np.ceil(n * request.test_fraction))
@@ -210,6 +212,7 @@ def train(dataset: dict, request: TrainRequest, model_id: str, report: dict) -> 
         "coefficients": dict(zip(feature_names, coefficients.tolist())),
         "media_parameters": parameters,
         "solver": solver,
+        "linear_inference": fit_linear_inference(x[warmup:cutoff], y[warmup:cutoff]),
         "split": {
             "train_end": rows[cutoff - 1][request.date_column],
             "test_start": rows[cutoff][request.date_column],
