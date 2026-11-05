@@ -23,7 +23,7 @@ def training_identity(backend, dataset, configuration):
     if backend == "pymc_marketing":
         names.append("integrations/native_persistence.py")
     if backend == "meta_robyn":
-        names = ["integrations/robyn_worker.R"]
+        names = ["integrations/worker.py", "integrations/robyn_worker.R"]
         metadata.update(
             {
                 str(

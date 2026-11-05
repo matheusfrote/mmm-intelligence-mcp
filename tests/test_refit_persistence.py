@@ -102,3 +102,33 @@ def test_missing_r_and_python_configuration_is_not_native_provenance(
     monkeypatch.setenv("MMM_ROBYN_PYTHON", str(tmp_path / "not-installed-python"))
     with pytest.raises(MMMError, match="unavailable"):
         training_identity("meta_robyn", dataset, {})
+
+
+def test_robyn_wrapper_change_invalidates_scientific_refit_identity(dataset, monkeypatch, tmp_path):
+    """Hash regression only: no placeholder fit is passed as native evidence."""
+    import hashlib
+    import sys
+    from pathlib import Path
+
+    from mmm_intelligence.refits import training_identity
+    from mmm_intelligence.storage import digest
+
+    monkeypatch.setenv("MMM_R_LIBRARY", str(tmp_path))
+    monkeypatch.setenv("MMM_RSCRIPT", str(tmp_path / "not-installed-Rscript"))
+    monkeypatch.setenv("MMM_ROBYN_PYTHON", sys.executable)
+    before = training_identity("meta_robyn", dataset, {})
+    original = Path.read_bytes
+    wrapper = Path(__file__).resolve().parents[1] / "src/mmm_intelligence/integrations/worker.py"
+    changed = original(wrapper) + b"\n# changed wrapper for provenance regression\n"
+
+    def read_source(path):
+        return changed if path == wrapper else original(path)
+
+    monkeypatch.setattr(Path, "read_bytes", read_source)
+    after = training_identity("meta_robyn", dataset, {})
+    assert digest(before) != digest(after)
+    assert after["source_sha256"]["integrations/worker.py"] == hashlib.sha256(changed).hexdigest()
+    assert (
+        before["source_sha256"]["integrations/robyn_worker.R"]
+        == after["source_sha256"]["integrations/robyn_worker.R"]
+    )
