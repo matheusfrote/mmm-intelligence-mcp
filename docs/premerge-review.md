@@ -44,6 +44,9 @@ registra os hashes das entradas e o novo screen de cobertura. Nenhuma amostragem
 foi repetida ou inventada. Os screens permanecem inconclusivos; as reprovações
 MCMC/busca dos relatórios completos continuam valendo independentemente desse
 screen. A política não altera os níveis nominais ou limites de precisão.
+Os hashes dessa reavaliação usam os bytes dos blobs do Git na revisão registrada,
+sem depender da conversão de quebras de linha no checkout Windows. Os seis hashes
+de entrada e o hash do classificador foram reconferidos contra os blobs publicados.
 
 ## Escopo da revisão
 
@@ -64,6 +67,7 @@ permanece documentada em [reference-repository-review.md](reference-repository-r
 | Verificação | Resultado / escopo |
 | --- | --- |
 | Suíte Python principal com cobertura habilitada | 811 aprovados, 9 casos opcionais separados, zero falhas |
+| Suíte focada nos workers nativos e contratos de baseline | 12 aprovados, zero falhas, um caso de dependência exclusiva ignorado no host e exercitado no runtime Meridian; há casos compartilhados com a suíte principal |
 | Ruff, formatação, mypy e Bandit | Aprovados; 49 módulos analisados pelo mypy, zero achados Bandit |
 | Pacote wheel instalado fora do checkout | 45 ferramentas descobertas, 23 chamadas locais e persistência após reinício verificadas |
 | SDK MCP oficial por STDIO, fluxo sem amostragem nativa | 42 ferramentas executadas, três prompts, um recurso, oito formatos e 18 perfis; as três ferramentas nativas são verificadas em ciclos separados |

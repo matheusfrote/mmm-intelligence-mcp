@@ -1,5 +1,7 @@
 {
   "scope": "Reassessment of published aggregates only; no new sampling or Monte Carlo replications",
+  "source_revision": "92063eac980226943aa91baf8b85eecf4d998e6c",
+  "input_scope": "Exact Git blob bytes at source_revision, independent of checkout line endings",
   "classifier_sha256": "08c7da88a6e24471a82538f8e70e07c12cc15fd4df430ff8fa0e974ba979af18",
   "synthetic": true,
   "causal_identification": false,
@@ -7,7 +9,7 @@
   "studies": [
     {
       "source": "docs/validation/scientific-corrections/recovery-google_meridian.json",
-      "source_sha256": "e9b6be698ec8854bcc821b56f8b9e64cec9b3dfcb470eb687b88dfc6ac8a3886",
+      "source_sha256": "7d79dfe39dd009abdf301bb0d0b9ec2be16d8a065aae7cd2d39cddefd79192cd",
       "historical_full_assessment_status": "failed",
       "reassessed_coverage_screen": {
         "status": "inconclusive",
@@ -44,7 +46,7 @@
     },
     {
       "source": "docs/validation/scientific-corrections/recovery-meta_robyn.json",
-      "source_sha256": "79acdb5757280d79f149d917e0b19e36ac565eb1e5bbdcf6e32ac0bdd727d6db",
+      "source_sha256": "e081ca12232d7a3812d8a43aeb03ab046ab875ca47866d325b03c81f92dfdba6",
       "historical_full_assessment_status": "failed",
       "reassessed_coverage_screen": {
         "status": "inconclusive",
@@ -87,7 +89,7 @@
     },
     {
       "source": "docs/validation/scientific-corrections/recovery-pymc_marketing.json",
-      "source_sha256": "f3773abf2c36b9489d3143703c68a752c4815f1e9d4ee3e6451e828f54c1b283",
+      "source_sha256": "cae5948ecdc2ad53baa4db03c1ec4906f320c19b2f12eaa653b3b93847ce91ad",
       "historical_full_assessment_status": "failed",
       "reassessed_coverage_screen": {
         "status": "inconclusive",
@@ -124,7 +126,7 @@
     },
     {
       "source": "docs/validation/scientific-corrections/ridge-adversarial.json",
-      "source_sha256": "e99c778c76090e0ea4294002b0b1815789365ef4bf84284f4307efd22d4ce44d",
+      "source_sha256": "95c003efa8e82131d099c864322c6f595c5cbb0154f81527827df0388626a366",
       "historical_full_assessment_status": "inconclusive",
       "reassessed_coverage_screen": {
         "status": "inconclusive",
@@ -156,7 +158,7 @@
     },
     {
       "source": "docs/validation/scientific-corrections/ridge-development.json",
-      "source_sha256": "c0cf39be589e19c01f428d54c0559a9c847da923acfe5ca58092c7fadb7f3ff1",
+      "source_sha256": "0e529f5eab6c6eabd2692ee9ac39190249ee6f4f89392beef158c42108ee68d0",
       "historical_full_assessment_status": "inconclusive",
       "reassessed_coverage_screen": {
         "status": "inconclusive",
@@ -254,7 +256,7 @@
     },
     {
       "source": "docs/validation/scientific-corrections/ridge-independent.json",
-      "source_sha256": "e70f5e2a9bcb3008a8ed2f154ce3bf8e690e9c3e902fcfc1f9fc6de28d200371",
+      "source_sha256": "49197818af20a4e4974d1d52579d9de028f6015d9c0bc8ec2e477a4e902e0aff",
       "historical_full_assessment_status": "inconclusive",
       "reassessed_coverage_screen": {
         "status": "inconclusive",
