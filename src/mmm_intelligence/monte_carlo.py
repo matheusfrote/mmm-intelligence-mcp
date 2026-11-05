@@ -319,9 +319,11 @@ def assess_study(study, config):
         if row["failed"]:
             failed.append("core_estimation_failure:" + key)
         count, coverage = (
-            row.get("intervals_available", row["successful"]),
+            row.get("intervals_available", 0),
             row["interval_coverage"],
         )
+        if count < row["successful"]:
+            missing.append("incomplete_interval_availability:" + key)
         if count < config.minimum_replications_for_assessment or coverage is None:
             missing.append("insufficient_replications_or_intervals:" + key)
             continue
@@ -329,6 +331,8 @@ def assess_study(study, config):
         checks.append(
             {
                 "estimand": key,
+                "successful": row["successful"],
+                "intervals_available": count,
                 "coverage": coverage,
                 "simultaneous_coverage_bounds": [lower, upper],
                 "minimum_coverage_policy": target,
@@ -352,6 +356,7 @@ def assess_study(study, config):
         "policy": {
             "core_scenarios": ["well_specified", "null_effect"],
             "minimum_replications": config.minimum_replications_for_assessment,
+            "require_intervals_for_all_successful_fits": True,
             "coverage_tolerance": config.coverage_tolerance,
             "max_absolute_bias": config.max_absolute_bias,
             "max_rmse": config.max_rmse,

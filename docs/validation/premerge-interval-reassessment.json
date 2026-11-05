@@ -1,0 +1,354 @@
+{
+  "scope": "Reassessment of published aggregates only; no new sampling or Monte Carlo replications",
+  "classifier_sha256": "08c7da88a6e24471a82538f8e70e07c12cc15fd4df430ff8fa0e974ba979af18",
+  "synthetic": true,
+  "causal_identification": false,
+  "limitation": "Native MCMC/search failures in the historical full assessment are not replaced by this coverage-only screen",
+  "studies": [
+    {
+      "source": "docs/validation/scientific-corrections/recovery-google_meridian.json",
+      "source_sha256": "e9b6be698ec8854bcc821b56f8b9e64cec9b3dfcb470eb687b88dfc6ac8a3886",
+      "historical_full_assessment_status": "failed",
+      "reassessed_coverage_screen": {
+        "status": "inconclusive",
+        "failed": [],
+        "missing": [
+          "absolute_bias_tolerance_missing",
+          "rmse_tolerance_missing",
+          "insufficient_replications_or_intervals:well_specified:spend_search",
+          "insufficient_replications_or_intervals:well_specified:spend_social",
+          "insufficient_replications_or_intervals:well_specified:spend_video",
+          "insufficient_replications_or_intervals:null_effect:spend_search",
+          "insufficient_replications_or_intervals:null_effect:spend_social",
+          "insufficient_replications_or_intervals:null_effect:spend_video"
+        ],
+        "undercoverage": [],
+        "coverage_checks": [],
+        "policy": {
+          "core_scenarios": [
+            "well_specified",
+            "null_effect"
+          ],
+          "minimum_replications": 100,
+          "require_intervals_for_all_successful_fits": true,
+          "coverage_tolerance": 0.05,
+          "max_absolute_bias": null,
+          "max_rmse": null,
+          "coverage_family_size": 6,
+          "family_alpha": 0.05
+        },
+        "causal_identification": false,
+        "scope": "Core DGP conditional-interval screening only; inspect all adverse scenarios, failures and width; cannot certify real effects"
+      },
+      "new_fits_executed": 0
+    },
+    {
+      "source": "docs/validation/scientific-corrections/recovery-meta_robyn.json",
+      "source_sha256": "79acdb5757280d79f149d917e0b19e36ac565eb1e5bbdcf6e32ac0bdd727d6db",
+      "historical_full_assessment_status": "failed",
+      "reassessed_coverage_screen": {
+        "status": "inconclusive",
+        "failed": [],
+        "missing": [
+          "absolute_bias_tolerance_missing",
+          "rmse_tolerance_missing",
+          "incomplete_interval_availability:well_specified:spend_search",
+          "insufficient_replications_or_intervals:well_specified:spend_search",
+          "incomplete_interval_availability:well_specified:spend_social",
+          "insufficient_replications_or_intervals:well_specified:spend_social",
+          "incomplete_interval_availability:well_specified:spend_video",
+          "insufficient_replications_or_intervals:well_specified:spend_video",
+          "incomplete_interval_availability:null_effect:spend_search",
+          "insufficient_replications_or_intervals:null_effect:spend_search",
+          "incomplete_interval_availability:null_effect:spend_social",
+          "insufficient_replications_or_intervals:null_effect:spend_social",
+          "incomplete_interval_availability:null_effect:spend_video",
+          "insufficient_replications_or_intervals:null_effect:spend_video"
+        ],
+        "undercoverage": [],
+        "coverage_checks": [],
+        "policy": {
+          "core_scenarios": [
+            "well_specified",
+            "null_effect"
+          ],
+          "minimum_replications": 100,
+          "require_intervals_for_all_successful_fits": true,
+          "coverage_tolerance": 0.05,
+          "max_absolute_bias": null,
+          "max_rmse": null,
+          "coverage_family_size": 6,
+          "family_alpha": 0.05
+        },
+        "causal_identification": false,
+        "scope": "Core DGP conditional-interval screening only; inspect all adverse scenarios, failures and width; cannot certify real effects"
+      },
+      "new_fits_executed": 0
+    },
+    {
+      "source": "docs/validation/scientific-corrections/recovery-pymc_marketing.json",
+      "source_sha256": "f3773abf2c36b9489d3143703c68a752c4815f1e9d4ee3e6451e828f54c1b283",
+      "historical_full_assessment_status": "failed",
+      "reassessed_coverage_screen": {
+        "status": "inconclusive",
+        "failed": [],
+        "missing": [
+          "absolute_bias_tolerance_missing",
+          "rmse_tolerance_missing",
+          "insufficient_replications_or_intervals:well_specified:spend_search",
+          "insufficient_replications_or_intervals:well_specified:spend_social",
+          "insufficient_replications_or_intervals:well_specified:spend_video",
+          "insufficient_replications_or_intervals:null_effect:spend_search",
+          "insufficient_replications_or_intervals:null_effect:spend_social",
+          "insufficient_replications_or_intervals:null_effect:spend_video"
+        ],
+        "undercoverage": [],
+        "coverage_checks": [],
+        "policy": {
+          "core_scenarios": [
+            "well_specified",
+            "null_effect"
+          ],
+          "minimum_replications": 100,
+          "require_intervals_for_all_successful_fits": true,
+          "coverage_tolerance": 0.05,
+          "max_absolute_bias": null,
+          "max_rmse": null,
+          "coverage_family_size": 6,
+          "family_alpha": 0.05
+        },
+        "causal_identification": false,
+        "scope": "Core DGP conditional-interval screening only; inspect all adverse scenarios, failures and width; cannot certify real effects"
+      },
+      "new_fits_executed": 0
+    },
+    {
+      "source": "docs/validation/scientific-corrections/ridge-adversarial.json",
+      "source_sha256": "e99c778c76090e0ea4294002b0b1815789365ef4bf84284f4307efd22d4ce44d",
+      "historical_full_assessment_status": "inconclusive",
+      "reassessed_coverage_screen": {
+        "status": "inconclusive",
+        "failed": [],
+        "missing": [
+          "core_scenarios_missing",
+          "absolute_bias_tolerance_missing",
+          "rmse_tolerance_missing"
+        ],
+        "undercoverage": [],
+        "coverage_checks": [],
+        "policy": {
+          "core_scenarios": [
+            "well_specified",
+            "null_effect"
+          ],
+          "minimum_replications": 100,
+          "require_intervals_for_all_successful_fits": true,
+          "coverage_tolerance": 0.05,
+          "max_absolute_bias": null,
+          "max_rmse": null,
+          "coverage_family_size": 0,
+          "family_alpha": 0.05
+        },
+        "causal_identification": false,
+        "scope": "Core DGP conditional-interval screening only; inspect all adverse scenarios, failures and width; cannot certify real effects"
+      },
+      "new_fits_executed": 0
+    },
+    {
+      "source": "docs/validation/scientific-corrections/ridge-development.json",
+      "source_sha256": "c0cf39be589e19c01f428d54c0559a9c847da923acfe5ca58092c7fadb7f3ff1",
+      "historical_full_assessment_status": "inconclusive",
+      "reassessed_coverage_screen": {
+        "status": "inconclusive",
+        "failed": [],
+        "missing": [
+          "absolute_bias_tolerance_missing",
+          "rmse_tolerance_missing"
+        ],
+        "undercoverage": [],
+        "coverage_checks": [
+          {
+            "estimand": "well_specified:spend_search",
+            "successful": 1000,
+            "intervals_available": 1000,
+            "coverage": 0.902,
+            "simultaneous_coverage_bounds": [
+              0.8743467726871147,
+              0.9240957468493062
+            ],
+            "minimum_coverage_policy": 0.85
+          },
+          {
+            "estimand": "well_specified:spend_social",
+            "successful": 1000,
+            "intervals_available": 1000,
+            "coverage": 0.926,
+            "simultaneous_coverage_bounds": [
+              0.9010933845700344,
+              0.9450173450879638
+            ],
+            "minimum_coverage_policy": 0.85
+          },
+          {
+            "estimand": "well_specified:spend_video",
+            "successful": 1000,
+            "intervals_available": 1000,
+            "coverage": 0.886,
+            "simultaneous_coverage_bounds": [
+              0.8567746004749004,
+              0.9098891123138022
+            ],
+            "minimum_coverage_policy": 0.85
+          },
+          {
+            "estimand": "null_effect:spend_search",
+            "successful": 1000,
+            "intervals_available": 1000,
+            "coverage": 0.947,
+            "simultaneous_coverage_bounds": [
+              0.9250294883863714,
+              0.9627909251280067
+            ],
+            "minimum_coverage_policy": 0.85
+          },
+          {
+            "estimand": "null_effect:spend_social",
+            "successful": 1000,
+            "intervals_available": 1000,
+            "coverage": 0.956,
+            "simultaneous_coverage_bounds": [
+              0.9355074754487498,
+              0.9701885168612199
+            ],
+            "minimum_coverage_policy": 0.85
+          },
+          {
+            "estimand": "null_effect:spend_video",
+            "successful": 1000,
+            "intervals_available": 1000,
+            "coverage": 0.937,
+            "simultaneous_coverage_bounds": [
+              0.9135547417890401,
+              0.9544039175080145
+            ],
+            "minimum_coverage_policy": 0.85
+          }
+        ],
+        "policy": {
+          "core_scenarios": [
+            "well_specified",
+            "null_effect"
+          ],
+          "minimum_replications": 100,
+          "require_intervals_for_all_successful_fits": true,
+          "coverage_tolerance": 0.05,
+          "max_absolute_bias": null,
+          "max_rmse": null,
+          "coverage_family_size": 6,
+          "family_alpha": 0.05
+        },
+        "causal_identification": false,
+        "scope": "Core DGP conditional-interval screening only; inspect all adverse scenarios, failures and width; cannot certify real effects"
+      },
+      "new_fits_executed": 0
+    },
+    {
+      "source": "docs/validation/scientific-corrections/ridge-independent.json",
+      "source_sha256": "e70f5e2a9bcb3008a8ed2f154ce3bf8e690e9c3e902fcfc1f9fc6de28d200371",
+      "historical_full_assessment_status": "inconclusive",
+      "reassessed_coverage_screen": {
+        "status": "inconclusive",
+        "failed": [],
+        "missing": [
+          "absolute_bias_tolerance_missing",
+          "rmse_tolerance_missing"
+        ],
+        "undercoverage": [],
+        "coverage_checks": [
+          {
+            "estimand": "well_specified:spend_search",
+            "successful": 1000,
+            "intervals_available": 1000,
+            "coverage": 0.923,
+            "simultaneous_coverage_bounds": [
+              0.8977196153374386,
+              0.9424325880553625
+            ],
+            "minimum_coverage_policy": 0.85
+          },
+          {
+            "estimand": "well_specified:spend_social",
+            "successful": 1000,
+            "intervals_available": 1000,
+            "coverage": 0.914,
+            "simultaneous_coverage_bounds": [
+              0.887653789063633,
+              0.9346228355335765
+            ],
+            "minimum_coverage_policy": 0.85
+          },
+          {
+            "estimand": "well_specified:spend_video",
+            "successful": 1000,
+            "intervals_available": 1000,
+            "coverage": 0.911,
+            "simultaneous_coverage_bounds": [
+              0.8843155491645184,
+              0.932002549167494
+            ],
+            "minimum_coverage_policy": 0.85
+          },
+          {
+            "estimand": "null_effect:spend_search",
+            "successful": 1000,
+            "intervals_available": 1000,
+            "coverage": 0.953,
+            "simultaneous_coverage_bounds": [
+              0.9319965989730524,
+              0.9677408670717201
+            ],
+            "minimum_coverage_policy": 0.85
+          },
+          {
+            "estimand": "null_effect:spend_social",
+            "successful": 1000,
+            "intervals_available": 1000,
+            "coverage": 0.952,
+            "simultaneous_coverage_bounds": [
+              0.9308305474598103,
+              0.96692074316323
+            ],
+            "minimum_coverage_policy": 0.85
+          },
+          {
+            "estimand": "null_effect:spend_video",
+            "successful": 1000,
+            "intervals_available": 1000,
+            "coverage": 0.963,
+            "simultaneous_coverage_bounds": [
+              0.9437829229130278,
+              0.9758162973490686
+            ],
+            "minimum_coverage_policy": 0.85
+          }
+        ],
+        "policy": {
+          "core_scenarios": [
+            "well_specified",
+            "null_effect"
+          ],
+          "minimum_replications": 100,
+          "require_intervals_for_all_successful_fits": true,
+          "coverage_tolerance": 0.05,
+          "max_absolute_bias": null,
+          "max_rmse": null,
+          "coverage_family_size": 6,
+          "family_alpha": 0.05
+        },
+        "causal_identification": false,
+        "scope": "Core DGP conditional-interval screening only; inspect all adverse scenarios, failures and width; cannot certify real effects"
+      },
+      "new_fits_executed": 0
+    }
+  ]
+}

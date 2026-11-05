@@ -20,6 +20,9 @@ Os resultados reprovados e inconclusivos são preservados; não há certificaç�
 causal de campanhas reais.
 Veja também a [revisão dos repositórios de referência](docs/reference-repository-review.md),
 com inventário, versões consultadas e integrações futuras identificadas.
+O [relatório de revisão para a main](docs/premerge-review.md) registra as correções
+de rastreabilidade Robyn e disponibilidade de intervalos Monte Carlo, com testes
+de regressão e limites de aprovação explícitos.
 
 Licença **Apache-2.0**, autorizada pelo proprietário; consulte [LICENSE](LICENSE) e [NOTICE](NOTICE). O [histórico de CI](https://github.com/matheusfrote/mmm-intelligence-mcp/actions) identifica a revisão realmente testada. Os recibos da entrega anterior [V4.2](docs/v42-followup.md) permanecem históricos. O CI atual combina cobertura da matriz e dos três motores, exige 100% e verifica separadamente JavaScript e R. Não há publicação PyPI ou serviço externo nesta entrega.
 
