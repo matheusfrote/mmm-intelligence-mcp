@@ -35,7 +35,7 @@ jobs:
       - run: python -c "from pathlib import Path; Path('var/coverage/base').mkdir(parents=True, exist_ok=True)"
       - run: python -m coverage run -m pytest -q
       - run: python examples/coverage_gate.py record --directory var/coverage/base --label base-${{ matrix.os }}-${{ matrix.python }}
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         with:
           name: coverage-${{ matrix.os }}-${{ matrix.python }}
           path: var/coverage/base/
@@ -69,7 +69,7 @@ jobs:
           path: var/coverage-downloads
       - name: Exact Python line and branch gate at identical source hashes
         run: python examples/coverage_ci_gate.py
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         with:
           name: aggregate-python-coverage
           path: evidence/python-coverage/
