@@ -76,7 +76,7 @@ jobs:
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           & ./var/runtime/r-portable/R-4.5.2/bin/Rscript.exe --vanilla examples/r_worker_branches.R $PWD.Path
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         with:
           name: coverage-native
           include-hidden-files: true
@@ -85,7 +85,7 @@ jobs:
             var/coverage/native-parent/
             var/coverage/native/
           retention-days: 14
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         with:
           name: r-coverage
           if-no-files-found: error
@@ -104,7 +104,7 @@ jobs:
           python examples/scientific_protocol.py --backend all --draws $env:SCIENTIFIC_DRAWS --tune $env:SCIENTIFIC_DRAWS --replications $env:SCIENTIFIC_REPLICATIONS --output-dir evidence/scientific-extensive
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           'Execution completed. Scientific failures and inconclusive outcomes are preserved in result.json; workflow success is not scientific approval.' >> $env:GITHUB_STEP_SUMMARY
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         if: ${{ always() && inputs.scientific_extensive }}
         with:
           name: scientific-outcomes
@@ -123,7 +123,7 @@ jobs:
           python examples/scientific_protocol.py --backend $env:RECOVERY_BACKEND --native-replications 2 --skip-refits --output-dir evidence/native-recovery
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           'Small synthetic recovery study; inspect statistical outcomes. Not a coverage or causal certification.' >> $env:GITHUB_STEP_SUMMARY
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
         if: ${{ always() && inputs.recovery_backend != '' }}
         with:
           name: native-recovery-${{ inputs.recovery_backend }}
