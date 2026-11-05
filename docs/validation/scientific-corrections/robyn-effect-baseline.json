@@ -1,0 +1,13 @@
+{
+  "source_receipt": "var/robyn-effect-baseline-proof/receipt.json",
+  "source_receipt_sha256": "1ce30b14f30552984057a71b1fca41b4f3b52fb9dd73bf4fbbf6e6f99e4170ef",
+  "result": {
+    "synthetic": true,
+    "scope": "Native decomposition equality, not causal certification",
+    "maximum_absolute_error": {
+      "spend_search": 0,
+      "spend_social": 0,
+      "spend_video": 0
+    }
+  }
+}

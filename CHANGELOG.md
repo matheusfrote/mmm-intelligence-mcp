@@ -1,5 +1,13 @@
 # Changelog
 
+## Em desenvolvimento — camada de validação científica
+
+- Protocolo aditivo em audit_model, relatório imutável e consulta/exportação com linhagem.
+- Três classificações independentes, MCSE/cadeias/PPC nativos e estabilidade específica por motor.
+- Monte Carlo com efeitos conhecidos e dez cenários; falsificação, hipóteses e calibração com evidência persistida.
+- Dashboard científico e workflow manual extenso, separados dos smokes de transporte.
+- Relatórios preservam reprovação e inconclusão; nenhuma certificação causal empresarial por simulação.
+
 ## 0.4.0 — preparada localmente, sem release publicada
 
 - Apache-2.0 autorizada; NOTICE, contribuição, conduta, segurança, templates e Dependabot.

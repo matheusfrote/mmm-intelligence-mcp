@@ -9,6 +9,28 @@ import pytest
 from mmm_intelligence.integrations import worker
 
 
+def test_geo_fixed_metadata_contract_does_not_exempt_free_parameters():
+    """Structural unit fixture only; real national fits supply scientific evidence."""
+    from mmm_intelligence.integrations.native_scientific import meridian_fixed
+
+    class Posterior(dict):
+        @property
+        def data_vars(self):
+            return self
+
+    model = SimpleNamespace(
+        is_national=False,
+        inference_data={"posterior": Posterior(tau_g=np.zeros((4, 20, 2)))},
+        prior_broadcast=SimpleNamespace(has_deterministic_param=lambda name: False),
+    )
+    assert meridian_fixed(model) == {}
+
+
+def test_unsupported_link_is_rejected_before_any_prediction():
+    with pytest.raises(ValueError, match="identity"):
+        worker.pymc_conditional_means(SimpleNamespace(link=SimpleNamespace(value="log")), None, 42)
+
+
 def test_original_scale_compatibility_initializes_once():
     class NativeModelBoundary:
         def __init__(self):

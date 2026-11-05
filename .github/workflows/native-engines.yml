@@ -1,13 +1,26 @@
 name: Native engines and R coverage
 on:
   workflow_call:
+    inputs:
+      scientific_extensive:
+        type: boolean
+        default: false
+      scientific_draws:
+        type: number
+        default: 1000
+      scientific_replications:
+        type: number
+        default: 100
+      recovery_backend:
+        type: string
+        default: ''
   workflow_dispatch:
 permissions:
   contents: read
 jobs:
   native:
     runs-on: windows-latest
-    timeout-minutes: 60
+    timeout-minutes: ${{ (inputs.scientific_extensive || inputs.recovery_backend != '') && 360 || 120 }}
     env:
       MMM_TEST_NATIVE: '1'
       MMM_MAX_FILE_BYTES: '52428800'
@@ -33,6 +46,11 @@ jobs:
             & "var/envs/$runtimeName/Scripts/python.exe" -m pip check
             if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           }
+      - name: Native Meridian sampler option contract without sampling
+        shell: pwsh
+        run: |
+          & ./var/envs/meridian/Scripts/python.exe -c "import sys; sys.path.insert(0,'src'); from mmm_intelligence.integrations.native_scientific import meridian_sampler_options; x=meridian_sampler_options({'target_accept':0.97}); hash(x['dual_averaging_kwargs']); assert x['dual_averaging_kwargs']['target_accept_prob']==0.97; assert x['max_tree_depth']==8; assert meridian_sampler_options({})['dual_averaging_kwargs']['target_accept_prob']==0.85"
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Install the verified portable R distribution
         shell: pwsh
         run: |
@@ -76,3 +94,42 @@ jobs:
             evidence/r-worker-branches/coverage.json
           retention-days: 14
     # Synthetic local processes only; never publishes or deploys a service.
+      - name: Extensive scientific execution; inspect statistical and causal outcomes separately
+        if: inputs.scientific_extensive
+        shell: pwsh
+        env:
+          SCIENTIFIC_DRAWS: ${{ inputs.scientific_draws }}
+          SCIENTIFIC_REPLICATIONS: ${{ inputs.scientific_replications }}
+        run: |
+          python examples/scientific_protocol.py --backend all --draws $env:SCIENTIFIC_DRAWS --tune $env:SCIENTIFIC_DRAWS --replications $env:SCIENTIFIC_REPLICATIONS --output-dir evidence/scientific-extensive
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          'Execution completed. Scientific failures and inconclusive outcomes are preserved in result.json; workflow success is not scientific approval.' >> $env:GITHUB_STEP_SUMMARY
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: ${{ always() && inputs.scientific_extensive }}
+        with:
+          name: scientific-outcomes
+          if-no-files-found: error
+          path: |
+            evidence/scientific-extensive/result.json
+            evidence/scientific-extensive/partial.json
+            evidence/scientific-extensive/*.md
+          retention-days: 30
+      - name: Known-truth native recovery with full sampling/search budgets
+        if: inputs.recovery_backend != ''
+        shell: pwsh
+        env:
+          RECOVERY_BACKEND: ${{ inputs.recovery_backend }}
+        run: |
+          python examples/scientific_protocol.py --backend $env:RECOVERY_BACKEND --native-replications 2 --skip-refits --output-dir evidence/native-recovery
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          'Small synthetic recovery study; inspect statistical outcomes. Not a coverage or causal certification.' >> $env:GITHUB_STEP_SUMMARY
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: ${{ always() && inputs.recovery_backend != '' }}
+        with:
+          name: native-recovery-${{ inputs.recovery_backend }}
+          if-no-files-found: error
+          path: |
+            evidence/native-recovery/result.json
+            evidence/native-recovery/partial.json
+            evidence/native-recovery/*.md
+          retention-days: 30

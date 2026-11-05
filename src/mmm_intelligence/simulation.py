@@ -174,6 +174,20 @@ def simulate(model: dict, request: SimulateRequest) -> dict:
         ],
         "warnings": warnings,
     }
+    if model.get("linear_inference"):
+        from .inference import linear_contrast
+
+        result["conditional_linear_confidence"] = {
+            "scope": "Unpenalized conditional-mean contrast, separate from Ridge point prediction and legacy bootstrap; fixed shapes/controls, no causal guarantee",
+            "methods": {
+                method: linear_contrast(
+                    model["linear_inference"],
+                    (scenario_design - baseline_design).sum(axis=0),
+                    covariance=method,
+                )
+                for method in ("hc3", "hac")
+            },
+        }
     if model.get("coefficient_draws"):
         draws = np.asarray(model["coefficient_draws"], float)
         if draws.ndim != 2 or draws.shape[1] != len(coef) or not np.isfinite(draws).all():

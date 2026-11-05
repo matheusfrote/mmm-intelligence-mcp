@@ -12,6 +12,18 @@ perfis de mídia, matriz crossmedia e histórico de decisões. Os gates locais m
 demonstração e limites em [ingestão e Growth](docs/universal-ingestion.md).
 Resultados sintéticos e cobertura de código não certificam convergência ou eficácia comercial.
 
+A revisão científica da PR #9 adiciona inferência HC3/HAC separada para Ridge,
+recuperação de efeitos nos três motores nativos, diagnósticos por refit e
+experimentos contínuos pareados/por cluster. Consulte as
+[correções, métricas e limitações](docs/scientific-corrections-results.md).
+Os resultados reprovados e inconclusivos são preservados; não há certificação
+causal de campanhas reais.
+Veja também a [revisão dos repositórios de referência](docs/reference-repository-review.md),
+com inventário, versões consultadas e integrações futuras identificadas.
+O [relatório de revisão para a main](docs/premerge-review.md) registra as correções
+de rastreabilidade Robyn e disponibilidade de intervalos Monte Carlo, com testes
+de regressão e limites de aprovação explícitos.
+
 Licença **Apache-2.0**, autorizada pelo proprietário; consulte [LICENSE](LICENSE) e [NOTICE](NOTICE). O [histórico de CI](https://github.com/matheusfrote/mmm-intelligence-mcp/actions) identifica a revisão realmente testada. Os recibos da entrega anterior [V4.2](docs/v42-followup.md) permanecem históricos. O CI atual combina cobertura da matriz e dos três motores, exige 100% e verifica separadamente JavaScript e R. Não há publicação PyPI ou serviço externo nesta entrega.
 
 ## Começar
@@ -110,6 +122,15 @@ Use pymc_marketing ou meta_robyn nos outros adaptadores. Robyn requer `test_frac
 
 ## Arquitetura e limites
 
+A [camada de validação científica](docs/scientific-validation.md) amplia `audit_model`
+com `scientific`, preservando a chamada anterior. Ela separa funcionamento,
+adequação estatística e força da evidência causal; coleta cadeias/MCSE/PPC nos
+workers nativos, mede estabilidade e executa Monte Carlo Ridge com verdade
+conhecida. O dashboard apresenta os resultados e permite exportar o relatório.
+O workflow científico extenso é manual e separado dos smokes. Nenhum resultado
+sintético certifica campanhas reais. Consulte os [resultados executados e
+pendências científicas](docs/scientific-validation-results.md).
+
 Servidor, contratos, validação, modelagem, análise, simulação, otimização, persistência, renderização e integrações são módulos separados em src/mmm_intelligence. Motores externos usam workers independentes e serialização Protobuf, NetCDF ou JSON oficial; não há fallback Ridge com outro rótulo nem uso de pickle/RDS.
 
 Bootstrap produz intervalos da **média condicional** com formas/inputs fixos; não é intervalo preditivo completo. Calibração é reponderação aproximada, sem demonstrar randomização ou transporte. Bom R² não certifica atribuição por canal. Diagnósticos e alertas permanecem visíveis, inclusive quando a convergência é ruim.
@@ -135,6 +156,7 @@ Arquivos são acessados por IDs. Dados reais exigem MMM_ALLOW_REAL_DATA=true no 
 | MMM_HTTP_MAX_CONCURRENT | 4 requisições simultâneas por usuário |
 | MMM_MERIDIAN_PYTHON / MMM_PYMC_PYTHON / MMM_ROBYN_PYTHON | Python de cada runtime opcional |
 | MMM_RSCRIPT | Executável Rscript portátil |
+| MMM_R_LIBRARY | Biblioteca R privada; informe caminho absoluto ao instalar o wheel fora do checkout |
 | MMM_BACKEND_TIMEOUT_SECONDS | 900 |
 | MMM_WORKER_CPU_PERCENT / MMM_WORKER_MEMORY_MB | 50 / 4096, Job Object Windows |
 

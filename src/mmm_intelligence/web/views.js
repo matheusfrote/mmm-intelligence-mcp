@@ -494,6 +494,173 @@ function results(c) {
       ),
     );
   c.root.append(diagnostics);
+  c.root.append(scientificEvidence(c, a));
+}
+export function scientificEvidence(c, analysis) {
+  const p = panel("Validação científica"),
+    config = jsonInput("Protocolo científico", { refit: false }),
+    out = el("div");
+  p.append(
+    el(
+      "p",
+      "Funcionamento, adequação estatística e evidência causal são avaliações independentes. Ative refit no protocolo para executar sensibilidade; ajustes nativos podem demorar.",
+    ),
+    config.wrap,
+  );
+  const labels = {
+    passed: "Aprovado no escopo operacional",
+    passed_for_protocol: "Critérios medidos atendidos",
+    failed: "Reprovado",
+    inconclusive: "Inconclusivo",
+    not_assessed: "Não avaliado",
+    simulation_only: "Somente simulação",
+    contradicted: "Hipóteses ou evidências contraditórias",
+    experimental_support_pending_external_review:
+      "Suporte experimental; revisão externa pendente",
+  };
+  const show = (r) => {
+    const classifications = r.classifications;
+    out.replaceChildren(
+      table(
+        [
+          {
+            dimensão: "Validação operacional",
+            resultado:
+              labels[classifications.operational.status] ??
+              classifications.operational.status,
+          },
+          {
+            dimensão: "Adequação estatística",
+            resultado:
+              labels[classifications.statistical.status] ??
+              classifications.statistical.status,
+          },
+          {
+            dimensão: "Força da evidência causal",
+            resultado:
+              labels[classifications.causal.status] ??
+              classifications.causal.status,
+          },
+        ],
+        ["dimensão", "resultado"],
+      ),
+      el(
+        "p",
+        "Convergência e boa previsão não demonstram causalidade. Dados sintéticos não certificam efeitos reais.",
+        "notice",
+      ),
+    );
+    if (r.scientific_diagnostics?.parameters?.length)
+      out.append(
+        table(r.scientific_diagnostics.parameters, [
+          "parameter",
+          "diagnostic_status",
+          "r_hat",
+          "ess_bulk",
+          "ess_tail",
+          "mcse_mean",
+          "mcse_sd_ratio",
+        ]),
+      );
+    const traces = r.scientific_diagnostics?.trace_series;
+    if (traces?.length) {
+      const chosen = select(
+          "Parâmetro para inspecionar cadeias",
+          traces.map((t, i) => [String(i), t.parameter]),
+        ),
+        graph = el("div");
+      const draw = () => {
+        const t = traces[Number(chosen.input.value)],
+          keys = t.chains.map((_, i) => `cadeia_${i + 1}`),
+          rows = t.draw_indices.map((index, j) => ({
+            date: String(index),
+            ...Object.fromEntries(keys.map((key, i) => [key, t.chains[i][j]])),
+          }));
+        graph.replaceChildren(
+          lineChart(rows, keys, {
+            label: `Traços das cadeias: ${t.parameter}`,
+          }),
+        );
+      };
+      chosen.input.addEventListener("change", draw);
+      draw();
+      out.append(
+        chosen.wrap,
+        graph,
+        el(
+          "p",
+          "O gráfico usa posições reais reduzidas para exibição. R-hat, ESS e MCSE usam todas as amostras; inspeção visual requer revisão humana.",
+        ),
+      );
+    }
+    if (r.posterior_predictive_check?.series?.length)
+      out.append(
+        lineChart(
+          r.posterior_predictive_check.series,
+          ["observed", "mean", "lower", "upper"],
+          { label: "Verificação preditiva em dados de teste" },
+        ),
+      );
+    if (r.stability?.runs?.length)
+      out.append(
+        detail(
+          "Sensibilidade, regularização e buscas independentes",
+          r.stability,
+        ),
+      );
+    for (const study of [r.monte_carlo, r.native_monte_carlo]) {
+      if (study?.summaries?.length)
+        out.append(
+          table(study.summaries, [
+            "scenario",
+            "channel",
+            "attempted",
+            "successful",
+            "interval_method",
+            "intervals_available",
+            "bias",
+            "rmse",
+            "interval_coverage",
+            "coverage_mcse",
+            "mean_interval_width",
+          ]),
+        );
+    }
+    if (analysis.conditional_linear_inference)
+      out.append(
+        detail(
+          "Inferência linear condicional — HC3/HAC",
+          analysis.conditional_linear_inference,
+        ),
+      );
+    out.append(detail("Critérios, alertas, proveniência e limitações", r));
+    if (r.artifact_id)
+      out.append(
+        button("Baixar relatório científico", () =>
+          download(JSON.stringify(r, null, 2), "validacao-cientifica.json"),
+        ),
+      );
+  };
+  if (analysis.scientific_validation?.classifications)
+    show(analysis.scientific_validation);
+  p.append(
+    job(
+      c,
+      "Executar validação científica",
+      "audit_model",
+      () => ({
+        model_id: analysis.model_id,
+        backend: c.state.backend,
+        scientific: JSON.parse(config.input.value),
+      }),
+      (r) => {
+        c.state.analysis.scientific_validation = r;
+        show(r);
+      },
+    ),
+    out,
+  );
+  return p;
 }
 function comparison(c) {
   head(
@@ -858,7 +1025,14 @@ function reports(c) {
         c,
         `Exportar ${format.toUpperCase()}`,
         "export_analysis",
-        { model_id: a.model_id, backend: c.state.backend, format },
+        {
+          model_id: a.model_id,
+          backend: c.state.backend,
+          format,
+          ...(a.scientific_validation?.artifact_id
+            ? { scientific_report_id: a.scientific_validation.artifact_id }
+            : {}),
+        },
         (r) =>
           download(
             r.content,

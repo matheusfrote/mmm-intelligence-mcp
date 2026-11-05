@@ -11,10 +11,21 @@ import time
 import urllib.error
 import urllib.request
 from concurrent.futures import ThreadPoolExecutor
+from datetime import date
 from pathlib import Path
 from uuid import uuid4
 
 ROOT = Path(__file__).resolve().parents[1]
+
+
+def binary_repository(snapshot):
+    """Only the reviewed official repository or a dated Posit CRAN snapshot."""
+    if snapshot is None:
+        return "https://cloud.r-project.org/bin/windows/contrib/4.5/"
+    if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", snapshot):
+        raise ValueError("A fixed YYYY-MM-DD snapshot is required")
+    date.fromisoformat(snapshot)
+    return "https://packagemanager.posit.co/cran/" + snapshot + "/bin/windows/contrib/4.5/"
 
 
 def download_verified(url, path, sha256):
@@ -59,14 +70,16 @@ def install(library, offline):
     manifest = json.loads(
         (ROOT / "requirements/robyn-r-win-binaries.json").read_text(encoding="utf-8")
     )
-    cache = ROOT / "var/r-binary-cache"
+    snapshot = manifest.get("snapshot")
+    repository = binary_repository(snapshot)
+    cache = ROOT / "var/r-binary-cache" / (snapshot or "")
     cache.mkdir(parents=True, exist_ok=True)
 
     def archive(record):
         assert re.fullmatch(r"[A-Za-z][A-Za-z0-9._]*", record["package"])
         assert re.fullmatch(r"[A-Za-z0-9.-]+", record["version"])
         name = record["package"] + "_" + record["version"] + ".zip"
-        assert record["url"] == "https://cloud.r-project.org/bin/windows/contrib/4.5/" + name
+        assert record["url"] == repository + name
         path = cache / name
         if not path.exists():
             if offline:

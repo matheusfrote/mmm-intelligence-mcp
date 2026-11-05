@@ -13,8 +13,48 @@ import os
 import subprocess  # nosec B404
 import sys
 import traceback
-from importlib.metadata import version
+from importlib.metadata import PackageNotFoundError, version
 from pathlib import Path
+
+
+def sampling_warning(request):
+    short = request["draws"] < 1000 or request["tune"] < 1000 or request["chains"] < 4
+    return (
+        "SHORT_CHAINS: functional sampling does not establish convergence"
+        if short
+        else "DIAGNOSTICS_REQUIRED: analytical sampling budget alone does not establish convergence"
+    )
+
+
+def runtime_versions(backend):
+    packages = {
+        "google_meridian": [
+            "google-meridian",
+            "jax",
+            "tensorflow",
+            "tensorflow-probability",
+            "arviz",
+            "numpy",
+            "scipy",
+        ],
+        "pymc_marketing": [
+            "pymc-marketing",
+            "pymc",
+            "pytensor",
+            "arviz",
+            "arviz-stats",
+            "numpy",
+            "scipy",
+        ],
+        "meta_robyn": ["nevergrad", "numpy", "scipy"],
+    }
+    result = {}
+    for package in packages[backend]:
+        try:
+            result[package] = version(package)
+        except PackageNotFoundError:
+            result[package] = None
+    return result
 
 
 def declared_target_type(dataset, target_column):
@@ -208,7 +248,7 @@ def pymc_effective_configuration(model, target_type):
     from pymc_marketing.serialization import serialization
 
     return {
-        "prior_source": "package_defaults_no_custom_priors",
+        "prior_source": "Explicit Normal/Laplace baseline priors with declared scale multiplier; native media/likelihood defaults",
         "model_config": serialization.serialize_model_config(model.model_config),
         "adstock": serialization.serialize(model.adstock),
         "saturation": serialization.serialize(model.saturation),
@@ -223,7 +263,7 @@ def meridian_effective_configuration(model):
 
     serde = distribution.DistributionSerde(function_registry.FunctionRegistry())
     return {
-        "prior_source": "package_defaults_no_custom_priors",
+        "prior_source": "Native defaults with declared scale multiplier for ROI, knots and control priors",
         "configured_priors": MessageToDict(serde.serialize(model.model_spec.prior)),
         "effective_broadcast_priors": MessageToDict(serde.serialize(model.prior_broadcast)),
         "media_prior_type": model.model_spec.media_prior_type,
@@ -245,7 +285,7 @@ def verify_restoration(before, after, backend, tolerance):
         raise ValueError(backend + " persistence changed predictions")
 
 
-def meridian_diagnostics(inference_data, request):
+def meridian_diagnostics(inference_data, request, fixed=None):
     import arviz as az
 
     diagnostics = {}
@@ -256,7 +296,14 @@ def meridian_diagnostics(inference_data, request):
         convergence_certified=False,
     )
     try:
-        summary = az.summary(inference_data, kind="diagnostics", round_to="none")
+        summary = az.summary(
+            inference_data,
+            var_names=[
+                name for name in inference_data["posterior"].data_vars if name not in (fixed or {})
+            ],
+            kind="diagnostics",
+            round_to="none",
+        )
         diagnostics.update(summarize_diagnostics(summary))
         diagnostics["summary_available"] = True
     except (ValueError, KeyError, TypeError):
@@ -264,12 +311,32 @@ def meridian_diagnostics(inference_data, request):
         diagnostics["summary_available"] = False
         diagnostics["summary_unavailable_reason"] = "ArviZ diagnostic summary unavailable"
     diagnostics.update(divergence_diagnostics(inference_data))
+    diagnostics["fixed_parameters"] = fixed or {}
     return diagnostics
+
+
+def pymc_conditional_means(model, frame, seed):
+    """Native identity-link conditional means; never observation-noise differences."""
+    import numpy as np
+
+    if model.link.value != "identity":
+        raise ValueError("Conditional effect adapter requires the native identity link")
+    values = model.sample_posterior_predictive(
+        X=frame,
+        extend_idata=False,
+        combined=False,
+        include_last_observations=False,
+        random_seed=seed,
+        progressbar=False,
+        var_names=["mu"],
+    )
+    return np.asarray(model.data.to_original_scale(values["mu"])).reshape(-1, len(frame))
 
 
 def pymc(payload, root):
     import numpy as np
     import pandas as pd
+    from native_scientific import calendar_design, scale_controls
     from pymc_marketing.mmm.components.adstock import GeometricAdstock
     from pymc_marketing.mmm.components.saturation import LogisticSaturation
     from pymc_marketing.mmm.mmm import MMM
@@ -279,7 +346,13 @@ def pymc(payload, root):
         stored = payload["model"]
         req = stored["request"]
         future = payload["future_rows"]
-        combined = pd.DataFrame(pymc_future_rows(stored, future))
+        combined_rows = pymc_future_rows(stored, future)
+        if stored.get("baseline_policy"):
+            combined_rows, _ = calendar_design(
+                combined_rows, req["date_column"], policy=stored["baseline_policy"]
+            )
+            combined_rows, _ = scale_controls(combined_rows, [], 0, stored["control_scaling"])
+        combined = pd.DataFrame(combined_rows)
         combined[req["date_column"]] = pd.to_datetime(combined[req["date_column"]])
         native.write_bytes(base64.b64decode(stored["native_base64"], validate=True))
         model = MMM.load(str(native))
@@ -313,18 +386,34 @@ def pymc(payload, root):
         req = payload["request"]
         dataset = payload["dataset"]
         df = pd.DataFrame(dataset["rows"])
+        baseline_policy, control_scaling = None, None
+        native_controls = list(req["control_columns"])
+        if req.get("baseline", "legacy") == "calendar":
+            augmented, baseline_policy = calendar_design(dataset["rows"], req["date_column"])
+            native_controls.extend(baseline_policy["columns"])
+            cutoff = len(augmented) - int(np.ceil(len(augmented) * req["test_fraction"]))
+            augmented, control_scaling = scale_controls(augmented, native_controls, cutoff)
+            df = pd.DataFrame(augmented)
         dates = df[req["date_column"]].tolist()
         df[req["date_column"]] = pd.to_datetime(df[req["date_column"]])
         cutoff = len(df) - int(np.ceil(len(df) * req["test_fraction"]))
-        x = df[[req["date_column"], *req["media_columns"], *req["control_columns"]]].copy()
+        x = df[[req["date_column"], *req["media_columns"], *native_controls]].copy()
+        from pymc_extras.prior import Prior
+
+        prior_scale = req.get("prior_scale_multiplier", 1.0)
         model = MMM(
             date_column=req["date_column"],
             target_column=req["target_column"],
             channel_columns=req["media_columns"],
-            control_columns=req["control_columns"] or None,
+            control_columns=native_controls or None,
             adstock=GeometricAdstock(l_max=8),
             saturation=LogisticSaturation(),
             yearly_seasonality=1,
+            model_config={
+                "intercept": Prior("Normal", mu=0, sigma=2 * prior_scale),
+                "gamma_control": Prior("Normal", mu=0, sigma=2 * prior_scale, dims="control"),
+                "gamma_fourier": Prior("Laplace", mu=0, b=prior_scale, dims="fourier_mode"),
+            },
         )
         y = df[req["target_column"]].copy()
         model.fit(
@@ -337,6 +426,7 @@ def pymc(payload, root):
             random_seed=req["seed"],
             progressbar=False,
             compute_convergence_checks=True,
+            target_accept=req.get("target_accept", 0.8),
         )
         model.add_original_scale_contribution_variable(var=["y"])
 
@@ -353,24 +443,38 @@ def pymc(payload, root):
             return np.asarray(pp["y_original_scale"]).reshape(-1, len(x) - cutoff)
 
         before = prediction(model)
-        model.save(str(native), engine="h5netcdf")
+        from native_persistence import save_pymc_model
+        from native_scientific import compressed_netcdf_encoding
+
+        serialization = save_pymc_model(model, native, compressed_netcdf_encoding)
         restored = MMM.load(str(native))
         after = prediction(restored)
         verify_restoration(before, after, "PyMC", 1e-7)
         # Current ArviZ exposes DataTree diagnostics through xarray accessors.
         idata = model.idata
+        from native_scientific import native_estimates
+
         return {
             "backend": "pymc_marketing",
             "backend_version": version("pymc-marketing"),
+            "baseline_policy": baseline_policy,
+            "control_scaling": control_scaling,
+            "native_runtime_versions": runtime_versions("pymc_marketing"),
+            "native_estimates": native_estimates(idata),
             "native_format": "netcdf-h5netcdf",
+            "native_serialization": serialization,
             "native_base64": base64.b64encode(native.read_bytes()).decode(),
             "dataset": dataset,
             "request": req,
             "cutoff": cutoff,
             "restore_verified": True,
-            "effective_configuration": pymc_effective_configuration(
-                model, declared_target_type(dataset, req["target_column"])
-            ),
+            "effective_configuration": {
+                **pymc_effective_configuration(
+                    model, declared_target_type(dataset, req["target_column"])
+                ),
+                "baseline_policy": baseline_policy,
+                "control_scaling": control_scaling,
+            },
             "test": summarize(
                 before,
                 dates[cutoff:],
@@ -386,14 +490,22 @@ def pymc(payload, root):
                 "convergence_certified": False,
             },
             "warnings": [
-                "FUNCTIONAL_SAMPLING_ONLY: inspect R-hat/ESS/divergences before statistical use",
+                sampling_warning(req),
                 "Predictive intervals are conditional on model assumptions; no causal guarantee",
             ],
         }
     stored = payload["model"]
     req = stored["request"]
-    df = pd.DataFrame(stored["dataset"]["rows"])
-    x = df[[req["date_column"], *req["media_columns"], *req["control_columns"]]].copy()
+    prediction_rows = stored["dataset"]["rows"]
+    native_controls = list(req["control_columns"])
+    if stored.get("baseline_policy"):
+        prediction_rows, _ = calendar_design(
+            prediction_rows, req["date_column"], policy=stored["baseline_policy"]
+        )
+        native_controls.extend(stored["baseline_policy"]["columns"])
+        prediction_rows, _ = scale_controls(prediction_rows, [], 0, stored["control_scaling"])
+    df = pd.DataFrame(prediction_rows)
+    x = df[[req["date_column"], *req["media_columns"], *native_controls]].copy()
     x[req["date_column"]] = pd.to_datetime(x[req["date_column"]])
     mult = payload["request"]["media_multiplier"]
     if set(mult) - set(req["media_columns"]):
@@ -404,6 +516,22 @@ def pymc(payload, root):
     native.write_bytes(base64.b64decode(stored["native_base64"], validate=True))
     model = MMM.load(str(native))
     ensure_original_scale(model)
+    if payload["operation"] == "effect":
+        from native_scientific import paired_effect
+
+        baseline = pymc_conditional_means(model, x, req["seed"])
+        effects = {}
+        for channel in req["media_columns"]:
+            scenario = x.copy()
+            scenario[channel] *= 1.1
+            effects[channel] = paired_effect(
+                baseline, pymc_conditional_means(model, scenario, req["seed"]), cutoff
+            )
+        return {
+            "backend": "pymc_marketing",
+            "effects": effects,
+            "scope": "Joint posterior contrasts of original-scale conditional means; no observation noise",
+        }
     pp = model.sample_posterior_predictive(
         X=x.iloc[cutoff:],
         extend_idata=False,
@@ -413,6 +541,23 @@ def pymc(payload, root):
         progressbar=False,
         var_names=["y_original_scale"],
     )
+    if payload["operation"] == "diagnose":
+        from native_scientific import collect_chains, predictive_check
+
+        return {
+            "diagnostics": {
+                **pymc_diagnostics(model),
+                **divergence_diagnostics(model.idata),
+                **{k: req[k] for k in ("chains", "draws", "tune")},
+            },
+            "scientific_diagnostics": collect_chains(model.idata, "pymc_marketing"),
+            "diagnostic_runtime_versions": runtime_versions("pymc_marketing"),
+            "posterior_predictive_check": predictive_check(
+                np.asarray(pp["y_original_scale"]).reshape(-1, len(df) - cutoff),
+                df[req["target_column"]].iloc[cutoff:].to_numpy(),
+                df[req["date_column"]].iloc[cutoff:].tolist(),
+            ),
+        }
     return {
         "backend": "pymc_marketing",
         "model_id": stored["model_id"],
@@ -429,6 +574,8 @@ def pymc(payload, root):
 
 
 def meridian(payload, root):
+    from native_scientific import calendar_design, meridian_fixed
+
     if payload["operation"] == "train":
         model_rows, observed, cutoff, holdout_policy = prepare_meridian_holdout(
             payload["dataset"], payload["request"]
@@ -438,7 +585,7 @@ def meridian(payload, root):
     from meridian.analysis import analyzer
     from meridian.data import load
     from meridian.model import model as model_module
-    from meridian.model import spec
+    from meridian.model import prior_distribution, spec
     from meridian.schema.serde import meridian_serde
 
     native = root / "model.binpb"
@@ -446,6 +593,14 @@ def meridian(payload, root):
         req = payload["request"]
         dataset = payload["dataset"]
         df = pd.DataFrame(model_rows)
+        baseline_policy = None
+        native_controls = list(req["control_columns"])
+        if req.get("baseline", "legacy") == "calendar":
+            model_rows, baseline_policy = calendar_design(
+                model_rows, req["date_column"], seasonal=True
+            )
+            native_controls.extend(baseline_policy["columns"])
+            df = pd.DataFrame(model_rows)
         # Spend is an explicitly declared proxy for exposure in this synthetic adapter.
         exposure = []
         for c in req["media_columns"]:
@@ -455,7 +610,7 @@ def meridian(payload, root):
         mapping = load.CoordToColumns(
             time=req["date_column"],
             kpi=req["target_column"],
-            controls=req["control_columns"] or None,
+            controls=native_controls or None,
             media=exposure,
             media_spend=req["media_columns"],
         )
@@ -467,17 +622,34 @@ def meridian(payload, root):
             media_spend_to_channel={c: c for c in req["media_columns"]},
         ).load()
         holdout = spec.HoldoutSpec(spec=[spec.DateRange(df[req["date_column"]].iloc[cutoff], None)])
+        from dataclasses import replace
+
+        native_prior = prior_distribution.PriorDistribution()
+        multiplier = req.get("prior_scale_multiplier", 1.0)
+        native_prior = replace(
+            native_prior,
+            gamma_c=native_prior.gamma_c.copy(scale=native_prior.gamma_c.scale * multiplier),
+            knot_values=native_prior.knot_values.copy(
+                scale=native_prior.knot_values.scale * multiplier
+            ),
+            roi_m=native_prior.roi_m.copy(scale=native_prior.roi_m.scale * multiplier),
+        )
         fitted = model_module.Meridian(
-            input_data=data, model_spec=spec.ModelSpec(max_lag=8, knots=4, holdout=holdout)
+            input_data=data,
+            model_spec=spec.ModelSpec(
+                max_lag=8, knots=1 if baseline_policy else 4, holdout=holdout, prior=native_prior
+            ),
         )
         fitted.sample_prior(n_draws=req["draws"], seed=req["seed"])
+        from native_scientific import meridian_sampler_options
+
         fitted.sample_posterior(
             n_chains=req["chains"],
             n_adapt=req["tune"],
             n_burnin=req["tune"],
             n_keep=req["draws"],
             seed=req["seed"],
-            max_tree_depth=8,
+            **meridian_sampler_options(req),
         )
 
         def prediction(m):
@@ -492,10 +664,15 @@ def meridian(payload, root):
         restored = meridian_serde.load_meridian(str(native))
         after = prediction(restored)
         verify_restoration(before, after, "Meridian", 1e-6)
-        diagnostics = meridian_diagnostics(fitted.inference_data, req)
+        diagnostics = meridian_diagnostics(fitted.inference_data, req, meridian_fixed(fitted))
+        from native_scientific import native_estimates
+
         return {
             "backend": "google_meridian",
             "backend_version": version("google-meridian"),
+            "baseline_policy": baseline_policy,
+            "native_runtime_versions": runtime_versions("google_meridian"),
+            "native_estimates": native_estimates(fitted.inference_data),
             "native_format": "protobuf-binpb",
             "native_base64": base64.b64encode(native.read_bytes()).decode(),
             "dataset": dataset,
@@ -503,7 +680,11 @@ def meridian(payload, root):
             "cutoff": cutoff,
             "restore_verified": True,
             "holdout_policy": holdout_policy,
-            "effective_configuration": meridian_effective_configuration(fitted),
+            "effective_configuration": {
+                **meridian_effective_configuration(fitted),
+                "baseline_policy": baseline_policy,
+                "knots": fitted.model_spec.knots,
+            },
             "test": summarize(
                 before[:, cutoff:],
                 df[req["date_column"]].iloc[cutoff:].tolist(),
@@ -512,7 +693,7 @@ def meridian(payload, root):
             ),
             "diagnostics": diagnostics,
             "warnings": [
-                "SHORT_CHAINS: functional test does not establish convergence",
+                sampling_warning(req),
                 "SPEND_PROXY: synthetic spend used as exposure proxy",
                 "Holdout target uses train-only placeholders in native preprocessing",
                 "No demonstrated causal attribution",
@@ -542,6 +723,44 @@ def meridian(payload, root):
     )
     n = len(stored["dataset"]["rows"])
     cutoff = stored["cutoff"]
+    if payload["operation"] == "effect":
+        from meridian.analysis import tensors
+        from native_scientific import paired_effect
+
+        effects = {}
+        for index, channel in enumerate(req["media_columns"]):
+            changed = np.array(fitted.input_data.media.values, copy=True)
+            changed[:, :, index] *= 1.1
+            scenario = np.asarray(
+                analyzer.Analyzer(fitted).expected_outcome(
+                    new_data=tensors.DataTensors(media=changed),
+                    aggregate_geos=True,
+                    aggregate_times=False,
+                    use_kpi=True,
+                )
+            )
+            effects[channel] = paired_effect(out.reshape(-1, n), scenario.reshape(-1, n), cutoff)
+        return {
+            "backend": "google_meridian",
+            "effects": effects,
+            "scope": "Joint posterior contrasts of native original-scale conditional means; no observation noise",
+        }
+    if payload["operation"] == "diagnose":
+        from native_scientific import collect_chains, meridian_ppc
+
+        rows = stored["dataset"]["rows"]
+        dates = [r[req["date_column"]] for r in rows]
+        observed = np.asarray([r[req["target_column"]] for r in rows])
+        return {
+            "diagnostics": meridian_diagnostics(fitted.inference_data, req, meridian_fixed(fitted)),
+            "scientific_diagnostics": collect_chains(
+                fitted.inference_data, "google_meridian", meridian_fixed(fitted)
+            ),
+            "diagnostic_runtime_versions": runtime_versions("google_meridian"),
+            "posterior_predictive_check": meridian_ppc(
+                fitted, out, observed, dates, cutoff, req["seed"]
+            ),
+        }
     return {
         "backend": "google_meridian",
         "model_id": stored["model_id"],
@@ -567,6 +786,14 @@ def pymc_future_rows(stored, future_rows):
         {c: r[c] for c in columns}
         for r in [*stored["dataset"]["rows"][stored["cutoff"] :], *future_rows]
     ]
+
+
+def r_timeout():
+    """Leave cleanup time inside the validated parent worker deadline."""
+    parent = int(os.environ.get("MMM_BACKEND_TIMEOUT_SECONDS", "900"))
+    if not 10 <= parent <= 3600:
+        raise ValueError("Backend timeout must be between 10 and 3600 seconds")
+    return parent - min(50, max(1, parent // 10))
 
 
 def main():
@@ -601,13 +828,18 @@ def main():
                     str(r_result),
                 ],
                 check=True,
-                timeout=850,
+                timeout=r_timeout(),
             )
             result = json.loads(r_result.read_text(encoding="utf-8"))
             if payload["operation"] == "train":
                 native = root / "model.robyn.json"
                 result.update(
                     native_format="robyn-json",
+                    native_runtime_versions={
+                        **runtime_versions("meta_robyn"),
+                        "R": result["r_version"],
+                        "Robyn": result["backend_version"],
+                    },
                     native_base64=base64.b64encode(native.read_bytes()).decode(),
                     dataset=payload["dataset"],
                     request=payload["request"],

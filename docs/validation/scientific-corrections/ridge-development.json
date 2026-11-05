@@ -1,0 +1,626 @@
+{
+  "scope": "Actual simulation aggregates; full trial records retained locally and reproducible from configuration/seeds",
+  "source_receipt": "var/ridge-inference-development.json",
+  "source_receipt_sha256": "5f37db0e2eea3027f323ead734a9154a8a99fd3706f44fc6d68b964cc90629aa",
+  "schema_version": "monte-carlo-v2",
+  "backend": "ridge",
+  "synthetic": true,
+  "configuration": {
+    "interval_method": "projected_hc3",
+    "replications": 1000,
+    "periods": 156,
+    "seed": 1103,
+    "bootstrap_samples": 40,
+    "minimum_replications_for_assessment": 100,
+    "coverage_tolerance": 0.05,
+    "max_absolute_bias": null,
+    "max_rmse": null,
+    "scenarios": [
+      "well_specified",
+      "null_effect"
+    ]
+  },
+  "attempted": 2000,
+  "versions": {
+    "numpy": "2.4.6",
+    "scipy": "1.17.1",
+    "mmm-intelligence-mcp": "0.4.0"
+  },
+  "summaries": [
+    {
+      "scenario": "well_specified",
+      "channel": "spend_search",
+      "attempted": 1000,
+      "successful": 1000,
+      "interval_method": "projected_hc3",
+      "intervals_available": 1000,
+      "mean_interval_width": 14.199748945253305,
+      "failed": 0,
+      "bias": -0.09298541749122455,
+      "bias_mcse": 0.13171258486590515,
+      "rmse": 4.164072897406124,
+      "interval_coverage": 0.902,
+      "coverage_mcse": 0.009401914698613255,
+      "coverage_interval_95": [
+        0.882005297700964,
+        0.9189179884766496
+      ],
+      "nominal_coverage": 0.9,
+      "rank_deficient_runs": 0
+    },
+    {
+      "scenario": "well_specified",
+      "channel": "spend_social",
+      "attempted": 1000,
+      "successful": 1000,
+      "interval_method": "projected_hc3",
+      "intervals_available": 1000,
+      "mean_interval_width": 14.178103699170817,
+      "failed": 0,
+      "bias": -0.0958491219273407,
+      "bias_mcse": 0.1260791662828954,
+      "rmse": 3.9861318679383446,
+      "interval_coverage": 0.926,
+      "coverage_mcse": 0.008277922444671728,
+      "coverage_interval_95": [
+        0.9080945943544141,
+        0.940645007415893
+      ],
+      "nominal_coverage": 0.9,
+      "rank_deficient_runs": 0
+    },
+    {
+      "scenario": "well_specified",
+      "channel": "spend_video",
+      "attempted": 1000,
+      "successful": 1000,
+      "interval_method": "projected_hc3",
+      "intervals_available": 1000,
+      "mean_interval_width": 14.104105916939039,
+      "failed": 0,
+      "bias": 0.06488636216155326,
+      "bias_mcse": 0.13542361976369632,
+      "rmse": 4.280820887762867,
+      "interval_coverage": 0.886,
+      "coverage_mcse": 0.010050074626588601,
+      "coverage_interval_95": [
+        0.8648073995463684,
+        0.904238342902783
+      ],
+      "nominal_coverage": 0.9,
+      "rank_deficient_runs": 0
+    },
+    {
+      "scenario": "null_effect",
+      "channel": "spend_search",
+      "attempted": 1000,
+      "successful": 1000,
+      "interval_method": "projected_hc3",
+      "intervals_available": 1000,
+      "mean_interval_width": 7.476066455377817,
+      "failed": 0,
+      "bias": 1.8100518603274955,
+      "bias_mcse": 0.07859330620733922,
+      "rmse": 3.0736002683977968,
+      "interval_coverage": 0.947,
+      "coverage_mcse": 0.007084560677981384,
+      "coverage_interval_95": [
+        0.9313253831625082,
+        0.9592534947514054
+      ],
+      "nominal_coverage": 0.9,
+      "rank_deficient_runs": 0
+    },
+    {
+      "scenario": "null_effect",
+      "channel": "spend_social",
+      "attempted": 1000,
+      "successful": 1000,
+      "interval_method": "projected_hc3",
+      "intervals_available": 1000,
+      "mean_interval_width": 7.047262585971806,
+      "failed": 0,
+      "bias": 1.5617509232111901,
+      "bias_mcse": 0.07511797973950024,
+      "rmse": 2.841853992627846,
+      "interval_coverage": 0.956,
+      "coverage_mcse": 0.006485676526007139,
+      "coverage_interval_95": [
+        0.9414482108495923,
+        0.9670617854115815
+      ],
+      "nominal_coverage": 0.9,
+      "rank_deficient_runs": 0
+    },
+    {
+      "scenario": "null_effect",
+      "channel": "spend_video",
+      "attempted": 1000,
+      "successful": 1000,
+      "interval_method": "projected_hc3",
+      "intervals_available": 1000,
+      "mean_interval_width": 7.36874800297392,
+      "failed": 0,
+      "bias": 1.817312004871667,
+      "bias_mcse": 0.08156112711225837,
+      "rmse": 3.1540748503193177,
+      "interval_coverage": 0.937,
+      "coverage_mcse": 0.007683163410991592,
+      "coverage_interval_95": [
+        0.920205076295354,
+        0.9504503367882711
+      ],
+      "nominal_coverage": 0.9,
+      "rank_deficient_runs": 0
+    }
+  ],
+  "method_comparisons": [
+    {
+      "scenario": "well_specified",
+      "channel": "spend_search",
+      "attempted": 1000,
+      "successful": 1000,
+      "interval_method": "legacy_percentile",
+      "intervals_available": 1000,
+      "mean_interval_width": 11.74664261740644,
+      "failed": 0,
+      "bias": -0.09298541749122455,
+      "bias_mcse": 0.13171258486590515,
+      "rmse": 4.164072897406124,
+      "interval_coverage": 0.829,
+      "coverage_mcse": 0.011906258858264422,
+      "coverage_interval_95": [
+        0.8044158480970535,
+        0.8510661448194513
+      ],
+      "nominal_coverage": 0.9,
+      "rank_deficient_runs": 0
+    },
+    {
+      "scenario": "well_specified",
+      "channel": "spend_social",
+      "attempted": 1000,
+      "successful": 1000,
+      "interval_method": "legacy_percentile",
+      "intervals_available": 1000,
+      "mean_interval_width": 11.78804565886123,
+      "failed": 0,
+      "bias": -0.0958491219273407,
+      "bias_mcse": 0.1260791662828954,
+      "rmse": 3.9861318679383446,
+      "interval_coverage": 0.839,
+      "coverage_mcse": 0.011622349160131098,
+      "coverage_interval_95": [
+        0.8149299903062807,
+        0.860475467440513
+      ],
+      "nominal_coverage": 0.9,
+      "rank_deficient_runs": 0
+    },
+    {
+      "scenario": "well_specified",
+      "channel": "spend_video",
+      "attempted": 1000,
+      "successful": 1000,
+      "interval_method": "legacy_percentile",
+      "intervals_available": 1000,
+      "mean_interval_width": 11.696195534598013,
+      "failed": 0,
+      "bias": 0.06488636216155326,
+      "bias_mcse": 0.13542361976369632,
+      "rmse": 4.280820887762867,
+      "interval_coverage": 0.805,
+      "coverage_mcse": 0.012528966437819202,
+      "coverage_interval_95": [
+        0.77929577121571,
+        0.8283699061081016
+      ],
+      "nominal_coverage": 0.9,
+      "rank_deficient_runs": 0
+    },
+    {
+      "scenario": "null_effect",
+      "channel": "spend_search",
+      "attempted": 1000,
+      "successful": 1000,
+      "interval_method": "legacy_percentile",
+      "intervals_available": 1000,
+      "mean_interval_width": 7.526044863089784,
+      "failed": 0,
+      "bias": 1.8100518603274955,
+      "bias_mcse": 0.07859330620733922,
+      "rmse": 3.0736002683977968,
+      "interval_coverage": 0.001,
+      "coverage_mcse": 0.0009994998749374609,
+      "coverage_interval_95": [
+        0.00017654637062607809,
+        0.0056425585979579355
+      ],
+      "nominal_coverage": 0.9,
+      "rank_deficient_runs": 0
+    },
+    {
+      "scenario": "null_effect",
+      "channel": "spend_social",
+      "attempted": 1000,
+      "successful": 1000,
+      "interval_method": "legacy_percentile",
+      "intervals_available": 1000,
+      "mean_interval_width": 7.28711964832226,
+      "failed": 0,
+      "bias": 1.5617509232111901,
+      "bias_mcse": 0.07511797973950024,
+      "rmse": 2.841853992627846,
+      "interval_coverage": 0.0,
+      "coverage_mcse": 0.0,
+      "coverage_interval_95": [
+        2.168404344971009e-19,
+        0.0038267584855551234
+      ],
+      "nominal_coverage": 0.9,
+      "rank_deficient_runs": 0
+    },
+    {
+      "scenario": "null_effect",
+      "channel": "spend_video",
+      "attempted": 1000,
+      "successful": 1000,
+      "interval_method": "legacy_percentile",
+      "intervals_available": 1000,
+      "mean_interval_width": 7.4484897967212635,
+      "failed": 0,
+      "bias": 1.817312004871667,
+      "bias_mcse": 0.08156112711225837,
+      "rmse": 3.1540748503193177,
+      "interval_coverage": 0.001,
+      "coverage_mcse": 0.0009994998749374609,
+      "coverage_interval_95": [
+        0.00017654637062607809,
+        0.0056425585979579355
+      ],
+      "nominal_coverage": 0.9,
+      "rank_deficient_runs": 0
+    },
+    {
+      "scenario": "well_specified",
+      "channel": "spend_search",
+      "attempted": 1000,
+      "successful": 1000,
+      "interval_method": "projected_hc3",
+      "intervals_available": 1000,
+      "mean_interval_width": 14.199748945253305,
+      "failed": 0,
+      "bias": -0.09298541749122455,
+      "bias_mcse": 0.13171258486590515,
+      "rmse": 4.164072897406124,
+      "interval_coverage": 0.902,
+      "coverage_mcse": 0.009401914698613255,
+      "coverage_interval_95": [
+        0.882005297700964,
+        0.9189179884766496
+      ],
+      "nominal_coverage": 0.9,
+      "rank_deficient_runs": 0
+    },
+    {
+      "scenario": "well_specified",
+      "channel": "spend_social",
+      "attempted": 1000,
+      "successful": 1000,
+      "interval_method": "projected_hc3",
+      "intervals_available": 1000,
+      "mean_interval_width": 14.178103699170817,
+      "failed": 0,
+      "bias": -0.0958491219273407,
+      "bias_mcse": 0.1260791662828954,
+      "rmse": 3.9861318679383446,
+      "interval_coverage": 0.926,
+      "coverage_mcse": 0.008277922444671728,
+      "coverage_interval_95": [
+        0.9080945943544141,
+        0.940645007415893
+      ],
+      "nominal_coverage": 0.9,
+      "rank_deficient_runs": 0
+    },
+    {
+      "scenario": "well_specified",
+      "channel": "spend_video",
+      "attempted": 1000,
+      "successful": 1000,
+      "interval_method": "projected_hc3",
+      "intervals_available": 1000,
+      "mean_interval_width": 14.104105916939039,
+      "failed": 0,
+      "bias": 0.06488636216155326,
+      "bias_mcse": 0.13542361976369632,
+      "rmse": 4.280820887762867,
+      "interval_coverage": 0.886,
+      "coverage_mcse": 0.010050074626588601,
+      "coverage_interval_95": [
+        0.8648073995463684,
+        0.904238342902783
+      ],
+      "nominal_coverage": 0.9,
+      "rank_deficient_runs": 0
+    },
+    {
+      "scenario": "null_effect",
+      "channel": "spend_search",
+      "attempted": 1000,
+      "successful": 1000,
+      "interval_method": "projected_hc3",
+      "intervals_available": 1000,
+      "mean_interval_width": 7.476066455377817,
+      "failed": 0,
+      "bias": 1.8100518603274955,
+      "bias_mcse": 0.07859330620733922,
+      "rmse": 3.0736002683977968,
+      "interval_coverage": 0.947,
+      "coverage_mcse": 0.007084560677981384,
+      "coverage_interval_95": [
+        0.9313253831625082,
+        0.9592534947514054
+      ],
+      "nominal_coverage": 0.9,
+      "rank_deficient_runs": 0
+    },
+    {
+      "scenario": "null_effect",
+      "channel": "spend_social",
+      "attempted": 1000,
+      "successful": 1000,
+      "interval_method": "projected_hc3",
+      "intervals_available": 1000,
+      "mean_interval_width": 7.047262585971806,
+      "failed": 0,
+      "bias": 1.5617509232111901,
+      "bias_mcse": 0.07511797973950024,
+      "rmse": 2.841853992627846,
+      "interval_coverage": 0.956,
+      "coverage_mcse": 0.006485676526007139,
+      "coverage_interval_95": [
+        0.9414482108495923,
+        0.9670617854115815
+      ],
+      "nominal_coverage": 0.9,
+      "rank_deficient_runs": 0
+    },
+    {
+      "scenario": "null_effect",
+      "channel": "spend_video",
+      "attempted": 1000,
+      "successful": 1000,
+      "interval_method": "projected_hc3",
+      "intervals_available": 1000,
+      "mean_interval_width": 7.36874800297392,
+      "failed": 0,
+      "bias": 1.817312004871667,
+      "bias_mcse": 0.08156112711225837,
+      "rmse": 3.1540748503193177,
+      "interval_coverage": 0.937,
+      "coverage_mcse": 0.007683163410991592,
+      "coverage_interval_95": [
+        0.920205076295354,
+        0.9504503367882711
+      ],
+      "nominal_coverage": 0.9,
+      "rank_deficient_runs": 0
+    },
+    {
+      "scenario": "well_specified",
+      "channel": "spend_search",
+      "attempted": 1000,
+      "successful": 1000,
+      "interval_method": "projected_hac",
+      "intervals_available": 1000,
+      "mean_interval_width": 13.718598685343844,
+      "failed": 0,
+      "bias": -0.09298541749122455,
+      "bias_mcse": 0.13171258486590515,
+      "rmse": 4.164072897406124,
+      "interval_coverage": 0.889,
+      "coverage_mcse": 0.00993373041711924,
+      "coverage_interval_95": [
+        0.8680219923564878,
+        0.9070007895417505
+      ],
+      "nominal_coverage": 0.9,
+      "rank_deficient_runs": 0
+    },
+    {
+      "scenario": "well_specified",
+      "channel": "spend_social",
+      "attempted": 1000,
+      "successful": 1000,
+      "interval_method": "projected_hac",
+      "intervals_available": 1000,
+      "mean_interval_width": 13.646046887260988,
+      "failed": 0,
+      "bias": -0.0958491219273407,
+      "bias_mcse": 0.1260791662828954,
+      "rmse": 3.9861318679383446,
+      "interval_coverage": 0.914,
+      "coverage_mcse": 0.008865889690267975,
+      "coverage_interval_95": [
+        0.8949999687497208,
+        0.9298314752242396
+      ],
+      "nominal_coverage": 0.9,
+      "rank_deficient_runs": 0
+    },
+    {
+      "scenario": "well_specified",
+      "channel": "spend_video",
+      "attempted": 1000,
+      "successful": 1000,
+      "interval_method": "projected_hac",
+      "intervals_available": 1000,
+      "mean_interval_width": 13.591951364159845,
+      "failed": 0,
+      "bias": 0.06488636216155326,
+      "bias_mcse": 0.13542361976369632,
+      "rmse": 4.280820887762867,
+      "interval_coverage": 0.88,
+      "coverage_mcse": 0.010276186062932104,
+      "coverage_interval_95": [
+        0.8583909241522872,
+        0.8987007393986909
+      ],
+      "nominal_coverage": 0.9,
+      "rank_deficient_runs": 0
+    },
+    {
+      "scenario": "null_effect",
+      "channel": "spend_search",
+      "attempted": 1000,
+      "successful": 1000,
+      "interval_method": "projected_hac",
+      "intervals_available": 1000,
+      "mean_interval_width": 7.226526617250418,
+      "failed": 0,
+      "bias": 1.8100518603274955,
+      "bias_mcse": 0.07859330620733922,
+      "rmse": 3.0736002683977968,
+      "interval_coverage": 0.941,
+      "coverage_mcse": 0.007451107300260817,
+      "coverage_interval_95": [
+        0.9246390972285408,
+        0.9539857017871995
+      ],
+      "nominal_coverage": 0.9,
+      "rank_deficient_runs": 0
+    },
+    {
+      "scenario": "null_effect",
+      "channel": "spend_social",
+      "attempted": 1000,
+      "successful": 1000,
+      "interval_method": "projected_hac",
+      "intervals_available": 1000,
+      "mean_interval_width": 6.805186684431518,
+      "failed": 0,
+      "bias": 1.5617509232111901,
+      "bias_mcse": 0.07511797973950024,
+      "rmse": 2.841853992627846,
+      "interval_coverage": 0.946,
+      "coverage_mcse": 0.0071473071852271785,
+      "coverage_interval_95": [
+        0.9302078451539475,
+        0.9583786862769372
+      ],
+      "nominal_coverage": 0.9,
+      "rank_deficient_runs": 0
+    },
+    {
+      "scenario": "null_effect",
+      "channel": "spend_video",
+      "attempted": 1000,
+      "successful": 1000,
+      "interval_method": "projected_hac",
+      "intervals_available": 1000,
+      "mean_interval_width": 7.119568846579594,
+      "failed": 0,
+      "bias": 1.817312004871667,
+      "bias_mcse": 0.08156112711225837,
+      "rmse": 3.1540748503193177,
+      "interval_coverage": 0.937,
+      "coverage_mcse": 0.007683163410991592,
+      "coverage_interval_95": [
+        0.920205076295354,
+        0.9504503367882711
+      ],
+      "nominal_coverage": 0.9,
+      "rank_deficient_runs": 0
+    }
+  ],
+  "causal_identification": false,
+  "limitations": [
+    "Legacy conditional constrained bootstrap retained for comparison; not repaired by relabeling",
+    "Projected HC3/HAC sets use unpenalized full-rank inference with fixed shapes, not a Bayesian posterior",
+    "HC3 assumes independent/martingale errors; HAC requires weak dependence and sufficient history",
+    "No sandwich correction identifies omitted confounders or repairs tracking breaks",
+    "Rank-deficient designs retain point results but refuse effect intervals",
+    "Failures remain in attempted denominators; interval coverage counts available intervals only",
+    "Synthetic recovery cannot establish effects in real campaigns"
+  ],
+  "acceptance": {
+    "status": "inconclusive",
+    "failed": [],
+    "missing": [
+      "absolute_bias_tolerance_missing",
+      "rmse_tolerance_missing"
+    ],
+    "undercoverage": [],
+    "coverage_checks": [
+      {
+        "estimand": "well_specified:spend_search",
+        "coverage": 0.902,
+        "simultaneous_coverage_bounds": [
+          0.8743467726871147,
+          0.9240957468493062
+        ],
+        "minimum_coverage_policy": 0.85
+      },
+      {
+        "estimand": "well_specified:spend_social",
+        "coverage": 0.926,
+        "simultaneous_coverage_bounds": [
+          0.9010933845700344,
+          0.9450173450879638
+        ],
+        "minimum_coverage_policy": 0.85
+      },
+      {
+        "estimand": "well_specified:spend_video",
+        "coverage": 0.886,
+        "simultaneous_coverage_bounds": [
+          0.8567746004749004,
+          0.9098891123138022
+        ],
+        "minimum_coverage_policy": 0.85
+      },
+      {
+        "estimand": "null_effect:spend_search",
+        "coverage": 0.947,
+        "simultaneous_coverage_bounds": [
+          0.9250294883863714,
+          0.9627909251280067
+        ],
+        "minimum_coverage_policy": 0.85
+      },
+      {
+        "estimand": "null_effect:spend_social",
+        "coverage": 0.956,
+        "simultaneous_coverage_bounds": [
+          0.9355074754487498,
+          0.9701885168612199
+        ],
+        "minimum_coverage_policy": 0.85
+      },
+      {
+        "estimand": "null_effect:spend_video",
+        "coverage": 0.937,
+        "simultaneous_coverage_bounds": [
+          0.9135547417890401,
+          0.9544039175080145
+        ],
+        "minimum_coverage_policy": 0.85
+      }
+    ],
+    "policy": {
+      "core_scenarios": [
+        "well_specified",
+        "null_effect"
+      ],
+      "minimum_replications": 100,
+      "coverage_tolerance": 0.05,
+      "max_absolute_bias": null,
+      "max_rmse": null,
+      "coverage_family_size": 6,
+      "family_alpha": 0.05
+    },
+    "causal_identification": false,
+    "scope": "Core DGP conditional-interval screening only; inspect all adverse scenarios, failures and width; cannot certify real effects"
+  }
+}

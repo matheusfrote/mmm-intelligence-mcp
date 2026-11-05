@@ -1,0 +1,30 @@
+{
+  "source_receipt": "var/native-public-contracts.json",
+  "source_receipt_sha256": "08439615988c0a2a1f1d43024b783cb25a9e6aec303a9fa3217c5470ca9c76aa",
+  "result": [
+    {
+      "backend": "google_meridian",
+      "model_id": "science-refit-0bf16f9a695f21b2c6e66a45f14def948bb8dd24",
+      "artifact_id": "scientific_validation-80d8e1ea423a42e7bef0b5d5c9a5bffb",
+      "transport": "official_sdk_stdio",
+      "public_native_recovery_contract_verified": true,
+      "scope": "Actual prior native model plus invalid-design rejection; no new sampler or convergence claim"
+    },
+    {
+      "backend": "pymc_marketing",
+      "model_id": "science-refit-007efe1d96f78363f1890902cc00024a2acaddef",
+      "artifact_id": "scientific_validation-7dc708df280e47a5bd9f746597deac23",
+      "transport": "official_sdk_stdio",
+      "public_native_recovery_contract_verified": true,
+      "scope": "Actual prior native model plus invalid-design rejection; no new sampler or convergence claim"
+    },
+    {
+      "backend": "meta_robyn",
+      "model_id": "science-refit-b1a4f38b38b8d845c40a3f346f8b4c1ced00f228",
+      "artifact_id": "scientific_validation-9308afe1d18e42e78ea8190dd3460771",
+      "transport": "official_sdk_stdio",
+      "public_native_recovery_contract_verified": true,
+      "scope": "Actual prior native model plus invalid-design rejection; no new sampler or convergence claim"
+    }
+  ]
+}

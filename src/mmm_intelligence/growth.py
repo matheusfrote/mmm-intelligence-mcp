@@ -156,6 +156,7 @@ class GrowthMixin:
                 "cohort_analysis",
                 "experiment_plan",
                 "experiment_result",
+                "scientific_validation",
             }
         ):
             raise MMMError("ARTIFACT_TYPE", "Unexpected artifact type")

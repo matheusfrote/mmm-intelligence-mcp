@@ -14,7 +14,7 @@ Cada chamada tem `arguments = {"request": {...}}`. IDs: 1–64 caracteres ASCII 
 | validate_dataset | dataset_id | media_columns, control_columns, target_column, date_column, test_fraction=0.2, warmup_periods=8 |
 | train_mmm | dataset_id | mesmos campos do validador; model_id=null; ridge_alpha=0.1; adstock_decay=0.5; saturation_multiplier=1.0 |
 | get_model | model_id | nenhum |
-| audit_model | model_id | folds=3 (2–5), decays=[0.2,0.5,0.8], multipliers=[0.5,1,2], max_allocation_spread=0.2 (0–1) |
+| audit_model | model_id | Legado Ridge: folds=3 (2–5), decays=[0.2,0.5,0.8], multipliers=[0.5,1,2], max_allocation_spread=0.2 (0–1). Modo aditivo: backend e scientific; salva relatório científico imutável |
 | simulate_budget | model_id, total_budget, allocation | horizon=13 (1–104 períodos); future_controls=null |
 | import_dataset | rows, synthetic, authorization_reference | dataset_id; frequency=weekly; units; schema de colunas; target_type=unspecified; data_context={} |
 | optimize_budget | model_id, total_budget | horizon=13; lower/upper, limites totais por canal; future_controls |
@@ -27,7 +27,7 @@ Cada chamada tem `arguments = {"request": {...}}`. IDs: 1–64 caracteres ASCII 
 | predict_backend | model_id | media_multiplier={}, cenário histórico nativo |
 | import_csv | csv_text, synthetic, authorization_reference | metadata de import_dataset; delimiter=comma, decimal_separator=dot, date_format=%Y-%m-%d, column_mapping={}, timezone=null; políticas abaixo |
 | data_quality | dataset_id | schema/split iguais a validate_dataset |
-| get_analysis | model_id | backend=ridge; max_rhat=1.01; min_ess_per_chain=100 |
+| get_analysis | model_id | backend=ridge; max_rhat=1.01; min_ess_per_chain=100; scientific_report_id opcional, com verificação de linhagem |
 | compare_models | models, lista de 2–5 entradas get_analysis distintas | window_policy=exact ou intersection |
 | model_capabilities | backend | ridge, google_meridian, pymc_marketing, meta_robyn |
 | forecast_model | model_id, media_plan, future_controls | backend=ridge; vetores de 1–104 períodos, gasto total até 1e9 |
@@ -70,7 +70,7 @@ no transporte podem ser is_error=true antes de chegar ao envelope da aplicação
 
 O treino local aceita `bootstrap_samples=0` (0–500), `bootstrap_block_size=4` (1–26) e `bootstrap_seed=42`. Com draws, a simulação devolve intervalos centrais condicionais de 90% da média; calibração exige pelo menos 20 draws. A seleção de formas admite até 25 combinações e preserva o teste externo. Veja [método](methodology.md).
 
-`audit_model` é leitura com custo computacional limitado: reconstrói a linhagem pelo hash, componentes aditivos e intervalos condicionais; executa folds temporais disjuntos (seleção nested quando tuned) e até 25 especificações. Faixas de alocação são sensibilidade, não confiança. `max_allocation_spread` é um alerta operacional configurável, não limiar universal de validade. Históricos insuficientes produzem backtest indisponível e abstenção explícita. O contrato não fornece ROI/mROI causal: esses campos são null.
+No modo legado, `audit_model` é leitura com custo computacional limitado: reconstrói a linhagem pelo hash, componentes aditivos e intervalos condicionais; executa folds temporais disjuntos (seleção nested quando tuned) e até 25 especificações. Faixas de alocação são sensibilidade, não confiança. `max_allocation_spread` é um alerta operacional configurável, não limiar universal de validade. Históricos insuficientes produzem backtest indisponível e abstenção explícita. O contrato não fornece ROI/mROI causal: esses campos são null. O modo `scientific` cria um relatório persistido e pode executar refits nativos, conforme o protocolo explícito.
 
 `optimize_budget` devolve `optimal_spend` como candidato numérico, `recommended_spend=null`, `decision_support`, comparação de mesmo total, diferenças absolutas/percentuais da referência e derivadas condicionais `marginal_kpi_per_spend`. Não são lucro ou mROI causal. Alertas do modelo acompanham cenários. Calibração recusa origens sintéticas/reais diferentes (`MIXED_DATA_ORIGINS`).
 
@@ -87,6 +87,14 @@ Desde 0.3.1, nomes de target/data seguem a mesma regra lexical das mídias/contr
 Dataset tem metadata `synthetic`, `frequency` e `rows`. Datas são ISO YYYY-MM-DD, crescentes e sem repetição, a passos exatos de um ou sete dias. Colunas numéricas exigidas não aceitam null, texto, booleano, NaN/Inf ou magnitude acima de 1e12. Target e gastos não podem ser negativos. O servidor não ordena, imputa nem remove linhas automaticamente. A declaração sintética é metadata local confiada ao operador; não é perícia da origem.
 
 ## Saída
+
+No [modo científico](scientific-validation.md), `audit_model` cria um relatório,
+portanto sua anotação MCP admite escrita. Reader HTTP mantém a auditoria legada
+de leitura, mas precisa de perfil analyst para criar a avaliação científica.
+Não surgem novas ferramentas: o inventário continua em 45. `get_growth_artifact`
+consulta o relatório e `export_analysis` o incorpora em JSON/Markdown quando
+`scientific_report_id` é fornecido. O CSV preserva seu contrato anterior de
+previsões. Ausência de relatório não implica aprovação estatística ou causal.
 
 ```json
 {

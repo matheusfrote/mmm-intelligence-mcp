@@ -317,7 +317,26 @@ class MMMService(GrowthMixin):
             self.authorize(model)
             dataset = model["dataset"]
             self.authorize(dataset)
-        return bundle(model, dataset, request)
+        analysis = bundle(model, dataset, request)
+        if request.scientific_report_id:
+            report = self._growth_read(request.scientific_report_id, {"scientific_validation"})
+            if (
+                report["model_id"] != request.model_id
+                or report["backend"] != request.backend
+                or report["provenance"]["model_sha256"] != digest(model)
+                or report["provenance"]["dataset_sha256"] != digest(dataset)
+            ):
+                raise MMMError(
+                    "LINEAGE_MISMATCH", "Validation report belongs to another model or data"
+                )
+            analysis["scientific_validation"] = report
+        else:
+            from .validation import classify_scientific
+
+            analysis["scientific_validation"] = {
+                "classifications": classify_scientific(model, dataset, backend=request.backend)
+            }
+        return analysis
 
     def storage_inventory(self, request: EmptyRequest) -> dict:
         from .lifecycle import inventory
@@ -465,12 +484,14 @@ class MMMService(GrowthMixin):
         return {"artifact_id": artifact_id, "kind": "reports", "sha256": checksum, **payload}
 
     def train_backend(self, request: BackendRequest) -> dict:
+        from .datasets import require_native_media_variation
         from .integrations.bridge import execute
 
         dataset = self.load_dataset(request.dataset_id)
         report = validate(dataset, request, self.settings.max_rows)
         if not report["valid"]:
             raise MMMError("DATASET_INVALID", "; ".join(report["issues"]))
+        require_native_media_variation(dataset, request)
         model_id = request.model_id or request.backend + "-" + uuid4().hex
         model = execute(
             self.store,
@@ -528,6 +549,14 @@ class MMMService(GrowthMixin):
     def audit_model(self, request: AuditRequest) -> dict:
         from .scientific import audit
 
+        if request.scientific is not None:
+            from .validation import run_protocol
+
+            return run_protocol(self, request)
+        if request.backend != "ridge":
+            raise MMMError(
+                "OPERATION_UNAVAILABLE", "Use scientific protocol for native engine audit"
+            )
         model = self.get_model(ModelRequest(model_id=request.model_id))
         dataset = self.load_dataset(model["dataset_id"])
         return audit(dataset, model, request, self.settings.max_rows)

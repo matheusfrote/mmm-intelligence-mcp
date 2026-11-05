@@ -52,7 +52,7 @@ alterar o PATH global. Os resultados e o alcance dos testes estão no
 
 Siga [operações](operations.md) e use runtimes separados para Meridian, PyMC e Robyn.
 Nunca instale os três ambientes pesados na venv base. Configure caminhos absolutos
-MMM_*_PYTHON e MMM_RSCRIPT. BACKEND_UNAVAILABLE significa executável ausente;
+MMM_*_PYTHON, MMM_RSCRIPT e MMM_R_LIBRARY. BACKEND_UNAVAILABLE significa executável ausente;
 BACKEND_FAILED exige revisar o log privado local. BUSY requer aguardar o cálculo;
 ARTIFACT_TOO_LARGE requer revisar o tamanho e a política do host. O limite HTTP de
 4 MiB pode ser menor que o limite do artefato. Não exponha a porta loopback na Internet.

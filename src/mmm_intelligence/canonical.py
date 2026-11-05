@@ -146,6 +146,9 @@ def bundle(model, dataset, request):
         "diagnostics": model.get("diagnostics", {}),
         "diagnostic_assessment": assessment,
         "intervals": interval,
+        "conditional_linear_inference": model.get("linear_inference")
+        if backend == "ridge"
+        else None,
         "decision_support": support,
         "capabilities": capabilities(backend),
         "warnings": model.get("warnings", []),

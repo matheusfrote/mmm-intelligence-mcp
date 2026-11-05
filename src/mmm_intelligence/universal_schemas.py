@@ -143,6 +143,9 @@ class GuardrailSpec(Contract):
 
 
 class ExperimentPlanRequest(Contract):
+    analysis_unit: Literal["independent", "paired", "cluster"] = "independent"
+    pair_column: str | None = Field(default=None, min_length=1, max_length=128)
+    cluster_column: str | None = Field(default=None, min_length=1, max_length=128)
     hypothesis: str | None = Field(default=None, min_length=1, max_length=2000)
     analysis_plan: str | None = Field(default=None, min_length=1, max_length=2000)
     randomization_unit: str | None = Field(default=None, min_length=1, max_length=128)

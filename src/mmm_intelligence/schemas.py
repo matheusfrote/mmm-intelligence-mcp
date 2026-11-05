@@ -235,7 +235,177 @@ class RenderRequest(ModelRequest):
     artifact_id: Identifier | None = None
 
 
+class MonteCarloProtocol(Contract):
+    interval_method: Literal["legacy_percentile", "projected_hc3", "projected_hac"] = (
+        "projected_hc3"
+    )
+    replications: int = Field(default=20, ge=2, le=1000, strict=True)
+    periods: int = Field(default=156, ge=52, le=520, strict=True)
+    seed: int = Field(default=2026, ge=0, le=2**31 - 1, strict=True)
+    bootstrap_samples: int = Field(default=40, ge=20, le=500, strict=True)
+    minimum_replications_for_assessment: int = Field(default=100, ge=30, le=1000, strict=True)
+    coverage_tolerance: float = Field(default=0.05, ge=0, le=0.2)
+    max_absolute_bias: float | None = Field(default=None, ge=0, le=1e12)
+    max_rmse: float | None = Field(default=None, ge=0, le=1e12)
+    scenarios: list[
+        Literal[
+            "well_specified",
+            "null_effect",
+            "collinear",
+            "omitted_confounder",
+            "tracking_break",
+            "heavy_tailed",
+            "misspecified_adstock",
+            "weak_signal",
+            "missing_target",
+            "constant_spend",
+        ]
+    ] = Field(
+        default=["well_specified", "null_effect", "omitted_confounder"],
+        min_length=1,
+        max_length=10,
+    )
+
+
+class NativeRecoveryProtocol(Contract):
+    replications: int = Field(default=2, ge=2, le=100, strict=True)
+    bootstrap_samples: Literal[0] = 0
+    interval_method: Literal["native_conditional_effect"] = "native_conditional_effect"
+    scenarios: list[
+        Literal[
+            "well_specified",
+            "null_effect",
+            "collinear",
+            "omitted_confounder",
+            "tracking_break",
+            "heavy_tailed",
+            "misspecified_adstock",
+            "weak_signal",
+            "missing_target",
+            "constant_spend",
+        ]
+    ] = Field(default=["well_specified", "null_effect"], min_length=1, max_length=10)
+    periods: int = Field(default=156, ge=52, le=520, strict=True)
+    seed: int = Field(default=2026, ge=0, le=2**31 - 1, strict=True)
+    minimum_replications_for_assessment: int = Field(default=100, ge=30, le=1000, strict=True)
+    coverage_tolerance: float = Field(default=0.05, ge=0, le=0.2)
+    max_absolute_bias: float | None = Field(default=None, ge=0, le=1e12)
+    max_rmse: float | None = Field(default=None, ge=0, le=1e12)
+    draws: int = Field(default=1000, ge=1000, le=8000, strict=True)
+    tune: int = Field(default=1000, ge=1000, le=8000, strict=True)
+    robyn_trials: int = Field(default=5, ge=5, le=10, strict=True)
+    robyn_iterations: int = Field(default=2000, ge=2000, le=10000, strict=True)
+
+
+class ScientificCalibration(Contract):
+    experiment_result_id: Identifier
+    channel: str = Field(min_length=1, max_length=64)
+    treatment_spend: Spend
+    control_spend: Spend
+    horizon: int = Field(default=4, ge=1, le=52, strict=True)
+    initial_adstock: Spend = 0
+    aggregate_multiplier: float = Field(gt=0, le=1e9, allow_inf_nan=False)
+    outcome_unit: str = Field(min_length=1, max_length=100)
+    transformation_justification: str = Field(min_length=10, max_length=1000)
+    matching_population: bool
+    matching_measurement_window: bool
+
+
+class ScientificProtocol(Contract):
+    refit_draws: int | None = Field(default=None, ge=1000, le=8000, strict=True)
+    native_monte_carlo: NativeRecoveryProtocol | None = None
+    baseline_variants: list[Literal["legacy", "calendar"]] = Field(
+        default_factory=list, max_length=2
+    )
+    prior_scale_multipliers: list[Annotated[float, Field(ge=0.25, le=4)]] = Field(
+        default_factory=list, max_length=3
+    )
+    policy_version: Literal["scientific-v1"] = "scientific-v1"
+    refit: bool = True
+    collect_native: bool = True
+    seeds: list[Annotated[int, Field(ge=0, le=2**31 - 1, strict=True)]] = Field(
+        default_factory=lambda: [17, 29], min_length=2, max_length=5
+    )
+    regularization: list[Annotated[float, Field(gt=0, le=1e6)]] = Field(
+        default_factory=lambda: [0.01, 0.1, 1.0], min_length=2, max_length=5
+    )
+    max_rhat: float = Field(default=1.01, gt=1, le=1.05)
+    min_ess_per_chain: int = Field(default=100, ge=100, le=10000, strict=True)
+    min_draws: int = Field(default=1000, ge=400, le=8000, strict=True)
+    max_mcse_sd_ratio: float = Field(default=0.05, gt=0, le=0.1)
+    max_relative_spread: float = Field(default=0.5, gt=0, le=2)
+    experiment_result_ids: list[Identifier] = Field(default_factory=list, max_length=10)
+    placebo_result_ids: list[Identifier] = Field(default_factory=list, max_length=10)
+    negative_control_result_ids: list[Identifier] = Field(default_factory=list, max_length=10)
+    equivalence_margin: float | None = Field(default=None, gt=0, le=1e12)
+    assumptions: dict[
+        Literal[
+            "random_assignment",
+            "no_interference",
+            "no_unmeasured_confounding",
+            "no_post_treatment_controls",
+            "positivity",
+            "measurement_consistency",
+            "prespecified_analysis",
+            "complete_followup",
+        ],
+        Literal["supported", "violated", "unknown"],
+    ] = Field(default_factory=dict)
+    review_reference: str | None = Field(default=None, min_length=1, max_length=500)
+    confounding_bias_grid: list[Number] = Field(default_factory=list, max_length=20)
+    monte_carlo: MonteCarloProtocol | None = None
+    calibration: ScientificCalibration | None = None
+
+    @model_validator(mode="after")
+    def distinct_scientific_inputs(self):
+        if self.refit_draws is not None and self.refit_draws < self.min_draws:
+            raise ValueError("Refit budget must meet the declared minimum-draw policy")
+        ids = [
+            *self.experiment_result_ids,
+            *self.placebo_result_ids,
+            *self.negative_control_result_ids,
+        ]
+        if len(set(ids)) != len(ids) or len(set(self.seeds)) != len(self.seeds):
+            raise ValueError("Use independent seeds and disjoint evidence sets")
+        if self.calibration is not None and self.calibration.experiment_result_id in ids:
+            raise ValueError(
+                "Calibration evidence must be independent from validation/falsification evidence"
+            )
+        if len(set(self.regularization)) != len(self.regularization):
+            raise ValueError("Use distinct regularization settings")
+        if len(set(self.baseline_variants)) != len(self.baseline_variants) or len(
+            set(self.prior_scale_multipliers)
+        ) != len(self.prior_scale_multipliers):
+            raise ValueError("Use distinct baseline and prior sensitivity settings")
+        return self
+
+
 class AuditRequest(ModelRequest):
+    backend: Literal["ridge", "google_meridian", "pymc_marketing", "meta_robyn"] = "ridge"
+    scientific: ScientificProtocol | None = None
+
+    @model_validator(mode="after")
+    def matched_monte_carlo_engine(self):
+        if (
+            self.scientific is not None
+            and self.scientific.refit_draws is not None
+            and self.backend not in {"google_meridian", "pymc_marketing"}
+        ):
+            raise ValueError("Refit draws apply only to native Bayesian engines")
+        if (
+            self.backend == "ridge"
+            and self.scientific is not None
+            and self.scientific.native_monte_carlo is not None
+        ):
+            raise ValueError("Native recovery requires an explicitly selected native engine")
+        if (
+            self.backend != "ridge"
+            and self.scientific is not None
+            and self.scientific.monte_carlo is not None
+        ):
+            raise ValueError("The matched-effect Monte Carlo suite currently evaluates Ridge only")
+        return self
+
     folds: int = Field(default=3, ge=2, le=5, strict=True)
     max_allocation_spread: float = Field(
         default=0.2,
@@ -264,15 +434,27 @@ class CalibrationRequest(ModelRequest):
 
 
 class BackendRequest(DatasetSpec):
+    baseline: Literal["legacy", "calendar"] = "calendar"
+    target_accept: float = Field(default=0.95, ge=0.8, le=0.99)
+    prior_scale_multiplier: float = Field(default=1.0, ge=0.25, le=4)
+    robyn_algorithm: Literal["TwoPointsDE", "DE"] | None = None
     backend: Literal["google_meridian", "pymc_marketing", "meta_robyn"]
     model_id: Identifier | None = None
-    draws: int = Field(default=100, ge=20, le=2000)
-    tune: int = Field(default=100, ge=20, le=2000)
+    draws: int = Field(default=100, ge=20, le=8000)
+    tune: int = Field(default=100, ge=20, le=8000)
     chains: int = Field(default=2, ge=2, le=4)
     seed: int = Field(default=42, ge=0, le=2**31 - 1)
+    robyn_trials: int | None = Field(default=None, ge=1, le=10, strict=True)
+    robyn_iterations: int | None = Field(default=None, ge=200, le=10000, strict=True)
 
     @model_validator(mode="after")
     def supported_native_split(self):
+        if self.backend != "meta_robyn" and (
+            self.robyn_trials is not None
+            or self.robyn_iterations is not None
+            or self.robyn_algorithm is not None
+        ):
+            raise ValueError("Robyn search controls apply only to Meta Robyn")
         if self.backend == "meta_robyn" and self.test_fraction != 0.2:
             raise ValueError(
                 "Meta Robyn adapter requires test_fraction=0.2 (native 60/20/20 split)"
@@ -305,6 +487,7 @@ class CapabilityRequest(Contract):
 
 class AnalysisRequest(ModelRequest):
     backend: BackendName = "ridge"
+    scientific_report_id: Identifier | None = None
     max_rhat: float = Field(default=1.01, gt=1, le=1.2)
     min_ess_per_chain: int = Field(default=100, ge=10, le=10000, strict=True)
 

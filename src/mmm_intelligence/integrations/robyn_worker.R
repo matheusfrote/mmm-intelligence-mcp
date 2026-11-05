@@ -75,6 +75,12 @@ prediction_summary <- function(output, selected, observed_data=NULL,
   summary
 }
 
+search_warning <- function(trials,iterations) {
+  ifelse(trials<5L || iterations<2000L,
+    "Functional reduced search, not recommended production search volume",
+    "Diagnostics and independent stability review required; search volume alone does not validate a model")
+}
+
 main <- function(args=commandArgs(trailingOnly=TRUE)) {
   stopifnot(length(args)==2L)
   suppressPackageStartupMessages(library(jsonlite))
@@ -117,8 +123,10 @@ if(payload$operation == "train") {
     dt_holidays=NULL,adstock="geometric",hyperparameters=hyper,
     window_start=as.character(df[[req$date_column]][req$warmup_periods+1L]),
     window_end=as.character(tail(df[[req$date_column]],1)))
-  models <- robyn_run(InputCollect=input,trials=1L,iterations=max(200L,as.integer(req$draws)*4L),
-    cores=1L,ts_validation=TRUE,seed=as.integer(req$seed),nevergrad_algo="TwoPointsDE",
+  search_trials <- ifelse(is.null(req$robyn_trials),1L,as.integer(req$robyn_trials))
+  search_iterations <- ifelse(is.null(req$robyn_iterations),max(200L,as.integer(req$draws)*4L),as.integer(req$robyn_iterations))
+  models <- robyn_run(InputCollect=input,trials=search_trials,iterations=search_iterations,
+    cores=1L,ts_validation=TRUE,seed=as.integer(req$seed),nevergrad_algo=if(is.null(req$robyn_algorithm)) "TwoPointsDE" else req$robyn_algorithm,
     intercept_sign="unconstrained",outputs=FALSE,quiet=FALSE)
   output <- robyn_outputs(InputCollect=input,OutputModels=models,pareto_fronts=1,
     min_candidates=1,clusters=FALSE,plot_pareto=FALSE,csv_out=NULL,export=FALSE,quiet=TRUE)
@@ -127,6 +135,7 @@ if(payload$operation == "train") {
   stopifnot(nrow(candidates)>0)
   candidates <- candidates[order(candidates$nrmse_val,candidates$solID),,drop=FALSE]
   selected <- as.character(candidates$solID[1])
+  selected_effects <- output$xDecompAgg[output$xDecompAgg$solID==selected & output$xDecompAgg$rn %in% media,,drop=FALSE]
   before <- prediction_summary(output,selected,observed_data,req$target_column,req$date_column)
   exported <- robyn_write(InputCollect=input,OutputCollect=output,select_model=selected,
                          add_data=TRUE,export=FALSE,quiet=TRUE)
@@ -145,9 +154,13 @@ if(payload$operation == "train") {
       priors=NULL,priors_status="not_applicable_non_bayesian_model",
       interval_type="not_available_point_prediction"),
     temporal_split=before$temporal_split,
-    diagnostics=list(trials=1L,iterations=max(200L,as.integer(req$draws)*4L),
+    native_estimates=setNames(as.list(selected_effects$coef),selected_effects$rn),
+    native_decomposition=selected_effects,
+    diagnostics=list(trials=search_trials,iterations=search_iterations,
+                     optimization_trace=models$convergence$errors,
+                     optimization_messages=models$convergence$conv_msg,
                      selection="validation_nrmse",convergence_certified=FALSE),
-    warnings=c("Functional reduced search, not recommended production search volume",
+    warnings=c(search_warning(search_trials,search_iterations),
       "Native temporal validation has its own rounding and warmup window",
       "Adapter isolates outer test targets with train-only placeholders; not default Robyn behavior",
       "Native test diagnostics use placeholders; adapter test metrics use original observations",
@@ -159,7 +172,35 @@ if(payload$operation == "train") {
   restored <- robyn_recreate(native,quiet=TRUE,cores=1L,clusters=FALSE,plot_pareto=FALSE,csv_out=NULL)
   selected <- stored$selected_id
   multipliers <- payload$request$media_multiplier
-  if(length(multipliers)>0L) {
+  if(identical(payload$operation,"effect")) {
+    effects <- list()
+    for(channel in as.character(req$media_columns)) {
+      input <- restored$InputCollect
+      output <- restored$OutputCollect
+      hyper <- output$resultHypParam[output$resultHypParam$solID==selected,,drop=FALSE]
+      coeff <- output$xDecompAgg$coef[output$xDecompAgg$solID==selected & output$xDecompAgg$rn==channel]
+      stopifnot(nrow(hyper)==1L,length(coeff)==1L)
+      raw <- input$dt_input[[channel]]
+      window <- seq.int(input$rollingWindowStartWhich,input$rollingWindowEndWhich)
+      transform <- getFromNamespace("transform_adstock","Robyn")
+      stock <- transform(raw,"geometric",hyper[[paste0(channel,"_thetas")]],NULL,NULL)$x_decayed[window]
+      changed <- transform(raw*1.1,"geometric",hyper[[paste0(channel,"_thetas")]],NULL,NULL)$x_decayed[window]
+      saturation <- getFromNamespace("saturation_hill","Robyn")
+      baseline <- saturation(stock,hyper[[paste0(channel,"_alphas")]],hyper[[paste0(channel,"_gammas")]])$x_saturated
+      scenario <- saturation(stock,hyper[[paste0(channel,"_alphas")]],hyper[[paste0(channel,"_gammas")]],x_marginal=changed)$x_saturated
+      dates <- as.character(input$dt_input[[req$date_column]][window])
+      heldout <- dates %in% as.character(stored$test$dates)
+      stopifnot(any(heldout),length(scenario)==length(window))
+      effects[[channel]] <- list(estimate=mean((scenario-baseline)[heldout]*coeff),
+        available=FALSE,lower=NULL,upper=NULL,
+        interval_type="unavailable_native_point_estimator",
+        reason="Native search does not supply an effect sampling distribution; search variation is not a confidence interval",
+        estimand="heldout_mean_outcome_difference_for_10pct_increase_to_one_channel_over_entire_history",
+        implementation="Robyn native transform_adstock and saturation_hill; baseline Hill inflexion fixed",
+        causal_identification=FALSE)
+    }
+    result <- list(backend="meta_robyn",effects=effects)
+  } else if(length(multipliers)>0L) {
     responses <- list()
     for(channel in names(multipliers)) {
       stopifnot(channel %in% stored$request$media_columns)
